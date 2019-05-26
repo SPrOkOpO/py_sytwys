@@ -1,10 +1,15 @@
-# py_sytwys
-Simple desktop application
+## py_sytwys
+Simple desktop GUI application for Windows.
 
-## Tags
+
+### Tags
 TERYT
 
-## Technologies
+### Technologies
 Python 3.x
 
-## Setup
+### Setup
+#### Requierements
+Python 3.x installed.
+#### To run
+Download files and run tc_mkDir_sytwys.py.
