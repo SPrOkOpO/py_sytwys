@@ -1,0 +1,821 @@
+#-*- coding: windows-1250 -*-
+
+
+from tkinter import filedialog 
+from tkinter import messagebox
+import tkinter	as	tk
+import tkinter.ttk as ttk
+import sys
+import teryt as ter
+import datetime
+import os
+import re as re
+
+
+
+class SytwysGUIgrid( tk.Frame):
+	def __init__( self, master, sw, teryt):
+		'''
+			do konstruktora przekazujê wskaŸniki:
+			-	master:	do nadrzêdnej ramki, czyli okna aplikacji;
+			-	sw:		do obiektu klasy Sytwys;
+			-	teryt:	do obiektu klasy Teryt;
+			¿eby z wnêtrza klasy móc siê odwo³ywac do pól i metod obiektów
+			sw i teryt
+		'''
+		super( SytwysGUIgrid, self).__init__( master)
+		self.grid()
+
+		self.master_frame = master
+		self.sw = sw
+		self.t = teryt
+		self.rowGr1 = 0
+		self.rowGr2 = self.rowGr1 + 15
+		self.rowGr3 = self.rowGr1 + 8
+
+		# zmienne tekstowe dla kontrolek	entry
+		#--------------------------------------------------------------------------
+		
+		# zmienne zwi¹zane z klas¹ Teryt
+		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		self.v_sw_powiat_teryt		= tk.StringVar()
+		self.v_sw_powiat_nazwa		= tk.StringVar()
+		self.v_sw_jEw_teryt			= tk.StringVar()
+		self.v_sw_jEw_nazwa			= tk.StringVar()
+		self.v_sw_obreb_teryt		= tk.StringVar()
+		self.v_sw_obreb_nazwa		= tk.StringVar()
+		self.v_sw_obreb_dir			= tk.StringVar()
+
+		# zmienne zwi¹zane z klas¹ Sytwys
+		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		self.v_sw_numer				= tk.StringVar()
+		self.v_sw_wykonawca			= tk.StringVar()
+		self.v_sw_obreb				= tk.StringVar()
+		self.v_sw_dzialki				= tk.StringVar()
+		self.v_sw_typ					= tk.StringVar()
+		self.v_sw_idZgl				= tk.StringVar()
+		self.v_sw_skala				= tk.StringVar()
+
+
+		self.v_sw_libre_wykon		= tk.StringVar()
+		self.v_sw_libre_opis			= tk.StringVar()
+		self.v_sw_dir_nazwa			= tk.StringVar()
+
+		self.v_sw_inw_obiekt			= tk.StringVar()
+		self.v_sw_inw_nrZal			= tk.StringVar()
+		self.v_sw_inw_decZnak		= tk.StringVar()
+		self.v_sw_inw_decData		= tk.StringVar()
+
+		self.v_sw_inw_decData		= tk.StringVar()
+		self.v_sw_mdcp_kp_uwagi1	= tk.StringVar()
+		self.v_sw_mdcp_kp_uwagi2  	= tk.StringVar()
+		self.v_sw_mdcp_kp_uwagi3  	= tk.StringVar()
+		self.v_sw_mdcp_kp_uwagi4  	= tk.StringVar()
+		self.v_sw_mdcp_kp_uwagi5  	= tk.StringVar()
+		self.v_sw_mdcp_kp_uwagi6  	= tk.StringVar()
+
+		self.v_sw_typ.set( "mdcp")
+		self.v_sw_ust5			= tk.IntVar()
+		self.v_sw_ust6			= tk.IntVar()
+		self.v_sw_ust5_str			= tk.StringVar()
+		self.v_sw_ust6_str			= tk.StringVar()
+
+		self.GC_DIR_SYTWYS = "t:\\sytwys\\"
+		self.GC_DIR_LICZNIK	  = "t:\\sytwys\\AAB__licznik\\"
+
+		self.dicWierszePliku = {}
+
+		# 6 ramek
+		# LTop		RTop
+		# LMiddle   RMiddle
+		# LBottom   RBottom
+		self.frameTL = tk.Frame( master, bg="thistle1")
+		self.frameML = tk.Frame( master, bg="khaki")
+		self.frameBL = tk.Frame( master, bg="thistle3")
+
+		self.frameTL.grid( row=0, column=0, sticky="W")
+		self.frameML.grid( row=1, column=0, sticky="W")
+		self.frameBL.grid( row=2, column=0, sticky="W")
+
+		self.frameTR = tk.Frame( master)
+		self.frameMR = tk.Frame( master)
+		self.frameTR.grid( row=0, column=5, sticky="NW")
+		self.frameMR.grid( row=1, column=5, sticky="NW")
+
+		'''
+		self.tx_mdcp_kp_uwagi1
+		self.tx_mdcp_kp_uwagi2
+		self.tx_mdcp_kp_uwagi3
+		self.tx_mdcp_kp_uwagi4
+		self.tx_mdcp_kp_uwagi5
+		'''
+
+		self.createWidgets_frameTL()
+		self.createWidgets_frameML()
+		self.createWidgets_frameBL()
+		self.createWidgets_frameTR()
+		self.createWidgets_frameMR()
+
+		#self.inicjuj()
+		#self.wczytaj()
+
+
+
+
+	def createWidgets_frameTL( self):
+		#self.rowGr1 = 0
+		lab_sw_numer			= tk.Label(	self.frameTL, text="Nr "				, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 0)
+		lab_sw_wykonawca		= tk.Label(	self.frameTL, text="Wykonawca"		, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 1)
+		lab_sw_typ				= tk.Label(	self.frameTL, text="Typ"				, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 2)
+		lab_sw_skala			= tk.Label(	self.frameTL, text="Skala (mian.)"	, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 3)
+		lab_sw_obreb			= tk.Label(	self.frameTL, text="Obreb "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 4)
+		lab_sw_dzialki			= tk.Label(	self.frameTL, text="Dzialki "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 5)
+		lab_sw_idZgl			= tk.Label(	self.frameTL, text="IdZgl "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
+
+		e1	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_numer		, bg="greenyellow")
+		e2	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_wykonawca	)
+		# typ
+		ttyp = ( "mdcp", "inw", "podz", "inny")
+		combobox = ttk.Combobox( \
+								self.frameTL, textvariable=self.v_sw_typ, state="readonly", values=ttyp) #, label_text="Typ"
+								#, labelpos="wn", listbox_width=8, dropdown=0, \
+								#scrolledlist_items=ttyp)
+		#combobox["values"] = ttyp
+		e7	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_skala		)
+		e3	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_obreb		)
+		e4	= tk.Entry(	self.frameTL, justify="left",	width=80 , textvariable	= self.v_sw_dzialki	)
+		#e5	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_typ		)
+		e6	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_idZgl		)
+
+		e1.grid(	row=self.rowGr1 + 0, column=1, sticky="W")
+		e2.grid(	row=self.rowGr1 + 1, column=1, sticky="W")
+		combobox.grid( row=self.rowGr1 + 2, column=1, sticky="W")
+
+		e7.grid(	row=self.rowGr1 + 3, column=1, sticky="W")
+		e3.grid(	row=self.rowGr1 + 4, column=1, sticky="W")
+		e4.grid(	row=self.rowGr1 + 5, column=1, sticky="W", columnspan=4)
+		#e5.grid(	row=rowGr1 + 22, column=1, sticky="W")
+		e6.grid(	row=self.rowGr1 + 6, column=1, sticky="W")
+
+
+		#self.v_sw_ust6.set = 1
+		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameTL, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=7, sticky="W")
+		for etykieta, row, col, status, variable in [ \
+			( "ust. 5", 7, 1, tk.NORMAL, self.v_sw_ust5_str), \
+			( "ust. 6", 7, 2, tk.NORMAL, self.v_sw_ust6_str) \
+			]:
+			tk.Checkbutton( self.frameTL, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
+
+		# kontrolki zwi¹zane z inwentaryzacj¹
+		#self.rowGr3 = self.rowGr1 + 8
+		lab_sw_inw_obiekt		= tk.Label(	self.frameTL, text="inw_obiekt "	, anchor="w", width=20).grid(row=self.rowGr3 + 0)
+		lab_sw_inw_nrZal		= tk.Label(	self.frameTL, text="inw_nrZal	"	, anchor="w", width=20).grid(row=self.rowGr3 + 1)
+		lab_sw_inw_decZnak	= tk.Label(	self.frameTL, text="inw_decZnak"	, anchor="w", width=20).grid(row=self.rowGr3 + 2)
+		lab_sw_inw_decData	= tk.Label(	self.frameTL, text="inw_decData"	, anchor="w", width=20).grid(row=self.rowGr3 + 3)
+
+		e_sw_inw_obiekt	 =	tk.Entry( self.frameTL,	justify="left", width=60, textvariable	= self.v_sw_inw_obiekt	  , bg="white")
+		e_sw_inw_nrZal		 =	tk.Entry( self.frameTL,	justify="left", width=10, textvariable	= self.v_sw_inw_nrZal	  , bg="white")
+		e_sw_inw_decZnak	 =	tk.Entry( self.frameTL,	justify="left", width=40, textvariable	= self.v_sw_inw_decZnak  , bg="white")
+		e_sw_inw_decData	 =	tk.Entry( self.frameTL,	justify="left", width=40, textvariable	= self.v_sw_inw_decData  , bg="white")
+
+		e_sw_inw_obiekt.grid		( row=self.rowGr3 + 0, column=1, sticky="W", columnspan=4)
+		e_sw_inw_nrZal.grid		( row=self.rowGr3 + 1, column=1, sticky="W", columnspan=4)
+		e_sw_inw_decZnak.grid	( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=4)
+		e_sw_inw_decData.grid	( row=self.rowGr3 + 3, column=1, sticky="W")
+
+
+	def createWidgets_frameML( self):
+		#self.rowGr2 = self.rowGr1 + 9
+
+		lab_sw_powiat_teryt	= tk.Label(	self.frameML, text="Powiat teryt"	, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 0)
+		lab_sw_powiat_nazwa	= tk.Label(	self.frameML, text="powiat_nazwa"	, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 1)
+		lab_sw_jEw_teryt		= tk.Label(	self.frameML, text="jEw_teryt"		, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 2)
+		lab_sw_jEw_nazwa		= tk.Label(	self.frameML, text="jEw_nazwa"		, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 3)
+		lab_sw_obreb_teryt	= tk.Label(	self.frameML, text="obreb_teryt"		, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 4)
+		lab_sw_obreb_nazwa	= tk.Label(	self.frameML, text="obreb_nazwa "	, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 5)
+		lab_sw_obreb_dir		= tk.Label(	self.frameML, text="obreb_dir"		, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 6)
+
+		lab_sw_libre_wykon	= tk.Label(	self.frameML, text="libre wykon "	, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 7)
+		lab_sw_libre_opis		= tk.Label(	self.frameML, text="libre opis "		, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 8)
+		lab_sw_dir_nazwa		= tk.Label(	self.frameML, text="dir nazwa"		, anchor="w", width=20).grid(column=0, row=self.rowGr2 + 9)
+
+		# definicje	kontrolek entry
+		e_sw_powiat_teryt	 =	tk.Entry( self.frameML,	justify="left", width=20, textvariable	= self.v_sw_powiat_teryt,	bg="chartreuse2")
+		e_sw_powiat_nazwa	 =	tk.Entry( self.frameML,	justify="left", width=40, textvariable	= self.v_sw_powiat_nazwa,	bg="greenyellow")
+		e_sw_jEw_teryt		 =	tk.Entry( self.frameML,	justify="left", width=20, textvariable	= self.v_sw_jEw_teryt	 ,	bg="chartreuse2")
+		e_sw_jEw_nazwa		 =	tk.Entry( self.frameML,	justify="left", width=40, textvariable	= self.v_sw_jEw_nazwa	 ,	bg="greenyellow")
+		e_sw_obreb_teryt	 =	tk.Entry( self.frameML,	justify="left", width=20, textvariable	= self.v_sw_obreb_teryt ,	bg="chartreuse2")
+		e_sw_obreb_nazwa	 =	tk.Entry( self.frameML,	justify="left", width=40, textvariable	= self.v_sw_obreb_nazwa ,	bg="greenyellow")
+		e_sw_obreb_dir		 =	tk.Entry( self.frameML,	justify="left", width=40, textvariable	= self.v_sw_obreb_dir	 ,	bg="turquoise3")
+
+		e_sw_libre_wykon	 =	tk.Entry( self.frameML,	justify="left", width=10, textvariable	= self.v_sw_libre_wykon, bg="turquoise")
+		e_sw_libre_opis	 =	tk.Entry( self.frameML,	justify="left", width=60, textvariable	= self.v_sw_libre_opis	, bg="turquoise")
+		e_sw_dir_nazwa		 =	tk.Entry( self.frameML,	justify="left", width=60, textvariable	= self.v_sw_dir_nazwa	, bg="navajowhite")
+
+		e_sw_powiat_teryt.grid(	row=self.rowGr2 + 0, column=1,	sticky="W")
+		e_sw_powiat_nazwa.grid(	row=self.rowGr2 + 1, column=1,	sticky="W")
+		e_sw_jEw_teryt.grid(		row=self.rowGr2 + 2, column=1,	sticky="W")
+		e_sw_jEw_nazwa.grid(		row=self.rowGr2 + 3, column=1,	sticky="W")
+		e_sw_obreb_teryt.grid(	row=self.rowGr2 + 4, column=1,	sticky="W")
+		e_sw_obreb_nazwa.grid(	row=self.rowGr2 + 5, column=1,	sticky="W")
+		e_sw_obreb_dir.grid(		row=self.rowGr2 + 6, column=1,	sticky="W")
+
+		e_sw_libre_wykon.grid(	row=self.rowGr2 +  7, column=1,	sticky="W")
+		e_sw_libre_opis.grid(	row=self.rowGr2 +  8, column=1,	sticky="W", columnspan=4)
+		e_sw_dir_nazwa.grid(		row=self.rowGr2 +  9, column=1,	sticky="W", columnspan=4)
+
+
+	def createWidgets_frameBL( self):
+		butInicjuj	= tk.Button( self.frameBL, text='Inicjuj',	width =15, command=self.inicjuj)
+		butWczytaj	= tk.Button( self.frameBL, text='Wczytaj swInfo',	width =15, command=self.wczytaj)
+		butOK			= tk.Button( self.frameBL, text='Zapisz swInfo',	 	width =15, command=self.zapisz)
+		butCancel	= tk.Button( self.frameBL, text='Zakoñcz', 	width =15, 	command=self.btn_rezygnacja, bg="salmon")
+		butInicjuj.grid(	row=0, column=0, pady=2, columnspan=1)
+		butWczytaj.grid(	row=1, column=0, pady=4, columnspan=1)
+		butOK.grid(		 	row=0, column=1, pady=3, columnspan=1)
+		butCancel.grid( 	row=1, column=1, pady=4, columnspan=1)
+
+
+	def createWidgets_frameTR( self):
+		lab_tx_sekcje			= tk.Label(	self.frameTR, text="sekcje:"	, anchor="w", width=20).grid(row=0, column=0, sticky="W")
+
+		butSekcje	= tk.Button( self.frameTR, text='Gen sekcje', 	width =15, 	command=self.btn_gen_sekcje, bg="salmon")
+		butSekcje.grid(	row=0, column=1, pady=0, columnspan=1)
+
+		self.tx_sekcje				= tk.Text( self.frameTR, height=7, width=80, tabs=3)
+		self.tx_sekcje.grid				( row=1, column=0, sticky="W", columnspan=3)
+
+
+	def createWidgets_frameMR( self):
+		lab_tx_mdcp_kp_uwagi	= tk.Label(	self.frameMR, text="mdcp_kp_uwagi:"	, anchor="w", width=20).grid(row=1, column=0, sticky="W")
+		
+		butUwagi1	= tk.Button( self.frameMR, text='Gen u1', 	width =15, 	command=self.btn_gen_uwagi1, bg="salmon")
+		butUwagi2	= tk.Button( self.frameMR, text='Gen u2', 	width =15, 	command=self.btn_gen_uwagi2, bg="salmon")
+		butUwagi3	= tk.Button( self.frameMR, text='Gen u3', 	width =15, 	command=self.btn_gen_uwagi3, bg="salmon")
+		butUwagi1.grid(	row=1, column=1, pady=0, columnspan=1)
+		butUwagi2.grid(	row=1, column=2, pady=0, columnspan=1)
+		butUwagi3.grid(	row=1, column=3, pady=0, columnspan=1)
+		
+		self.tx_mdcp_kp_uwagi1		= tk.Text( self.frameMR, height=6, width=90, tabs=3)
+		'''
+		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameMR, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=2, sticky="W")
+		for etykieta, row, col, status, variable in [ \
+			( "5", 3, 0, tk.NORMAL, v_sw_ust5), ( "6", 3, 1, tk.NORMAL, v_sw_ust6) \
+			]:
+			tk.Checkbutton( self.frameMR, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
+		'''
+		self.tx_mdcp_kp_uwagi2		= tk.Text( self.frameMR, height=6, width=90, tabs=3)
+		self.tx_mdcp_kp_uwagi3		= tk.Text( self.frameMR, height=3, width=90, tabs=3)
+		self.tx_mdcp_kp_uwagi4		= tk.Text( self.frameMR, height=6, width=90, tabs=3)
+		self.tx_mdcp_kp_uwagi5		= tk.Text( self.frameMR, height=2, width=90, tabs=3)
+		self.tx_mdcp_kp_uwagi5.tag_configure('bold_italics', font=('Arial', 8, 'bold', 'italic'))
+		self.tx_mdcp_kp_uwagi6		= tk.Text( self.frameMR, height=2, width=90, tabs=3)
+
+		self.tx_mdcp_kp_uwagi1.grid	( row=2, column=0, sticky="W", columnspan=4)
+		self.tx_mdcp_kp_uwagi2.grid	( row=3, column=0, sticky="W", columnspan=4)
+		self.tx_mdcp_kp_uwagi3.grid	( row=4, column=0, sticky="W", columnspan=4)
+		self.tx_mdcp_kp_uwagi4.grid	( row=5, column=0, sticky="W", columnspan=4)
+		self.tx_mdcp_kp_uwagi5.grid	( row=6, column=0, sticky="W", columnspan=4)
+		self.tx_mdcp_kp_uwagi6.grid	( row=7, column=0, sticky="W", columnspan=4)
+
+
+	def inicjuj( self):
+		'''
+		na	podstawie wprowadzonych	danych wype³nia odpowiednie pola
+		1)	najpierw sprawdzenie, czy podano dobry obrêb
+			-	jednoczeœnie jest to inicjacja pól obiektu teryt
+		'''
+		
+		# 1)
+		if	self.t.setTerytFrom_obrNazwa( self.v_sw_obreb.get()) != 0:
+			tk.messagebox.showinfo("Err", "Inicjacja niudana - b³êdny obrêb")
+			return -1	
+
+
+		#self.sw.sw_plikInfo_fullPath
+		global sw_plikNr_fullPath
+		global sw_plikNr_nazwa
+
+		self.sw.sw_wykonawca		= self.v_sw_wykonawca.get()
+		self.sw.sw_dzialki		= self.v_sw_dzialki.get()
+		self.sw.sw_dzialka1		= self.sw.get_sw_dzialka1( self.sw.sw_dzialki)
+		self.sw.sw_typ				= self.v_sw_typ.get()
+		self.sw.sw_idZgl			= self.v_sw_idZgl.get()
+		self.sw.sw_skala			= self.v_sw_skala.get()
+		self.sw.sw_mdcp_ust5		= self.v_sw_ust5_str.get()
+		self.sw.sw_mdcp_ust6		= self.v_sw_ust6_str.get()
+
+		if	self.v_sw_typ.get()	==	"inw":
+			self.sw.sw_inw_obiekt		= self.v_sw_inw_obiekt.get()
+			self.sw.sw_inw_nrZal			= self.v_sw_inw_nrZal.get()
+			self.sw.sw_inw_decZnak		= self.v_sw_inw_decZnak.get()
+			self.sw.sw_inw_decData		= self.v_sw_inw_decData.get()
+		else:
+			self.sw.sw_inw_obiekt		= ""
+			self.sw.sw_inw_nrZal			= ""
+			self.sw.sw_inw_decZnak		= ""
+			self.sw.sw_inw_decData		= ""
+			self.v_sw_inw_obiekt.set	(	self.sw.sw_inw_obiekt	)
+			self.v_sw_inw_nrZal.set		(	self.sw.sw_inw_nrZal	)
+			self.v_sw_inw_decZnak.set	(	self.sw.sw_inw_decZnak	)
+			self.v_sw_inw_decData.set	(	self.sw.sw_inw_decData	)
+
+
+		self.sw.sw_libre_wykon	= self.sw.sw_numer_str	+ self.sw.sw_wykonawca
+		self.sw.sw_libre_opis = self.t.nazwaDir_obr +	" dz." +	self.sw.sw_dzialka1
+		if	self.v_sw_typ.get()	==	"inw":
+			self.sw.sw_libre_opis = self.sw.sw_libre_opis +	" " +	"inw"
+
+		#obr_terytFull	= dictObr_nazwaObrWpisana2teryt[	self.v_sw_obreb.get()]
+		#self.t.terytFull =	obr_terytFull
+		#print( "obr_terytFull=" +	obr_terytFull)
+		#print( "dictObr_teryt2nazwaDir[	obr_terytFull]=" + dictObr_teryt2nazwaDir[ obr_terytFull])
+
+		# nazwa obr. do nazwy katalogu
+		self.sw.sw_obrebDir = self.t.nazwaDir_obr
+		tytstr =	self.sw.sw_wykonawca +	"_" +	self.get_RRMM() + "_" + self.t.nazwaDir_obr
+		tytstr =	tytstr +	"_" +	self.sw.sw_dzialka1
+		if	self.v_sw_typ.get()	==	"inw":
+			tytstr =	tytstr +	"_" +	"inw"
+		self.sw.sw_dir_nazwa =	self.GC_DIR_SYTWYS + self.sw.sw_numer_str + "_" + tytstr
+		if os.path.exists( self.sw.sw_plikInfo_fullPath) == False:
+			self.sw.sw_plikInfo_fullPath	= self.sw.sw_dir_nazwa	+ "\\sw_" +	self.sw.sw_numer_str +	"_info.txt"
+			self.sw.sw_plikNr_nazwa =	self.sw.sw_numer_str +	"___"	+ tytstr
+			self.sw.sw_plikNr_fullPath =	self.GC_DIR_LICZNIK	+ self.sw.sw_plikNr_nazwa	+ ".nr"
+		print( "1 sw_dir_nazwa=" +	self.sw.sw_dir_nazwa)
+		print( "1 sw_plikInfo_fullPath="	+ self.sw.sw_plikInfo_fullPath)
+		print( "1 sw_plikNr_fullPath=" +	self.sw.sw_plikNr_fullPath)
+
+
+		# wype³nienie kontrolek	entry	aktualnymi danymi
+		# - -	- - -	- - -	- - -	- - -	- - -	- - -	- - -	- - -	- - -	- - -	- - -	-
+		# teryty	i nazwy
+		self.v_sw_powiat_teryt.set( self.t.terytF_pow)
+		self.v_sw_jEw_teryt.set( self.t.terytF_jew)
+		self.v_sw_obreb_teryt.set( self.t.terytF_obr)
+
+		self.v_sw_powiat_nazwa.set( self.t.nazwa_pow)
+		self.v_sw_jEw_nazwa.set( self.t.nazwa_jew)
+		self.v_sw_obreb_nazwa.set( self.t.nazwa_obr)
+
+		self.v_sw_obreb_dir.set( self.t.nazwaDir_obr)
+
+		# libre
+		self.v_sw_libre_wykon.set( self.sw.sw_libre_wykon)
+		self.v_sw_libre_opis.set(	self.sw.sw_libre_opis)
+
+		# œciezka dir
+		self.v_sw_dir_nazwa.set( self.sw.sw_dir_nazwa)
+
+		self.sw.inicjujStrukture(	self.sw.sw_dir_nazwa)
+		self.sw.deb_listujStrukture()
+
+
+	def btn_rezygnacja( self):
+		#print( "Rezygnacja")
+		self.master_frame.destroy
+		sys.exit()
+
+
+	def zapisz( self):
+		#global sw_plikInfo_fullPath
+		global sw_plikNr_fullPath
+		global sw_plikNr_nazwa
+
+		# utworzenie katalogu w	GC_DIR_SYTWYS
+		#os.mkdir( sw_dir_nazwa, 0777)
+		print( "sw_dir_nazwa=" + self.sw.sw_dir_nazwa)
+		print( "sw_plikInfo_fullPath=" +	self.sw.sw_plikInfo_fullPath)
+		if os.path.exists( self.sw.sw_plikInfo_fullPath) == False:
+			os.makedirs( self.sw.sw_dir_nazwa)
+			self.sw.utworzStrukture()
+			#os.path.isdir("C:\First\Second\Third")
+			f = open( self.sw.sw_plikNr_fullPath,	"w")
+			f.write(	self.sw.sw_plikNr_nazwa)
+			f.close()
+		
+		f = open( self.sw.sw_plikInfo_fullPath, "w")
+		
+		# dane klasy Teryt
+		f.write(	"[t_terytFull]="	 +	self.t.terytFull		 +	"\n")
+		f.write(	"[t_terytF_woj]=" +	self.t.terytF_woj		 +	"\n")
+		f.write(	"[t_terytF_pow]=" +	self.t.terytF_pow		 +	"\n")
+		f.write(	"[t_terytF_jew]=" +	self.t.terytF_jew		 +	"\n")
+		f.write(	"[t_terytF_obr]=" +	self.t.terytF_obr		 +	"\n")
+
+		f.write(	"[t_teryt_woj]="	+ self.t.teryt_woj			 +	"\n")
+		f.write(	"[t_teryt_pow]="	+ self.t.teryt_pow			 +	"\n")
+		f.write(	"[t_teryt_jew]="	+ self.t.teryt_jew			 +	"\n")
+		f.write(	"[t_teryt_obr]="	+ self.t.teryt_obr			 +	"\n")
+
+		f.write(	"[t_nazwa_woj]="	+ self.t.nazwa_woj			 +	"\n")
+		f.write(	"[t_nazwa_pow]="	+ self.t.nazwa_pow			 +	"\n")
+		f.write(	"[t_nazwa_jew]="	+ self.t.nazwa_jew			 +	"\n")
+		f.write(	"[t_nazwa_obr]="	+ self.t.nazwa_obr			 +	"\n")
+
+		f.write(	"[t_nazwa_uStn_woj]=" + self.t.nazwa_uStn_woj + "\n")
+		f.write(	"[t_nazwa_uStn_pow]=" + self.t.nazwa_uStn_pow + "\n")
+		f.write(	"[t_nazwa_uStn_jew]=" + self.t.nazwa_uStn_jew + "\n")
+		f.write(	"[t_nazwa_uStn_obr]=" + self.t.nazwa_uStn_obr + "\n")
+
+		f.write(	"[t_nazwaDir_obr]="	+ self.t.nazwaDir_obr		 +	"\n")
+
+		# dane klasy Sytwys
+		f.write(	"[sw_numer]="			+ str( self.sw.sw_numer)		+ "\n")
+		f.write(	"[sw_numer_str]="		+ self.sw.sw_numer_str			+ "\n")
+		f.write(	"[sw_wykonawca]="		+ self.sw.sw_wykonawca			+ "\n")
+		f.write(	"[sw_typ]="				+ self.sw.sw_typ					+ "\n")
+		f.write(	"[sw_skala]="			+ self.sw.sw_skala				+ "\n")
+		f.write(	"[sw_dzialki]="		+ self.sw.sw_dzialki				+ "\n")
+		f.write(	"[sw_dzialka1]="		+ self.sw.sw_dzialka1			+ "\n")
+		f.write(	"[sw_idZgl]="			+ self.sw.sw_idZgl				+ "\n")
+		f.write(	"[sw_obrebDir]="		+ self.sw.sw_obrebDir			+ "\n")
+		f.write(	"[sw_dir_nazwa]="		+ self.sw.sw_dir_nazwa			+ "\n")
+		f.write(	"[sw_mdcp_ust5]=%s\n"  % ( self.v_sw_ust5_str.get()))
+		f.write(	"[sw_mdcp_ust6]=%s\n"  % ( self.v_sw_ust6_str.get()))
+
+		f.write(	"[sw_inw_obiekt]="		+ self.sw.sw_inw_obiekt		+ "\n")
+		f.write(	"[sw_inw_nrZal]="			+ self.sw.sw_inw_nrZal		+ "\n")
+		f.write(	"[sw_inw_decZnak]="		+ self.sw.sw_inw_decZnak	+ "\n")
+		f.write(	"[sw_inw_decData]="		+ self.sw.sw_inw_decData	+ "\n")
+
+		f.write( "[sw_libre_wykon]="		+ self.sw.sw_libre_wykon	+ "\n")
+		f.write( "[sw_libre_opis]="      + self.sw.sw_libre_opis		+ "\n")
+
+		for key, val in self.sw.sw_dicSekcje.items():
+			f.write( "%s=%s\n" % ( key, val))
+		
+		# zapisanie danych wieloliniowych
+		# 1) pobranie z textu
+		# 2) obciêcie
+		# 3) zapisanie do pliku info
+		# 4) zapisanie do pliku tytu³
+		# 5) zapisanie do pliku uwagi
+		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		# 1)
+		#self.sw.sw_sekcje = self.tx_sekcje.get( 1.0, tk.END)
+		self.sw.sw_sekcje_tytul = self.tx_sekcje.get( 1.0, tk.END)
+		self.sw.sw_mdcp_kp_uwagi1 = self.tx_mdcp_kp_uwagi1.get( 1.0, tk.END)
+		self.sw.sw_mdcp_kp_uwagi2 = self.tx_mdcp_kp_uwagi2.get( 1.0, tk.END)
+		self.sw.sw_mdcp_kp_uwagi3 = self.tx_mdcp_kp_uwagi3.get( 1.0, tk.END)
+		self.sw.sw_mdcp_kp_uwagi4 = self.tx_mdcp_kp_uwagi4.get( 1.0, tk.END)
+		self.sw.sw_mdcp_kp_uwagi5 = self.tx_mdcp_kp_uwagi5.get( 1.0, tk.END)
+		self.sw.sw_mdcp_kp_uwagi6 = self.tx_mdcp_kp_uwagi6.get( 1.0, tk.END)
+		# 2)
+		self.sw.sw_sekcje = self.sw.sw_sekcje.strip()
+		self.sw.sw_sekcje_tytul = self.sw.sw_sekcje_tytul.strip()
+		self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1.strip()
+		self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2.strip()
+		self.sw.sw_mdcp_kp_uwagi3 = self.sw.sw_mdcp_kp_uwagi3.strip()
+		self.sw.sw_mdcp_kp_uwagi4 = self.sw.sw_mdcp_kp_uwagi4.strip()
+		self.sw.sw_mdcp_kp_uwagi5 = self.sw.sw_mdcp_kp_uwagi5.strip()
+		self.sw.sw_mdcp_kp_uwagi6 = self.sw.sw_mdcp_kp_uwagi6.strip()
+		# 3)
+		f.write( "[sw_sekcje]="      		+ self.sw.sw_sekcje + "\n")
+		f.write( "[sw_sekcje_tytul]="		+ self.sw.sw_sekcje_tytul + "\n")
+		f.write( "[sw_mdcp_kp_uwagi1]=" 	+ self.sw.sw_mdcp_kp_uwagi1 + "\n")
+		f.write( "[sw_mdcp_kp_uwagi2]=" 	+ self.sw.sw_mdcp_kp_uwagi2 + "\n")
+		f.write( "[sw_mdcp_kp_uwagi3]=" 	+ self.sw.sw_mdcp_kp_uwagi3 + "\n")
+		f.write( "[sw_mdcp_kp_uwagi4]=" 	+ self.sw.sw_mdcp_kp_uwagi4 + "\n")
+		f.write( "[sw_mdcp_kp_uwagi5]=" 	+ self.sw.sw_mdcp_kp_uwagi5 + "\n")
+		f.write( "[sw_mdcp_kp_uwagi6]=" 	+ self.sw.sw_mdcp_kp_uwagi6 + "\n")
+		# 4)
+		self.sw.setNazwyPlikow_tytul_uwagi()		
+		with open(  self.sw.sw_plikTytul_fullPath, "w") as f2:
+			f2.write(	self.t.nazwa_uStn_woj + "\n")
+			f2.write(	self.t.nazwa_uStn_pow + "\n")
+			f2.write(	self.t.nazwa_uStn_jew + "\n")
+			f2.write(	self.t.nazwa_uStn_obr + "\n")
+			f2.write(	"Dzia³ki: " + self.sw.sw_dzialki + "\n")
+			f2.write(	"Uk³ad wspó³rzêdnych p³askich prostok¹tnych: PL-2000/18" + "\n")
+			f2.write(	"Geodezyjny uk³ad wysokoœciowy: PL-KRON86-NH" + "\n")
+			f2.write(	self.sw.sw_sekcje_tytul + "\n")
+			f2.write(	"Skala 1:" + self.sw.sw_skala + "\n")
+			f2.write(	"Id. zg³.: " + self.sw.sw_idZgl + "\n")
+			if self.sw.sw_typ == "inw":
+				f2.write( "\n")
+				f2.write( "Usytuowanie obiektu budowlanego (%s) zgodne\n" % ( self.sw.sw_inw_obiekt))
+				f2.write( "z projektem zagospodarowania terenu (za³¹cznik nr %s do decyzji\n" % ( self.sw.sw_inw_nrZal))
+				f2.write( "o znaku %s z dnia %s r.)" % ( self.sw.sw_inw_decZnak, self.sw.sw_inw_decData))
+
+		f2.close()
+		# 5)
+		with open(  self.sw.sw_plikUwagi_fullPath, "w") as f2:
+			f2.write( self.sw.sw_mdcp_kp_uwagi1 + "\n\n")
+			f2.write( self.sw.sw_mdcp_kp_uwagi2 + "\n\n")
+			f2.write( self.sw.sw_mdcp_kp_uwagi3 + "\n\n")
+			f2.write( self.sw.sw_mdcp_kp_uwagi4 + "\n\n")
+			f2.write( self.sw.sw_mdcp_kp_uwagi5 + "\n\n")
+			f2.write( self.sw.sw_mdcp_kp_uwagi6 + "\n\n")
+		f2.close()
+
+		f.close()
+		print( "zapisano")
+		# na razie trzeba zamkn¹æ, ¿eby program nie g³upia³
+		#self.master_frame.destroy
+		#sys.exit()
+
+
+	def wczytaj( self):
+		#global sw_plikInfo_fullPath
+		
+		#self.sw.sw_plikInfo_fullPath = "t:\\sytwys\\826_kp_1904_Biezen_7-24\\sw_826_info.txt"
+		#self.sw.sw_plikInfo_fullPath = tkFileDialog.askopenfilename( initialdir = "/", title = "Select file", filetypes = ( ("jpeg files","*.jpg"), ("all files","*.*")))		
+		self.sw.sw_plikInfo_fullPath = tk.filedialog.askopenfilename( \
+			initialdir = "t:\\sytwys\\", \
+			title = "Wybierz plik swInfo", \
+			filetypes = ( ("swInfo files","*.txt"), ("all files","*.*"))\
+			)
+		
+		if os.path.exists( self.sw.sw_plikInfo_fullPath) == False: 
+			komunikat = "Plik %s nie istnieje" % self.sw.sw_plikInfo_fullPath
+			tk.messagebox.showinfo("Err", komunikat)
+			return -1
+		
+		# - odczytanie danych z pliku info 
+		# - i zapisanie ich s³owniku dicWierszePliku
+		#=========================================================================
+		with open( self.sw.sw_plikInfo_fullPath, "r") as f:
+		#with open( plikInfo_826, "r") as f:
+			for wiersz in f:
+				wLen = len( wiersz)
+				#print( "%s" % wiersz[:-1])
+
+				s = wiersz.strip()
+				lstWiersz = s.split( "=")
+				if len( lstWiersz) == 2:
+					s = ">%s< >%s<\n" % (lstWiersz[0], lstWiersz[1])
+					#print( s)
+					klucz = lstWiersz[0]
+					self.dicWierszePliku[ klucz] = lstWiersz[1]
+				elif len( lstWiersz) == 1:
+					self.dicWierszePliku[ klucz] = self.dicWierszePliku[ klucz] + "\n" + lstWiersz[0] 
+				else:
+					print( "ERR")
+					
+				#self.dicWierszePliku.insert( wiersz)
+				#print( "%s" % self.dicWierszePliku)
+			#deb
+			#print( self.dicWierszePliku)
+		f.closed
+
+		
+		# aktualizacja zmiennych danymi ze s³ownika dicWierszePliku
+		#=========================================================================
+		for key, val in self.dicWierszePliku.items():
+			if key == "[t_terytFull]"       : self.t.terytFull      	= val
+			if key == "[t_terytF_woj]"      : self.t.terytF_woj     	= val
+			if key == "[t_terytF_pow]"      : self.t.terytF_pow     	= val
+			if key == "[t_terytF_jew]"      : self.t.terytF_jew     	= val
+			if key == "[t_terytF_obr]"      : self.t.terytF_obr     	= val
+			if key == "[t_teryt_woj]"       : self.t.teryt_woj      	= val
+			if key == "[t_teryt_pow]"       : self.t.teryt_pow      	= val
+			if key == "[t_teryt_jew]"       : self.t.teryt_jew      	= val
+			if key == "[t_teryt_obr]"       : self.t.teryt_obr      	= val
+			if key == "[t_nazwa_woj]"       : self.t.nazwa_woj      	= val
+			if key == "[t_nazwa_pow]"       : self.t.nazwa_pow      	= val
+			if key == "[t_nazwa_jew]"       : self.t.nazwa_jew      	= val
+			if key == "[t_nazwa_obr]"       : self.t.nazwa_obr      	= val
+			if key == "[t_nazwa_uStn_woj]"  : self.t.nazwa_uStn_woj 	= val
+			if key == "[t_nazwa_uStn_pow]"  : self.t.nazwa_uStn_pow 	= val
+			if key == "[t_nazwa_uStn_jew]"  : self.t.nazwa_uStn_jew 	= val
+			if key == "[t_nazwa_uStn_obr]"  : self.t.nazwa_uStn_obr 	= val
+			if key == "[t_nazwaDir_obr]"    : self.t.nazwaDir_obr    = val
+			
+			if key == "[sw_numer]"           : self.sw.sw_numer      	 = int( val)
+			if key == "[sw_numer_str]"       : self.sw.sw_numer_str      = val
+			if key == "[sw_wykonawca]"       : self.sw.sw_wykonawca      = val
+			if key == "[sw_typ]"             : self.sw.sw_typ            = val
+			if key == "[sw_skala]"           : self.sw.sw_skala          = val
+			if key == "[sw_dzialki]"         : self.sw.sw_dzialki        = val
+			if key == "[sw_dzialka1]"        : self.sw.sw_dzialka1       = val
+			if key == "[sw_idZgl]"           : self.sw.sw_idZgl          = val
+			if key == "[sw_obrebDir]"        : self.sw.sw_obrebDir       = val
+			if key == "[sw_dir_nazwa]"       : self.sw.sw_dir_nazwa      = val			
+			if key == "[sw_mdcp_ust5]"       : self.sw.sw_mdcp_ust5_str  = val
+			if key == "[sw_mdcp_ust6]"       : self.sw.sw_mdcp_ust6_str  = val
+			
+			if key == "[sw_inw_obiekt]"      : self.sw.sw_inw_obiekt     = val
+			if key == "[sw_inw_nrZal]"       : self.sw.sw_inw_nrZal      = val
+			if key == "[sw_inw_decZnak]"     : self.sw.sw_inw_decZnak    = val
+			if key == "[sw_inw_decData]"     : self.sw.sw_inw_decData    = val
+			if key == "[sw_libre_wykon]"     : self.sw.sw_libre_wykon    = val
+			if key == "[sw_libre_opis]"      : self.sw.sw_libre_opis     = val
+			
+			if key == "[sw_sekcje]"          : self.sw.sw_sekcje         = val
+			if key == "[sw_sekcje_tytul]"    : self.sw.sw_sekcje_tytul   = val
+			if key == "[godlo_01]"           : self.sw.sw_godlo_01       = val
+			if key == "[godlo_02]"           : self.sw.sw_godlo_02       = val
+			if key == "[godlo_03]"           : self.sw.sw_godlo_03       = val
+			if key == "[godlo_04]"           : self.sw.sw_godlo_04       = val
+			if key == "[godlo_05]"           : self.sw.sw_godlo_05       = val
+			if key == "[godlo_06]"           : self.sw.sw_godlo_06       = val
+			if key == "[godlo_07]"           : self.sw.sw_godlo_07       = val
+			if key == "[godlo_08]"           : self.sw.sw_godlo_08       = val
+			if key == "[godlo_09]"           : self.sw.sw_godlo_09       = val
+			if key == "[godlo_10]"           : self.sw.sw_godlo_10       = val
+			if key == "[godlo_11]"           : self.sw.sw_godlo_11       = val
+			if key == "[godlo_12]"           : self.sw.sw_godlo_12       = val
+			if key == "[godlo_13]"           : self.sw.sw_godlo_13       = val
+			if key == "[godlo_14]"           : self.sw.sw_godlo_14       = val
+			if key == "[godlo_15]"           : self.sw.sw_godlo_15       = val
+			if key == "[godlo_16]"           : self.sw.sw_godlo_16       = val
+			if key == "[godlo_17]"           : self.sw.sw_godlo_17       = val
+			if key == "[godlo_18]"           : self.sw.sw_godlo_18       = val
+			if key == "[godlo_19]"           : self.sw.sw_godlo_19       = val
+			if key == "[godlo_20]"           : self.sw.sw_godlo_20       = val
+			if key == "[funkcja_01]"         : self.sw.sw_funkcja_01     = val
+			if key == "[funkcja_02]"         : self.sw.sw_funkcja_02     = val
+			if key == "[funkcja_03]"         : self.sw.sw_funkcja_03     = val
+			if key == "[funkcja_04]"         : self.sw.sw_funkcja_04     = val
+			if key == "[funkcja_05]"         : self.sw.sw_funkcja_05     = val
+			if key == "[funkcja_06]"         : self.sw.sw_funkcja_06     = val
+			if key == "[funkcja_07]"         : self.sw.sw_funkcja_07     = val
+			if key == "[funkcja_08]"         : self.sw.sw_funkcja_08     = val
+			if key == "[funkcja_09]"         : self.sw.sw_funkcja_09     = val
+			if key == "[funkcja_10]"         : self.sw.sw_funkcja_10     = val
+			if key == "[funkcja_11]"         : self.sw.sw_funkcja_11     = val
+			
+			if key == "[sw_mdcp_kp_uwagi1]"	: self.sw.sw_mdcp_kp_uwagi1 = val
+			if key == "[sw_mdcp_kp_uwagi2]"	: self.sw.sw_mdcp_kp_uwagi2 = val
+			if key == "[sw_mdcp_kp_uwagi3]"	: self.sw.sw_mdcp_kp_uwagi3 = val
+			if key == "[sw_mdcp_kp_uwagi4]"	: self.sw.sw_mdcp_kp_uwagi4 = val
+			if key == "[sw_mdcp_kp_uwagi5]"	: self.sw.sw_mdcp_kp_uwagi5 = val
+			if key == "[sw_mdcp_kp_uwagi6]"	: self.sw.sw_mdcp_kp_uwagi6 = val
+
+		# aktualizacja zmiennych zwi¹zanych z widgetami
+		#=========================================================================
+		self.v_sw_powiat_teryt	.set( self.t.terytF_pow		)
+		self.v_sw_jEw_teryt		.set( self.t.terytF_jew		)
+		self.v_sw_powiat_nazwa	.set( self.t.nazwa_pow		)
+		self.v_sw_jEw_nazwa		.set( self.t.nazwa_jew		)
+		self.v_sw_obreb_teryt	.set( self.t.teryt_obr		)   
+		self.v_sw_obreb_nazwa	.set( self.t.nazwa_obr		)   
+		self.v_sw_obreb_dir		.set( self.t.nazwaDir_obr	)
+
+		self.v_sw_numer			.set( self.sw.sw_numer_str			)   
+		self.v_sw_wykonawca		.set( self.sw.sw_wykonawca			)
+		self.v_sw_obreb			.set( self.t.nazwa_obr				)   
+		self.v_sw_dzialki			.set( self.sw.sw_dzialki			)	
+		self.v_sw_typ				.set( self.sw.sw_typ					)
+		self.v_sw_idZgl			.set( self.sw.sw_idZgl				)   
+		self.v_sw_skala			.set( self.sw.sw_skala				)   
+		
+		
+		self.v_sw_libre_wykon	.set( self.sw.sw_libre_wykon		)   
+		self.v_sw_libre_opis		.set( self.sw.sw_libre_opis		)	
+		self.v_sw_dir_nazwa		.set( self.sw.sw_dir_nazwa			)
+
+		self.v_sw_inw_obiekt		.set( self.sw.sw_inw_obiekt		)
+		self.v_sw_inw_nrZal		.set( self.sw.sw_inw_nrZal	      )
+		self.v_sw_inw_decZnak	.set( self.sw.sw_inw_decZnak     )
+		self.v_sw_inw_decData	.set( self.sw.sw_inw_decData     )
+
+		#self.v_sw_inw_decData	.set( self.sw.sw_inw_decData	 	)
+		#self.v_sw_mdcp_kp_uwagi1.set( self.sw.sw_mdcp_kp_uwagi1   )
+		#self.v_sw_mdcp_kp_uwagi2.set( self.sw.sw_mdcp_kp_uwagi2   )
+		#self.v_sw_mdcp_kp_uwagi3.set( self.sw.sw_mdcp_kp_uwagi3   )
+		#self.v_sw_mdcp_kp_uwagi4.set( self.sw.sw_mdcp_kp_uwagi4   )
+		#self.v_sw_mdcp_kp_uwagi5.set( self.sw.sw_mdcp_kp_uwagi5   )
+		#self.v_sw_typ.set( self.sw_sw_typ)
+		#print( self.sw.sw_mdcp_ust5) 
+		#print( self.sw.sw_mdcp_ust6) 
+		self.v_sw_ust5_str.set( self.sw.sw_mdcp_ust5_str)
+		self.v_sw_ust6_str.set( self.sw.sw_mdcp_ust6_str)
+			
+		
+		# god³a i text sekcje		
+		# utworzenie listy sekcji i s³ownika sekcji
+		#-------------------------------------------------------------------------
+		#deb - wczytana zmienna
+		print( "---[ self.sw.sw_sekcje po wczytaniu ]-----------------------------")
+		print( "%s\n" % (self.sw.sw_sekcje))
+		print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+		self.tx_sekcje.delete( 1.0, tk.END)
+		if len( self.sw.sw_sekcje_tytul) > 0:			
+			self.tx_sekcje.insert( tk.END, self.sw.sw_sekcje_tytul)
+
+		# utworzenie listy i s³ownika sekcji
+		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		print( "---[ utworzenie listy i s³ownika sekcji ]------------------------")
+		self.sw.sw_dicSekcje.clear()
+		del self.sw.sw_lstSekcje[0:]
+		for key, val in self.dicWierszePliku.items():
+			if key.startswith( "[godlo_") > 0:								
+				self.sw.sw_lstSekcje.append( val)
+				self.sw.sw_dicSekcje[ key] = val
+		self.sw.sw_lstSekcje.sort()
+		print( "self.sw.sw_lstSekcje po utworzeniu:\n")
+		print( "%s\n" % (self.sw.sw_lstSekcje))
+		print( "self.sw.sw_dicSekcje po utworzeniu:\n")
+		print( self.sw.sw_dicSekcje)
+		print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+
+
+		# uwagi 1
+		# wpisanie wczytanych uwag do widgetu text
+		#-------------------------------------------------------------------------
+		print( "---[ self.sw.sw_mdcp_kp_uwagi1 po wczytaniu ]---------------------")
+		print( "%s\n" % (self.sw.sw_mdcp_kp_uwagi1))
+		print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+		self.tx_mdcp_kp_uwagi1.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi2.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi3.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi4.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi5.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi6.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi1.insert( tk.END, self.sw.sw_mdcp_kp_uwagi1)
+		self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.sw_mdcp_kp_uwagi2)
+		self.tx_mdcp_kp_uwagi3.insert( tk.END, self.sw.sw_mdcp_kp_uwagi3)
+		self.tx_mdcp_kp_uwagi4.insert( tk.END, self.sw.sw_mdcp_kp_uwagi4)
+		self.tx_mdcp_kp_uwagi5.insert( tk.END, self.sw.sw_mdcp_kp_uwagi5)
+		self.tx_mdcp_kp_uwagi6.insert( tk.END, self.sw.sw_mdcp_kp_uwagi6)
+		
+
+		#self.master_frame.destroy
+		#sys.exit()
+
+
+	def btn_gen_sekcje( self):
+		# utworzenie tekstu sw_sekcje
+		i = 0
+		j = 0
+		iOstatnia = len( self.sw.sw_lstSekcje)
+		liczbaSekcjiWWierszu = 3
+		self.sw.sw_sekcje = ""
+		wierszSekcji = ""
+		for s in self.sw.sw_lstSekcje:
+			i += 1
+			j += 1
+			sEnd = ""
+			if i == liczbaSekcjiWWierszu:
+				sEnd = "\n"
+				i = 0
+			if j != iOstatnia:
+				sPrzecinek = ", "
+			else:
+				sEnd = ""
+				sPrzecinek = ""
+			#deb
+			#print( "i=%d, iOstatnia=%d >%s<>%s<\n" % ( i, iOstatnia, sPrzecinek, sEnd))
+			wierszSekcji = wierszSekcji + s + sPrzecinek + sEnd
+			self.sw.sw_sekcje = self.sw.sw_sekcje + s + sPrzecinek + sEnd
+			# zapisanie wiersza w s³owniku sekcji
+			#self.sw.sw_dicSekcje[]
+		
+		self.sw.sw_sekcje_tytul = "Sekcje mapy zas. uk³. 2000: " + self.sw.sw_sekcje	
+		print( "self.sw.sw_lstSekcje po utworzeniu z gode³:\n")
+		print( "%s\n" % (self.sw.sw_lstSekcje))
+		print( "self.sw.sw_sekcje po utworzeniu z gode³:\n")
+		print( "%s\n" % (self.sw.sw_sekcje))		
+		
+		
+		self.tx_sekcje.delete( 1.0, tk.END)
+		self.tx_sekcje.insert( tk.END, self.sw.sw_sekcje_tytul)
+
+		
+	def btn_gen_uwagi1( self):	
+		# utworzenie uwag
+		self.sw.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza \n"
+		self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + self.sw.sw_sekcje
+		self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. \n"
+		self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + self.sw.sw_idZgl + "."		
+		self.tx_mdcp_kp_uwagi1.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi1.insert( tk.END, self.sw.sw_mdcp_kp_uwagi1)
+
+
+	def btn_gen_uwagi2( self):	
+		# utworzenie uwag
+		self.sw.sw_dzialki = self.v_sw_dzialki.get()
+		self.sw.sw_mdcp_ust5_str = self.v_sw_ust5_str.get()
+		self.sw.sw_mdcp_ust6_str = self.v_sw_ust6_str.get()
+		self.sw.sw_mdcp_kp_uwagi2 = "Dane dotycz¹ce dzia³ki "
+		self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + self.sw.sw_dzialki + ", ujawnione w PZGiK, "
+		if self.sw.sw_mdcp_ust5_str == "1" and self.sw.sw_mdcp_ust6_str == "1":
+			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 5 i 6 \n"
+		elif self.sw.sw_mdcp_ust5_str == "1" and self.sw.sw_mdcp_ust6_str == "0":
+			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 5 \n"	
+		elif self.sw.sw_mdcp_ust5_str == "0" and self.sw.sw_mdcp_ust6_str == "1":
+			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 6 \n"	
+		else:
+			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "nie spe³niaj¹ warunków przepisów §79, ust. 5 i 6 \n"	
+		self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "rozp. MSWiA z dnia 9 listopada 2011r."		
+		
+		self.tx_mdcp_kp_uwagi2.delete( 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.sw_mdcp_kp_uwagi2)
+
+
+	def btn_gen_uwagi3( self):	
+		pass
+
+	def get_RRMM( self):
+		'''
+			funkcja zwraca	string RRMM	(1903), potrzebny	do	utworzenia
+			sciezki dla	katalogu	sw
+		'''
+		x = datetime.datetime.now()
+		rrmm = x.strftime( "%y%m")
+		return rrmm
+
+	# koniec __init__()
+	# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
