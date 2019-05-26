@@ -8,7 +8,7 @@ Python 3.x
 
 ### Setup
 #### Requierements
-OS: Windows.
-Python 3.x installed.
+* OS: Windows.
+* Python 3.x installed.
 #### To run
 Download files and run tc_mkDir_sytwys.py.
