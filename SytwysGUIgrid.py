@@ -52,9 +52,13 @@ class SytwysGUIgrid( tk.Frame):
 		self.v_sw_wykonawca			= tk.StringVar()
 		self.v_sw_obreb				= tk.StringVar()
 		self.v_sw_dzialki				= tk.StringVar()
-		self.v_sw_typ					= tk.StringVar()
-		self.v_sw_idZgl				= tk.StringVar()
+		self.v_sw_typ					= tk.StringVar()		
 		self.v_sw_skala				= tk.StringVar()
+
+		self.v_sw_idZgl				= tk.StringVar()		#<== do likwidacji
+		self.v_sw_idZgl_jrwa			= tk.StringVar()
+		self.v_sw_idZgl_nr			= tk.StringVar()
+		self.v_sw_idZgl_rok			= tk.StringVar()
 
 
 		self.v_sw_libre_wykon		= tk.StringVar()
@@ -143,9 +147,15 @@ class SytwysGUIgrid( tk.Frame):
 		#combobox["values"] = ttyp
 		e7	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_skala		)
 		e3	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_obreb		)
-		e4	= tk.Entry(	self.frameTL, justify="left",	width=80 , textvariable	= self.v_sw_dzialki	)
+		e4	= tk.Entry(	self.frameTL, justify="left",	width=60 , textvariable	= self.v_sw_dzialki	)
 		#e5	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_typ		)
+		
+		# id Zg³ 
 		e6	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_idZgl		)
+		e6_1	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_idZgl_jrwa	)
+		e6_2	= tk.Entry(	self.frameTL, justify="left",	width=5	, textvariable	= self.v_sw_idZgl_nr		)
+		e6_3	= tk.Entry(	self.frameTL, justify="left",	width=6	, textvariable	= self.v_sw_idZgl_rok	)
+		
 
 		e1.grid(	row=self.rowGr1 + 0, column=1, sticky="W")
 		e2.grid(	row=self.rowGr1 + 1, column=1, sticky="W")
@@ -155,7 +165,10 @@ class SytwysGUIgrid( tk.Frame):
 		e3.grid(	row=self.rowGr1 + 4, column=1, sticky="W")
 		e4.grid(	row=self.rowGr1 + 5, column=1, sticky="W", columnspan=4)
 		#e5.grid(	row=rowGr1 + 22, column=1, sticky="W")
-		e6.grid(	row=self.rowGr1 + 6, column=1, sticky="W")
+		#e6.grid(	row=self.rowGr1 + 6, column=1, sticky="W")
+		e6_1.grid(	row=self.rowGr1 + 6, column=1, sticky="W")
+		e6_2.grid(	row=self.rowGr1 + 6, column=2, sticky="E")
+		e6_3.grid(	row=self.rowGr1 + 6, column=3, sticky="E")
 
 
 		#self.v_sw_ust6.set = 1
@@ -300,7 +313,7 @@ class SytwysGUIgrid( tk.Frame):
 		self.sw.sw_dzialki		= self.v_sw_dzialki.get()
 		self.sw.sw_dzialka1		= self.sw.get_sw_dzialka1( self.sw.sw_dzialki)
 		self.sw.sw_typ				= self.v_sw_typ.get()
-		self.sw.sw_idZgl			= self.v_sw_idZgl.get()
+		self.sw.sw_idZgl			= self.v_sw_idZgl_jrwa.get() + self.v_sw_idZgl_nr.get() + "." + self.v_sw_idZgl_rok.get()
 		self.sw.sw_skala			= self.v_sw_skala.get()
 		self.sw.sw_mdcp_ust5		= self.v_sw_ust5_str.get()
 		self.sw.sw_mdcp_ust6		= self.v_sw_ust6_str.get()
@@ -421,6 +434,10 @@ class SytwysGUIgrid( tk.Frame):
 		f.write(	"[t_nazwaDir_obr]="	+ self.t.nazwaDir_obr		 +	"\n")
 
 		# dane klasy Sytwys
+		self.sw.sw_idZgl			= self.v_sw_idZgl_jrwa.get() + self.v_sw_idZgl_nr.get() + "." + self.v_sw_idZgl_rok.get()
+		self.sw.sw_idZgl_jrwa	= self.v_sw_idZgl_jrwa.get()
+		self.sw.sw_idZgl_nr		= self.v_sw_idZgl_nr.get()
+		self.sw.sw_idZgl_rok		= self.v_sw_idZgl_rok.get()
 		f.write(	"[sw_numer]="			+ str( self.sw.sw_numer)		+ "\n")
 		f.write(	"[sw_numer_str]="		+ self.sw.sw_numer_str			+ "\n")
 		f.write(	"[sw_wykonawca]="		+ self.sw.sw_wykonawca			+ "\n")
@@ -428,7 +445,12 @@ class SytwysGUIgrid( tk.Frame):
 		f.write(	"[sw_skala]="			+ self.sw.sw_skala				+ "\n")
 		f.write(	"[sw_dzialki]="		+ self.sw.sw_dzialki				+ "\n")
 		f.write(	"[sw_dzialka1]="		+ self.sw.sw_dzialka1			+ "\n")
+		
 		f.write(	"[sw_idZgl]="			+ self.sw.sw_idZgl				+ "\n")
+		f.write(	"[sw_idZgl_jrwa]="	+ self.sw.sw_idZgl_jrwa			+ "\n")
+		f.write(	"[sw_idZgl_nr]="		+ self.sw.sw_idZgl_nr			+ "\n")
+		f.write(	"[sw_idZgl_rok]="		+ self.sw.sw_idZgl_rok			+ "\n")
+		
 		f.write(	"[sw_obrebDir]="		+ self.sw.sw_obrebDir			+ "\n")
 		f.write(	"[sw_dir_nazwa]="		+ self.sw.sw_dir_nazwa			+ "\n")
 		f.write(	"[sw_mdcp_ust5]=%s\n"  % ( self.v_sw_ust5_str.get()))
@@ -589,7 +611,12 @@ class SytwysGUIgrid( tk.Frame):
 			if key == "[sw_skala]"           : self.sw.sw_skala          = val
 			if key == "[sw_dzialki]"         : self.sw.sw_dzialki        = val
 			if key == "[sw_dzialka1]"        : self.sw.sw_dzialka1       = val
+			
 			if key == "[sw_idZgl]"           : self.sw.sw_idZgl          = val
+			if key == "[sw_idZgl_jrwa]"		: self.sw.sw_idZgl_jrwa		 = val				
+			if key == "[sw_idZgl_nr]"			: self.sw.sw_idZgl_nr		 = val				
+			if key == "[sw_idZgl_rok]"			: self.sw.sw_idZgl_rok		 = val				
+				
 			if key == "[sw_obrebDir]"        : self.sw.sw_obrebDir       = val
 			if key == "[sw_dir_nazwa]"       : self.sw.sw_dir_nazwa      = val			
 			if key == "[sw_mdcp_ust5]"       : self.sw.sw_mdcp_ust5_str  = val
@@ -658,7 +685,12 @@ class SytwysGUIgrid( tk.Frame):
 		self.v_sw_obreb			.set( self.t.nazwa_obr				)   
 		self.v_sw_dzialki			.set( self.sw.sw_dzialki			)	
 		self.v_sw_typ				.set( self.sw.sw_typ					)
+
 		self.v_sw_idZgl			.set( self.sw.sw_idZgl				)   
+		self.v_sw_idZgl_jrwa		.set( self.sw.sw_idZgl_jrwa		)   
+		self.v_sw_idZgl_nr		.set( self.sw.sw_idZgl_nr			)   
+		self.v_sw_idZgl_rok		.set( self.sw.sw_idZgl_rok			)   
+
 		self.v_sw_skala			.set( self.sw.sw_skala				)   
 		
 		

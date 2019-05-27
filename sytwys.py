@@ -27,6 +27,9 @@ class	Sytwys( object):
 		self.sw_dzialka1		= ""
 		self.sw_typ				= ""
 		self.sw_idZgl			= ""
+		self.sw_idZgl_jrwa	= ""
+		self.sw_idZgl_nr		= ""
+		self.sw_idZgl_rok		= ""
 		self.sw_skala			= ""
 
 		# inw.
