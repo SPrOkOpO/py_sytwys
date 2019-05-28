@@ -65,7 +65,7 @@ if __name__ == "__main__":
 	sw.sw_wykonawca =	"kp"
 	g.v_sw_numer.set( sw.sw_numer_str)
 	g.v_sw_wykonawca.set( sw.sw_wykonawca)
-	g.v_sw_obreb.set( "K³obuck")
+	g.v_sw_obreb.set( "Zagorze")
 	g.v_sw_dzialki.set( "309, 310")
 	g.v_sw_typ.set( "mdcp")
 	#g.v_sw_idZgl.set( "GKK.6640.X.2019")		# <== do likwidacji

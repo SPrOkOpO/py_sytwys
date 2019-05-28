@@ -97,6 +97,7 @@ class	Teryt( object):
 			"Przybylow"								: "240601_4.0005",
 			"Smugi"									: "240601_4.0006",
 			"Zagórze"								: "240601_4.0007",
+			"Zagorze"								: "240601_4.0007",
 			"Zakrzew"								: "240601_4.0008",
 
 			"Bia³a Dolna"							: "240601_5.0001",
@@ -614,7 +615,7 @@ class	Teryt( object):
 			self.nazwa_woj	= "œl¹skie"
 			self.nazwa_pow	= self.dictPow[ self.terytF_pow]
 			self.nazwa_jew	= self.dictJEw[ self.terytF_jew]
-			self.nazwa_obr	= astr
+			self.nazwa_obr	= self.dictObr_teryt2nazwa[ self.terytFull]
 
 			self.nazwa_uStn_woj = "Województwo: " + self.nazwa_woj
 			self.nazwa_uStn_pow = "Powiat: " + self.nazwa_pow
