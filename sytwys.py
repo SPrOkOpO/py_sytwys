@@ -95,7 +95,7 @@ class	Sytwys( object):
 		
 		self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotycz¹ce dzia³ki "
 		self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
-		self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6\nrozp. MSWiA z dnia 9 listopada 2011r."
+		self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011r."
 	
 		'''
 		Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 

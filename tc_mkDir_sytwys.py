@@ -49,7 +49,7 @@ if __name__ == "__main__":
 	title	= "SytWys info"
 	master =	tk.Tk( screenName=prompt)
 	master.title( title)
-	master.geometry( "1500x800+100+100")
+	master.geometry( "1500x900+100+50")
 	g = SytwysGUIgrid.SytwysGUIgrid( master, sw, t) 
 	
 	
@@ -72,7 +72,8 @@ if __name__ == "__main__":
 	g.v_sw_idZgl_jrwa.set( "GKK.6640.") 
 	g.v_sw_idZgl_nr.set( "") 
 	g.v_sw_idZgl_rok.set( "2019") 
-	g.v_sw_ust5.set = 1
+	g.v_sw_ust5.set( 0)
+	g.v_sw_ust6.set( 1)
 	g.v_sw_skala.set( "500")
 	g.v_sw_inw_obiekt.set( "budynku mieszkalnego wraz z przy³¹czami")
 	g.v_sw_inw_nrZal.set( "1")

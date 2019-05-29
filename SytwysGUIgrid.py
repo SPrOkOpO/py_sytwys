@@ -37,7 +37,7 @@ class SytwysGUIgrid( tk.Frame):
 
 		# font dla widgetów tekst
 		#--------------------------------------------------------------------------
-		self.font = tkFont.Font( family="Courier New", size=9)
+		self.font = tkFont.Font( family="Courier New", size=8)
 
 		# zmienne tekstowe dla kontrolek	entry
 		#--------------------------------------------------------------------------
@@ -180,8 +180,8 @@ class SytwysGUIgrid( tk.Frame):
 		#self.v_sw_ust6.set = 1
 		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameTL, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=7, sticky="W")
 		for etykieta, row, col, status, variable in [ \
-			( "ust. 5", 7, 1, tk.NORMAL, self.v_sw_ust5_str), \
-			( "ust. 6", 7, 2, tk.NORMAL, self.v_sw_ust6_str) \
+			( "ust. 5", 7, 1, tk.NORMAL, self.v_sw_ust5), \
+			( "ust. 6", 7, 2, tk.NORMAL, self.v_sw_ust6) \
 			]:
 			tk.Checkbutton( self.frameTL, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
 
@@ -261,7 +261,7 @@ class SytwysGUIgrid( tk.Frame):
 		butSekcje	= tk.Button( self.frameTR, text='Gen sekcje', 	width =15, 	command=self.btn_gen_sekcje, bg="salmon")
 		butSekcje.grid(	row=0, column=1, pady=0, columnspan=1)
 
-		self.tx_sekcje				= tk.Text( self.frameTR, height=7, width=80, tabs=3)
+		self.tx_sekcje				= tk.Text( self.frameTR, height=7, width=100, tabs=3, font=self.font)
 		self.tx_sekcje.grid				( row=1, column=0, sticky="W", columnspan=3)
 
 
@@ -275,7 +275,7 @@ class SytwysGUIgrid( tk.Frame):
 		butUwagi2.grid(	row=1, column=2, pady=0, columnspan=1)
 		butUwagi3.grid(	row=1, column=3, pady=0, columnspan=1)
 					
-		self.tx_mdcp_kp_uwagi1		= tk.Text( self.frameMR, height=6, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi1		= tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font)
 		'''
 		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameMR, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=2, sticky="W")
 		for etykieta, row, col, status, variable in [ \
@@ -283,8 +283,8 @@ class SytwysGUIgrid( tk.Frame):
 			]:
 			tk.Checkbutton( self.frameMR, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
 		'''
-		self.tx_mdcp_kp_uwagi2		= tk.Text( self.frameMR, height=6, width=90, tabs=3, font=self.font)
-		self.tx_mdcp_kp_uwagi3		= tk.Text( self.frameMR, height=3, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi2		= tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi3		= tk.Text( self.frameMR, height=3, width=100, tabs=3, font=self.font)
 		self.tx_mdcp_kp_uwagi3.tag_configure('Arial8', font=('Arial', 8))
 		self.tx_mdcp_kp_uwagi3.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
 		self.tx_mdcp_kp_uwagi3.tag_add( 'bold_italics', 1.0, tk.END)
@@ -292,11 +292,11 @@ class SytwysGUIgrid( tk.Frame):
 		#self.tx_mdcp_kp_uwagi3.tag_configure( 'bold_italics', font= 'Arial, 8, bold, italic')
 		#self.tx_mdcp_kp_uwagi3.tag_configure( font='Arial, 8, bold')
 		
-		self.tx_mdcp_kp_uwagi4		= tk.Text( self.frameMR, height=6, width=90, tabs=3, font=self.font)
-		self.tx_mdcp_kp_uwagi5		= tk.Text( self.frameMR, height=2, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi4		= tk.Text( self.frameMR, height=8, width=100, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi5		= tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font)
 		self.tx_mdcp_kp_uwagi5.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
 		self.tx_mdcp_kp_uwagi5.tag_add( 'bold_italics', 1.0, tk.END)
-		self.tx_mdcp_kp_uwagi6		= tk.Text( self.frameMR, height=2, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi6		= tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font)
 
 		self.tx_mdcp_kp_uwagi1.grid	( row=2, column=0, sticky="W", columnspan=4)
 		self.tx_mdcp_kp_uwagi2.grid	( row=3, column=0, sticky="W", columnspan=4)
@@ -329,8 +329,14 @@ class SytwysGUIgrid( tk.Frame):
 		self.sw.sw_typ				= self.v_sw_typ.get()
 		self.sw.sw_idZgl			= self.v_sw_idZgl_jrwa.get() + self.v_sw_idZgl_nr.get() + "." + self.v_sw_idZgl_rok.get()
 		self.sw.sw_skala			= self.v_sw_skala.get()
-		self.sw.sw_mdcp_ust5		= self.v_sw_ust5_str.get()
-		self.sw.sw_mdcp_ust6		= self.v_sw_ust6_str.get()
+		#self.sw.sw_mdcp_ust5		= self.v_sw_ust5_str.get()
+		#self.sw.sw_mdcp_ust6		= self.v_sw_ust6_str.get()
+		self.sw.sw_mdcp_ust5		= "%s" % self.v_sw_ust5.get()
+		self.sw.sw_mdcp_ust6		= "%s" % self.v_sw_ust6.get()
+		
+		print ( "self.sw.sw_mdcp_ust5 = " + self.sw.sw_mdcp_ust5)
+		print ( "self.sw.sw_mdcp_ust6 = " + self.sw.sw_mdcp_ust6)		
+		#print ( "self.sw.sw_mdcp_ust6 = %s\n") %  self.sw.sw_mdcp_ust6
 
 		if	self.v_sw_typ.get()	==	"inw":
 			self.sw.sw_inw_obiekt		= self.v_sw_inw_obiekt.get()
@@ -467,8 +473,11 @@ class SytwysGUIgrid( tk.Frame):
 		
 		f.write(	"[sw_obrebDir]="		+ self.sw.sw_obrebDir			+ "\n")
 		f.write(	"[sw_dir_nazwa]="		+ self.sw.sw_dir_nazwa			+ "\n")
-		f.write(	"[sw_mdcp_ust5]=%s\n"  % ( self.v_sw_ust5_str.get()))
-		f.write(	"[sw_mdcp_ust6]=%s\n"  % ( self.v_sw_ust6_str.get()))
+		f.write(	"[sw_mdcp_ust5]=%d\n"  % ( self.v_sw_ust5.get()))
+		f.write(	"[sw_mdcp_ust6]=%d\n"  % ( self.v_sw_ust6.get()))
+		#print ( "self.v_sw_ust5_str.get() = %d\n") % ( self.v_sw_ust5.get())
+		#print ( "self.v_sw_ust6_str.get() = %d\n") % ( self.v_sw_ust6.get())
+
 
 		f.write(	"[sw_inw_obiekt]="		+ self.sw.sw_inw_obiekt		+ "\n")
 		f.write(	"[sw_inw_nrZal]="			+ self.sw.sw_inw_nrZal		+ "\n")
@@ -633,8 +642,8 @@ class SytwysGUIgrid( tk.Frame):
 				
 			if key == "[sw_obrebDir]"        : self.sw.sw_obrebDir       = val
 			if key == "[sw_dir_nazwa]"       : self.sw.sw_dir_nazwa      = val			
-			if key == "[sw_mdcp_ust5]"       : self.sw.sw_mdcp_ust5_str  = val
-			if key == "[sw_mdcp_ust6]"       : self.sw.sw_mdcp_ust6_str  = val
+			if key == "[sw_mdcp_ust5]"       : self.sw.sw_mdcp_ust5  	 = val
+			if key == "[sw_mdcp_ust6]"       : self.sw.sw_mdcp_ust6  	 = val
 			
 			if key == "[sw_inw_obiekt]"      : self.sw.sw_inw_obiekt     = val
 			if key == "[sw_inw_nrZal]"       : self.sw.sw_inw_nrZal      = val
@@ -726,8 +735,8 @@ class SytwysGUIgrid( tk.Frame):
 		#self.v_sw_typ.set( self.sw_sw_typ)
 		#print( self.sw.sw_mdcp_ust5) 
 		#print( self.sw.sw_mdcp_ust6) 
-		self.v_sw_ust5_str.set( self.sw.sw_mdcp_ust5_str)
-		self.v_sw_ust6_str.set( self.sw.sw_mdcp_ust6_str)
+		self.v_sw_ust5.set( int( self.sw.sw_mdcp_ust5))
+		self.v_sw_ust6.set( int( self.sw.sw_mdcp_ust6))
 			
 		
 		# god³a i text sekcje		
@@ -833,18 +842,20 @@ class SytwysGUIgrid( tk.Frame):
 	def btn_gen_uwagi2( self):	
 		# utworzenie uwag
 		self.sw.sw_dzialki = self.v_sw_dzialki.get()
-		self.sw.sw_mdcp_ust5_str = self.v_sw_ust5_str.get()
-		self.sw.sw_mdcp_ust6_str = self.v_sw_ust6_str.get()
+		self.sw.sw_mdcp_ust5 = "%s" % self.v_sw_ust5.get()
+		self.sw.sw_mdcp_ust6 = "%s" % self.v_sw_ust6.get()
 		self.sw.sw_mdcp_kp_uwagi2 = "Dane dotycz¹ce dzia³ki "
 		self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + self.sw.sw_dzialki + ", ujawnione w PZGiK, "
-		if self.sw.sw_mdcp_ust5_str == "1" and self.sw.sw_mdcp_ust6_str == "1":
+		
+		if self.sw.sw_mdcp_ust5 == "1" and self.sw.sw_mdcp_ust6 == "1":
 			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 5 i 6 \n"
-		elif self.sw.sw_mdcp_ust5_str == "1" and self.sw.sw_mdcp_ust6_str == "0":
+		elif self.sw.sw_mdcp_ust5 == "1" and self.sw.sw_mdcp_ust6 == "0":
 			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 5 \n"	
-		elif self.sw.sw_mdcp_ust5_str == "0" and self.sw.sw_mdcp_ust6_str == "1":
+		elif self.sw.sw_mdcp_ust5 == "0" and self.sw.sw_mdcp_ust6 == "1":
 			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 6 \n"	
 		else:
 			self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "nie spe³niaj¹ warunków przepisów §79, ust. 5 i 6 \n"	
+		
 		self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "rozp. MSWiA z dnia 9 listopada 2011r."		
 		
 		self.tx_mdcp_kp_uwagi2.delete( 1.0, tk.END)
