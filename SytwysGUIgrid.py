@@ -3,8 +3,10 @@
 
 from tkinter import filedialog 
 from tkinter import messagebox
+
 import tkinter	as	tk
 import tkinter.ttk as ttk
+import tkinter.font as tkFont
 import sys
 import teryt as ter
 import datetime
@@ -32,6 +34,10 @@ class SytwysGUIgrid( tk.Frame):
 		self.rowGr1 = 0
 		self.rowGr2 = self.rowGr1 + 15
 		self.rowGr3 = self.rowGr1 + 8
+
+		# font dla widgetów tekst
+		#--------------------------------------------------------------------------
+		self.font = tkFont.Font( family="Courier New", size=9)
 
 		# zmienne tekstowe dla kontrolek	entry
 		#--------------------------------------------------------------------------
@@ -268,8 +274,8 @@ class SytwysGUIgrid( tk.Frame):
 		butUwagi1.grid(	row=1, column=1, pady=0, columnspan=1)
 		butUwagi2.grid(	row=1, column=2, pady=0, columnspan=1)
 		butUwagi3.grid(	row=1, column=3, pady=0, columnspan=1)
-		
-		self.tx_mdcp_kp_uwagi1		= tk.Text( self.frameMR, height=6, width=90, tabs=3)
+					
+		self.tx_mdcp_kp_uwagi1		= tk.Text( self.frameMR, height=6, width=90, tabs=3, font=self.font)
 		'''
 		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameMR, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=2, sticky="W")
 		for etykieta, row, col, status, variable in [ \
@@ -277,12 +283,20 @@ class SytwysGUIgrid( tk.Frame):
 			]:
 			tk.Checkbutton( self.frameMR, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
 		'''
-		self.tx_mdcp_kp_uwagi2		= tk.Text( self.frameMR, height=6, width=90, tabs=3)
-		self.tx_mdcp_kp_uwagi3		= tk.Text( self.frameMR, height=3, width=90, tabs=3)
-		self.tx_mdcp_kp_uwagi4		= tk.Text( self.frameMR, height=6, width=90, tabs=3)
-		self.tx_mdcp_kp_uwagi5		= tk.Text( self.frameMR, height=2, width=90, tabs=3)
-		self.tx_mdcp_kp_uwagi5.tag_configure('bold_italics', font=('Arial', 8, 'bold', 'italic'))
-		self.tx_mdcp_kp_uwagi6		= tk.Text( self.frameMR, height=2, width=90, tabs=3)
+		self.tx_mdcp_kp_uwagi2		= tk.Text( self.frameMR, height=6, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi3		= tk.Text( self.frameMR, height=3, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi3.tag_configure('Arial8', font=('Arial', 8))
+		self.tx_mdcp_kp_uwagi3.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
+		self.tx_mdcp_kp_uwagi3.tag_add( 'bold_italics', 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi3.tag_add( 'Arial8', 1.0, tk.END)
+		#self.tx_mdcp_kp_uwagi3.tag_configure( 'bold_italics', font= 'Arial, 8, bold, italic')
+		#self.tx_mdcp_kp_uwagi3.tag_configure( font='Arial, 8, bold')
+		
+		self.tx_mdcp_kp_uwagi4		= tk.Text( self.frameMR, height=6, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi5		= tk.Text( self.frameMR, height=2, width=90, tabs=3, font=self.font)
+		self.tx_mdcp_kp_uwagi5.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
+		self.tx_mdcp_kp_uwagi5.tag_add( 'bold_italics', 1.0, tk.END)
+		self.tx_mdcp_kp_uwagi6		= tk.Text( self.frameMR, height=2, width=90, tabs=3, font=self.font)
 
 		self.tx_mdcp_kp_uwagi1.grid	( row=2, column=0, sticky="W", columnspan=4)
 		self.tx_mdcp_kp_uwagi2.grid	( row=3, column=0, sticky="W", columnspan=4)
@@ -838,6 +852,8 @@ class SytwysGUIgrid( tk.Frame):
 
 
 	def btn_gen_uwagi3( self):	
+		#self.tx_mdcp_kp_uwagi3.tag_add( 'bold_italics', 1.0, tk.END)
+		#self.tx_mdcp_kp_uwagi3.tag_add( 'Arial8', 1.0, tk.END)
 		pass
 
 	def get_RRMM( self):
