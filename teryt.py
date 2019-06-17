@@ -69,6 +69,7 @@ class	Teryt( object):
 
 		# s³ownik jEw
 		self.dictJEw =	{
+			# powiat k³obucki
 			"240601_4" : "K³obuck - miasto",
          "240601_5" : "K³obuck - obszar wiejski",
          "240602_4" : "Krzepice - miasto",
@@ -79,8 +80,21 @@ class	Teryt( object):
          "240606_2" : "Panki",
          "240607_2" : "Popów",
          "240608_2" : "Przystajñ",
-         "240609_2" : "Wrêczyca Wielka"
+         "240609_2" : "Wrêczyca Wielka",
+
+			# powiat czêstochowski
+         "240401_4" : "Blachownia - miasto",
+			"240401_5" : "Blachownia - obszar wiejski",
+			"240403_2" : "Janów",
+			"240405_2" : "K³omnice",
+			"240407_2" : "Konopiska",
+			"240411_2" : "Mykanów",
+			"240412_2" : "Olsztyn",
+			"240415_2" : "Rêdziny",
+
+			"999999_9" : "koniec wyœcigu"
 		}
+
 
 		# s³ownik do zamiany	nazwy	wpisanej	do	entry-sw_obreb	na	terytFull
 		self.dictObr_nazwaObrWpisana2teryt = {
@@ -261,6 +275,11 @@ class	Teryt( object):
 			"Wydra"									: "240609_2.0024",
 			"Zam³ynie"								: "240609_2.0025",
 
+			# inne powiaty
+			"Blachownia"							: "240401_4.0001",
+			"B³aszczyki"							: "240401_4.0002",
+
+
 			"koniec wyœcigu"						: "999999_9.9999"
 			}
 
@@ -420,11 +439,14 @@ class	Teryt( object):
 			"240609_2.0024" :	"Wydra",
 			"240609_2.0025" :	"Zamlynie",
 
+			"240401_4.0001" :	"Blachownia",
+			"240401_4.0002" :	"Blaszczyki",
+
 			"999999_9.9999" :	"koniec wyœcigu"
 		}
 
 
-		# s³ownik do zamiany	terytu na nazwê obrêbu	
+		# s³ownik do zamiany	terytu na nazwê obrêbu
 		self.dictObr_teryt2nazwa =	{
 			"240601_4.0001" : "Brody Malina",
 			"240601_4.0002" : "K³obuck",
@@ -434,7 +456,7 @@ class	Teryt( object):
 			"240601_4.0006" : "Smugi",
 			"240601_4.0007" : "Zagórze",
 			"240601_4.0008" : "Zakrzew",
-			
+
 			"240601_5.0001" : "Bia³a Dolna",
 			"240601_5.0002" : "Bia³a Górna",
 			"240601_5.0003" : "Borowianka",
@@ -446,11 +468,11 @@ class	Teryt( object):
 			"240601_5.0009" : "£obodno",
 			"240601_5.0010" : "Nowa Wieœ",
 			"240601_5.0011" : "Rybno",
-			
+
 			"240602_4.0001" : "Krzepice",
 			"240602_4.0002" : "Kuków",
 			"240602_4.0003" : "KuŸniczka",
-			
+
 			"240602_5.0001" : "Dankowice",
 			"240602_5.0002" : "Lutrowskie",
 			"240602_5.0003" : "Pod³ê¿e Królewskie",
@@ -458,7 +480,7 @@ class	Teryt( object):
 			"240602_5.0005" : "Szarki",
 			"240602_5.0006" : "Zaj¹czki I",
 			"240602_5.0007" : "Zaj¹czki II",
-			
+
 			"240603_2.0001" : "Albertów",
 			"240603_2.0002" : "Brzózki",
 			"240603_2.0003" : "Danków",
@@ -478,7 +500,7 @@ class	Teryt( object):
 			"240603_2.0017" : "Wapiennik",
 			"240603_2.0018" : "Zbrojewsko",
 			"240603_2.0019" : "Zimnowoda",
-			
+
 			"240604_2.0001" : "Borowa",
 			"240604_2.0002" : "Izbiska",
 			"240604_2.0003" : "Ko³aczkowice",
@@ -489,7 +511,7 @@ class	Teryt( object):
 			"240604_2.0008" : "Suchany",
 			"240604_2.0009" : "Wapiennik",
 			"240604_2.0010" : "W³adys³awów",
-			
+
 			"240605_2.0001" : "Iwanowice Du¿e",
 			"240605_2.0002" : "Iwanowice Ma³e",
 			"240605_2.0003" : "Naboków",
@@ -499,7 +521,7 @@ class	Teryt( object):
 			"240605_2.0007" : "Z³ochowice",
 			"240605_2.0008" : "Zwierzyniec I",
 			"240605_2.0009" : "Zwierzyniec II",
-			
+
 			"240606_2.0001" : "Aleksandrów",
 			"240606_2.0002" : "Cyganka",
 			"240606_2.0003" : "Jaciska",
@@ -514,7 +536,7 @@ class	Teryt( object):
 			"240606_2.0012" : "Praszczyki",
 			"240606_2.0013" : "Zwierzyniec III",
 			"240606_2.0014" : "¯erdzina",
-			
+
 			"240607_2.0001" : "Annolesie",
 			"240607_2.0002" : "Brzózki",
 			"240607_2.0003" : "D¹browa",
@@ -533,7 +555,7 @@ class	Teryt( object):
 			"240607_2.0016" : "Wiêcki",
 			"240607_2.0017" : "Zawady",
 			"240607_2.0018" : "Zbory",
-			
+
 			"240608_2.0001" : "Antonów",
 			"240608_2.0002" : "Bagna",
 			"240608_2.0003" : "Bór Zajaciñski",
@@ -553,7 +575,7 @@ class	Teryt( object):
 			"240608_2.0017" : "Stany",
 			"240608_2.0018" : "Wilcza Góra",
 			"240608_2.0019" : "Wrzosy",
-			
+
 			"240609_2.0001" : "Bie¿eñ",
 			"240609_2.0002" : "Borowe",
 			"240609_2.0003" : "Bór Zapilski",
@@ -579,20 +601,24 @@ class	Teryt( object):
 			"240609_2.0023" : "Wrêczyca Wielka",
 			"240609_2.0024" : "Wydra",
 			"240609_2.0025" : "Zam³ynie",
-	
+
+			"240401_4.0001" : "Blachownia",
+			"240401_4.0002" : "B³aszczyki",
+
+
 			"999999_9.9999" :	"koniec wyœcigu"
 		}
-	
+
 
 	# koniec __init__()
-	# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-		
+	# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 	'''
 	@staticmethod
 	def setTerytFrom_obrNazwa_static(	astr):
 		return setTerytFrom_obrNazwa(	astr)
-	'''		
-		
+	'''
+
 	def setTerytFrom_obrNazwa(	self, astr):
 		'''
 			podajemy	nazwê	obrêbu, a funkcja	na	tej podstawie ustawia
