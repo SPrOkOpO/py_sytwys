@@ -76,6 +76,7 @@ if __name__ == "__main__":
 	g.v_sw_ust6.set( 1)
 	g.v_sw_skala.set( "500")
 	g.v_sw_inw_obiekt.set( "budynku mieszkalnego wraz z przy³¹czami")
+	g.v_sw_inw_obiektDoUwag.set( "budynku mieszkalnego")
 	g.v_sw_inw_nrZal.set( "1")
 	g.v_sw_inw_decZnak.set(	"GPN.6730.160.2018.UC")
 	g.v_sw_inw_decData.set(	".2018")

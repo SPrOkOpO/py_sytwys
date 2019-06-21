@@ -34,6 +34,7 @@ class	Sytwys( object):
 
 		# inw.
 		self.sw_inw_obiekt	= ""
+		self.sw_inw_obiektDoUwag	= ""
 		self.sw_inw_nrZal		= ""
 		self.sw_inw_decZnak	= ""
 		self.sw_inw_decData	= ""
@@ -95,17 +96,17 @@ class	Sytwys( object):
 		
 		self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotycz¹ce dzia³ki "
 		self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
-		self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011r."
+		self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
 	
 		'''
 		Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 
 		pomiaru aktualizacyjnego id. zg³. GKN.6640.446.2019
 		 
 		Dane dotycz¹ce dzia³ki 309, 310, ujawnione w PZGiK, spe³niaj¹ warunki przepisów §79, ust. 5 i 6 
-		rozp. MSWiA z dnia 9 listopada 2011r.
+		rozp. MSWiA z dnia 9 listopada 2011 r.
 		 
 		Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u s³u¿ebnoœci 
-		gruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011r.)
+		gruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)
 		 
 		Dla terenu objêtego opracowaniem brak opracowañ planistycznych.
 		 

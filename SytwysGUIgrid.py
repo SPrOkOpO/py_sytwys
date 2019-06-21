@@ -68,10 +68,11 @@ class SytwysGUIgrid( tk.Frame):
 
 
 		self.v_sw_libre_wykon		= tk.StringVar()
-		self.v_sw_libre_opis			= tk.StringVar()
+		self.v_sw_libre_opis		= tk.StringVar()
 		self.v_sw_dir_nazwa			= tk.StringVar()
 
-		self.v_sw_inw_obiekt			= tk.StringVar()
+		self.v_sw_inw_obiekt		= tk.StringVar()
+		self.v_sw_inw_obiektDoUwag	= tk.StringVar()
 		self.v_sw_inw_nrZal			= tk.StringVar()
 		self.v_sw_inw_decZnak		= tk.StringVar()
 		self.v_sw_inw_decData		= tk.StringVar()
@@ -188,19 +189,22 @@ class SytwysGUIgrid( tk.Frame):
 		# kontrolki zwi¹zane z inwentaryzacj¹
 		#self.rowGr3 = self.rowGr1 + 8
 		lab_sw_inw_obiekt		= tk.Label(	self.frameTL, text="inw_obiekt "	, anchor="w", width=20).grid(row=self.rowGr3 + 0)
-		lab_sw_inw_nrZal		= tk.Label(	self.frameTL, text="inw_nrZal	"	, anchor="w", width=20).grid(row=self.rowGr3 + 1)
-		lab_sw_inw_decZnak	= tk.Label(	self.frameTL, text="inw_decZnak"	, anchor="w", width=20).grid(row=self.rowGr3 + 2)
-		lab_sw_inw_decData	= tk.Label(	self.frameTL, text="inw_decData"	, anchor="w", width=20).grid(row=self.rowGr3 + 3)
+		lab_sw_inw_obiektDoUwag	= tk.Label(	self.frameTL, text="inw_obiekt do uwag "	, anchor="w", width=20).grid(row=self.rowGr3 + 1)
+		lab_sw_inw_nrZal		= tk.Label(	self.frameTL, text="inw_nrZal	"	, anchor="w", width=20).grid(row=self.rowGr3 + 2)
+		lab_sw_inw_decZnak		= tk.Label(	self.frameTL, text="inw_decZnak"	, anchor="w", width=20).grid(row=self.rowGr3 + 3)
+		lab_sw_inw_decData		= tk.Label(	self.frameTL, text="inw_decData"	, anchor="w", width=20).grid(row=self.rowGr3 + 4)
 
-		e_sw_inw_obiekt	 =	tk.Entry( self.frameTL,	justify="left", width=60, textvariable	= self.v_sw_inw_obiekt	  , bg="white")
-		e_sw_inw_nrZal		 =	tk.Entry( self.frameTL,	justify="left", width=10, textvariable	= self.v_sw_inw_nrZal	  , bg="white")
-		e_sw_inw_decZnak	 =	tk.Entry( self.frameTL,	justify="left", width=40, textvariable	= self.v_sw_inw_decZnak  , bg="white")
-		e_sw_inw_decData	 =	tk.Entry( self.frameTL,	justify="left", width=40, textvariable	= self.v_sw_inw_decData  , bg="white")
+		e_sw_inw_obiekt	 		= tk.Entry( self.frameTL,	justify="left", width=60, textvariable	= self.v_sw_inw_obiekt	 		, bg="white")
+		e_sw_inw_obiektDoUwag	= tk.Entry( self.frameTL,	justify="left", width=60, textvariable	= self.v_sw_inw_obiektDoUwag 	, bg="white")
+		e_sw_inw_nrZal		 	= tk.Entry( self.frameTL,	justify="left", width=10, textvariable	= self.v_sw_inw_nrZal	 		, bg="white")
+		e_sw_inw_decZnak	 	= tk.Entry( self.frameTL,	justify="left", width=40, textvariable	= self.v_sw_inw_decZnak  		, bg="white")
+		e_sw_inw_decData	 	= tk.Entry( self.frameTL,	justify="left", width=40, textvariable	= self.v_sw_inw_decData  		, bg="white")
 
 		e_sw_inw_obiekt.grid		( row=self.rowGr3 + 0, column=1, sticky="W", columnspan=4)
-		e_sw_inw_nrZal.grid		( row=self.rowGr3 + 1, column=1, sticky="W", columnspan=4)
-		e_sw_inw_decZnak.grid	( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=4)
-		e_sw_inw_decData.grid	( row=self.rowGr3 + 3, column=1, sticky="W")
+		e_sw_inw_obiektDoUwag.grid	( row=self.rowGr3 + 1, column=1, sticky="W", columnspan=4)
+		e_sw_inw_nrZal.grid		( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=4)
+		e_sw_inw_decZnak.grid	( row=self.rowGr3 + 3, column=1, sticky="W", columnspan=4)
+		e_sw_inw_decData.grid	( row=self.rowGr3 + 4, column=1, sticky="W")
 
 
 	def createWidgets_frameML( self):
@@ -254,7 +258,7 @@ class SytwysGUIgrid( tk.Frame):
 		butOK.grid(		 	row=0, column=1, pady=3, columnspan=1)
 		butCancel.grid( 	row=1, column=1, pady=4, columnspan=1)
 
-
+	
 	def createWidgets_frameTR( self):
 		lab_tx_sekcje			= tk.Label(	self.frameTR, text="sekcje:"	, anchor="w", width=20).grid(row=0, column=0, sticky="W")
 
@@ -340,15 +344,18 @@ class SytwysGUIgrid( tk.Frame):
 
 		if	self.v_sw_typ.get()	==	"inw":
 			self.sw.sw_inw_obiekt		= self.v_sw_inw_obiekt.get()
-			self.sw.sw_inw_nrZal			= self.v_sw_inw_nrZal.get()
+			self.sw.sw_inw_obiektDoUwag	= self.v_sw_inw_obiektDoUwag.get()
+			self.sw.sw_inw_nrZal		= self.v_sw_inw_nrZal.get()
 			self.sw.sw_inw_decZnak		= self.v_sw_inw_decZnak.get()
 			self.sw.sw_inw_decData		= self.v_sw_inw_decData.get()
 		else:
 			self.sw.sw_inw_obiekt		= ""
+			self.sw.sw_inw_obiektDoUwag		= ""
 			self.sw.sw_inw_nrZal			= ""
 			self.sw.sw_inw_decZnak		= ""
 			self.sw.sw_inw_decData		= ""
 			self.v_sw_inw_obiekt.set	(	self.sw.sw_inw_obiekt	)
+			self.v_sw_inw_obiektDoUwag.set	(	self.sw.sw_inw_obiektDoUwag	)
 			self.v_sw_inw_nrZal.set		(	self.sw.sw_inw_nrZal	)
 			self.v_sw_inw_decZnak.set	(	self.sw.sw_inw_decZnak	)
 			self.v_sw_inw_decData.set	(	self.sw.sw_inw_decData	)
@@ -479,10 +486,11 @@ class SytwysGUIgrid( tk.Frame):
 		#print ( "self.v_sw_ust6_str.get() = %d\n") % ( self.v_sw_ust6.get())
 
 
-		f.write(	"[sw_inw_obiekt]="		+ self.sw.sw_inw_obiekt		+ "\n")
+		f.write(	"[sw_inw_obiekt]="			+ self.sw.sw_inw_obiekt			+ "\n")
+		f.write(	"[sw_inw_obiektDoUwag]="	+ self.sw.sw_inw_obiektDoUwag	+ "\n")
 		f.write(	"[sw_inw_nrZal]="			+ self.sw.sw_inw_nrZal		+ "\n")
-		f.write(	"[sw_inw_decZnak]="		+ self.sw.sw_inw_decZnak	+ "\n")
-		f.write(	"[sw_inw_decData]="		+ self.sw.sw_inw_decData	+ "\n")
+		f.write(	"[sw_inw_decZnak]="			+ self.sw.sw_inw_decZnak	+ "\n")
+		f.write(	"[sw_inw_decData]="			+ self.sw.sw_inw_decData	+ "\n")
 
 		f.write( "[sw_libre_wykon]="		+ self.sw.sw_libre_wykon	+ "\n")
 		f.write( "[sw_libre_opis]="      + self.sw.sw_libre_opis		+ "\n")
@@ -539,7 +547,7 @@ class SytwysGUIgrid( tk.Frame):
 			f2.write(	"Id. zg³.: " + self.sw.sw_idZgl + "\n")
 			if self.sw.sw_typ == "inw":
 				f2.write( "\n")
-				f2.write( "Usytuowanie obiektu budowlanego (%s) zgodne\n" % ( self.sw.sw_inw_obiekt))
+				f2.write( "Usytuowanie obiektu budowlanego (%s) zgodne\n" % ( self.sw.sw_inw_obiektDoUwag))
 				f2.write( "z projektem zagospodarowania terenu (za³¹cznik nr %s do decyzji\n" % ( self.sw.sw_inw_nrZal))
 				f2.write( "o znaku %s z dnia %s r.)" % ( self.sw.sw_inw_decZnak, self.sw.sw_inw_decData))
 
