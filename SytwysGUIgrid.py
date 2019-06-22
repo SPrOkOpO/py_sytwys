@@ -8,10 +8,11 @@ import tkinter	as	tk
 import tkinter.ttk as ttk
 import tkinter.font as tkFont
 import sys
-import teryt as ter
+#import teryt as ter
 import datetime
 import os
 import re as re
+from tkinter.constants import ACTIVE
 
 
 
@@ -57,6 +58,7 @@ class SytwysGUIgrid( tk.Frame):
 		self.v_sw_numer				= tk.StringVar()
 		self.v_sw_wykonawca			= tk.StringVar()
 		self.v_sw_obreb				= tk.StringVar()
+		self.v_sw_obrebListBox		= tk.StringVar()
 		self.v_sw_dzialki				= tk.StringVar()
 		self.v_sw_typ					= tk.StringVar()		
 		self.v_sw_skala				= tk.StringVar()
@@ -113,6 +115,7 @@ class SytwysGUIgrid( tk.Frame):
 		self.frameTR.grid( row=0, column=5, sticky="NW")
 		self.frameMR.grid( row=1, column=5, sticky="NW")
 
+
 		'''
 		self.tx_mdcp_kp_uwagi1
 		self.tx_mdcp_kp_uwagi2
@@ -126,12 +129,58 @@ class SytwysGUIgrid( tk.Frame):
 		self.createWidgets_frameBL()
 		self.createWidgets_frameTR()
 		self.createWidgets_frameMR()
+		#self.createWidgets_frameBR()
 
 		#self.inicjuj()
 		#self.wczytaj()
 
-
-
+	def eventHandler_entry_obreb( self, event):
+		# wyczyszczenie powi¹zanego ListBoxu
+		lista = ""
+		self.v_sw_obrebListBox.set( lista)
+		
+		obr = self.v_sw_obreb.get()
+		#obr = self.e3.get()
+		if len( obr) >= 3:
+			print( "event + tekst %s" % ( obr))
+			'''
+			if obr in self.t.dictObr_nazwaObrWpisana2teryt:
+				print( "Obrêb %s jest w s³owniku" % ( obr))
+			else:
+				print( "Obrêbu %s NIE MA w s³owniku" % ( obr))	
+			'''
+			liczbaKluczy = 0
+			lista = ""
+			listaTerytow = []
+			for k in self.t.dictObr_nazwaObrWpisana2teryt.keys():
+				#print( "k=%s" % ( k))				
+				#klucz = "XXX"
+				klucz = k[0:len( obr)]
+				if klucz == obr:
+					liczbaKluczy += 1
+					print( "klucz %i: %s, teryt: %s" % ( liczbaKluczy, obr, self.t.dictObr_nazwaObrWpisana2teryt[k]))
+					listaTerytow.append( self.t.dictObr_nazwaObrWpisana2teryt[k])
+					
+			#print( "event + obrCzesc: %s, liczba kluczy: %i" % ( obr, liczbaKluczy))
+			
+			
+			listaTerytow.sort()
+			listaUnikalnych = []
+			for teryt in listaTerytow:
+				if teryt in listaUnikalnych:
+					pass
+				else:
+					listaUnikalnych.append( teryt)
+			for teryt in listaUnikalnych:
+				lista = lista + " " + teryt
+			self.v_sw_obrebListBox.set( lista)
+			
+			
+	def eventHandler_entry_wykonawca( self, event):
+		wykonawca = self.v_sw_wykonawca.get()
+		if wykonawca == "kh":
+			self.v_sw_typ.set( "podz") 
+		
 
 	def createWidgets_frameTL( self):
 		#self.rowGr1 = 0
@@ -140,11 +189,13 @@ class SytwysGUIgrid( tk.Frame):
 		lab_sw_typ				= tk.Label(	self.frameTL, text="Typ"				, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 2)
 		lab_sw_skala			= tk.Label(	self.frameTL, text="Skala (mian.)"	, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 3)
 		lab_sw_obreb			= tk.Label(	self.frameTL, text="Obreb "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 4)
-		lab_sw_dzialki			= tk.Label(	self.frameTL, text="Dzialki "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 5)
-		lab_sw_idZgl			= tk.Label(	self.frameTL, text="IdZgl "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
+		lab_sw_dzialki			= tk.Label(	self.frameTL, text="Dzialki "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
+		lab_sw_idZgl			= tk.Label(	self.frameTL, text="IdZgl "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 7)
 
 		e1	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_numer		, bg="greenyellow")
 		e2	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_wykonawca	)
+		e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
+		
 		# typ
 		ttyp = ( "mdcp", "inw", "podz", "inny")
 		combobox = ttk.Combobox( \
@@ -153,33 +204,51 @@ class SytwysGUIgrid( tk.Frame):
 								#scrolledlist_items=ttyp)
 		#combobox["values"] = ttyp
 		e7	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_skala		)
-		e3	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_obreb		)
+		
+		# entry OBRÊB
+		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		# - 
+		self.e3	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_obreb		)
+		#e3.bind('<Button-1>', self.eventHandler_entry_obreb)
+		self.e3.bind('<Key>', self.eventHandler_entry_obreb)
+		
+		# listBox dla obrêbów
+		self.listBox_obr = tk.Listbox( self.frameTL, height=4, width=15, listvariable=self.v_sw_obrebListBox)
+
+		
+		
+		
 		e4	= tk.Entry(	self.frameTL, justify="left",	width=60 , textvariable	= self.v_sw_dzialki	)
 		#e5	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_typ		)
 		
 		# id Zg³ 
-		e6	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_idZgl		)
-		e6_1	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_idZgl_jrwa	)
-		e6_2	= tk.Entry(	self.frameTL, justify="left",	width=5	, textvariable	= self.v_sw_idZgl_nr		)
+		# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		#do likwidacji:
+		#e6	= tk.Entry(	self.frameTL, justify="left",	width=40	, textvariable	= self.v_sw_idZgl		)
+		e6_1	= tk.Entry(	self.frameTL, justify="left",	width=15	, textvariable	= self.v_sw_idZgl_jrwa	)
+		e6_2	= tk.Entry(	self.frameTL, justify="left",	width=6	, textvariable	= self.v_sw_idZgl_nr		)
 		e6_3	= tk.Entry(	self.frameTL, justify="left",	width=6	, textvariable	= self.v_sw_idZgl_rok	)
 		
 
-		e1.grid(	row=self.rowGr1 + 0, column=1, sticky="W")
-		e2.grid(	row=self.rowGr1 + 1, column=1, sticky="W")
-		combobox.grid( row=self.rowGr1 + 2, column=1, sticky="W")
+		
+		e1.grid(			row=self.rowGr1 + 0, column=1, sticky="W")
+		e2.grid(			row=self.rowGr1 + 1, column=1, sticky="W")
+		combobox.grid( 		row=self.rowGr1 + 2, column=1, sticky="W")
 
-		e7.grid(	row=self.rowGr1 + 3, column=1, sticky="W")
-		e3.grid(	row=self.rowGr1 + 4, column=1, sticky="W")
-		e4.grid(	row=self.rowGr1 + 5, column=1, sticky="W", columnspan=4)
+		e7.grid(			row=self.rowGr1 + 3, column=1, sticky="W")
+		self.e3.grid(		row=self.rowGr1 + 4, column=1, sticky="W")
+		self.listBox_obr.grid( 	row=self.rowGr1 + 5, column=1, sticky="W", columnspan=4)	
+
+		e4.grid(			row=self.rowGr1 + 6, column=1, sticky="W", columnspan=4)
 		#e5.grid(	row=rowGr1 + 22, column=1, sticky="W")
 		#e6.grid(	row=self.rowGr1 + 6, column=1, sticky="W")
-		e6_1.grid(	row=self.rowGr1 + 6, column=1, sticky="W")
-		e6_2.grid(	row=self.rowGr1 + 6, column=2, sticky="E")
-		e6_3.grid(	row=self.rowGr1 + 6, column=3, sticky="E")
+		e6_1.grid(			row=self.rowGr1 + 7, column=1, sticky="W")
+		e6_2.grid(			row=self.rowGr1 + 7, column=2, sticky="W")
+		e6_3.grid(			row=self.rowGr1 + 7, column=3, sticky="W")
 
 
 		#self.v_sw_ust6.set = 1
-		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameTL, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=7, sticky="W")
+		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameTL, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=8, sticky="W")
 		for etykieta, row, col, status, variable in [ \
 			( "ust. 5", 7, 1, tk.NORMAL, self.v_sw_ust5), \
 			( "ust. 6", 7, 2, tk.NORMAL, self.v_sw_ust6) \
@@ -205,6 +274,8 @@ class SytwysGUIgrid( tk.Frame):
 		e_sw_inw_nrZal.grid		( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=4)
 		e_sw_inw_decZnak.grid	( row=self.rowGr3 + 3, column=1, sticky="W", columnspan=4)
 		e_sw_inw_decData.grid	( row=self.rowGr3 + 4, column=1, sticky="W")
+
+		
 
 
 	def createWidgets_frameML( self):
@@ -313,13 +384,33 @@ class SytwysGUIgrid( tk.Frame):
 	def inicjuj( self):
 		'''
 		na	podstawie wprowadzonych	danych wype³nia odpowiednie pola
-		1)	najpierw sprawdzenie, czy podano dobry obrêb
-			-	jednoczeœnie jest to inicjacja pól obiektu teryt
+		
+		1)	najpierw ustalenie wybranego obrêbu
+			(jest to jednoczeœnie inicjalizacja pól terytu i nazw p/g/o) 						
+			-	sprawdzenie, czy obrêb jest wpisany jednoznacznie
+				a)	to sprawdzenie odbywa siê poprzez ustalenie liczby terytów
+					w ListBoxie obrêbu
+				-	je¿eli jest jeden teryt, to nie trzeba nic robiæ
+				b)	je¿eli jest wiêcej ni¿ jeden teryt, to trzeba pobraæ teryt
+					wybrany w ListBoxie, a je¿eli ¿aden nie jest wybrany, to wyœwietliæ
+					MsgBox z wezwaniem do usera
+					
 		'''
 		
+		# 1a,b)
+		if self.listBox_obr.size() > 1:
+			obrTerytFull = self.listBox_obr.get( ACTIVE)
+			if len( obrTerytFull) < 3:  
+				tk.messagebox.showinfo("Err", "Wska¿ teryt obrêbu w ListBoxie!")			
+			 
+			#obrNazwa = self.t.dictObr_teryt2nazwa[ obrTerytFull]
+		else:
+			obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[ self.v_sw_obreb.get()]
+			
+				
 		# 1)
-		if	self.t.setTerytFrom_obrNazwa( self.v_sw_obreb.get()) != 0:
-			tk.messagebox.showinfo("Err", "Inicjacja niudana - b³êdny obrêb")
+		if	self.t.setTerytyFrom_obrTerytFull( obrTerytFull) != 0:
+			tk.messagebox.showinfo("Err", "Inicjacja nieudana - b³êdny obrêb")
 			return -1	
 
 
