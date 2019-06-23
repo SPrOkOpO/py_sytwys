@@ -33,8 +33,8 @@ class SytwysGUIgrid( tk.Frame):
 		self.sw = sw
 		self.t = teryt
 		self.rowGr1 = 0
-		self.rowGr2 = self.rowGr1 + 15
-		self.rowGr3 = self.rowGr1 + 8
+		self.rowGr2 = self.rowGr1 + 16
+		self.rowGr3 = self.rowGr1 + 9
 
 		# font dla widgetów tekst
 		#--------------------------------------------------------------------------
@@ -189,8 +189,9 @@ class SytwysGUIgrid( tk.Frame):
 		lab_sw_typ				= tk.Label(	self.frameTL, text="Typ"				, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 2)
 		lab_sw_skala			= tk.Label(	self.frameTL, text="Skala (mian.)"	, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 3)
 		lab_sw_obreb			= tk.Label(	self.frameTL, text="Obreb "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 4)
+		lab_sw_obrebLBox		= tk.Label(	self.frameTL, text="Obreb - teryty"			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 5)
 		lab_sw_dzialki			= tk.Label(	self.frameTL, text="Dzialki "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
-		lab_sw_idZgl			= tk.Label(	self.frameTL, text="IdZgl "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 7)
+		lab_sw_idZgl			= tk.Label(	self.frameTL, text="IdZgl "			, anchor="w", width=20).grid(column=0, row=self.rowGr1 + 8)
 
 		e1	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_numer		, bg="greenyellow")
 		e2	= tk.Entry(	self.frameTL, justify="left",	width=10	, textvariable	= self.v_sw_wykonawca	)
@@ -242,13 +243,13 @@ class SytwysGUIgrid( tk.Frame):
 		e4.grid(			row=self.rowGr1 + 6, column=1, sticky="W", columnspan=4)
 		#e5.grid(	row=rowGr1 + 22, column=1, sticky="W")
 		#e6.grid(	row=self.rowGr1 + 6, column=1, sticky="W")
-		e6_1.grid(			row=self.rowGr1 + 7, column=1, sticky="W")
-		e6_2.grid(			row=self.rowGr1 + 7, column=2, sticky="W")
-		e6_3.grid(			row=self.rowGr1 + 7, column=3, sticky="W")
+		e6_1.grid(			row=self.rowGr1 + 8, column=1, sticky="W")
+		e6_2.grid(			row=self.rowGr1 + 8, column=2, sticky="W")
+		e6_3.grid(			row=self.rowGr1 + 8, column=3, sticky="W")
 
 
 		#self.v_sw_ust6.set = 1
-		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameTL, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=8, sticky="W")
+		lab_tx_mdcp_kp_ust56	= tk.Label(	self.frameTL, text="mdcp_kp_ust. 5 i 6:"	, anchor="w", width=20).grid(row=self.rowGr1 + 7, sticky="W")
 		for etykieta, row, col, status, variable in [ \
 			( "ust. 5", 7, 1, tk.NORMAL, self.v_sw_ust5), \
 			( "ust. 6", 7, 2, tk.NORMAL, self.v_sw_ust6) \
