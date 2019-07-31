@@ -814,7 +814,7 @@ class   Teryt( object):
             self.nazwa_uStn_woj = "Województwo: " + self.nazwa_woj
             self.nazwa_uStn_pow = "Powiat: " + self.nazwa_pow
             self.nazwa_uStn_jew = "Jednostka ewidencyjna: "  + self.terytF_jew[0:6] + "__" + self.terytF_jew[7:9] + ", "   + self.nazwa_jew
-            self.nazwa_uStn_obr = "obrêb: " + self.teryt_obr + " " + self.nazwa_obr
+            self.nazwa_uStn_obr = "Obrêb: " + self.teryt_obr + " " + self.nazwa_obr
 
             # nazwa obr. do nazwy katalogu
             self.nazwaDir_obr   = self.dictObr_teryt2nazwaDir[ self.terytFull]

@@ -46,7 +46,8 @@ if __name__ == "__main__":
     listaArg    = sys.argv[0].split('" "')
     
     prompt = "Podaj dane do utworzenia podkatalogu w SW"
-    title  = "SytWys info"
+    nrWersji = "1.4.0"
+    title = "SytWys info " + nrWersji
     master = tk.Tk( screenName=prompt)
     master.title( title)
     master.geometry( "1500x900+100+50")
