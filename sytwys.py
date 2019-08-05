@@ -200,7 +200,7 @@ class   Sytwys( object):
                 self.sw_numer   = int( f)
         self.sw_numer = self.sw_numer + 1
         #deb
-        #print( self.sw_numer)
+        print( "Numer licznika dla roboty: %d" % (self.sw_numer))
 
 
     def inicjujStrukture( self, asw_dir_nazwa):

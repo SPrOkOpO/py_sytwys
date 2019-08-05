@@ -14,6 +14,8 @@ import os
 import re as re
 from tkinter.constants import ACTIVE
 
+import dictConstants
+
 
 
 class SytwysGUIgrid( tk.Frame):
@@ -321,14 +323,16 @@ class SytwysGUIgrid( tk.Frame):
 
 
     def createWidgets_frameBL( self):
+        butNowaRobota  = tk.Button( self.frameBL, text='Nowa robota',  width =15, command=self.nowaRobota)
         butInicjuj  = tk.Button( self.frameBL, text='Inicjuj',  width =15, command=self.inicjuj)
         butWczytaj  = tk.Button( self.frameBL, text='Wczytaj swInfo',   width =15, command=self.wczytaj)
         butOK       = tk.Button( self.frameBL, text='Zapisz swInfo',        width =15, command=self.zapisz)
         butCancel   = tk.Button( self.frameBL, text='Zakoñcz',  width =15,  command=self.btn_rezygnacja, bg="salmon")
-        butInicjuj.grid(    row=0, column=0, pady=2, columnspan=1)
-        butWczytaj.grid(    row=1, column=0, pady=4, columnspan=1)
-        butOK.grid(         row=0, column=1, pady=3, columnspan=1)
-        butCancel.grid(     row=1, column=1, pady=4, columnspan=1)
+        butNowaRobota.grid( row=0, column=0, pady=2, columnspan=1)
+        butInicjuj.grid(    row=0, column=1, pady=2, columnspan=1)
+        butOK.grid(         row=1, column=1, pady=3, columnspan=1)
+        butWczytaj.grid(    row=0, column=2, pady=4, columnspan=1)
+        butCancel.grid(     row=1, column=2, pady=4, columnspan=1)
 
     
     def createWidgets_frameTR( self):
@@ -382,6 +386,17 @@ class SytwysGUIgrid( tk.Frame):
         self.tx_mdcp_kp_uwagi6.grid ( row=7, column=0, sticky="W", columnspan=4)
 
 
+    def nowaRobota(self):
+        '''
+        skanuje katalog z plikami licznika i ustala numer dla nowej roboty
+        -   ma zastosowanie w przypadku rejestracji kilku robót po kolei - nie trzeba uruchamiac
+            programu dla kazdej roboty
+        '''        
+        self.sw.ustalNrSW( dictConstants.dictConstants[ "GC_DIR_LICZNIK"]) 
+        self.sw.sw_numer_str =   str( self.sw.sw_numer)
+        self.v_sw_numer.set( self.sw.sw_numer_str)
+    
+    
     def inicjuj( self):
         '''
         na  podstawie wprowadzonych danych wype³nia odpowiednie pola

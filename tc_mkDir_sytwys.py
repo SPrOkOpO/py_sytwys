@@ -12,16 +12,22 @@ str( shutil)
 import tkinter  as  tk
 import tkinter.ttk as ttk
 
-# moje modu³y
+
+# import zasobów w³asnych programu
+#---------------------------------------------------------------------
 import teryt
 #teryt.__doc__
 str( teryt)
 import sytwys
 import SytwysGUIgrid
 
+import dictConstants
+#import dictErrors
 
-GC_DIR_SYTWYS   = "t:\\sytwys\\"
-GC_DIR_LICZNIK  = "t:\\sytwys\\AAB__licznik\\"
+
+
+#GC_DIR_SYTWYS   = "t:\\sytwys\\"
+#GC_DIR_LICZNIK  = "t:\\sytwys\\AAB__licznik\\"
 
 def get_RRMM():
     '''
@@ -46,7 +52,7 @@ if __name__ == "__main__":
     listaArg    = sys.argv[0].split('" "')
     
     prompt = "Podaj dane do utworzenia podkatalogu w SW"
-    nrWersji = "1.4.0"
+    nrWersji = "1.4.1"
     title = "SytWys info " + nrWersji
     master = tk.Tk( screenName=prompt)
     master.title( title)
@@ -59,7 +65,7 @@ if __name__ == "__main__":
         dirBiezacy_fullPath = dirBiezacy_fullPath[0:len(dirBiezacy_fullPath)-1]
     
     
-    sw.ustalNrSW( GC_DIR_LICZNIK)
+    sw.ustalNrSW( dictConstants.dictConstants[ "GC_DIR_LICZNIK"])
     
     # testowe wype³nienie kontrolek entry
     sw.sw_numer_str =   str( sw.sw_numer)
