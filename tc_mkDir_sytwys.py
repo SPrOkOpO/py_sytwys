@@ -26,8 +26,6 @@ import dictConstants
 
 
 
-#GC_DIR_SYTWYS   = "t:\\sytwys\\"
-#GC_DIR_LICZNIK  = "t:\\sytwys\\AAB__licznik\\"
 
 def get_RRMM():
     '''
@@ -52,7 +50,7 @@ if __name__ == "__main__":
     listaArg    = sys.argv[0].split('" "')
     
     prompt = "Podaj dane do utworzenia podkatalogu w SW"
-    nrWersji = "1.4.1"
+    nrWersji = dictConstants.dictConstants["NR_WERSJI"]
     title = "SytWys info " + nrWersji
     master = tk.Tk( screenName=prompt)
     master.title( title)
@@ -72,14 +70,14 @@ if __name__ == "__main__":
     sw.sw_wykonawca =   "kp"
     g.v_sw_numer.set( sw.sw_numer_str)
     g.v_sw_wykonawca.set( sw.sw_wykonawca)
-    g.v_sw_obreb.set( "Zagorze")
+    g.v_sw_obreb.set( "Zagórze")
     g.v_sw_dzialki.set( "309, 310")
     g.v_sw_typ.set( "mdcp")
     #g.v_sw_idZgl.set( "GKK.6640.X.2019")       # <== do likwidacji
     g.v_sw_idZgl_jrwa.set( "GKK.6640.") 
     g.v_sw_idZgl_nr.set( "") 
     g.v_sw_idZgl_rok.set( "2019") 
-    g.v_sw_ust5.set( 0)
+    g.v_sw_ust5.set( 1)
     g.v_sw_ust6.set( 1)
     g.v_sw_skala.set( "500")
     g.v_sw_inw_obiekt.set( "budynku mieszkalnego wraz z przy³¹czami")

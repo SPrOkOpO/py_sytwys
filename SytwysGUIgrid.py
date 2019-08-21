@@ -45,6 +45,29 @@ class SytwysGUIgrid( tk.Frame):
         # zmienne tekstowe dla kontrolek    entry
         #--------------------------------------------------------------------------
         
+
+        # zmienne zwi¹zane z klas¹ Sytwys
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        self.v_sw_numer             = tk.StringVar()
+        self.v_sw_wykonawca         = tk.StringVar()
+        self.v_sw_typ               = tk.StringVar()        
+        self.v_sw_skala             = tk.StringVar()
+        self.v_sw_obreb             = tk.StringVar()
+        self.v_sw_obrebListBox      = tk.StringVar()
+        self.v_sw_dzialki           = tk.StringVar()
+        self.v_sw_idZgl             = tk.StringVar()        #<== do likwidacji
+        self.v_sw_idZgl_jrwa        = tk.StringVar()
+        self.v_sw_idZgl_nr          = tk.StringVar()
+        self.v_sw_idZgl_rok         = tk.StringVar()
+
+        # dot. inwent.
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        self.v_sw_inw_obiekt        = tk.StringVar()
+        self.v_sw_inw_obiektDoUwag  = tk.StringVar()
+        self.v_sw_inw_nrZal         = tk.StringVar()
+        self.v_sw_inw_decZnak       = tk.StringVar()
+        self.v_sw_inw_decData       = tk.StringVar()
+
         # zmienne zwi¹zane z klas¹ Teryt
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         self.v_sw_powiat_teryt      = tk.StringVar()
@@ -54,34 +77,11 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_obreb_teryt       = tk.StringVar()
         self.v_sw_obreb_nazwa       = tk.StringVar()
         self.v_sw_obreb_dir         = tk.StringVar()
-
-        # zmienne zwi¹zane z klas¹ Sytwys
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        self.v_sw_numer             = tk.StringVar()
-        self.v_sw_wykonawca         = tk.StringVar()
-        self.v_sw_obreb             = tk.StringVar()
-        self.v_sw_obrebListBox      = tk.StringVar()
-        self.v_sw_dzialki           = tk.StringVar()
-        self.v_sw_typ               = tk.StringVar()        
-        self.v_sw_skala             = tk.StringVar()
-
-        self.v_sw_idZgl             = tk.StringVar()        #<== do likwidacji
-        self.v_sw_idZgl_jrwa        = tk.StringVar()
-        self.v_sw_idZgl_nr          = tk.StringVar()
-        self.v_sw_idZgl_rok         = tk.StringVar()
-
-
         self.v_sw_libre_wykon       = tk.StringVar()
         self.v_sw_libre_opis        = tk.StringVar()
         self.v_sw_dir_nazwa         = tk.StringVar()
 
-        self.v_sw_inw_obiekt        = tk.StringVar()
-        self.v_sw_inw_obiektDoUwag  = tk.StringVar()
-        self.v_sw_inw_nrZal         = tk.StringVar()
-        self.v_sw_inw_decZnak       = tk.StringVar()
-        self.v_sw_inw_decData       = tk.StringVar()
 
-        self.v_sw_inw_decData       = tk.StringVar()
         self.v_sw_mdcp_kp_uwagi1    = tk.StringVar()
         self.v_sw_mdcp_kp_uwagi2    = tk.StringVar()
         self.v_sw_mdcp_kp_uwagi3    = tk.StringVar()
@@ -410,7 +410,8 @@ class SytwysGUIgrid( tk.Frame):
                 b)  je¿eli jest wiêcej ni¿ jeden teryt, to trzeba pobraæ teryt
                     wybrany w ListBoxie, a je¿eli ¿aden nie jest wybrany, to wyœwietliæ
                     MsgBox z wezwaniem do usera
-                    
+        
+        NIE TWORZY KATALOGU s-w! To robi funkcja zapisz().                    
         '''
         
         # 1a,b)
@@ -525,6 +526,15 @@ class SytwysGUIgrid( tk.Frame):
 
 
     def zapisz( self):
+        '''
+        -   tworzy katalog s-w
+        -   wype³nia go struktur¹ s-w
+        -   tworzy i otwiera plik sw_NNN_info.txt
+        -   zapisuje do niego:
+            -   dane teryt - wszystkie pola klasy (oprócz s³owników oczywiœcie)
+            -   dane sw
+        
+        '''
         #global sw_plikInfo_fullPath
         global sw_plikNr_fullPath
         global sw_plikNr_nazwa
@@ -677,12 +687,15 @@ class SytwysGUIgrid( tk.Frame):
 
 
     def wczytaj( self):
+        '''
+        
+        '''
         #global sw_plikInfo_fullPath
         
         #self.sw.sw_plikInfo_fullPath = "t:\\sytwys\\826_kp_1904_Biezen_7-24\\sw_826_info.txt"
         #self.sw.sw_plikInfo_fullPath = tkFileDialog.askopenfilename( initialdir = "/", title = "Select file", filetypes = ( ("jpeg files","*.jpg"), ("all files","*.*")))      
         self.sw.sw_plikInfo_fullPath = tk.filedialog.askopenfilename( \
-            initialdir = "t:\\sytwys\\", \
+            initialdir = dictConstants.dictConstants["GC_DIR_SYTWYS"], \
             title = "Wybierz plik swInfo", \
             filetypes = ( ("swInfo files","*.txt"), ("all files","*.*"))\
             )
@@ -750,7 +763,7 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[sw_dzialki]"        : self.sw.sw_dzialki        = val
             if key == "[sw_dzialka1]"       : self.sw.sw_dzialka1       = val
             
-            if key == "[sw_idZgl]"          : self.sw.sw_idZgl          = val
+            #if key == "[sw_idZgl]"          : self.sw.sw_idZgl          = val
             if key == "[sw_idZgl_jrwa]"     : self.sw.sw_idZgl_jrwa     = val               
             if key == "[sw_idZgl_nr]"       : self.sw.sw_idZgl_nr       = val               
             if key == "[sw_idZgl_rok]"      : self.sw.sw_idZgl_rok      = val               
@@ -810,38 +823,39 @@ class SytwysGUIgrid( tk.Frame):
 
         # aktualizacja zmiennych zwi¹zanych z widgetami
         #=========================================================================
-        self.v_sw_powiat_teryt  .set( self.t.terytF_pow     )
-        self.v_sw_jEw_teryt     .set( self.t.terytF_jew     )
-        self.v_sw_powiat_nazwa  .set( self.t.nazwa_pow      )
-        self.v_sw_jEw_nazwa     .set( self.t.nazwa_jew      )
-        self.v_sw_obreb_teryt   .set( self.t.teryt_obr      )   
-        self.v_sw_obreb_nazwa   .set( self.t.nazwa_obr      )   
-        self.v_sw_obreb_dir     .set( self.t.nazwaDir_obr   )
-
         self.v_sw_numer         .set( self.sw.sw_numer_str          )   
         self.v_sw_wykonawca     .set( self.sw.sw_wykonawca          )
-        self.v_sw_obreb         .set( self.t.nazwa_obr              )   
-        self.v_sw_dzialki       .set( self.sw.sw_dzialki            )   
         self.v_sw_typ           .set( self.sw.sw_typ                )
-
-        self.v_sw_idZgl         .set( self.sw.sw_idZgl              )   
+        self.v_sw_skala         .set( self.sw.sw_skala              )   
+        self.v_sw_obreb         .set( self.t.nazwa_obr              )   
+        # tu powinien byæ obrêb-teryt
+        #self.v_sw_obrebListBox    
+        self.v_sw_dzialki       .set( self.sw.sw_dzialki            )   
+        self.v_sw_ust5.set( int( self.sw.sw_mdcp_ust5))
+        self.v_sw_ust6.set( int( self.sw.sw_mdcp_ust6))
+        #self.v_sw_idZgl         .set( self.sw.sw_idZgl              )   #<== do likwidacji
         self.v_sw_idZgl_jrwa    .set( self.sw.sw_idZgl_jrwa         )   
         self.v_sw_idZgl_nr      .set( self.sw.sw_idZgl_nr           )   
         self.v_sw_idZgl_rok     .set( self.sw.sw_idZgl_rok          )   
 
-        self.v_sw_skala         .set( self.sw.sw_skala              )   
-        
+        self.v_sw_powiat_teryt  .set( self.t.terytF_pow     )
+        self.v_sw_powiat_nazwa  .set( self.t.nazwa_pow      )
+        self.v_sw_jEw_teryt     .set( self.t.terytF_jew     )
+        self.v_sw_jEw_nazwa     .set( self.t.nazwa_jew      )
+        self.v_sw_obreb_teryt   .set( self.t.teryt_obr      )   
+        self.v_sw_obreb_nazwa   .set( self.t.nazwa_obr      )   
+        self.v_sw_obreb_dir     .set( self.t.nazwaDir_obr   )
         
         self.v_sw_libre_wykon   .set( self.sw.sw_libre_wykon        )   
         self.v_sw_libre_opis    .set( self.sw.sw_libre_opis         )   
         self.v_sw_dir_nazwa     .set( self.sw.sw_dir_nazwa          )
 
-        self.v_sw_inw_obiekt    .set( self.sw.sw_inw_obiekt         )
-        self.v_sw_inw_nrZal     .set( self.sw.sw_inw_nrZal          )
-        self.v_sw_inw_decZnak   .set( self.sw.sw_inw_decZnak        )
-        self.v_sw_inw_decData   .set( self.sw.sw_inw_decData        )
+        self.v_sw_inw_obiekt        .set( self.sw.sw_inw_obiekt         )
+        self.v_sw_inw_obiektDoUwag  .set( self.sw.sw_inw_obiektDoUwag   )
+        self.v_sw_inw_nrZal         .set( self.sw.sw_inw_nrZal          )
+        self.v_sw_inw_decZnak       .set( self.sw.sw_inw_decZnak        )
+        self.v_sw_inw_decData       .set( self.sw.sw_inw_decData        )
 
-        #self.v_sw_inw_decData  .set( self.sw.sw_inw_decData        )
         #self.v_sw_mdcp_kp_uwagi1.set( self.sw.sw_mdcp_kp_uwagi1   )
         #self.v_sw_mdcp_kp_uwagi2.set( self.sw.sw_mdcp_kp_uwagi2   )
         #self.v_sw_mdcp_kp_uwagi3.set( self.sw.sw_mdcp_kp_uwagi3   )
@@ -850,8 +864,6 @@ class SytwysGUIgrid( tk.Frame):
         #self.v_sw_typ.set( self.sw_sw_typ)
         #print( self.sw.sw_mdcp_ust5) 
         #print( self.sw.sw_mdcp_ust6) 
-        self.v_sw_ust5.set( int( self.sw.sw_mdcp_ust5))
-        self.v_sw_ust6.set( int( self.sw.sw_mdcp_ust6))
             
         
         # god³a i text sekcje       

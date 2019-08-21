@@ -4,7 +4,8 @@
 # s³ownik sta³ych
 #---------------------------------------------------------------------
 dictConstants = {
-         "GC_DIR_SYTWYS"        : "t:\\sytwys\\"                    
+        "NR_WERSJI"             : "1.4.2"
+        ,"GC_DIR_SYTWYS"        : "t:\\sytwys\\"                    
         ,"GC_DIR_LICZNIK"       : "t:\\sytwys\\AAB__licznik\\"      
         }
 
