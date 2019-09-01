@@ -1,0 +1,38 @@
+#-*- coding: windows-1250 -*-
+
+class OpracowaniePlanistyczne(object):
+    '''
+    klasa do obs³ugi opracowania planistycznego
+    -   planu zagospodarowania
+    -   decyzji o warunkach zabudowy
+    
+    
+    na razie tylko dostarcza zmiennych do odczytu i zapisu symboli funkcji 
+    terenu w pliku sw_XXX_info.txt
+    
+    >>  na obecnym etapie da siê latwo zrobiæ makro do pod³¹czenia pod polecenie
+        inf>fun w p500A.sbm
+    >>  mozna te¿ dorobiæ podobn¹ obs³ugê opisów, w tym celu trzeba:
+        -   zrobiæ pole tekstowe do edycji tych opisów
+        -   dodaæ obs³ugê zapisu i odczytu do/z pliku sw_info    
+    ?>  zastanowiæ siê nad opisami, które nie mieszcz¹ siê w jedne linii
+    
+        
+    '''
+    def __init__(self):
+        self.funAkt_01 = ""
+        self.funAkt_02 = ""
+        self.funAkt_03 = ""
+        self.funAkt_04 = ""
+        self.funAkt_05 = ""
+        self.funAkt_06 = ""
+        self.funAkt_07 = ""
+        self.funAkt_08 = ""
+        self.funAkt_09 = ""
+        self.funAkt_10 = ""
+        self.funAkt_11 = ""
+        self.funAkt_12 = ""
+        self.funAkt_13 = ""
+        self.funAkt_14 = ""
+        self.funAkt_15 = ""
+        

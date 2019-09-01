@@ -15,7 +15,7 @@ import re as re
 from tkinter.constants import ACTIVE
 
 import dictConstants
-
+import OpracowaniePlanistyczne as oPlan
 
 
 class SytwysGUIgrid( tk.Frame):
@@ -34,6 +34,7 @@ class SytwysGUIgrid( tk.Frame):
         self.master_frame = master
         self.sw = sw
         self.t = teryt
+        self.oPlan = oPlan.OpracowaniePlanistyczne()
         self.rowGr1 = 0
         self.rowGr2 = self.rowGr1 + 16
         self.rowGr3 = self.rowGr1 + 9
@@ -385,7 +386,6 @@ class SytwysGUIgrid( tk.Frame):
         self.tx_mdcp_kp_uwagi5.grid ( row=6, column=0, sticky="W", columnspan=4)
         self.tx_mdcp_kp_uwagi6.grid ( row=7, column=0, sticky="W", columnspan=4)
 
-
     def nowaRobota(self):
         '''
         skanuje katalog z plikami licznika i ustala numer dla nowej roboty
@@ -578,10 +578,10 @@ class SytwysGUIgrid( tk.Frame):
         f.write(    "[t_nazwaDir_obr]=" + self.t.nazwaDir_obr        +  "\n")
 
         # dane klasy Sytwys
-        self.sw.sw_idZgl            = self.v_sw_idZgl_jrwa.get() + self.v_sw_idZgl_nr.get() + "." + self.v_sw_idZgl_rok.get()
+        self.sw.sw_idZgl        = self.v_sw_idZgl_jrwa.get() + self.v_sw_idZgl_nr.get() + "." + self.v_sw_idZgl_rok.get()
         self.sw.sw_idZgl_jrwa   = self.v_sw_idZgl_jrwa.get()
         self.sw.sw_idZgl_nr     = self.v_sw_idZgl_nr.get()
-        self.sw.sw_idZgl_rok        = self.v_sw_idZgl_rok.get()
+        self.sw.sw_idZgl_rok    = self.v_sw_idZgl_rok.get()
         f.write(    "[sw_numer]="           + str( self.sw.sw_numer)        + "\n")
         f.write(    "[sw_numer_str]="       + self.sw.sw_numer_str          + "\n")
         f.write(    "[sw_wykonawca]="       + self.sw.sw_wykonawca          + "\n")
@@ -603,14 +603,30 @@ class SytwysGUIgrid( tk.Frame):
         #print ( "self.v_sw_ust6_str.get() = %d\n") % ( self.v_sw_ust6.get())
 
 
-        f.write(    "[sw_inw_obiekt]="          + self.sw.sw_inw_obiekt         + "\n")
-        f.write(    "[sw_inw_obiektDoUwag]="    + self.sw.sw_inw_obiektDoUwag   + "\n")
-        f.write(    "[sw_inw_nrZal]="           + self.sw.sw_inw_nrZal          + "\n")
-        f.write(    "[sw_inw_decZnak]="         + self.sw.sw_inw_decZnak        + "\n")
-        f.write(    "[sw_inw_decData]="         + self.sw.sw_inw_decData        + "\n")
+        f.write(    "[sw_inw_obiekt]="          + self.v_sw_inw_obiekt.get()   + "\n")
+        f.write(    "[sw_inw_obiektDoUwag]="    + self.v_sw_inw_obiektDoUwag.get()   + "\n")
+        f.write(    "[sw_inw_nrZal]="           + self.v_sw_inw_nrZal.get()          + "\n")
+        f.write(    "[sw_inw_decZnak]="         + self.v_sw_inw_decZnak.get()        + "\n")
+        f.write(    "[sw_inw_decData]="         + self.v_sw_inw_decData.get()        + "\n")
 
         f.write( "[sw_libre_wykon]="    + self.sw.sw_libre_wykon    + "\n")
         f.write( "[sw_libre_opis]="     + self.sw.sw_libre_opis     + "\n")
+
+        f.write( "[oPlan_fA_01]="    + self.oPlan.funAkt_01   + "\n")
+        f.write( "[oPlan_fA_02]="    + self.oPlan.funAkt_02   + "\n")
+        f.write( "[oPlan_fA_03]="    + self.oPlan.funAkt_03   + "\n")
+        f.write( "[oPlan_fA_04]="    + self.oPlan.funAkt_04   + "\n")
+        f.write( "[oPlan_fA_05]="    + self.oPlan.funAkt_05   + "\n")
+        f.write( "[oPlan_fA_06]="    + self.oPlan.funAkt_06   + "\n")
+        f.write( "[oPlan_fA_07]="    + self.oPlan.funAkt_07   + "\n")
+        f.write( "[oPlan_fA_08]="    + self.oPlan.funAkt_08   + "\n")
+        f.write( "[oPlan_fA_09]="    + self.oPlan.funAkt_09   + "\n")
+        f.write( "[oPlan_fA_10]="    + self.oPlan.funAkt_10   + "\n")
+        f.write( "[oPlan_fA_11]="    + self.oPlan.funAkt_11   + "\n")
+        f.write( "[oPlan_fA_12]="    + self.oPlan.funAkt_12   + "\n")
+        f.write( "[oPlan_fA_13]="    + self.oPlan.funAkt_13   + "\n")
+        f.write( "[oPlan_fA_14]="    + self.oPlan.funAkt_14   + "\n")
+        f.write( "[oPlan_fA_15]="    + self.oPlan.funAkt_15   + "\n")
 
         for key, val in self.sw.sw_dicSekcje.items():
             f.write( "%s=%s\n" % ( key, val))
@@ -632,7 +648,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.sw_mdcp_kp_uwagi5 = self.tx_mdcp_kp_uwagi5.get( 1.0, tk.END)
         self.sw.sw_mdcp_kp_uwagi6 = self.tx_mdcp_kp_uwagi6.get( 1.0, tk.END)
         # 2)
-        self.sw.sw_sekcje = self.sw.sw_sekcje.strip()
+        #self.sw.sw_sekcje = self.sw.sw_sekcje.strip()
         self.sw.sw_sekcje_tytul = self.sw.sw_sekcje_tytul.strip()
         self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1.strip()
         self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2.strip()
@@ -736,90 +752,96 @@ class SytwysGUIgrid( tk.Frame):
         # aktualizacja zmiennych danymi ze s³ownika dicWierszePliku
         #=========================================================================
         for key, val in self.dicWierszePliku.items():
-            if key == "[t_terytFull]"       : self.t.terytFull          = val
-            if key == "[t_terytF_woj]"      : self.t.terytF_woj         = val
-            if key == "[t_terytF_pow]"      : self.t.terytF_pow         = val
-            if key == "[t_terytF_jew]"      : self.t.terytF_jew         = val
-            if key == "[t_terytF_obr]"      : self.t.terytF_obr         = val
-            if key == "[t_teryt_woj]"       : self.t.teryt_woj          = val
-            if key == "[t_teryt_pow]"       : self.t.teryt_pow          = val
-            if key == "[t_teryt_jew]"       : self.t.teryt_jew          = val
-            if key == "[t_teryt_obr]"       : self.t.teryt_obr          = val
-            if key == "[t_nazwa_woj]"       : self.t.nazwa_woj          = val
-            if key == "[t_nazwa_pow]"       : self.t.nazwa_pow          = val
-            if key == "[t_nazwa_jew]"       : self.t.nazwa_jew          = val
-            if key == "[t_nazwa_obr]"       : self.t.nazwa_obr          = val
-            if key == "[t_nazwa_uStn_woj]"  : self.t.nazwa_uStn_woj     = val
-            if key == "[t_nazwa_uStn_pow]"  : self.t.nazwa_uStn_pow     = val
-            if key == "[t_nazwa_uStn_jew]"  : self.t.nazwa_uStn_jew     = val
-            if key == "[t_nazwa_uStn_obr]"  : self.t.nazwa_uStn_obr     = val
-            if key == "[t_nazwaDir_obr]"    : self.t.nazwaDir_obr       = val
+            if key == "[t_terytFull]"           : self.t.terytFull          = val
+            if key == "[t_terytF_woj]"          : self.t.terytF_woj         = val
+            if key == "[t_terytF_pow]"          : self.t.terytF_pow         = val
+            if key == "[t_terytF_jew]"          : self.t.terytF_jew         = val
+            if key == "[t_terytF_obr]"          : self.t.terytF_obr         = val
+            if key == "[t_teryt_woj]"           : self.t.teryt_woj          = val
+            if key == "[t_teryt_pow]"           : self.t.teryt_pow          = val
+            if key == "[t_teryt_jew]"           : self.t.teryt_jew          = val
+            if key == "[t_teryt_obr]"           : self.t.teryt_obr          = val
+            if key == "[t_nazwa_woj]"           : self.t.nazwa_woj          = val
+            if key == "[t_nazwa_pow]"           : self.t.nazwa_pow          = val
+            if key == "[t_nazwa_jew]"           : self.t.nazwa_jew          = val
+            if key == "[t_nazwa_obr]"           : self.t.nazwa_obr          = val
+            if key == "[t_nazwa_uStn_woj]"      : self.t.nazwa_uStn_woj     = val
+            if key == "[t_nazwa_uStn_pow]"      : self.t.nazwa_uStn_pow     = val
+            if key == "[t_nazwa_uStn_jew]"      : self.t.nazwa_uStn_jew     = val
+            if key == "[t_nazwa_uStn_obr]"      : self.t.nazwa_uStn_obr     = val
+            if key == "[t_nazwaDir_obr]"        : self.t.nazwaDir_obr       = val
+                                                
+            if key == "[sw_numer]"              : self.sw.sw_numer          = int( val)
+            if key == "[sw_numer_str]"          : self.sw.sw_numer_str      = val
+            if key == "[sw_wykonawca]"          : self.sw.sw_wykonawca      = val
+            if key == "[sw_typ]"                : self.sw.sw_typ            = val
+            if key == "[sw_skala]"              : self.sw.sw_skala          = val
+            if key == "[sw_dzialki]"            : self.sw.sw_dzialki        = val
+            if key == "[sw_dzialka1]"           : self.sw.sw_dzialka1       = val
+                                                
+            #if key == "[sw_idZgl]"              : self.sw.sw_idZgl          = val
+            if key == "[sw_idZgl_jrwa]"         : self.sw.sw_idZgl_jrwa     = val               
+            if key == "[sw_idZgl_nr]"           : self.sw.sw_idZgl_nr       = val               
+            if key == "[sw_idZgl_rok]"          : self.sw.sw_idZgl_rok      = val               
+                                                
+            if key == "[sw_obrebDir]"           : self.sw.sw_obrebDir       = val
+            if key == "[sw_dir_nazwa]"          : self.sw.sw_dir_nazwa      = val           
+            if key == "[sw_mdcp_ust5]"          : self.sw.sw_mdcp_ust5      = val
+            if key == "[sw_mdcp_ust6]"          : self.sw.sw_mdcp_ust6      = val
+                                                
+            if key == "[sw_inw_obiekt]"         : self.sw.sw_inw_obiekt     = val
+            if key == "[sw_inw_obiektDoUwag]"   : self.sw.sw_inw_obiektDoUwag      = val
+            if key == "[sw_inw_nrZal]"          : self.sw.sw_inw_nrZal    = val
+            if key == "[sw_inw_decZnak]"        : self.sw.sw_inw_decZnak    = val
+            if key == "[sw_inw_decData]"        : self.sw.sw_inw_decData    = val
             
-            if key == "[sw_numer]"          : self.sw.sw_numer          = int( val)
-            if key == "[sw_numer_str]"      : self.sw.sw_numer_str      = val
-            if key == "[sw_wykonawca]"      : self.sw.sw_wykonawca      = val
-            if key == "[sw_typ]"            : self.sw.sw_typ            = val
-            if key == "[sw_skala]"          : self.sw.sw_skala          = val
-            if key == "[sw_dzialki]"        : self.sw.sw_dzialki        = val
-            if key == "[sw_dzialka1]"       : self.sw.sw_dzialka1       = val
-            
-            #if key == "[sw_idZgl]"          : self.sw.sw_idZgl          = val
-            if key == "[sw_idZgl_jrwa]"     : self.sw.sw_idZgl_jrwa     = val               
-            if key == "[sw_idZgl_nr]"       : self.sw.sw_idZgl_nr       = val               
-            if key == "[sw_idZgl_rok]"      : self.sw.sw_idZgl_rok      = val               
-                
-            if key == "[sw_obrebDir]"       : self.sw.sw_obrebDir       = val
-            if key == "[sw_dir_nazwa]"      : self.sw.sw_dir_nazwa      = val           
-            if key == "[sw_mdcp_ust5]"      : self.sw.sw_mdcp_ust5      = val
-            if key == "[sw_mdcp_ust6]"      : self.sw.sw_mdcp_ust6      = val
-            
-            if key == "[sw_inw_obiekt]"     : self.sw.sw_inw_obiekt     = val
-            if key == "[sw_inw_nrZal]"      : self.sw.sw_inw_nrZal      = val
-            if key == "[sw_inw_decZnak]"    : self.sw.sw_inw_decZnak    = val
-            if key == "[sw_inw_decData]"    : self.sw.sw_inw_decData    = val
-            if key == "[sw_libre_wykon]"    : self.sw.sw_libre_wykon    = val
-            if key == "[sw_libre_opis]"     : self.sw.sw_libre_opis     = val
-            
-            if key == "[sw_sekcje]"         : self.sw.sw_sekcje         = val
-            if key == "[sw_sekcje_tytul]"   : self.sw.sw_sekcje_tytul   = val
-            if key == "[godlo_01]"          : self.sw.sw_godlo_01       = val
-            if key == "[godlo_02]"          : self.sw.sw_godlo_02       = val
-            if key == "[godlo_03]"          : self.sw.sw_godlo_03       = val
-            if key == "[godlo_04]"          : self.sw.sw_godlo_04       = val
-            if key == "[godlo_05]"          : self.sw.sw_godlo_05       = val
-            if key == "[godlo_06]"          : self.sw.sw_godlo_06       = val
-            if key == "[godlo_07]"          : self.sw.sw_godlo_07       = val
-            if key == "[godlo_08]"          : self.sw.sw_godlo_08       = val
-            if key == "[godlo_09]"          : self.sw.sw_godlo_09       = val
-            if key == "[godlo_10]"          : self.sw.sw_godlo_10       = val
-            if key == "[godlo_11]"          : self.sw.sw_godlo_11       = val
-            if key == "[godlo_12]"          : self.sw.sw_godlo_12       = val
-            if key == "[godlo_13]"          : self.sw.sw_godlo_13       = val
-            if key == "[godlo_14]"          : self.sw.sw_godlo_14       = val
-            if key == "[godlo_15]"          : self.sw.sw_godlo_15       = val
-            if key == "[godlo_16]"          : self.sw.sw_godlo_16       = val
-            if key == "[godlo_17]"          : self.sw.sw_godlo_17       = val
-            if key == "[godlo_18]"          : self.sw.sw_godlo_18       = val
-            if key == "[godlo_19]"          : self.sw.sw_godlo_19       = val
-            if key == "[godlo_20]"          : self.sw.sw_godlo_20       = val
-            if key == "[funkcja_01]"        : self.sw.sw_funkcja_01     = val
-            if key == "[funkcja_02]"        : self.sw.sw_funkcja_02     = val
-            if key == "[funkcja_03]"        : self.sw.sw_funkcja_03     = val
-            if key == "[funkcja_04]"        : self.sw.sw_funkcja_04     = val
-            if key == "[funkcja_05]"        : self.sw.sw_funkcja_05     = val
-            if key == "[funkcja_06]"        : self.sw.sw_funkcja_06     = val
-            if key == "[funkcja_07]"        : self.sw.sw_funkcja_07     = val
-            if key == "[funkcja_08]"        : self.sw.sw_funkcja_08     = val
-            if key == "[funkcja_09]"        : self.sw.sw_funkcja_09     = val
-            if key == "[funkcja_10]"        : self.sw.sw_funkcja_10     = val
-            if key == "[funkcja_11]"        : self.sw.sw_funkcja_11     = val
-            
-            if key == "[sw_mdcp_kp_uwagi1]" : self.sw.sw_mdcp_kp_uwagi1 = val
-            if key == "[sw_mdcp_kp_uwagi2]" : self.sw.sw_mdcp_kp_uwagi2 = val
-            if key == "[sw_mdcp_kp_uwagi3]" : self.sw.sw_mdcp_kp_uwagi3 = val
-            if key == "[sw_mdcp_kp_uwagi4]" : self.sw.sw_mdcp_kp_uwagi4 = val
-            if key == "[sw_mdcp_kp_uwagi5]" : self.sw.sw_mdcp_kp_uwagi5 = val
-            if key == "[sw_mdcp_kp_uwagi6]" : self.sw.sw_mdcp_kp_uwagi6 = val
+            if key == "[sw_libre_wykon]"        : self.sw.sw_libre_wykon    = val
+            if key == "[sw_libre_opis]"         : self.sw.sw_libre_opis     = val
+                                                
+            if key == "[sw_sekcje]"             : self.sw.sw_sekcje         = val
+            if key == "[sw_sekcje_tytul]"       : self.sw.sw_sekcje_tytul   = val
+            if key == "[godlo_01]"              : self.sw.sw_godlo_01       = val
+            if key == "[godlo_02]"              : self.sw.sw_godlo_02       = val
+            if key == "[godlo_03]"              : self.sw.sw_godlo_03       = val
+            if key == "[godlo_04]"              : self.sw.sw_godlo_04       = val
+            if key == "[godlo_05]"              : self.sw.sw_godlo_05       = val
+            if key == "[godlo_06]"              : self.sw.sw_godlo_06       = val
+            if key == "[godlo_07]"              : self.sw.sw_godlo_07       = val
+            if key == "[godlo_08]"              : self.sw.sw_godlo_08       = val
+            if key == "[godlo_09]"              : self.sw.sw_godlo_09       = val
+            if key == "[godlo_10]"              : self.sw.sw_godlo_10       = val
+            if key == "[godlo_11]"              : self.sw.sw_godlo_11       = val
+            if key == "[godlo_12]"              : self.sw.sw_godlo_12       = val
+            if key == "[godlo_13]"              : self.sw.sw_godlo_13       = val
+            if key == "[godlo_14]"              : self.sw.sw_godlo_14       = val
+            if key == "[godlo_15]"              : self.sw.sw_godlo_15       = val
+            if key == "[godlo_16]"              : self.sw.sw_godlo_16       = val
+            if key == "[godlo_17]"              : self.sw.sw_godlo_17       = val
+            if key == "[godlo_18]"              : self.sw.sw_godlo_18       = val
+            if key == "[godlo_19]"              : self.sw.sw_godlo_19       = val
+            if key == "[godlo_20]"              : self.sw.sw_godlo_20       = val
+            if key == "[oPlan_fA_01]"           : self.oPlan.funAkt_01      = val
+            if key == "[oPlan_fA_02]"           : self.oPlan.funAkt_02      = val
+            if key == "[oPlan_fA_03]"           : self.oPlan.funAkt_03      = val
+            if key == "[oPlan_fA_04]"           : self.oPlan.funAkt_04      = val
+            if key == "[oPlan_fA_05]"           : self.oPlan.funAkt_05      = val
+            if key == "[oPlan_fA_06]"           : self.oPlan.funAkt_06      = val
+            if key == "[oPlan_fA_07]"           : self.oPlan.funAkt_07      = val
+            if key == "[oPlan_fA_08]"           : self.oPlan.funAkt_08      = val
+            if key == "[oPlan_fA_09]"           : self.oPlan.funAkt_09      = val
+            if key == "[oPlan_fA_10]"           : self.oPlan.funAkt_10      = val
+            if key == "[oPlan_fA_11]"           : self.oPlan.funAkt_11      = val
+            if key == "[oPlan_fA_12]"           : self.oPlan.funAkt_12      = val
+            if key == "[oPlan_fA_13]"           : self.oPlan.funAkt_13      = val
+            if key == "[oPlan_fA_14]"           : self.oPlan.funAkt_14      = val
+            if key == "[oPlan_fA_15]"           : self.oPlan.funAkt_15      = val
+                                                
+            if key == "[sw_mdcp_kp_uwagi1]"     : self.sw.sw_mdcp_kp_uwagi1 = val
+            if key == "[sw_mdcp_kp_uwagi2]"     : self.sw.sw_mdcp_kp_uwagi2 = val
+            if key == "[sw_mdcp_kp_uwagi3]"     : self.sw.sw_mdcp_kp_uwagi3 = val
+            if key == "[sw_mdcp_kp_uwagi4]"     : self.sw.sw_mdcp_kp_uwagi4 = val
+            if key == "[sw_mdcp_kp_uwagi5]"     : self.sw.sw_mdcp_kp_uwagi5 = val
+            if key == "[sw_mdcp_kp_uwagi6]"     : self.sw.sw_mdcp_kp_uwagi6 = val
 
         # aktualizacja zmiennych zwi¹zanych z widgetami
         #=========================================================================
