@@ -85,7 +85,9 @@ class   Teryt( object):
             # powiat    czêstochowski
             "240401_4" : "Blachownia - miasto",
             "240401_5" : "Blachownia - obszar wiejski",
+            "240402_2" : "D¹browa Zielona",
             "240403_2" : "Janów",
+            "240404_2" : "Kamienica Polska",
             "240405_2" : "K³omnice",
             "240407_2" : "Konopiska",
             "240411_2" : "Mykanów",
@@ -254,7 +256,8 @@ class   Teryt( object):
 
             "240401_4.0001" :   "Blachownia",
             "240401_4.0002" :   "B³aszczyki",
-
+            
+            "240401_5.0002" :   "Gorzelnia",
 
             "999999_9.9999" :   "koniec wyœcigu"
         }
@@ -447,6 +450,8 @@ class   Teryt( object):
          "Blachownia"                     : "240401_4.0001",
          "B³aszczyki"                     : "240401_4.0002",
 
+         "Gorzelnia"                      : "240401_5.0002",
+
 
          "koniec wyœcigu"                 : "999999_9.9999"
          }
@@ -609,6 +614,8 @@ class   Teryt( object):
 
             "240401_4.0001" :   "Blachownia",
             "240401_4.0002" :   "Blaszczyki",
+
+            "240401_5.0002" :   "Gorzelnia",
 
             "999999_9.9999" :   "koniec wyœcigu"
         }
