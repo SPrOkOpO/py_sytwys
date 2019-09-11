@@ -980,10 +980,16 @@ class SytwysGUIgrid( tk.Frame):
         
     def btn_gen_uwagi1( self):  
         # utworzenie uwag
-        self.sw.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza \n"
+        
+        # utworzenie stringu idZgl
+        seq = (self.sw.sw_idZgl_jrwa, self.sw.sw_idZgl_nr, self.sw.sw_idZgl_rok)
+        s = "."
+        s = s.join(seq)
+        
+        self.sw.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza \n"        
         self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + self.sw.sw_sekcje
-        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. \n"
-        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + self.sw.sw_idZgl + "."      
+        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + "\n mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
+        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + s + "."      
         self.tx_mdcp_kp_uwagi1.delete( 1.0, tk.END)
         self.tx_mdcp_kp_uwagi1.insert( tk.END, self.sw.sw_mdcp_kp_uwagi1)
 
@@ -1005,7 +1011,7 @@ class SytwysGUIgrid( tk.Frame):
         else:
             self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "nie spe³niaj¹ warunków przepisów §79, ust. 5 i 6 \n"   
         
-        self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "rozp. MSWiA z dnia 9 listopada 2011r."     
+        self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "rozp. MSWiA z dnia 9 listopada 2011 r."     
         
         self.tx_mdcp_kp_uwagi2.delete( 1.0, tk.END)
         self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.sw_mdcp_kp_uwagi2)

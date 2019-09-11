@@ -74,7 +74,7 @@ if __name__ == "__main__":
     g.v_sw_dzialki.set( "309, 310")
     g.v_sw_typ.set( "mdcp")
     #g.v_sw_idZgl.set( "GKK.6640.X.2019")       # <== do likwidacji
-    g.v_sw_idZgl_jrwa.set( "GKK.6640.") 
+    g.v_sw_idZgl_jrwa.set( "GKK.6640") 
     g.v_sw_idZgl_nr.set( "") 
     g.v_sw_idZgl_rok.set( "2019") 
     g.v_sw_ust5.set( 1)
