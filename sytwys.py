@@ -121,11 +121,13 @@ class   Sytwys( object):
         # sta³e,    ale na razie jako   zwykle pola
         self.FILE_TYTUL  =  "tytul.txt"
         self.FILE_UWAGI  =  "uwagi.txt"
+        self.FILE_GODLA  =  "godla2swInfo.txt"
         
         self.sw_dir_nazwa           = ""
         self.sw_plikInfo_fullPath   = ""
         self.sw_plikTytul_fullPath  = ""
         self.sw_plikUwagi_fullPath  = ""
+        self.sw_plikGodla2swInfo_fullPath  = ""
         self.sw_plikNr_nazwa        = ""
         self.sw_plikNr_fullPath     = ""
 
@@ -178,7 +180,11 @@ class   Sytwys( object):
         p = self.sw_plikInfo_fullPath
         self.sw_plikTytul_fullPath  = os.path.join( os.path.dirname( p), self.FILE_TYTUL)
         self.sw_plikUwagi_fullPath  = os.path.join( os.path.dirname( p), self.FILE_UWAGI)
+        self.sw_plikGodla2swInfo_fullPath  = os.path.join( os.path.dirname( p), self.FILE_GODLA)
         
+        # deb
+        #print("def setNazwyPlikow_tytul_uwagi( self):")
+        #print( " *1* godla2swInfo.txt= >%s<" % (self.sw.sw_plikGodla2swInfo_fullPath))
         
         
     
