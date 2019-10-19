@@ -257,6 +257,12 @@ class   Sytwys( object):
     '''
     
     def utworzStrukture(    self):
+        '''
+        >>  trzeba dorobiæ: 
+            -   sprawdzenie, czy te katalogi istniej¹
+            -   funkcjê, która skasuje b³êdnie za³o¿on¹ strukturê
+        
+        '''   
         # utworzenie struktury katalogów
         #-------------------------------------------------------
         os.makedirs( self.sw_dictDirs[ "dane_ergo"          ])
@@ -281,7 +287,8 @@ class   Sytwys( object):
         os.makedirs( self.sw_dictDirs[ "zz_backup"          ])
         os.makedirs( self.sw_dictDirs[ "zz_wersjeNieakt"    ])
 
-        os.makedirs( self.sw_dictDirs[ "rasC_sytwys"        ])
+        if os.path.exists( self.sw_dictDirs[ "rasC_sytwys"]) == False:
+            os.makedirs( self.sw_dictDirs[ "rasC_sytwys"        ])
 
         # kopiowanie plików do mz...v7
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

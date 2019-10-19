@@ -93,7 +93,11 @@ class   Teryt( object):
             "240411_2" : "Mykanów",
             "240412_2" : "Olsztyn",
             "240415_2" : "Rêdziny",
-
+            
+            # M. Czêstochowa
+            "246401_1" : "Czêstochowa",
+                
+                
             "999999_9" : "koniec wyœcigu"
         }
 
@@ -258,7 +262,15 @@ class   Teryt( object):
             "240401_4.0002" :   "B³aszczyki",
             
             "240401_5.0002" :   "Gorzelnia",
-
+            
+            # M. Czêstochowa
+            "246401_1"      : "Czêstochowa",
+            
+            "246401_1.0395" :   "395",
+                
+            "246401_1.0420" :   "420-Brzeziny Ma³e",
+                
+            
             "999999_9.9999" :   "koniec wyœcigu"
         }
 
@@ -451,6 +463,9 @@ class   Teryt( object):
          "B³aszczyki"                     : "240401_4.0002",
 
          "Gorzelnia"                      : "240401_5.0002",
+         
+         # M. Czêstochowa   
+         "Czêstochowa"                    : "246401_1",   
 
 
          "koniec wyœcigu"                 : "999999_9.9999"
@@ -617,6 +632,9 @@ class   Teryt( object):
 
             "240401_5.0002" :   "Gorzelnia",
 
+            # M. Czêstochowa
+            "246401_1"      :   "CzM",
+                    
             "999999_9.9999" :   "koniec wyœcigu"
         }
 

@@ -668,7 +668,8 @@ class SytwysGUIgrid( tk.Frame):
         f.write( "[sw_mdcp_kp_uwagi5]="     + self.sw.sw_mdcp_kp_uwagi5 + "\n")
         f.write( "[sw_mdcp_kp_uwagi6]="     + self.sw.sw_mdcp_kp_uwagi6 + "\n")
         # 4)
-        #self.sw.setNazwyPlikow_tytul_uwagi()
+        
+        self.sw.setNazwyPlikow_tytul_uwagi()
         with open(  self.sw.sw_plikTytul_fullPath, "w") as f2:
             f2.write(   self.t.nazwa_uStn_woj + "\n")
             f2.write(   self.t.nazwa_uStn_pow + "\n")
@@ -988,7 +989,7 @@ class SytwysGUIgrid( tk.Frame):
         i = 0
         j = 0
         iOstatnia = len( self.godlaX.g_lista)
-        liczbaSekcjiWWierszu = 3
+        liczbaSekcjiWWierszu = 4
         wierszSekcji = ""
         nrWiersza = 0
         sStart = ""
