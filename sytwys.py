@@ -306,7 +306,7 @@ class   Sytwys( object):
 
         # kopiowanie plików do mz...v8
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-        sourceFile = "c:\\USSP\\SEED\\v8_2004\\000_pusty_u2k_V8.dgn"
+        sourceFile = "c:\\USSP\\SEED\\v8_2004\\zDXF_v8_poziomy-v7.dgn"
         targetDir = self.sw_dictDirs[ "mz_nr_v8"]
         shutil.copy( sourceFile, os.path.join( targetDir, "zDXF_v8.dgn"))
         
