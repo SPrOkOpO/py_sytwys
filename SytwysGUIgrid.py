@@ -685,7 +685,9 @@ class SytwysGUIgrid( tk.Frame):
                 f2.write( "\n")
                 f2.write( "Usytuowanie obiektu budowlanego (%s) zgodne\n" % ( self.sw.sw_inw_obiektDoUwag))
                 f2.write( "z projektem zagospodarowania terenu (za³¹cznik nr %s do decyzji\n" % ( self.sw.sw_inw_nrZal))
-                f2.write( "o znaku %s z dnia %s r.)" % ( self.sw.sw_inw_decZnak, self.sw.sw_inw_decData))
+                # na koñcu musi byæ spacja, bo z niewiadomych wzglêdów macro nie tworzy 
+                # ostatniego wiersza z ostatnim znakiem (bez spacji nie narysuje siê kropka)
+                f2.write( "o znaku %s z dnia %s r.). " % ( self.sw.sw_inw_decZnak, self.sw.sw_inw_decData))
 
         f2.close()
         # 5)
