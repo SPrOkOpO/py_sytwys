@@ -580,7 +580,7 @@ class SytwysGUIgrid( tk.Frame):
         f.write(    "[t_nazwaDir_obr]=" + self.t.nazwaDir_obr        +  "\n")
 
         # dane klasy Sytwys
-        self.sw.sw_idZgl        = self.v_sw_idZgl_jrwa.get() + self.v_sw_idZgl_nr.get() + "." + self.v_sw_idZgl_rok.get()
+        self.sw.sw_idZgl = ".".join([self.v_sw_idZgl_jrwa.get(), self.v_sw_idZgl_nr.get(), self.v_sw_idZgl_rok.get()])
         self.sw.sw_idZgl_jrwa   = self.v_sw_idZgl_jrwa.get()
         self.sw.sw_idZgl_nr     = self.v_sw_idZgl_nr.get()
         self.sw.sw_idZgl_rok    = self.v_sw_idZgl_rok.get()

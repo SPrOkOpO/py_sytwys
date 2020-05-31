@@ -310,7 +310,9 @@ class   Sytwys( object):
         sourceFile = "c:\\USSP\\SEED\\v8_2004\\zDXF_v8_poziomy-v7.dgn"
         targetDir = self.sw_dictDirs[ "mz_nr_v8"]
         shutil.copy( sourceFile, os.path.join( targetDir, "zDXF_v8.dgn"))
-        
+        targetDir = self.sw_dictDirs[ "mz_nr_v8"]
+        shutil.copy( sourceFile, os.path.join( targetDir, "zDXF_v8_pusty.dgn"))
+
         # utworzenie pliku #_pikiety_XXX.dgn
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
         sourceFile = "t:\\sytwys_T\\zzz_wzor_mdcp\\mdcp2k\\#_mdcp2k.dgn"
