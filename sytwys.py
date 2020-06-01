@@ -86,7 +86,7 @@ class   Sytwys( object):
         self.sw_mdcp_ust6_str = "1"
         self.sw_mdcp_kp_uwagi1  = "Mapa utworzona na podstawie arkusza ..."
         self.sw_mdcp_kp_uwagi2  = "Dane dotycz¹ce dzia³ki ..., ujawn..."
-        self.sw_mdcp_kp_uwagi3  = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u \ns³u¿ebnoœci gruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
+        self.sw_mdcp_kp_uwagi3  = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u s³u¿ebnoœci \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
         self.sw_mdcp_kp_uwagi4  = "Dla terenu objêtego opracowaniem brak opracowañ planistycznych."
         self.sw_mdcp_kp_uwagi5  = "Granice nieruchomoœci oznaczono kolorem zielonym."
         #self.sw_mdcp_kp_uwagi6  = "Nie wyklucza siê istnienia w terenie innych, niewykazanych na niniejszej mapie, urz¹dzeñ \npodziemnych."
