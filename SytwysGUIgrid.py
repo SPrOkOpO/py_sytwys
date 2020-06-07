@@ -588,7 +588,7 @@ class SytwysGUIgrid( tk.Frame):
         f.write(    "[sw_wykonawca]="       + self.sw.sw_wykonawca          + "\n")
         f.write(    "[sw_typ]="             + self.sw.sw_typ                + "\n")
         f.write(    "[sw_skala]="           + self.sw.sw_skala              + "\n")
-        f.write(    "[sw_dzialki]="         + self.sw.sw_dzialki            + "\n")
+        f.write(    "[sw_dzialki]="         + sorted(self.sw.sw_dzialki)    + "\n")
         f.write(    "[sw_dzialka1]="        + self.sw.sw_dzialka1           + "\n")
 
         f.write(    "[sw_idZgl]="           + self.sw.sw_idZgl              + "\n")
