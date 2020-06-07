@@ -439,9 +439,9 @@ class SytwysGUIgrid( tk.Frame):
 
         self.sw.sw_wykonawca        = self.v_sw_wykonawca.get()
         self.sw.sw_dzialki          = self.v_sw_dzialki.get()
-        self.sw.sw_dzialka1         = self.sw.get_sw_dzialka1( self.sw.sw_dzialki)
-        self.sw.sw_typ              = self.v_sw_typ.get()
-        self.sw.sw_idZgl            = self.v_sw_idZgl_jrwa.get() + self.v_sw_idZgl_nr.get() + "." + self.v_sw_idZgl_rok.get()
+        self.sw.sw_dzialka1         = self.sw.get_sw_dzialka1(self.sw.sw_dzialki)
+        self.sw.sw_typ              = sorted(self.v_sw_typ.get())
+        self.sw.sw_idZgl            = '.'.join([self.v_sw_idZgl_jrwa.get(), self.v_sw_idZgl_nr.get(), self.v_sw_idZgl_rok.get()])
         self.sw.sw_skala            = self.v_sw_skala.get()
         #self.sw.sw_mdcp_ust5       = self.v_sw_ust5_str.get()
         #self.sw.sw_mdcp_ust6       = self.v_sw_ust6_str.get()
@@ -495,7 +495,6 @@ class SytwysGUIgrid( tk.Frame):
         print( "1 sw_dir_nazwa=" +  self.sw.sw_dir_nazwa)
         print( "1 sw_plikInfo_fullPath="    + self.sw.sw_plikInfo_fullPath)
         print( "1 sw_plikNr_fullPath=" +    self.sw.sw_plikNr_fullPath)
-
 
         # wype³nienie kontrolek entry   aktualnymi danymi
         # - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   -
