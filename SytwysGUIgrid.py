@@ -18,6 +18,28 @@ import dictConstants
 import OpracowaniePlanistyczne as oPlan
 import sekcja
 
+class Inwentaryzacja():
+    def __init__(self):
+        self.obiekt = ''
+        self.obiekt_do_uwag = ''
+        self.nr_zal = ''
+        self.dec_znak = ''
+        self.dec_data = ''
+
+    def set_default(self):
+        self.obiekt = 'budynku mieszkalnego wraz z przy³¹czami'
+        self.obiekt_do_uwag = 'budynku mieszkalnego'
+        self.nr_zal = '1'
+        self.dec_znak = 'GPN.6730.140.2018.UC'
+        self.dec_data = '2018'
+
+    def set_empty(self):
+        self.obiekt = ''
+        self.obiekt_do_uwag = ''
+        self.nr_zal = ''
+        self.dec_znak = ''
+        self.dec_data = ''
+
 
 class SytwysGUIgrid( tk.Frame):
     def __init__( self, master, sw, teryt):
@@ -58,18 +80,25 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_obreb             = tk.StringVar()
         self.v_sw_obrebListBox      = tk.StringVar()
         self.v_sw_dzialki           = tk.StringVar()
-        self.v_sw_idZgl             = tk.StringVar()        #<== do likwidacji
         self.v_sw_idZgl_jrwa        = tk.StringVar()
         self.v_sw_idZgl_nr          = tk.StringVar()
         self.v_sw_idZgl_rok         = tk.StringVar()
 
         # dot. inwent.
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        self.inw = Inwentaryzacja()
+        self.inw.set_default()
         self.v_sw_inw_obiekt        = tk.StringVar()
         self.v_sw_inw_obiektDoUwag  = tk.StringVar()
         self.v_sw_inw_nrZal         = tk.StringVar()
         self.v_sw_inw_decZnak       = tk.StringVar()
         self.v_sw_inw_decData       = tk.StringVar()
+        self.v_sw_inw_obiekt.set(self.inw.obiekt)
+        self.v_sw_inw_obiektDoUwag.set(self.inw.obiekt_do_uwag)
+        self.v_sw_inw_nrZal.set(self.inw.nr_zal)
+        self.v_sw_inw_decZnak.set(self.inw.dec_znak)
+        self.v_sw_inw_decData.set(self.inw.dec_data)
+
 
         # zmienne zwi¹zane z klas¹ Teryt
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -458,7 +487,14 @@ class SytwysGUIgrid( tk.Frame):
             self.sw.sw_inw_nrZal        = self.v_sw_inw_nrZal.get()
             self.sw.sw_inw_decZnak      = self.v_sw_inw_decZnak.get()
             self.sw.sw_inw_decData      = self.v_sw_inw_decData.get()
+            # obiekt Inwentaryzacja
+            self.inw.obiekt         = self.v_sw_inw_obiekt.get()
+            self.inw.obiekt_do_uwag = self.v_sw_inw_obiektDoUwag.get()
+            self.inw.nr_zal         = self.v_sw_inw_nrZal.get()
+            self.inw.dec_znak       = self.v_sw_inw_decZnak.get()
+            self.inw.dec_znak       = self.v_sw_inw_decData.get()
         else:
+            self.inw.set_empty()
             self.sw.sw_inw_obiekt       = ""
             self.sw.sw_inw_obiektDoUwag = ""
             self.sw.sw_inw_nrZal        = ""
@@ -583,51 +619,51 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.sw_idZgl_jrwa   = self.v_sw_idZgl_jrwa.get()
         self.sw.sw_idZgl_nr     = self.v_sw_idZgl_nr.get()
         self.sw.sw_idZgl_rok    = self.v_sw_idZgl_rok.get()
-        f.write(    "[sw_numer]="           + str( self.sw.sw_numer)        + "\n")
-        f.write(    "[sw_numer_str]="       + self.sw.sw_numer_str          + "\n")
-        f.write(    "[sw_wykonawca]="       + self.sw.sw_wykonawca          + "\n")
-        f.write(    "[sw_typ]="             + self.sw.sw_typ                + "\n")
-        f.write(    "[sw_skala]="           + self.sw.sw_skala              + "\n")
-        f.write(    "[sw_dzialki]="         + self.sw.sw_dzialki            + "\n")
-        f.write(    "[sw_dzialka1]="        + self.sw.sw_dzialka1           + "\n")
+        f.write("[sw_numer]="           + str( self.sw.sw_numer)        + "\n")
+        f.write("[sw_numer_str]="       + self.sw.sw_numer_str          + "\n")
+        f.write("[sw_wykonawca]="       + self.sw.sw_wykonawca          + "\n")
+        f.write("[sw_typ]="             + self.sw.sw_typ                + "\n")
+        f.write("[sw_skala]="           + self.sw.sw_skala              + "\n")
+        f.write("[sw_dzialki]="         + self.sw.sw_dzialki            + "\n")
+        f.write("[sw_dzialka1]="        + self.sw.sw_dzialka1           + "\n")
 
-        f.write(    "[sw_idZgl]="           + self.sw.sw_idZgl              + "\n")
-        f.write(    "[sw_idZgl_jrwa]="      + self.sw.sw_idZgl_jrwa         + "\n")
-        f.write(    "[sw_idZgl_nr]="        + self.sw.sw_idZgl_nr           + "\n")
-        f.write(    "[sw_idZgl_rok]="       + self.sw.sw_idZgl_rok          + "\n")
+        f.write("[sw_idZgl]="           + self.sw.sw_idZgl              + "\n")
+        f.write("[sw_idZgl_jrwa]="      + self.sw.sw_idZgl_jrwa         + "\n")
+        f.write("[sw_idZgl_nr]="        + self.sw.sw_idZgl_nr           + "\n")
+        f.write("[sw_idZgl_rok]="       + self.sw.sw_idZgl_rok          + "\n")
 
-        f.write(    "[sw_obrebDir]="        + self.sw.sw_obrebDir           + "\n")
-        f.write(    "[sw_dir_nazwa]="       + self.sw.sw_dir_nazwa          + "\n")
-        f.write(    "[sw_mdcp_ust5]=%d\n"  % ( self.v_sw_ust5.get()))
-        f.write(    "[sw_mdcp_ust6]=%d\n"  % ( self.v_sw_ust6.get()))
+        f.write("[sw_obrebDir]="        + self.sw.sw_obrebDir           + "\n")
+        f.write("[sw_dir_nazwa]="       + self.sw.sw_dir_nazwa          + "\n")
+        f.write("[sw_mdcp_ust5]=%d\n"  % ( self.v_sw_ust5.get()))
+        f.write("[sw_mdcp_ust6]=%d\n"  % ( self.v_sw_ust6.get()))
         #print ( "self.v_sw_ust5_str.get() = %d\n") % ( self.v_sw_ust5.get())
         #print ( "self.v_sw_ust6_str.get() = %d\n") % ( self.v_sw_ust6.get())
 
 
-        f.write(    "[sw_inw_obiekt]="          + self.v_sw_inw_obiekt.get()   + "\n")
-        f.write(    "[sw_inw_obiektDoUwag]="    + self.v_sw_inw_obiektDoUwag.get()   + "\n")
-        f.write(    "[sw_inw_nrZal]="           + self.v_sw_inw_nrZal.get()          + "\n")
-        f.write(    "[sw_inw_decZnak]="         + self.v_sw_inw_decZnak.get()        + "\n")
-        f.write(    "[sw_inw_decData]="         + self.v_sw_inw_decData.get()        + "\n")
+        f.write("[sw_inw_obiekt]="          + self.v_sw_inw_obiekt.get()   + "\n")
+        f.write("[sw_inw_obiektDoUwag]="    + self.v_sw_inw_obiektDoUwag.get()   + "\n")
+        f.write("[sw_inw_nrZal]="           + self.v_sw_inw_nrZal.get()          + "\n")
+        f.write("[sw_inw_decZnak]="         + self.v_sw_inw_decZnak.get()        + "\n")
+        f.write("[sw_inw_decData]="         + self.v_sw_inw_decData.get()        + "\n")
 
-        f.write( "[sw_libre_wykon]="    + self.sw.sw_libre_wykon    + "\n")
-        f.write( "[sw_libre_opis]="     + self.sw.sw_libre_opis     + "\n")
+        f.write("[sw_libre_wykon]="    + self.sw.sw_libre_wykon    + "\n")
+        f.write("[sw_libre_opis]="     + self.sw.sw_libre_opis     + "\n")
 
-        f.write( "[oPlan_fA_01]="    + self.oPlan.funAkt_01   + "\n")
-        f.write( "[oPlan_fA_02]="    + self.oPlan.funAkt_02   + "\n")
-        f.write( "[oPlan_fA_03]="    + self.oPlan.funAkt_03   + "\n")
-        f.write( "[oPlan_fA_04]="    + self.oPlan.funAkt_04   + "\n")
-        f.write( "[oPlan_fA_05]="    + self.oPlan.funAkt_05   + "\n")
-        f.write( "[oPlan_fA_06]="    + self.oPlan.funAkt_06   + "\n")
-        f.write( "[oPlan_fA_07]="    + self.oPlan.funAkt_07   + "\n")
-        f.write( "[oPlan_fA_08]="    + self.oPlan.funAkt_08   + "\n")
-        f.write( "[oPlan_fA_09]="    + self.oPlan.funAkt_09   + "\n")
-        f.write( "[oPlan_fA_10]="    + self.oPlan.funAkt_10   + "\n")
-        f.write( "[oPlan_fA_11]="    + self.oPlan.funAkt_11   + "\n")
-        f.write( "[oPlan_fA_12]="    + self.oPlan.funAkt_12   + "\n")
-        f.write( "[oPlan_fA_13]="    + self.oPlan.funAkt_13   + "\n")
-        f.write( "[oPlan_fA_14]="    + self.oPlan.funAkt_14   + "\n")
-        f.write( "[oPlan_fA_15]="    + self.oPlan.funAkt_15   + "\n")
+        f.write("[oPlan_fA_01]="    + self.oPlan.funAkt_01   + "\n")
+        f.write("[oPlan_fA_02]="    + self.oPlan.funAkt_02   + "\n")
+        f.write("[oPlan_fA_03]="    + self.oPlan.funAkt_03   + "\n")
+        f.write("[oPlan_fA_04]="    + self.oPlan.funAkt_04   + "\n")
+        f.write("[oPlan_fA_05]="    + self.oPlan.funAkt_05   + "\n")
+        f.write("[oPlan_fA_06]="    + self.oPlan.funAkt_06   + "\n")
+        f.write("[oPlan_fA_07]="    + self.oPlan.funAkt_07   + "\n")
+        f.write("[oPlan_fA_08]="    + self.oPlan.funAkt_08   + "\n")
+        f.write("[oPlan_fA_09]="    + self.oPlan.funAkt_09   + "\n")
+        f.write("[oPlan_fA_10]="    + self.oPlan.funAkt_10   + "\n")
+        f.write("[oPlan_fA_11]="    + self.oPlan.funAkt_11   + "\n")
+        f.write("[oPlan_fA_12]="    + self.oPlan.funAkt_12   + "\n")
+        f.write("[oPlan_fA_13]="    + self.oPlan.funAkt_13   + "\n")
+        f.write("[oPlan_fA_14]="    + self.oPlan.funAkt_14   + "\n")
+        f.write("[oPlan_fA_15]="    + self.oPlan.funAkt_15   + "\n")
 
         for key, val in self.sw.sw_dicSekcje.items():
             f.write( "%s=%s\n" % ( key, val))
