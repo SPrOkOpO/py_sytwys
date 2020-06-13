@@ -18,27 +18,9 @@ import dictConstants
 import OpracowaniePlanistyczne as oPlan
 import sekcja
 
-class Inwentaryzacja():
-    def __init__(self):
-        self.obiekt = ''
-        self.obiekt_do_uwag = ''
-        self.nr_zal = ''
-        self.dec_znak = ''
-        self.dec_data = ''
 
-    def set_default(self):
-        self.obiekt = 'budynku mieszkalnego wraz z przy³¹czami'
-        self.obiekt_do_uwag = 'budynku mieszkalnego'
-        self.nr_zal = '1'
-        self.dec_znak = 'GPN.6730.140.2018.UC'
-        self.dec_data = '2018'
 
-    def set_empty(self):
-        self.obiekt = ''
-        self.obiekt_do_uwag = ''
-        self.nr_zal = ''
-        self.dec_znak = ''
-        self.dec_data = ''
+
 
 
 class SytwysGUIgrid( tk.Frame):
@@ -86,18 +68,17 @@ class SytwysGUIgrid( tk.Frame):
 
         # dot. inwent.
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        self.inw = Inwentaryzacja()
-        self.inw.set_default()
         self.v_sw_inw_obiekt        = tk.StringVar()
         self.v_sw_inw_obiektDoUwag  = tk.StringVar()
         self.v_sw_inw_nrZal         = tk.StringVar()
         self.v_sw_inw_decZnak       = tk.StringVar()
         self.v_sw_inw_decData       = tk.StringVar()
-        self.v_sw_inw_obiekt.set(self.inw.obiekt)
-        self.v_sw_inw_obiektDoUwag.set(self.inw.obiekt_do_uwag)
-        self.v_sw_inw_nrZal.set(self.inw.nr_zal)
-        self.v_sw_inw_decZnak.set(self.inw.dec_znak)
-        self.v_sw_inw_decData.set(self.inw.dec_data)
+
+        self.v_sw_inw_obiekt.set(self.sw.inw.obiekt)
+        self.v_sw_inw_obiektDoUwag.set(self.sw.inw.obiekt_do_uwag)
+        self.v_sw_inw_nrZal.set(self.sw.inw.nr_zal)
+        self.v_sw_inw_decZnak.set(self.sw.inw.dec_znak)
+        self.v_sw_inw_decData.set(self.sw.inw.dec_data)
 
 
         # zmienne zwi¹zane z klas¹ Teryt
@@ -482,24 +463,28 @@ class SytwysGUIgrid( tk.Frame):
         #print ( "self.sw.sw_mdcp_ust6 = %s\n") %  self.sw.sw_mdcp_ust6
 
         if  self.v_sw_typ.get() ==  "inw":
+            # old ver
             self.sw.sw_inw_obiekt       = self.v_sw_inw_obiekt.get()
             self.sw.sw_inw_obiektDoUwag = self.v_sw_inw_obiektDoUwag.get()
             self.sw.sw_inw_nrZal        = self.v_sw_inw_nrZal.get()
             self.sw.sw_inw_decZnak      = self.v_sw_inw_decZnak.get()
             self.sw.sw_inw_decData      = self.v_sw_inw_decData.get()
-            # obiekt Inwentaryzacja
-            self.inw.obiekt         = self.v_sw_inw_obiekt.get()
-            self.inw.obiekt_do_uwag = self.v_sw_inw_obiektDoUwag.get()
-            self.inw.nr_zal         = self.v_sw_inw_nrZal.get()
-            self.inw.dec_znak       = self.v_sw_inw_decZnak.get()
-            self.inw.dec_znak       = self.v_sw_inw_decData.get()
+            # new ver - obiekt Inwentaryzacja
+            self.sw.inw.obiekt         = self.v_sw_inw_obiekt.get()
+            self.sw.inw.obiekt_do_uwag = self.v_sw_inw_obiektDoUwag.get()
+            self.sw.inw.nr_zal         = self.v_sw_inw_nrZal.get()
+            self.sw.inw.dec_znak       = self.v_sw_inw_decZnak.get()
+            self.sw.inw.dec_znak       = self.v_sw_inw_decData.get()
         else:
-            self.inw.set_empty()
+            # new
+            self.sw.inw.set_empty()
+            # old
             self.sw.sw_inw_obiekt       = ""
             self.sw.sw_inw_obiektDoUwag = ""
             self.sw.sw_inw_nrZal        = ""
             self.sw.sw_inw_decZnak      = ""
             self.sw.sw_inw_decData      = ""
+
             self.v_sw_inw_obiekt.set        (   self.sw.sw_inw_obiekt   )
             self.v_sw_inw_obiektDoUwag.set  (   self.sw.sw_inw_obiektDoUwag )
             self.v_sw_inw_nrZal.set         (   self.sw.sw_inw_nrZal    )
@@ -550,10 +535,12 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_libre_opis.set(   self.sw.sw_libre_opis)
 
         # œciezka dir
-        self.v_sw_dir_nazwa.set( self.sw.sw_dir_nazwa)
+        self.v_sw_dir_nazwa.set(self.sw.sw_dir_nazwa)
 
-        self.sw.inicjujStrukture(   self.sw.sw_dir_nazwa)
-        self.sw.deb_listujStrukture()
+        self.sw.inicjujStrukture(self.sw.sw_dir_nazwa)   # old
+        self.sw.struktura_sw.sw_dir_abspath = self.sw.sw_dir_nazwa
+        self.sw.struktura_sw.inicjujStrukture() # new
+        self.sw.struktura_sw.deb_listujStrukture()
 
 
     def btn_rezygnacja( self):

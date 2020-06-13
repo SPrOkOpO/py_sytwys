@@ -1,5 +1,33 @@
 #-*- coding: windows-1250 -*-
 
+
+class FunkcjePlanu():
+    """
+    funkcje planu i ich opisy
+
+    -   w fazie projektowej nie jestem zdecydowany na typ atrybutów;
+        być może oba typy będą przydatne
+    """
+    def __init__(self):
+        # źródłowe dane z ustn - funkcje (mogą być zdublowane)
+        # - pobrane z dgna za pomocą makra fun>inf (sw_funkcja2plikInf.bas)
+        # - to makro dopisuje do pliku sw_XXX_info.txt wiersze postaci:
+        #   [oPlan_fA_01]=MN,RM,DG
+        self.funkcje_z_uStn = list()
+        self.funkcje_lst = list()
+        self.opisy_lst = list()
+        self.funkcje_mstr = ''
+        self.opisy_mstr = ''
+
+    def import_ustn_data(self):
+        """
+        dane z ustn porządkuje i wypełnia nimi atrybuty dot. funkcji
+        """
+        pass
+
+
+
+
 class OpracowaniePlanistyczne(object):
     '''
     klasa do obsługi opracowania planistycznego
