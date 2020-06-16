@@ -92,8 +92,8 @@ class   Sytwys( object):
         Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 
         pomiaru aktualizacyjnego id. zg³. GKN.6640.446.2019
 
-        Dane dotycz¹ce dzia³ki 309, 310, ujawnione w PZGiK, spe³niaj¹ warunki przepisów §79, ust. 5 i 6 
-        rozp. MSWiA z dnia 9 listopada 2011 r.
+        Dane dotycz¹ce granic dzia³ki 309, 310, ujawnione w PZGiK, spe³niaj¹ warunki przepisów §79, ust.  
+        5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r.
 
         Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u s³u¿ebnoœci 
         gruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)

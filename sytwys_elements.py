@@ -203,8 +203,8 @@ class MDCP():
         Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 
         pomiaru aktualizacyjnego id. zgł. GKN.6640.446.2019
 
-        Dane dotyczące działki 309, 310, ujawnione w PZGiK, spełniają warunki przepisów §79, ust. 5 i 6 
-        rozp. MSWiA z dnia 9 listopada 2011 r.
+        Dane dotyczące granic działki 309, 310, ujawnione w PZGiK, spełniają warunki przepisów §79, ust.  
+        5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r.
 
         Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności 
         gruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)
