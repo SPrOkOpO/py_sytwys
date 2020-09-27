@@ -36,7 +36,7 @@ class StrukturaKatalogow:
             "z_dxf_3__zbedne": "",
             "zz_backup": "",
             "zz_wersjeNieakt": "",
-            "kG":'',
+            "kG": "",
 
             "rasC_sytwys": ""
         }
@@ -185,7 +185,7 @@ class MDCP():
         self.ust5_str = "1"
         self.ust6_str = "1"
         self.kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
-        self.kp_uwagi2 = "Dane dotyczące działki ..., ujawn..."
+        self.kp_uwagi2 = "Dane dotyczące granic działki ..., ujawn..."
         self.kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
         self.kp_uwagi4 = "Dla terenu objętego opracowaniem brak opracowań planistycznych."
         self.kp_uwagi5 = "Granice nieruchomości oznaczono kolorem zielonym."

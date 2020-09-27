@@ -41,7 +41,7 @@ def main():
 
     # opracowanie argumentow z  linii   poleceñ
     # - potrzebne,  zeby uzyskac info   o parametrach uruchomienia, np.:
-    # - argument 1: katalog bieza
+    # - argument 1: katalog bie¿¹cy
     # -------------------------------------------------------
     listaArg = sys.argv[0].split('" "')
 
