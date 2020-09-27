@@ -773,7 +773,6 @@ class SytwysGUIgrid( tk.Frame):
                 #print( "%s" % self.dicWierszePliku)
             #deb
             #print( self.dicWierszePliku)
-        f.closed
 
 
         # aktualizacja zmiennych danymi ze s³ownika dicWierszePliku

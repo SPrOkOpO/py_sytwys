@@ -74,7 +74,7 @@ class   Sytwys( object):
         self.sw_mdcp_ust5_str = "1"
         self.sw_mdcp_ust6_str = "1"
         self.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
-        self.sw_mdcp_kp_uwagi2 = "Dane dotycz¹ce dzia³ki ..., ujawn..."
+        self.sw_mdcp_kp_uwagi2 = "Dane dotycz¹ce granic dzia³ki ..., ujawn..."
         self.sw_mdcp_kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u s³u¿ebnoœci \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
         self.sw_mdcp_kp_uwagi4 = "Dla terenu objêtego opracowaniem brak opracowañ planistycznych."
         self.sw_mdcp_kp_uwagi5 = "Granice nieruchomoœci oznaczono kolorem zielonym."
@@ -84,7 +84,7 @@ class   Sytwys( object):
         self.sw_mdcp_kp_uwagi1_fraza1 = "Mapa utworzona na podstawie arkusza "
         self.sw_mdcp_kp_uwagi1_fraza2 = " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
 
-        self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotycz¹ce dzia³ki "
+        self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotycz¹ce granic dzia³ki "
         self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
         self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
 
@@ -187,6 +187,7 @@ class   Sytwys( object):
             "z_dxf_3__zbedne"               : "",
             "zz_backup"                     : "",
             "zz_wersjeNieakt"               : "",
+            "kG": "",
 
             "rasC_sytwys"                   : ""
         }
@@ -226,17 +227,24 @@ class   Sytwys( object):
          ustalenie  numeru dla nowej roboty s-w
          -  polega na sprawdzeniu, jaki jest ostatni plik
             w katalogu DIR_LICZNIK i odczytanie jego nru
+            t:\sytwys\AAB__licznik\909___kp_2001_Bagna_55_inw.nr
+
+         adir_licznik :: katalog z plikami licznikowymi
         =====================================================================
         '''
-        #fileList   = [ os.path.normcase( f) for f in os.listdir( adir_licznik)]
-        fileList    = [ f[0:3] for f in os.listdir( adir_licznik)]
-        # deb
-        #[print(f) for  f in fileList]
-        #[print(f[0:3]) for f in fileList]
+        # deb - zawartoœæ katalogu:
+        # fileList = [f for f in os.listdir(adir_licznik)]
+        # [print(f) for f in fileList]
+        # print('----1')
+
+        # lista numerów wyekstrachowanych z nazw plików i katalogów
+        num_list = [f.split('_')[0] for f in os.listdir(adir_licznik)]
         self.sw_numer = -1
-        for f in  fileList:
-            if int(f) > self.sw_numer:
-                self.sw_numer   = int( f)
+        for nr_str in num_list:
+            # deb
+            # print(f'{nr_str = }')
+            if int(nr_str) > self.sw_numer:
+                self.sw_numer = int(nr_str)
         self.sw_numer = self.sw_numer + 1
         #deb
         print( "Numer licznika dla roboty: %d" % (self.sw_numer))
@@ -268,6 +276,7 @@ class   Sytwys( object):
         self.sw_dictDirs[   "z_dxf_3__zbedne"       ] = self.sw_dictDirs[ "z_dxf_3"]    + "zbedne\\"
         self.sw_dictDirs[   "zz_backup"             ] = asw_dir_nazwa   + "\\zz_backup\\"
         self.sw_dictDirs[   "zz_wersjeNieakt"       ] = asw_dir_nazwa   + "\\zz_wersjeNieakt\\"
+        self.sw_dictDirs[   "kG"                    ] = asw_dir_nazwa   + "\\kG\\"
 
         self.sw_dictDirs[   "rasC_sytwys"           ] = "t:\\&&RasC\\sytwys\\" + self.sw_numer_str + "_" + self.sw_obrebDir
     
@@ -292,27 +301,28 @@ class   Sytwys( object):
         '''   
         # utworzenie struktury katalogów
         #-------------------------------------------------------
-        os.makedirs( self.sw_dictDirs[ "dane_ergo"          ])
-        os.makedirs( self.sw_dictDirs[ "dane_wyk"           ])
-        os.makedirs( self.sw_dictDirs[ "dane_wyk_oryg"      ])
-        os.makedirs( self.sw_dictDirs[ "mz_nr_v7"           ])
-        os.makedirs( self.sw_dictDirs[ "mz_nr_v8"           ])
-        os.makedirs( self.sw_dictDirs[ "mz_nr_v8__v7"       ])
-        os.makedirs( self.sw_dictDirs[ "mz_nr_v8__v7_bac"   ])
-        os.makedirs( self.sw_dictDirs[ "orient"             ])
-        os.makedirs( self.sw_dictDirs[ "tabelki"            ])
-        os.makedirs( self.sw_dictDirs[ "tabelki__100_oryg"  ])
-        os.makedirs( self.sw_dictDirs[ "txt"                ])
-        os.makedirs( self.sw_dictDirs[ "wyslane"            ])
-        os.makedirs( self.sw_dictDirs[ "z_dxf"              ])
-        os.makedirs( self.sw_dictDirs[ "z_dxf_1"            ])
-        os.makedirs( self.sw_dictDirs[ "z_dxf_2"            ])
-        os.makedirs( self.sw_dictDirs[ "z_dxf_3"            ])
-        os.makedirs( self.sw_dictDirs[ "z_dxf_1__zbedne"    ])
-        os.makedirs( self.sw_dictDirs[ "z_dxf_2__zbedne"    ])
-        os.makedirs( self.sw_dictDirs[ "z_dxf_3__zbedne"    ])
-        os.makedirs( self.sw_dictDirs[ "zz_backup"          ])
-        os.makedirs( self.sw_dictDirs[ "zz_wersjeNieakt"    ])
+        os.makedirs(self.sw_dictDirs[ "dane_ergo"          ])
+        os.makedirs(self.sw_dictDirs[ "dane_wyk"           ])
+        os.makedirs(self.sw_dictDirs[ "dane_wyk_oryg"      ])
+        os.makedirs(self.sw_dictDirs[ "mz_nr_v7"           ])
+        os.makedirs(self.sw_dictDirs[ "mz_nr_v8"           ])
+        os.makedirs(self.sw_dictDirs[ "mz_nr_v8__v7"       ])
+        os.makedirs(self.sw_dictDirs[ "mz_nr_v8__v7_bac"   ])
+        os.makedirs(self.sw_dictDirs[ "orient"             ])
+        os.makedirs(self.sw_dictDirs[ "tabelki"            ])
+        os.makedirs(self.sw_dictDirs[ "tabelki__100_oryg"  ])
+        os.makedirs(self.sw_dictDirs[ "txt"                ])
+        os.makedirs(self.sw_dictDirs[ "wyslane"            ])
+        os.makedirs(self.sw_dictDirs[ "z_dxf"              ])
+        os.makedirs(self.sw_dictDirs[ "z_dxf_1"            ])
+        os.makedirs(self.sw_dictDirs[ "z_dxf_2"            ])
+        os.makedirs(self.sw_dictDirs[ "z_dxf_3"            ])
+        os.makedirs(self.sw_dictDirs[ "z_dxf_1__zbedne"    ])
+        os.makedirs(self.sw_dictDirs[ "z_dxf_2__zbedne"    ])
+        os.makedirs(self.sw_dictDirs[ "z_dxf_3__zbedne"    ])
+        os.makedirs(self.sw_dictDirs[ "zz_backup"          ])
+        os.makedirs(self.sw_dictDirs[ "zz_wersjeNieakt"    ])
+        os.makedirs(self.sw_dictDirs["kG"])
 
         if os.path.exists( self.sw_dictDirs[ "rasC_sytwys"]) == False:
             os.makedirs( self.sw_dictDirs[ "rasC_sytwys"        ])
