@@ -48,6 +48,8 @@ class   Sytwys( object):
         self.sw_obreb           = ""
         self.sw_obrebDir        = ""
         self.sw_dzialki         = ""
+        self.sw_dzialki_lst     = list()
+        self.sw_dzialki_ergo_lst = list()
         self.sw_dzialka1        = ""
         self.sw_typ             = ""
         self.sw_idZgl           = ""
@@ -154,6 +156,7 @@ class   Sytwys( object):
         self.FILE_TYTUL  =  "tytul.txt"
         self.FILE_UWAGI  =  "uwagi.txt"
         self.FILE_GODLA  =  "godla2swInfo.txt"
+        self.FILE_DZIALKI_ERGO = "dz_ergo.txt"
         
         self.sw_dir_nazwa           = ""
         self.sw_plikInfo_fullPath   = ""
@@ -162,6 +165,7 @@ class   Sytwys( object):
         self.sw_plikGodla2swInfo_fullPath  = ""
         self.sw_plikNr_nazwa        = ""
         self.sw_plikNr_fullPath     = ""
+        self.sw_plikDz_ergo_abspath = ""
 
         self.struktura_sw = sytwys_elements.StrukturaKatalogow()
         # s³ownik z katalogami s-w
@@ -215,7 +219,9 @@ class   Sytwys( object):
         self.sw_plikTytul_fullPath  = os.path.join( os.path.dirname( p), self.FILE_TYTUL)
         self.sw_plikUwagi_fullPath  = os.path.join( os.path.dirname( p), self.FILE_UWAGI)
         self.sw_plikGodla2swInfo_fullPath  = os.path.join( os.path.dirname( p), self.FILE_GODLA)
-        
+        # w katalogu ...\kG:
+        #self.sw_plikDz_ergo_abspath = os.path.join(os.path.dirname(p), self.sw_dictDirs["kG"])
+        self.sw_plikDz_ergo_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_DZIALKI_ERGO)
         # deb
         #print("def setNazwyPlikow_tytul_uwagi( self):")
         #print( " *1* godla2swInfo.txt= >%s<" % (self.sw.sw_plikGodla2swInfo_fullPath))
@@ -356,8 +362,6 @@ class   Sytwys( object):
         plikPikiety_nazwa = "#_pikiety_" + self.sw_numer_str + ".dgn"
         shutil.copy( sourceFile, os.path.join( targetDir, plikPikiety_nazwa))
 
-
-
     def get_sw_dzialka1(    self,   adzialki):
         '''
             z danego    ³añcucha    dzia³ek wybiera pierwsz¹ i  modyfikuje
@@ -374,3 +378,34 @@ class   Sytwys( object):
     
         print( "dz2=" + dz2)
         return dz2
+
+    def gen_dzialki_lst(self):
+        """
+        tworzy listê dzia³ek (tylko numery)
+        """
+        dzialki = self.sw_dzialki.split(',')
+        print(f'2 {dzialki = }')
+        for dz in dzialki:
+            dz = dz.strip(' ')
+            self.sw_dzialki_lst.append(dz)
+        # deb
+        for dz in self.sw_dzialki_lst:
+            print(f'(sw_dzialki_lst) {dz = }')
+
+    def gen_dzialki_ergo_lst(self, terytF_obr):
+        """
+        tworzy listê dzia³ek w formacie wymaganym przez Ergo podczas
+        tworzenia zakresu zamówienia/zg³oszenia z pliku
+        -   format:
+            999999_9.9999.dz1\n
+
+        terytF_obr (z instancji teryt)
+        "999999_9.9999"
+        """
+        for dz in self.sw_dzialki_lst:
+            s = f'{terytF_obr}.{dz}'
+            self.sw_dzialki_ergo_lst.append(s)
+        # deb
+        for dz in self.sw_dzialki_ergo_lst:
+            print(f'(ergo:) {dz = }')
+

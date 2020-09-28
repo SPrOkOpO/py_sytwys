@@ -559,6 +559,12 @@ class SytwysGUIgrid( tk.Frame):
             -   dane sw
 
         '''
+
+        # aktualizacja list dzia³ek
+        self.sw.gen_dzialki_lst()
+        self.sw.gen_dzialki_ergo_lst(self.t.terytF_obr)
+
+
         #global sw_plikInfo_fullPath
         global sw_plikNr_fullPath
         global sw_plikNr_nazwa
@@ -723,6 +729,15 @@ class SytwysGUIgrid( tk.Frame):
         f2.close()
 
         f.close()
+
+        # utworzenie pliku dz.txt z dzia³kami do zakresu ergo
+        try:
+            with open(self.sw.sw_plikDz_ergo_abspath, 'w') as f:
+                for dz in self.sw.sw_dzialki_ergo_lst:
+                    f.write(dz + '\n')
+        except:
+            print("ERR b³¹d zapisu listy dzia³ek do ergo do pliku")
+
         print( "zapisano")
         # na razie trzeba zamkn¹æ, ¿eby program nie g³upia³
         #self.master_frame.destroy
