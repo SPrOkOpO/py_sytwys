@@ -5,6 +5,9 @@ bieżące
 -------
 *   otwieranie z uStn połączone z wczytaniem odpowiedniego pliku
     swInfo
+*   teksty do wypełniania konta geodety:
+    mdcp 01_4 Zagórze 1571
+    01_4 Zagórze 1571
     
 planowane 
 ---------
