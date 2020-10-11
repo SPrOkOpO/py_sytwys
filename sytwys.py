@@ -70,43 +70,28 @@ class   Sytwys( object):
 
         # mdcp - new ver
         self.mdcp = sytwys_elements.MDCP()
-        # mdcp - old ver
-        self.sw_mdcp_ust5 = 1
-        self.sw_mdcp_ust6 = 1
-        self.sw_mdcp_ust5_str = "1"
-        self.sw_mdcp_ust6_str = "1"
-        self.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
-        self.sw_mdcp_kp_uwagi2 = "Dane dotycz¹ce granic dzia³ki ..., ujawn..."
-        self.sw_mdcp_kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u s³u¿ebnoœci \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
-        self.sw_mdcp_kp_uwagi4 = "Dla terenu objêtego opracowaniem brak opracowañ planistycznych."
-        self.sw_mdcp_kp_uwagi5 = "Granice nieruchomoœci oznaczono kolorem zielonym."
+
+        # !!! to jest stara wersja !!!
+        # aktualna jest w pliku sytwys_elements.py - klasa MDCP
+        # self.sw_mdcp_ust5 = 1
+        # self.sw_mdcp_ust6 = 1
+        # self.sw_mdcp_ust5_str = "1"
+        # self.sw_mdcp_ust6_str = "1"
+        # self.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
+        # self.sw_mdcp_kp_uwagi2 = "Dane dotycz¹ce granic dzia³ki ..., ujawn..."
+        # self.sw_mdcp_kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u s³u¿ebnoœci \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
+        # self.sw_mdcp_kp_uwagi4 = "Dla terenu objêtego opracowaniem brak opracowañ planistycznych."
+        # self.sw_mdcp_kp_uwagi5 = "Granice nieruchomoœci oznaczono kolorem zielonym."
         # self.sw_mdcp_kp_uwagi6  = "Nie wyklucza siê istnienia w terenie innych, niewykazanych na niniejszej mapie, urz¹dzeñ \npodziemnych."
-        self.sw_mdcp_kp_uwagi6 = "Nie wyklucza siê istnienia w terenie innych, niewykazanych na niniejszej mapie, urz¹dzeñ \npodziemnych, które nie by³y zg³oszone do inwentaryzacji lub o których brak jest informacji\nw instytucjach bran¿owych."
+        # self.sw_mdcp_kp_uwagi6 = "Nie wyklucza siê istnienia w terenie innych, niewykazanych na niniejszej mapie, urz¹dzeñ \npodziemnych, które nie by³y zg³oszone do inwentaryzacji lub o których brak jest informacji\nw instytucjach bran¿owych."
+        #
+        # self.sw_mdcp_kp_uwagi1_fraza1 = "Mapa utworzona na podstawie arkusza "
+        # self.sw_mdcp_kp_uwagi1_fraza2 = " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
+        #
+        # self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotycz¹ce granic dzia³ki "
+        # self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
+        # self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
 
-        self.sw_mdcp_kp_uwagi1_fraza1 = "Mapa utworzona na podstawie arkusza "
-        self.sw_mdcp_kp_uwagi1_fraza2 = " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
-
-        self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotycz¹ce granic dzia³ki "
-        self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
-        self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
-
-        '''
-        Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 
-        pomiaru aktualizacyjnego id. zg³. GKN.6640.446.2019
-
-        Dane dotycz¹ce granic dzia³ki 309, 310, ujawnione w PZGiK, spe³niaj¹ warunki przepisów §79, ust.  
-        5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r.
-
-        Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ z tytu³u s³u¿ebnoœci 
-        gruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)
-
-        Dla terenu objêtego opracowaniem brak opracowañ planistycznych.
-
-        Granice nieruchomoœci oznaczono kolorem zielonym. 
-
-        Nie wyklucza siê istnienia w terenie innych niewykazanych na niniejszej mapie urz¹dzeñ 
-        podziemnych. 
-        '''
 
         # dane do libre
         self.sw_libre_wykon = ""

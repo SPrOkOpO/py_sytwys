@@ -74,12 +74,14 @@ def main():
     g.v_sw_ust5.set(1)
     g.v_sw_ust6.set(1)
     g.v_sw_skala.set("500")
-    g.tx_mdcp_kp_uwagi1.insert(tk.END, sw.sw_mdcp_kp_uwagi1)
-    g.tx_mdcp_kp_uwagi2.insert(tk.END, sw.sw_mdcp_kp_uwagi2)
-    g.tx_mdcp_kp_uwagi3.insert(tk.END, sw.sw_mdcp_kp_uwagi3)
-    g.tx_mdcp_kp_uwagi4.insert(tk.END, sw.sw_mdcp_kp_uwagi4)
-    g.tx_mdcp_kp_uwagi5.insert(tk.END, sw.sw_mdcp_kp_uwagi5)
-    g.tx_mdcp_kp_uwagi6.insert(tk.END, sw.sw_mdcp_kp_uwagi6)
+
+    # stara wersja
+    g.tx_mdcp_kp_uwagi1.insert(tk.END, sw.mdcp.kp_uwagi1)
+    g.tx_mdcp_kp_uwagi2.insert(tk.END, sw.mdcp.kp_uwagi2)
+    g.tx_mdcp_kp_uwagi3.insert(tk.END, sw.mdcp.kp_uwagi3)
+    g.tx_mdcp_kp_uwagi4.insert(tk.END, sw.mdcp.kp_uwagi4)
+    g.tx_mdcp_kp_uwagi5.insert(tk.END, sw.mdcp.kp_uwagi5)
+    g.tx_mdcp_kp_uwagi6.insert(tk.END, sw.mdcp.kp_uwagi6)
 
     sw.sw_dir_nazwa = sw.sw_numer_str + "_" + sw.sw_wykonawca + "_"
     g.v_sw_dir_nazwa.set(sw.sw_dir_nazwa)

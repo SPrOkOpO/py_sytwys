@@ -14,10 +14,21 @@ planowane
 *   reorganizacja klasy sytwys
     -   rozdzielenie na składniki - klasy z pliku sytwys_elements.py    
 *   następnie reorganizacja klasy sytwysGUIgid
+*   dopracowanie funkcji divide_into_rows()
 
 
 changelog
 =========
+
+2020.10.10 v. 2.0.6
+-------------------
+*   zmiana treści uwag ze względu na zmianę przepisów
+    *   usunięcie z klasy Sytwys zbędnych pól mdcp_... (obecnie są w klasie MDCP)
+    *   usunięcie użycia tych pól także z klasy SytwysGUIgrid
+    *   utworzenie funkcji divide_into_rows(), dzielącej teksty wyswietlane
+        w kontrolkach tekstowych tx_mdcp_...
+        *   funkcja nie działa idealnie - patrz docstring 
+    
 
 2020.09.28 v. 2.0.5
 -------------------

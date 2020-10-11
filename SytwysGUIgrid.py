@@ -453,22 +453,19 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.sw_typ              = self.v_sw_typ.get()
         self.sw.sw_idZgl            = '.'.join([self.v_sw_idZgl_jrwa.get(), self.v_sw_idZgl_nr.get(), self.v_sw_idZgl_rok.get()])
         self.sw.sw_skala            = self.v_sw_skala.get()
-        #self.sw.sw_mdcp_ust5       = self.v_sw_ust5_str.get()
-        #self.sw.sw_mdcp_ust6       = self.v_sw_ust6_str.get()
-        self.sw.sw_mdcp_ust5        = "%s" % self.v_sw_ust5.get()
-        self.sw.sw_mdcp_ust6        = "%s" % self.v_sw_ust6.get()
+        self.sw.mdcp.ust5        = "%s" % self.v_sw_ust5.get()
+        self.sw.mdcp.ust6        = "%s" % self.v_sw_ust6.get()
 
-        print ( "self.sw.sw_mdcp_ust5 = " + self.sw.sw_mdcp_ust5)
-        print ( "self.sw.sw_mdcp_ust6 = " + self.sw.sw_mdcp_ust6)
-        #print ( "self.sw.sw_mdcp_ust6 = %s\n") %  self.sw.sw_mdcp_ust6
+        print ( "self.sw.mdcp.ust5 = " + self.sw.mdcp.ust5)
+        print ( "self.sw.mdcp.ust6 = " + self.sw.mdcp.ust6)
 
         if  self.v_sw_typ.get() ==  "inw":
             # old ver
-            self.sw.sw_inw_obiekt       = self.v_sw_inw_obiekt.get()
-            self.sw.sw_inw_obiektDoUwag = self.v_sw_inw_obiektDoUwag.get()
-            self.sw.sw_inw_nrZal        = self.v_sw_inw_nrZal.get()
-            self.sw.sw_inw_decZnak      = self.v_sw_inw_decZnak.get()
-            self.sw.sw_inw_decData      = self.v_sw_inw_decData.get()
+            # self.sw.sw_inw_obiekt       = self.v_sw_inw_obiekt.get()
+            # self.sw.sw_inw_obiektDoUwag = self.v_sw_inw_obiektDoUwag.get()
+            # self.sw.sw_inw_nrZal        = self.v_sw_inw_nrZal.get()
+            # self.sw.sw_inw_decZnak      = self.v_sw_inw_decZnak.get()
+            # self.sw.sw_inw_decData      = self.v_sw_inw_decData.get()
             # new ver - obiekt Inwentaryzacja
             self.sw.inw.obiekt         = self.v_sw_inw_obiekt.get()
             self.sw.inw.obiekt_do_uwag = self.v_sw_inw_obiektDoUwag.get()
@@ -479,11 +476,11 @@ class SytwysGUIgrid( tk.Frame):
             # new
             self.sw.inw.set_empty()
             # old
-            self.sw.sw_inw_obiekt       = ""
-            self.sw.sw_inw_obiektDoUwag = ""
-            self.sw.sw_inw_nrZal        = ""
-            self.sw.sw_inw_decZnak      = ""
-            self.sw.sw_inw_decData      = ""
+            # self.sw.sw_inw_obiekt       = ""
+            # self.sw.sw_inw_obiektDoUwag = ""
+            # self.sw.sw_inw_nrZal        = ""
+            # self.sw.sw_inw_decZnak      = ""
+            # self.sw.sw_inw_decData      = ""
 
             self.v_sw_inw_obiekt.set        (   self.sw.sw_inw_obiekt   )
             self.v_sw_inw_obiektDoUwag.set  (   self.sw.sw_inw_obiektDoUwag )
@@ -671,30 +668,30 @@ class SytwysGUIgrid( tk.Frame):
         # 1)
         #self.sw.sw_sekcje = self.tx_sekcje.get( 1.0, tk.END)
         self.sw.sw_sekcje_tytul = self.tx_sekcje.get( 1.0, tk.END)
-        self.sw.sw_mdcp_kp_uwagi1 = self.tx_mdcp_kp_uwagi1.get( 1.0, tk.END)
-        self.sw.sw_mdcp_kp_uwagi2 = self.tx_mdcp_kp_uwagi2.get( 1.0, tk.END)
-        self.sw.sw_mdcp_kp_uwagi3 = self.tx_mdcp_kp_uwagi3.get( 1.0, tk.END)
-        self.sw.sw_mdcp_kp_uwagi4 = self.tx_mdcp_kp_uwagi4.get( 1.0, tk.END)
-        self.sw.sw_mdcp_kp_uwagi5 = self.tx_mdcp_kp_uwagi5.get( 1.0, tk.END)
-        self.sw.sw_mdcp_kp_uwagi6 = self.tx_mdcp_kp_uwagi6.get( 1.0, tk.END)
+        self.sw.mdcp.kp_uwagi1 = self.tx_mdcp_kp_uwagi1.get( 1.0, tk.END)
+        self.sw.mdcp.kp_uwagi2 = self.tx_mdcp_kp_uwagi2.get( 1.0, tk.END)
+        self.sw.mdcp.kp_uwagi3 = self.tx_mdcp_kp_uwagi3.get( 1.0, tk.END)
+        self.sw.mdcp.kp_uwagi4 = self.tx_mdcp_kp_uwagi4.get( 1.0, tk.END)
+        self.sw.mdcp.kp_uwagi5 = self.tx_mdcp_kp_uwagi5.get( 1.0, tk.END)
+        self.sw.mdcp.kp_uwagi6 = self.tx_mdcp_kp_uwagi6.get( 1.0, tk.END)
         # 2)
         #self.sw.sw_sekcje = self.sw.sw_sekcje.strip()
         self.sw.sw_sekcje_tytul = self.sw.sw_sekcje_tytul.strip()
-        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1.strip()
-        self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2.strip()
-        self.sw.sw_mdcp_kp_uwagi3 = self.sw.sw_mdcp_kp_uwagi3.strip()
-        self.sw.sw_mdcp_kp_uwagi4 = self.sw.sw_mdcp_kp_uwagi4.strip()
-        self.sw.sw_mdcp_kp_uwagi5 = self.sw.sw_mdcp_kp_uwagi5.strip()
-        self.sw.sw_mdcp_kp_uwagi6 = self.sw.sw_mdcp_kp_uwagi6.strip()
+        self.sw.mdcp.kp_uwagi1 = self.sw.mdcp.kp_uwagi1.strip()
+        self.sw.mdcp.kp_uwagi2 = self.sw.mdcp.kp_uwagi2.strip()
+        self.sw.mdcp.kp_uwagi3 = self.sw.mdcp.kp_uwagi3.strip()
+        self.sw.mdcp.kp_uwagi4 = self.sw.mdcp.kp_uwagi4.strip()
+        self.sw.mdcp.kp_uwagi5 = self.sw.mdcp.kp_uwagi5.strip()
+        self.sw.mdcp.kp_uwagi6 = self.sw.mdcp.kp_uwagi6.strip()
         # 3)
         f.write( "[sw_sekcje]="             + self.sw.sw_sekcje + "\n")
         f.write( "[sw_sekcje_tytul]="       + self.sw.sw_sekcje_tytul + "\n")
-        f.write( "[sw_mdcp_kp_uwagi1]="     + self.sw.sw_mdcp_kp_uwagi1 + "\n")
-        f.write( "[sw_mdcp_kp_uwagi2]="     + self.sw.sw_mdcp_kp_uwagi2 + "\n")
-        f.write( "[sw_mdcp_kp_uwagi3]="     + self.sw.sw_mdcp_kp_uwagi3 + "\n")
-        f.write( "[sw_mdcp_kp_uwagi4]="     + self.sw.sw_mdcp_kp_uwagi4 + "\n")
-        f.write( "[sw_mdcp_kp_uwagi5]="     + self.sw.sw_mdcp_kp_uwagi5 + "\n")
-        f.write( "[sw_mdcp_kp_uwagi6]="     + self.sw.sw_mdcp_kp_uwagi6 + "\n")
+        f.write( "[sw.mdcp.kp_uwagi1]="     + self.sw.mdcp.kp_uwagi1 + "\n")
+        f.write( "[sw.mdcp.kp_uwagi2]="     + self.sw.mdcp.kp_uwagi2 + "\n")
+        f.write( "[sw.mdcp.kp_uwagi3]="     + self.sw.mdcp.kp_uwagi3 + "\n")
+        f.write( "[sw.mdcp.kp_uwagi4]="     + self.sw.mdcp.kp_uwagi4 + "\n")
+        f.write( "[sw.mdcp.kp_uwagi5]="     + self.sw.mdcp.kp_uwagi5 + "\n")
+        f.write( "[sw.mdcp.kp_uwagi6]="     + self.sw.mdcp.kp_uwagi6 + "\n")
         # 4)
         
         self.sw.setNazwyPlikow_tytul_uwagi()
@@ -720,12 +717,12 @@ class SytwysGUIgrid( tk.Frame):
         f2.close()
         # 5)
         with open(  self.sw.sw_plikUwagi_fullPath, "w") as f2:
-            f2.write( self.sw.sw_mdcp_kp_uwagi1 + "\n\n")
-            f2.write( self.sw.sw_mdcp_kp_uwagi2 + "\n\n")
-            f2.write( self.sw.sw_mdcp_kp_uwagi3 + "\n\n")
-            f2.write( self.sw.sw_mdcp_kp_uwagi4 + "\n\n")
-            f2.write( self.sw.sw_mdcp_kp_uwagi5 + "\n\n")
-            f2.write( self.sw.sw_mdcp_kp_uwagi6 + "\n\n")
+            f2.write( self.sw.mdcp.kp_uwagi1 + "\n\n")
+            f2.write( self.sw.mdcp.kp_uwagi2 + "\n\n")
+            f2.write( self.sw.mdcp.kp_uwagi3 + "\n\n")
+            f2.write( self.sw.mdcp.kp_uwagi4 + "\n\n")
+            f2.write( self.sw.mdcp.kp_uwagi5 + "\n\n")
+            f2.write( self.sw.mdcp.kp_uwagi6 + "\n\n")
         f2.close()
 
         f.close()
@@ -827,8 +824,8 @@ class SytwysGUIgrid( tk.Frame):
 
             if key == "[sw_obrebDir]"           : self.sw.sw_obrebDir       = val
             if key == "[sw_dir_nazwa]"          : self.sw.sw_dir_nazwa      = val
-            if key == "[sw_mdcp_ust5]"          : self.sw.sw_mdcp_ust5      = val
-            if key == "[sw_mdcp_ust6]"          : self.sw.sw_mdcp_ust6      = val
+            if key == "[sw_mdcp_ust5]"          : self.sw.mdcp.ust5      = val
+            if key == "[sw_mdcp_ust6]"          : self.sw.mdcp.ust6      = val
 
             if key == "[sw_inw_obiekt]"         : self.sw.sw_inw_obiekt     = val
             if key == "[sw_inw_obiektDoUwag]"   : self.sw.sw_inw_obiektDoUwag      = val
@@ -882,12 +879,12 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[oPlan_fA_14]"           : self.oPlan.funAkt_14      = val
             if key == "[oPlan_fA_15]"           : self.oPlan.funAkt_15      = val
 
-            if key == "[sw_mdcp_kp_uwagi1]"     : self.sw.sw_mdcp_kp_uwagi1 = val
-            if key == "[sw_mdcp_kp_uwagi2]"     : self.sw.sw_mdcp_kp_uwagi2 = val
-            if key == "[sw_mdcp_kp_uwagi3]"     : self.sw.sw_mdcp_kp_uwagi3 = val
-            if key == "[sw_mdcp_kp_uwagi4]"     : self.sw.sw_mdcp_kp_uwagi4 = val
-            if key == "[sw_mdcp_kp_uwagi5]"     : self.sw.sw_mdcp_kp_uwagi5 = val
-            if key == "[sw_mdcp_kp_uwagi6]"     : self.sw.sw_mdcp_kp_uwagi6 = val
+            if key == "[sw_mdcp_kp_uwagi1]"     : self.sw.mdcp.kp_uwagi1 = val
+            if key == "[sw_mdcp_kp_uwagi2]"     : self.sw.mdcp.kp_uwagi2 = val
+            if key == "[sw_mdcp_kp_uwagi3]"     : self.sw.mdcp.kp_uwagi3 = val
+            if key == "[sw_mdcp_kp_uwagi4]"     : self.sw.mdcp.kp_uwagi4 = val
+            if key == "[sw_mdcp_kp_uwagi5]"     : self.sw.mdcp.kp_uwagi5 = val
+            if key == "[sw_mdcp_kp_uwagi6]"     : self.sw.mdcp.kp_uwagi6 = val
 
         # aktualizacja zmiennych zwi¹zanych z widgetami
         #=========================================================================
@@ -899,8 +896,8 @@ class SytwysGUIgrid( tk.Frame):
         # tu powinien byæ obrêb-teryt
         #self.v_sw_obrebListBox
         self.v_sw_dzialki       .set( self.sw.sw_dzialki            )
-        self.v_sw_ust5.set( int( self.sw.sw_mdcp_ust5))
-        self.v_sw_ust6.set( int( self.sw.sw_mdcp_ust6))
+        self.v_sw_ust5.set(int(self.sw.mdcp.ust5))
+        self.v_sw_ust6.set(int(self.sw.mdcp.ust6))
         #self.v_sw_idZgl         .set( self.sw.sw_idZgl              )   #<== do likwidacji
         self.v_sw_idZgl_jrwa    .set( self.sw.sw_idZgl_jrwa         )
         self.v_sw_idZgl_nr      .set( self.sw.sw_idZgl_nr           )
@@ -966,7 +963,7 @@ class SytwysGUIgrid( tk.Frame):
         # wpisanie wczytanych uwag do widgetu text
         #-------------------------------------------------------------------------
         print( "---[ self.sw.sw_mdcp_kp_uwagi1 po wczytaniu ]---------------------")
-        print( "%s\n" % (self.sw.sw_mdcp_kp_uwagi1))
+        print( "%s\n" % (self.sw.mdcp.kp_uwagi1))
         print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
         self.tx_mdcp_kp_uwagi1.delete( 1.0, tk.END)
         self.tx_mdcp_kp_uwagi2.delete( 1.0, tk.END)
@@ -974,12 +971,12 @@ class SytwysGUIgrid( tk.Frame):
         self.tx_mdcp_kp_uwagi4.delete( 1.0, tk.END)
         self.tx_mdcp_kp_uwagi5.delete( 1.0, tk.END)
         self.tx_mdcp_kp_uwagi6.delete( 1.0, tk.END)
-        self.tx_mdcp_kp_uwagi1.insert( tk.END, self.sw.sw_mdcp_kp_uwagi1)
-        self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.sw_mdcp_kp_uwagi2)
-        self.tx_mdcp_kp_uwagi3.insert( tk.END, self.sw.sw_mdcp_kp_uwagi3)
-        self.tx_mdcp_kp_uwagi4.insert( tk.END, self.sw.sw_mdcp_kp_uwagi4)
-        self.tx_mdcp_kp_uwagi5.insert( tk.END, self.sw.sw_mdcp_kp_uwagi5)
-        self.tx_mdcp_kp_uwagi6.insert( tk.END, self.sw.sw_mdcp_kp_uwagi6)
+        self.tx_mdcp_kp_uwagi1.insert( tk.END, self.sw.mdcp.kp_uwagi1)
+        self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.mdcp.kp_uwagi2)
+        self.tx_mdcp_kp_uwagi3.insert( tk.END, self.sw.mdcp.kp_uwagi3)
+        self.tx_mdcp_kp_uwagi4.insert( tk.END, self.sw.mdcp.kp_uwagi4)
+        self.tx_mdcp_kp_uwagi5.insert( tk.END, self.sw.mdcp.kp_uwagi5)
+        self.tx_mdcp_kp_uwagi6.insert( tk.END, self.sw.mdcp.kp_uwagi6)
 
 
         #self.master_frame.destroy
@@ -1110,45 +1107,69 @@ class SytwysGUIgrid( tk.Frame):
         # utworzenie uwag
 
         # utworzenie stringu idZgl
-        seq = (self.sw.sw_idZgl_jrwa, self.sw.sw_idZgl_nr, self.sw.sw_idZgl_rok)
-        s = "."
-        s = s.join(seq)
+        self.sw.sw_idZgl_jrwa = self.v_sw_idZgl_jrwa.get()
+        self.sw.sw_idZgl_nr = self.v_sw_idZgl_nr.get()
+        self.sw.sw_idZgl_rok = self.v_sw_idZgl_rok.get()
+        s = '.'.join([self.sw.sw_idZgl_jrwa, self.sw.sw_idZgl_nr, self.sw.sw_idZgl_rok])
 
-        self.sw.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza \n"
-        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + self.sw.sw_sekcje
-        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + "\n mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
-        self.sw.sw_mdcp_kp_uwagi1 = self.sw.sw_mdcp_kp_uwagi1 + s + "."
+        self.sw.mdcp.kp_uwagi1 = "Mapa utworzona na podstawie arkusza "
+        self.sw.mdcp.kp_uwagi1 += self.sw.sw_sekcje
+        self.sw.mdcp.kp_uwagi1 += " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
+        self.sw.mdcp.kp_uwagi1 += s + "."
+
+        self.sw.mdcp.kp_uwagi1 = self.divide_into_rows(self.sw.mdcp.kp_uwagi1, 90)
+        # deb
+        print(f'{self.sw.mdcp.kp_uwagi1 = }')
+
         self.tx_mdcp_kp_uwagi1.delete( 1.0, tk.END)
-        self.tx_mdcp_kp_uwagi1.insert( tk.END, self.sw.sw_mdcp_kp_uwagi1)
+        self.tx_mdcp_kp_uwagi1.insert( tk.END, self.sw.mdcp.kp_uwagi1)
 
 
     def btn_gen_uwagi2( self):
         # utworzenie uwag
         self.sw.sw_dzialki = self.v_sw_dzialki.get()
-        self.sw.sw_mdcp_ust5 = "%s" % self.v_sw_ust5.get()
-        self.sw.sw_mdcp_ust6 = "%s" % self.v_sw_ust6.get()
-        self.sw.sw_mdcp_kp_uwagi2 = "Dane dotycz¹ce dzia³ki "
-        self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + self.sw.sw_dzialki + ", ujawnione w PZGiK, "
+        self.sw.mdcp.ust5 = "%s" % self.v_sw_ust5.get()
+        self.sw.mdcp.ust6 = "%s" % self.v_sw_ust6.get()
+        self.sw.mdcp.kp_uwagi2 = "Dane dotycz¹ce granic dzia³ki "
+        self.sw.mdcp.kp_uwagi2 += self.sw.sw_dzialki + ", ujawnione w PZGiK,"
 
-        if self.sw.sw_mdcp_ust5 == "1" and self.sw.sw_mdcp_ust6 == "1":
-            self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 5 i 6 \n"
-        elif self.sw.sw_mdcp_ust5 == "1" and self.sw.sw_mdcp_ust6 == "0":
-            self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 5 \n"
-        elif self.sw.sw_mdcp_ust5 == "0" and self.sw.sw_mdcp_ust6 == "1":
-            self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "spe³niaj¹ warunki przepisów §79, ust. 6 \n"
-        else:
-            self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "nie spe³niaj¹ warunków przepisów §79, ust. 5 i 6 \n"
+        # if self.sw.mdcp.ust5 == "1" and self.sw.mdcp.ust6 == "1":
+        #     self.sw.mdcp.kp_uwagi2 += "spe³niaj¹ warunki przepisów §79, ust. 5 i 6 \n"
+        # elif self.sw.mdcp.ust5 == "1" and self.sw.mdcp.ust6 == "0":
+        #     self.sw.mdcp.kp_uwagi2 += "spe³niaj¹ warunki przepisów §79, ust. 5 \n"
+        # elif self.sw.mdcp.ust5 == "0" and self.sw.mdcp.ust6 == "1":
+        #     self.sw.mdcp.kp_uwagi2 += "spe³niaj¹ warunki przepisów §79, ust. 6 \n"
+        # else:
+        #     self.sw.mdcp.kp_uwagi2 = self.sw.mdcp.kp_uwagi2 + "nie spe³niaj¹ warunków przepisów §79, ust. 5 i 6 \n"
 
-        self.sw.sw_mdcp_kp_uwagi2 = self.sw.sw_mdcp_kp_uwagi2 + "rozp. MSWiA z dnia 9 listopada 2011 r."
+        self.sw.mdcp.kp_uwagi2 += " spe³niaj¹ wymogi dok³adnoœciowe dla znaków i punktów granicznych,"
+        self.sw.mdcp.kp_uwagi2 += " okreœlone w § 16 pkt 1 rozporz¹dzenia Ministra Rozwoju"
+        self.sw.mdcp.kp_uwagi2 += " z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429."
+
+        self.sw.mdcp.kp_uwagi2 = self.divide_into_rows(self.sw.mdcp.kp_uwagi2, 90)
 
         self.tx_mdcp_kp_uwagi2.delete( 1.0, tk.END)
-        self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.sw_mdcp_kp_uwagi2)
+        self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.mdcp.kp_uwagi2)
 
 
     def btn_gen_uwagi3( self):
+        self.sw.mdcp.kp_uwagi3 = 'Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ'
+        self.sw.mdcp.kp_uwagi3 += ' z tytu³u s³u¿ebnoœci gruntowych (§ 30 ust. 2 pkt 4 rozporz¹dzenia'
+        self.sw.mdcp.kp_uwagi3 += ' Ministra Rozwoju z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429).'
+
+        self.sw.mdcp.kp_uwagi3 = self.divide_into_rows(self.sw.mdcp.kp_uwagi3, 90)
+
+        self.tx_mdcp_kp_uwagi3.delete( 1.0, tk.END)
+        self.tx_mdcp_kp_uwagi3.insert( tk.END, self.sw.mdcp.kp_uwagi3)
+
         #self.tx_mdcp_kp_uwagi3.tag_add( 'bold_italics', 1.0, tk.END)
         #self.tx_mdcp_kp_uwagi3.tag_add( 'Arial8', 1.0, tk.END)
-        pass
+        #pass
+
+    #
+    #     self.sw.mdcp.kp_uwagi4 += 'Dla terenu objêtego pomiarem brak opracowañ planistycznych (§ 30 ust. 2 pkt 3 rozporz¹dzenia'
+    #     self.sw.mdcp.kp_uwagi4 += 'Ministra Rozwoju z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429).'
+
 
     def get_RRMM( self):
         '''
@@ -1158,6 +1179,32 @@ class SytwysGUIgrid( tk.Frame):
         x = datetime.datetime.now()
         rrmm = x.strftime( "%y%m")
         return rrmm
+
+    def divide_into_rows(self, text, max_length):
+        """
+        podzia³ na linie po ok. 90 znaków
+        podzia³ polega na wstawieniu znaków \n
+        - wymaga dopracowania
+        - dzieli na chama w pó³ s³owa, je¿eli tak wypadnie
+
+            text        :: tekst do podzia³u
+            max_length  ::
+        """
+        i = 0
+        s = ''
+        poprzedni_znak = ''
+        for letter in text:
+            # deb print(f'{letter = }_')
+            if i < max_length:
+                s += letter
+                poprzedni_znak = letter
+            else:
+                s += letter
+                s += '\n'
+                i = 0
+                poprzedni_znak = ''
+            i += 1
+        return s
 
     # koniec __init__()
     # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
