@@ -18,8 +18,10 @@ import dictConstants
 import OpracowaniePlanistyczne as oPlan
 import sekcja
 
-
-
+sys.path.append(r"i:\aPy\LibSP")
+#sys.path.append(r"i:\aPy\LibSP\sytwys")
+import kG_cele_pracy
+import kGeodety
 
 
 
@@ -33,7 +35,7 @@ class SytwysGUIgrid( tk.Frame):
             ¿eby z wnêtrza klasy móc siê odwo³ywac do pól i metod obiektów
             sw i teryt
         '''
-        super( SytwysGUIgrid, self).__init__( master)
+        super( SytwysGUIgrid, self).__init__(master)
         self.grid()
 
         self.master_frame = master
@@ -80,7 +82,6 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_inw_decZnak.set(self.sw.inw.dec_znak)
         self.v_sw_inw_decData.set(self.sw.inw.dec_data)
 
-
         # zmienne zwi¹zane z klas¹ Teryt
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         self.v_sw_powiat_teryt      = tk.StringVar()
@@ -93,7 +94,6 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_libre_wykon       = tk.StringVar()
         self.v_sw_libre_opis        = tk.StringVar()
         self.v_sw_dir_nazwa         = tk.StringVar()
-
 
         self.v_sw_mdcp_kp_uwagi1    = tk.StringVar()
         self.v_sw_mdcp_kp_uwagi2    = tk.StringVar()
@@ -194,7 +194,7 @@ class SytwysGUIgrid( tk.Frame):
     def eventHandler_entry_wykonawca( self, event):
         wykonawca = self.v_sw_wykonawca.get()
         if wykonawca == "kh":
-            self.v_sw_typ.set( "podz")
+            self.v_sw_typ.set( "mppn")
 
 
     def createWidgets_frameTL( self):
@@ -213,9 +213,11 @@ class SytwysGUIgrid( tk.Frame):
         e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
 
         # typ
-        ttyp = ( "mdcp", "inw", "podz", "inny")
-        combobox = ttk.Combobox( \
-                                self.frameTL, textvariable=self.v_sw_typ, state="readonly", values=ttyp) #, label_text="Typ"
+        # ttyp = ( "mdcp", "inw", "podz", "inny") <-- tak by³o przed kG...
+        combobox = ttk.Combobox(
+                                self.frameTL, textvariable=self.v_sw_typ, state="readonly",
+                                values=kG_cele_pracy.kG_cele_pracy)
+                                #, label_text="Typ"
                                 #, labelpos="wn", listbox_width=8, dropdown=0, \
                                 #scrolledlist_items=ttyp)
         #combobox["values"] = ttyp
@@ -558,7 +560,7 @@ class SytwysGUIgrid( tk.Frame):
         '''
 
         # aktualizacja list dzia³ek
-        self.sw.gen_dzialki_lst()
+        self.sw.gen_dzialki_lst(self.t.teryt_jew, self.t.nazwa_obr)
         self.sw.gen_dzialki_ergo_lst(self.t.terytF_obr)
 
 
@@ -734,6 +736,23 @@ class SytwysGUIgrid( tk.Frame):
                     f.write(dz + '\n')
         except:
             print("ERR b³¹d zapisu listy dzia³ek do ergo do pliku")
+
+        # utworzenie pliku do zg³oszenia ergo
+        try:
+            with open(self.sw.sw_plikDz_kg_abspath, 'w') as f:
+                # nazwa obiektu
+                f.write(self.sw.sw_typ + ' ')
+                f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
+                f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
+                f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n')
+                # opis po³o¿nia
+                f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
+                f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
+                f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n')
+                # data zakonczenia
+
+        except:
+            print("ERR b³¹d zapisu pliku kg.txt")
 
         print( "zapisano")
         # na razie trzeba zamkn¹æ, ¿eby program nie g³upia³
@@ -1005,7 +1024,6 @@ class SytwysGUIgrid( tk.Frame):
             self.godlaX.drukujListe("---[ godla przed wczytaniem z pliku ]-------")
             for wiersz in f:
                 self.godlaX.dodajSekcje( wiersz[:-1])
-        f.close
 
         #for wiersz
         #print( self.godlaX.g_lista)
@@ -1177,7 +1195,7 @@ class SytwysGUIgrid( tk.Frame):
             sciezki dla katalogu    sw
         '''
         x = datetime.datetime.now()
-        rrmm = x.strftime( "%y%m")
+        rrmm = x.strftime("%y%m")
         return rrmm
 
     def divide_into_rows(self, text, max_length):

@@ -5,9 +5,6 @@ bieżące
 -------
 *   otwieranie z uStn połączone z wczytaniem odpowiedniego pliku
     swInfo
-*   generowanie tekstów do wypełniania konta geodety:
-    mdcp 01_4 Zagórze 1571
-    01_4 Zagórze 1571
     
 planowane 
 ---------
@@ -19,6 +16,18 @@ planowane
 
 changelog
 =========
+
+2020.12.21 v. 2.0.7
+-------------------
+*   generowanie tekstów do wypełniania konta geodety (we własnym pliku):
+    mdcp 01_4 Zagórze 1571
+    01_4 Zagórze 1571
+    *   na razie w treści klasy SytwysGUIgrid() >> wyizolować
+*   przeniesienie części kodu (głównie nowotworzonego) do biblioteki
+    LibSP\sytwys
+    *   nowe klasy Dzialka i Dzialki, KontoGeodety
+    *   zapoczątkowanie wykorzystania własnych modułów z LibSP
+*   zesłownikowanie i implementacja aktualnych celów prac geodezyjnych     
 
 2020.10.10 v. 2.0.6
 -------------------

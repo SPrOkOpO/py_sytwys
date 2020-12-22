@@ -1,10 +1,14 @@
 #-*- coding: windows-1250 -*-
 
 import os
+import sys
 #import datetime
 import shutil
 
 import sytwys_elements
+sys.path.append(r"i:\aPy\LibSP")
+sys.path.append(r"i:\aPy\LibSP\sytwys")
+import dzialki
 
 """
 #-####################################################################
@@ -47,10 +51,13 @@ class   Sytwys( object):
         self.sw_wykonawca       = ""
         self.sw_obreb           = ""
         self.sw_obrebDir        = ""
+
         self.sw_dzialki         = ""
         self.sw_dzialki_lst     = list()
         self.sw_dzialki_ergo_lst = list()
         self.sw_dzialka1        = ""
+        self.sw_dzialki_obj = dzialki.Dzialki()
+
         self.sw_typ             = ""
         self.sw_idZgl           = ""
         self.sw_idZgl_jrwa      = ""
@@ -72,7 +79,9 @@ class   Sytwys( object):
         self.mdcp = sytwys_elements.MDCP()
 
         # !!! to jest stara wersja !!!
-        # aktualna jest w pliku sytwys_elements.py - klasa MDCP
+        #
+        # --->  aktualna jest w pliku sytwys_elements.py - klasa MDCP
+        #
         # self.sw_mdcp_ust5 = 1
         # self.sw_mdcp_ust6 = 1
         # self.sw_mdcp_ust5_str = "1"
@@ -142,7 +151,8 @@ class   Sytwys( object):
         self.FILE_UWAGI  =  "uwagi.txt"
         self.FILE_GODLA  =  "godla2swInfo.txt"
         self.FILE_DZIALKI_ERGO = "dz_ergo.txt"
-        
+        self.FILE_KG_ERGO = "kg.txt"
+
         self.sw_dir_nazwa           = ""
         self.sw_plikInfo_fullPath   = ""
         self.sw_plikTytul_fullPath  = ""
@@ -151,6 +161,7 @@ class   Sytwys( object):
         self.sw_plikNr_nazwa        = ""
         self.sw_plikNr_fullPath     = ""
         self.sw_plikDz_ergo_abspath = ""
+        self.sw_plikDz_kg_abspath = ""
 
         self.struktura_sw = sytwys_elements.StrukturaKatalogow()
         # słownik z katalogami s-w
@@ -207,6 +218,7 @@ class   Sytwys( object):
         # w katalogu ...\kG:
         #self.sw_plikDz_ergo_abspath = os.path.join(os.path.dirname(p), self.sw_dictDirs["kG"])
         self.sw_plikDz_ergo_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_DZIALKI_ERGO)
+        self.sw_plikDz_kg_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_KG_ERGO)
         # deb
         #print("def setNazwyPlikow_tytul_uwagi( self):")
         #print( " *1* godla2swInfo.txt= >%s<" % (self.sw.sw_plikGodla2swInfo_fullPath))
@@ -364,7 +376,7 @@ class   Sytwys( object):
         print( "dz2=" + dz2)
         return dz2
 
-    def gen_dzialki_lst(self):
+    def gen_dzialki_lst(self, teryt_jew, nazwa_obr):
         """
         tworzy listę działek (tylko numery)
         """
@@ -376,6 +388,15 @@ class   Sytwys( object):
         # deb
         for dz in self.sw_dzialki_lst:
             print(f'(sw_dzialki_lst) {dz = }')
+
+        # aktualizacja instancji klasy Dzialki()
+        self.sw_dzialki_obj.source_string_nr = self.sw_dzialki
+        self.sw_dzialki_obj.source_obr_nazwa = nazwa_obr
+        self.sw_dzialki_obj.source_jew_teryt_do_kG = teryt_jew
+        self.sw_dzialki_obj.init_instance()
+
+
+
 
     def gen_dzialki_ergo_lst(self, terytF_obr):
         """
