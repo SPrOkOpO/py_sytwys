@@ -17,6 +17,11 @@ planowane
 changelog
 =========
 
+2020.12.23 v. 2.0.8
+-------------------
+*   w module dzialki.py zaimplementowano skuteczną funkcję sortowania
+    nr-ów działek
+
 2020.12.21 v. 2.0.7
 -------------------
 *   generowanie tekstów do wypełniania konta geodety (we własnym pliku):
