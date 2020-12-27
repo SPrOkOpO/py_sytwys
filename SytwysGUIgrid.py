@@ -22,7 +22,8 @@ sys.path.append(r"i:\aPy\LibSP")
 #sys.path.append(r"i:\aPy\LibSP\sytwys")
 import kG_cele_pracy
 import kGeodety
-
+import spdatetime
+import dzialki
 
 
 class SytwysGUIgrid( tk.Frame):
@@ -410,8 +411,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.sw_numer_str =   str( self.sw.sw_numer)
         self.v_sw_numer.set( self.sw.sw_numer_str)
 
-
-    def inicjuj( self):
+    def inicjuj(self):
         '''
         na  podstawie wprowadzonych danych wype³nia odpowiednie pola
 
@@ -430,7 +430,7 @@ class SytwysGUIgrid( tk.Frame):
 
         # 1a,b)
         if self.listBox_obr.size() > 1:
-            obrTerytFull = self.listBox_obr.get( ACTIVE)
+            obrTerytFull = self.listBox_obr.get(ACTIVE)
             if len( obrTerytFull) < 3:
                 tk.messagebox.showinfo("Err", "Wska¿ teryt obrêbu w ListBoxie!")
 
@@ -438,20 +438,23 @@ class SytwysGUIgrid( tk.Frame):
         else:
             obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[ self.v_sw_obreb.get()]
 
-
         # 1)
-        if  self.t.setTerytyFrom_obrTerytFull( obrTerytFull) != 0:
+        if self.t.setTerytyFrom_obrTerytFull(obrTerytFull) != 0:
             tk.messagebox.showinfo("Err", "Inicjacja nieudana - b³êdny obrêb")
             return -1
-
 
         #self.sw.sw_plikInfo_fullPath
         global sw_plikNr_fullPath
         global sw_plikNr_nazwa
 
         self.sw.sw_wykonawca        = self.v_sw_wykonawca.get()
-        self.sw.sw_dzialki          = self.v_sw_dzialki.get()
-        self.sw.sw_dzialka1         = self.sw.get_sw_dzialka1(self.sw.sw_dzialki)
+
+        # oczyszczenie i posortowanie dzia³ek i wype³nienie pól dot. dzia³ek
+        self.sw.sw_dzialki_obj.source_string_nr = self.v_sw_dzialki.get()
+        self.sw.sw_dzialki_obj.init_instance()
+        self.sw.update_dzialki(self.t.terytF_obr, self.t.teryt_jew, self.t.nazwa_obr)
+        self.v_sw_dzialki.set(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp)
+
         self.sw.sw_typ              = self.v_sw_typ.get()
         self.sw.sw_idZgl            = '.'.join([self.v_sw_idZgl_jrwa.get(), self.v_sw_idZgl_nr.get(), self.v_sw_idZgl_rok.get()])
         self.sw.sw_skala            = self.v_sw_skala.get()
@@ -492,7 +495,7 @@ class SytwysGUIgrid( tk.Frame):
 
 
         self.sw.sw_libre_wykon  = self.sw.sw_numer_str  + self.sw.sw_wykonawca
-        self.sw.sw_libre_opis = self.t.nazwaDir_obr +   " dz." +    self.sw.sw_dzialka1
+        self.sw.sw_libre_opis = self.t.nazwaDir_obr + " dz. " + self.sw.sw_dzialka1
         if  self.v_sw_typ.get() ==  "inw":
             self.sw.sw_libre_opis = self.sw.sw_libre_opis + " " +   "inw"
 
@@ -530,8 +533,8 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_obreb_dir.set( self.t.nazwaDir_obr)
 
         # libre
-        self.v_sw_libre_wykon.set( self.sw.sw_libre_wykon)
-        self.v_sw_libre_opis.set(   self.sw.sw_libre_opis)
+        self.v_sw_libre_wykon.set(self.sw.sw_libre_wykon)
+        self.v_sw_libre_opis.set(self.sw.sw_libre_opis)
 
         # œciezka dir
         self.v_sw_dir_nazwa.set(self.sw.sw_dir_nazwa)
@@ -560,9 +563,7 @@ class SytwysGUIgrid( tk.Frame):
         '''
 
         # aktualizacja list dzia³ek
-        self.sw.gen_dzialki_lst(self.t.teryt_jew, self.t.nazwa_obr)
-        self.sw.gen_dzialki_ergo_lst(self.t.terytF_obr)
-
+        self.sw.update_dzialki(self.t.terytF_obr, self.t.teryt_jew, self.t.nazwa_obr)
 
         #global sw_plikInfo_fullPath
         global sw_plikNr_fullPath
@@ -694,8 +695,9 @@ class SytwysGUIgrid( tk.Frame):
         f.write( "[sw.mdcp.kp_uwagi4]="     + self.sw.mdcp.kp_uwagi4 + "\n")
         f.write( "[sw.mdcp.kp_uwagi5]="     + self.sw.mdcp.kp_uwagi5 + "\n")
         f.write( "[sw.mdcp.kp_uwagi6]="     + self.sw.mdcp.kp_uwagi6 + "\n")
+        f.close()
+
         # 4)
-        
         self.sw.setNazwyPlikow_tytul_uwagi()
         with open(  self.sw.sw_plikTytul_fullPath, "w") as f2:
             f2.write(   self.t.nazwa_uStn_woj + "\n")
@@ -716,7 +718,6 @@ class SytwysGUIgrid( tk.Frame):
                 # ostatniego wiersza z ostatnim znakiem (bez spacji nie narysuje siê kropka)
                 f2.write( "o znaku %s z dnia %s r.). " % ( self.sw.sw_inw_decZnak, self.sw.sw_inw_decData))
 
-        f2.close()
         # 5)
         with open(  self.sw.sw_plikUwagi_fullPath, "w") as f2:
             f2.write( self.sw.mdcp.kp_uwagi1 + "\n\n")
@@ -725,9 +726,6 @@ class SytwysGUIgrid( tk.Frame):
             f2.write( self.sw.mdcp.kp_uwagi4 + "\n\n")
             f2.write( self.sw.mdcp.kp_uwagi5 + "\n\n")
             f2.write( self.sw.mdcp.kp_uwagi6 + "\n\n")
-        f2.close()
-
-        f.close()
 
         # utworzenie pliku dz.txt z dzia³kami do zakresu ergo
         try:
@@ -737,7 +735,7 @@ class SytwysGUIgrid( tk.Frame):
         except:
             print("ERR b³¹d zapisu listy dzia³ek do ergo do pliku")
 
-        # utworzenie pliku do zg³oszenia ergo
+        # utworzenie pliku do zg³oszenia ergo (kg.txt)
         try:
             with open(self.sw.sw_plikDz_kg_abspath, 'w') as f:
                 # nazwa obiektu
@@ -750,14 +748,14 @@ class SytwysGUIgrid( tk.Frame):
                 f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
                 f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n')
                 # data zakonczenia
-
+                f.write(spdatetime.date_after(1, 0, 0).isoformat() + '\n')
         except:
             print("ERR b³¹d zapisu pliku kg.txt")
 
-        print( "zapisano")
+        print("zapisano")
         # na razie trzeba zamkn¹æ, ¿eby program nie g³upia³
-        #self.master_frame.destroy
-        #sys.exit()
+        # self.master_frame.destroy
+        # sys.exit()
 
 
     def wczytaj( self):

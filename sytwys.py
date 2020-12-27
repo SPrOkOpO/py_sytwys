@@ -359,55 +359,32 @@ class   Sytwys( object):
         plikPikiety_nazwa = "#_pikiety_" + self.sw_numer_str + ".dgn"
         shutil.copy( sourceFile, os.path.join( targetDir, plikPikiety_nazwa))
 
-    def get_sw_dzialka1(    self,   adzialki):
-        '''
-            z danego    ³añcucha    dzia³ek wybiera pierwsz¹ i  modyfikuje
-            j¹  tak, aby    nadawala    sie do œcie¿ki  i j¹ zwraca
-        '''
-        dz  = adzialki
-        dz1 = dz.split(",")
-        dz2 = dz1[0]
-        dz2 = dz2.strip()
-        dz2 = dz2.replace( "/", "-")
-    
-        if len( dz1) > 1:
-            dz2 = dz2 + "--"
-    
-        print( "dz2=" + dz2)
-        return dz2
-
-    def gen_dzialki_lst(self, teryt_jew, nazwa_obr):
+    def update_dzialki(self, terytF_obr, teryt_jew, nazwa_obr):
         """
-        tworzy listê dzia³ek (tylko numery)
+        aktualizuje listy numerów dzia³ek
+        - funkcja u¿yta w metodzie zapisz()
+        - jako Ÿród³a danych o dzia³kach u¿ywa obiektu sw.dzialki_obj
+          - jest on aktualizowany w metodzie inicjuj()
+          - zak³adamy, ¿e w momencie wywo³ania matody zapisz() dzia³ki
+            wyœwietlone w swoim polu i przechowywane w obiekcie dzialki_obj
+            s¹ aktualne
         """
-        dzialki = self.sw_dzialki.split(',')
-        print(f'2 {dzialki = }')
-        for dz in dzialki:
-            dz = dz.strip(' ')
-            self.sw_dzialki_lst.append(dz)
-        # deb
-        for dz in self.sw_dzialki_lst:
-            print(f'(sw_dzialki_lst) {dz = }')
-
-        # aktualizacja instancji klasy Dzialki()
-        self.sw_dzialki_obj.source_string_nr = self.sw_dzialki
+        self.sw_dzialki = self.sw_dzialki_obj.sorted_string_nr_prz_sp
+        self.sw_dzialki_lst = self.sw_dzialki_obj.lista_nr_sorted
         self.sw_dzialki_obj.source_obr_nazwa = nazwa_obr
         self.sw_dzialki_obj.source_jew_teryt_do_kG = teryt_jew
-        self.sw_dzialki_obj.init_instance()
+        self.sw_dzialka1 = self.sw_dzialki_obj.dzialka1
 
-
-
-
-    def gen_dzialki_ergo_lst(self, terytF_obr):
         """
         tworzy listê dzia³ek w formacie wymaganym przez Ergo podczas
         tworzenia zakresu zamówienia/zg³oszenia z pliku
         -   format:
-            999999_9.9999.dz1\n
+            999999_9.9999.dz1
 
         terytF_obr (z instancji teryt)
         "999999_9.9999"
         """
+        self.sw_dzialki_ergo_lst.clear()
         for dz in self.sw_dzialki_lst:
             s = f'{terytF_obr}.{dz}'
             self.sw_dzialki_ergo_lst.append(s)
