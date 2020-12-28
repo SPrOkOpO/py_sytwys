@@ -19,6 +19,10 @@ planowane
 changelog
 =========
 
+2020.12.28 v. 2.0.10
+-------------------
+    *   merge wersja_2 to master (local)
+
 2020.12.27 v. 2.0.9
 -------------------
     *   moduł Dzialki
