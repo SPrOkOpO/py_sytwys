@@ -759,35 +759,39 @@ class SytwysGUIgrid( tk.Frame):
 
 
     def wczytaj( self):
-        '''
+        """
 
-        '''
-        #global sw_plikInfo_fullPath
+        """
 
-        #self.sw.sw_plikInfo_fullPath = "t:\\sytwys\\826_kp_1904_Biezen_7-24\\sw_826_info.txt"
-        #self.sw.sw_plikInfo_fullPath = tkFileDialog.askopenfilename( initialdir = "/", title = "Select file", filetypes = ( ("jpeg files","*.jpg"), ("all files","*.*")))
-        self.sw.sw_plikInfo_fullPath = tk.filedialog.askopenfilename( \
-            initialdir = dictConstants.dictConstants["GC_DIR_SYTWYS"], \
-            title = "Wybierz plik swInfo", \
-            filetypes = ( ("swInfo files","*.txt"), ("all files","*.*"))\
-            )
+        # otwarcie pliku sw_*_info.txt
+        # - na razie za pomoc¹ okna dialogowego
+        # >> zrobiæ przekazywanie œcie¿ki pliku do otwarcia jako argumentu
+        #    przekazywanego podczas uruchamiania programu
+        # =========================================================================
+        # global sw_plikInfo_fullPath
+        # self.sw.sw_plikInfo_fullPath = "t:\\sytwys\\826_kp_1904_Biezen_7-24\\sw_826_info.txt"
+        self.sw.sw_plikInfo_fullPath = tk.filedialog.askopenfilename(
+                initialdir=dictConstants.dictConstants["GC_DIR_SYTWYS"],
+                title="Wybierz plik swInfo",
+                filetypes=(("swInfo files", "*.txt"), ("all files", "*.*"))
+                )
         self.sw.setNazwyPlikow_tytul_uwagi()
-        if os.path.exists( self.sw.sw_plikInfo_fullPath) == False:
+        if not os.path.exists(self.sw.sw_plikInfo_fullPath):
             komunikat = "Plik %s nie istnieje" % self.sw.sw_plikInfo_fullPath
             tk.messagebox.showinfo("Err", komunikat)
             return -1
 
         # - odczytanie danych z pliku info
         # - i zapisanie ich s³owniku dicWierszePliku
-        #=========================================================================
+        # =========================================================================
         with open( self.sw.sw_plikInfo_fullPath, "r") as f:
-        #with open( plikInfo_826, "r") as f:
+        # with open( plikInfo_826, "r") as f:
             for wiersz in f:
                 wLen = len( wiersz)
                 #print( "%s" % wiersz[:-1])
 
                 s = wiersz.strip()
-                lstWiersz = s.split( "=")
+                lstWiersz = s.split("=")
                 if len( lstWiersz) == 2:
                     s = ">%s< >%s<\n" % (lstWiersz[0], lstWiersz[1])
                     #print( s)
@@ -803,9 +807,8 @@ class SytwysGUIgrid( tk.Frame):
             #deb
             #print( self.dicWierszePliku)
 
-
         # aktualizacja zmiennych danymi ze s³ownika dicWierszePliku
-        #=========================================================================
+        # =========================================================================
         for key, val in self.dicWierszePliku.items():
             if key == "[t_terytFull]"           : self.t.terytFull          = val
             if key == "[t_terytF_woj]"          : self.t.terytF_woj         = val
@@ -831,7 +834,13 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[sw_wykonawca]"          : self.sw.sw_wykonawca      = val
             if key == "[sw_typ]"                : self.sw.sw_typ            = val
             if key == "[sw_skala]"              : self.sw.sw_skala          = val
-            if key == "[sw_dzialki]"            : self.sw.sw_dzialki        = val
+
+            # aktualizacja dzia³ek
+            # - string z numerami odczytany z pliku
+            # ?> czy tutaj jest potrzebna aktualizacja obiektu sw.sw_dzialki_obj
+            #    NIE, bo tu tylko odczytujemy dane z pliku
+            # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            if key == "[sw_dzialki]"            : self.sw.sw_dzialki = val
             if key == "[sw_dzialka1]"           : self.sw.sw_dzialka1       = val
 
             #if key == "[sw_idZgl]"              : self.sw.sw_idZgl          = val
@@ -995,10 +1004,8 @@ class SytwysGUIgrid( tk.Frame):
         self.tx_mdcp_kp_uwagi5.insert( tk.END, self.sw.mdcp.kp_uwagi5)
         self.tx_mdcp_kp_uwagi6.insert( tk.END, self.sw.mdcp.kp_uwagi6)
 
-
         #self.master_frame.destroy
         #sys.exit()
-
 
     def btn_gen_sekcje( self):
         '''
