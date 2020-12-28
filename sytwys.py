@@ -1,10 +1,14 @@
 #-*- coding: windows-1250 -*-
 
 import os
+import sys
 #import datetime
 import shutil
 
 import sytwys_elements
+sys.path.append(r"i:\aPy\LibSP")
+sys.path.append(r"i:\aPy\LibSP\sytwys")
+import dzialki
 
 """
 #-####################################################################
@@ -47,10 +51,13 @@ class   Sytwys( object):
         self.sw_wykonawca       = ""
         self.sw_obreb           = ""
         self.sw_obrebDir        = ""
+
         self.sw_dzialki         = ""
         self.sw_dzialki_lst     = list()
         self.sw_dzialki_ergo_lst = list()
         self.sw_dzialka1        = ""
+        self.sw_dzialki_obj = dzialki.Dzialki()
+
         self.sw_typ             = ""
         self.sw_idZgl           = ""
         self.sw_idZgl_jrwa      = ""
@@ -70,43 +77,30 @@ class   Sytwys( object):
 
         # mdcp - new ver
         self.mdcp = sytwys_elements.MDCP()
-        # mdcp - old ver
-        self.sw_mdcp_ust5 = 1
-        self.sw_mdcp_ust6 = 1
-        self.sw_mdcp_ust5_str = "1"
-        self.sw_mdcp_ust6_str = "1"
-        self.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
-        self.sw_mdcp_kp_uwagi2 = "Dane dotyczące granic działki ..., ujawn..."
-        self.sw_mdcp_kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
-        self.sw_mdcp_kp_uwagi4 = "Dla terenu objętego opracowaniem brak opracowań planistycznych."
-        self.sw_mdcp_kp_uwagi5 = "Granice nieruchomości oznaczono kolorem zielonym."
+
+        # !!! to jest stara wersja !!!
+        #
+        # --->  aktualna jest w pliku sytwys_elements.py - klasa MDCP
+        #
+        # self.sw_mdcp_ust5 = 1
+        # self.sw_mdcp_ust6 = 1
+        # self.sw_mdcp_ust5_str = "1"
+        # self.sw_mdcp_ust6_str = "1"
+        # self.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
+        # self.sw_mdcp_kp_uwagi2 = "Dane dotyczące granic działki ..., ujawn..."
+        # self.sw_mdcp_kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
+        # self.sw_mdcp_kp_uwagi4 = "Dla terenu objętego opracowaniem brak opracowań planistycznych."
+        # self.sw_mdcp_kp_uwagi5 = "Granice nieruchomości oznaczono kolorem zielonym."
         # self.sw_mdcp_kp_uwagi6  = "Nie wyklucza się istnienia w terenie innych, niewykazanych na niniejszej mapie, urządzeń \npodziemnych."
-        self.sw_mdcp_kp_uwagi6 = "Nie wyklucza się istnienia w terenie innych, niewykazanych na niniejszej mapie, urządzeń \npodziemnych, które nie były zgłoszone do inwentaryzacji lub o których brak jest informacji\nw instytucjach branżowych."
+        # self.sw_mdcp_kp_uwagi6 = "Nie wyklucza się istnienia w terenie innych, niewykazanych na niniejszej mapie, urządzeń \npodziemnych, które nie były zgłoszone do inwentaryzacji lub o których brak jest informacji\nw instytucjach branżowych."
+        #
+        # self.sw_mdcp_kp_uwagi1_fraza1 = "Mapa utworzona na podstawie arkusza "
+        # self.sw_mdcp_kp_uwagi1_fraza2 = " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zgł. "
+        #
+        # self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotyczące granic działki "
+        # self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
+        # self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
 
-        self.sw_mdcp_kp_uwagi1_fraza1 = "Mapa utworzona na podstawie arkusza "
-        self.sw_mdcp_kp_uwagi1_fraza2 = " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zgł. "
-
-        self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotyczące granic działki "
-        self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
-        self.sw_mdcp_kp_uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
-
-        '''
-        Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 
-        pomiaru aktualizacyjnego id. zgł. GKN.6640.446.2019
-
-        Dane dotyczące granic działki 309, 310, ujawnione w PZGiK, spełniają warunki przepisów §79, ust.  
-        5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r.
-
-        Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności 
-        gruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)
-
-        Dla terenu objętego opracowaniem brak opracowań planistycznych.
-
-        Granice nieruchomości oznaczono kolorem zielonym. 
-
-        Nie wyklucza się istnienia w terenie innych niewykazanych na niniejszej mapie urządzeń 
-        podziemnych. 
-        '''
 
         # dane do libre
         self.sw_libre_wykon = ""
@@ -157,7 +151,8 @@ class   Sytwys( object):
         self.FILE_UWAGI  =  "uwagi.txt"
         self.FILE_GODLA  =  "godla2swInfo.txt"
         self.FILE_DZIALKI_ERGO = "dz_ergo.txt"
-        
+        self.FILE_KG_ERGO = "kg.txt"
+
         self.sw_dir_nazwa           = ""
         self.sw_plikInfo_fullPath   = ""
         self.sw_plikTytul_fullPath  = ""
@@ -166,6 +161,7 @@ class   Sytwys( object):
         self.sw_plikNr_nazwa        = ""
         self.sw_plikNr_fullPath     = ""
         self.sw_plikDz_ergo_abspath = ""
+        self.sw_plikDz_kg_abspath = ""
 
         self.struktura_sw = sytwys_elements.StrukturaKatalogow()
         # słownik z katalogami s-w
@@ -222,6 +218,7 @@ class   Sytwys( object):
         # w katalogu ...\kG:
         #self.sw_plikDz_ergo_abspath = os.path.join(os.path.dirname(p), self.sw_dictDirs["kG"])
         self.sw_plikDz_ergo_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_DZIALKI_ERGO)
+        self.sw_plikDz_kg_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_KG_ERGO)
         # deb
         #print("def setNazwyPlikow_tytul_uwagi( self):")
         #print( " *1* godla2swInfo.txt= >%s<" % (self.sw.sw_plikGodla2swInfo_fullPath))
@@ -362,46 +359,32 @@ class   Sytwys( object):
         plikPikiety_nazwa = "#_pikiety_" + self.sw_numer_str + ".dgn"
         shutil.copy( sourceFile, os.path.join( targetDir, plikPikiety_nazwa))
 
-    def get_sw_dzialka1(    self,   adzialki):
-        '''
-            z danego    łańcucha    działek wybiera pierwszą i  modyfikuje
-            ją  tak, aby    nadawala    sie do ścieżki  i ją zwraca
-        '''
-        dz  = adzialki
-        dz1 = dz.split(",")
-        dz2 = dz1[0]
-        dz2 = dz2.strip()
-        dz2 = dz2.replace( "/", "-")
-    
-        if len( dz1) > 1:
-            dz2 = dz2 + "--"
-    
-        print( "dz2=" + dz2)
-        return dz2
-
-    def gen_dzialki_lst(self):
+    def update_dzialki(self, terytF_obr, teryt_jew, nazwa_obr):
         """
-        tworzy listę działek (tylko numery)
+        aktualizuje listy numerów działek
+        - funkcja użyta w metodzie zapisz()
+        - jako źródła danych o działkach używa obiektu sw.dzialki_obj
+          - jest on aktualizowany w metodzie inicjuj()
+          - zakładamy, że w momencie wywołania matody zapisz() działki
+            wyświetlone w swoim polu i przechowywane w obiekcie dzialki_obj
+            są aktualne
         """
-        dzialki = self.sw_dzialki.split(',')
-        print(f'2 {dzialki = }')
-        for dz in dzialki:
-            dz = dz.strip(' ')
-            self.sw_dzialki_lst.append(dz)
-        # deb
-        for dz in self.sw_dzialki_lst:
-            print(f'(sw_dzialki_lst) {dz = }')
+        self.sw_dzialki = self.sw_dzialki_obj.sorted_string_nr_prz_sp
+        self.sw_dzialki_lst = self.sw_dzialki_obj.lista_nr_sorted
+        self.sw_dzialki_obj.source_obr_nazwa = nazwa_obr
+        self.sw_dzialki_obj.source_jew_teryt_do_kG = teryt_jew
+        self.sw_dzialka1 = self.sw_dzialki_obj.dzialka1
 
-    def gen_dzialki_ergo_lst(self, terytF_obr):
         """
         tworzy listę działek w formacie wymaganym przez Ergo podczas
         tworzenia zakresu zamówienia/zgłoszenia z pliku
         -   format:
-            999999_9.9999.dz1\n
+            999999_9.9999.dz1
 
         terytF_obr (z instancji teryt)
         "999999_9.9999"
         """
+        self.sw_dzialki_ergo_lst.clear()
         for dz in self.sw_dzialki_lst:
             s = f'{terytF_obr}.{dz}'
             self.sw_dzialki_ergo_lst.append(s)

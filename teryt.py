@@ -851,7 +851,7 @@ class   Teryt( object):
     
     
     # chyba - w tej postaci - zbêdna funkcja
-    def setTerytFrom_obrNazwa(  self,   astr):
+    def setTerytFrom_obrNazwa(self, astr):
         '''
             podajemy    nazwê   obrêbu, a funkcja   na  tej podstawie ustawia
             wszystkie pola  instancji klasy

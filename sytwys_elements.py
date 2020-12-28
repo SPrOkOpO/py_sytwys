@@ -147,7 +147,7 @@ class StrukturaKatalogow:
         shutil.copy(sourceFile, os.path.join(targetDir, plikPikiety_nazwa))
 
 
-class PlikSWinfo():
+class PlikSWinfo:
     """
     separacja obsługi pliku sw_XXX_info.txt oraz danych w nim zapisanych
     """
@@ -167,8 +167,8 @@ class Inwentaryzacja():
         self.obiekt = 'budynku mieszkalnego wraz z przyłączami'
         self.obiekt_do_uwag = 'budynku mieszkalnego'
         self.nr_zal = '1'
-        self.dec_znak = 'GPN.6730.140.2018.UC'
-        self.dec_data = '2018'
+        self.dec_znak = 'GPN.6730.140.2020.UC'
+        self.dec_data = '2020'
 
     def set_empty(self):
         self.obiekt = ''
@@ -178,7 +178,7 @@ class Inwentaryzacja():
         self.dec_data = ''
 
 
-class MDCP():
+class MDCP:
     def __init__(self):
         self.ust5 = 1
         self.ust6 = 1
@@ -186,8 +186,8 @@ class MDCP():
         self.ust6_str = "1"
         self.kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
         self.kp_uwagi2 = "Dane dotyczące granic działki ..., ujawn..."
-        self.kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności \ngruntowych (§80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
-        self.kp_uwagi4 = "Dla terenu objętego opracowaniem brak opracowań planistycznych."
+        self.kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności \ngruntowych (§ 30 ust. 2 pkt 4 rozporządzenia Ministra Rozwoju z dnia 18 sierpnia 2020 r.,\nDzU 2020 poz. 1429)."
+        self.kp_uwagi4 = 'Dla terenu objętego pomiarem brak opracowań planistycznych (§ 30 ust. 2 pkt 3 rozporządzenia\nMinistra Rozwoju z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429).'
         self.kp_uwagi5 = "Granice nieruchomości oznaczono kolorem zielonym."
         # self.kp_uwagi6  = "Nie wyklucza się istnienia w terenie innych, niewykazanych na niniejszej mapie, urządzeń \npodziemnych."
         self.kp_uwagi6 = "Nie wyklucza się istnienia w terenie innych, niewykazanych na niniejszej mapie, urządzeń \npodziemnych, które nie były zgłoszone do inwentaryzacji lub o których brak jest informacji\nw instytucjach branżowych."
@@ -199,6 +199,34 @@ class MDCP():
         self.uwagi2_fraza2 = ", ujawnione w PZGiK, "
         self.uwagi2_fraza3 = "przepisów §79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
 
+        # wersja nowa (od 2020)
+        # DzU 2020 poz. 1429
+        # Rozporządzenie Ministra Rozwoju z dnia 18 sierpnia 2020 r. w sprawie standardów technicznych
+        # wykonywania geodezyjnych pomiarów sytuacyjnych i wysokościowych oraz opracowywania
+        # i przekazywania wyników tych pomiarów do państwowego zasobu geodezyjnego i kartograficznego
+
+        '''
+        Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 
+        pomiaru aktualizacyjnego id. zgł. GKN.6640.446.2019
+
+        Dane dotyczące granic działki 309, 310, ujawnione w PZGiK, spełniają wymogi dokładnościowe
+        dla znaków i punktów granicznych określone w § 16 pkt 1 rozporządzenia Ministra Rozwoju  
+        z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429.
+
+        Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciążeń z tytułu służebności 
+        gruntowych (§ 30 ust. 2 pkt 4 rozporządzenia Ministra Rozwoju z dnia 18 sierpnia 2020 r., 
+        DzU 2020 poz. 1429).
+
+        Dla terenu objętego pomiarem brak opracowań planistycznych (§ 30 ust. 2 pkt 3 rozporządzenia 
+        Ministra Rozwoju z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429).
+
+        Granice nieruchomości oznaczono kolorem zielonym. 
+
+        Nie wyklucza się istnienia w terenie innych niewykazanych na niniejszej mapie urządzeń 
+        podziemnych. 
+        '''
+
+        # wersja stara
         '''
         Mapa utworzona na podstawie arkusza 6.144.30.07.4.1, 6.144.30.07.4.2 mapy zasadniczej oraz 
         pomiaru aktualizacyjnego id. zgł. GKN.6640.446.2019
