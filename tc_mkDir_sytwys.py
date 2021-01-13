@@ -70,7 +70,7 @@ def main():
     # g.v_sw_idZgl.set( "GKK.6640.X.2019")       # <== do likwidacji
     g.v_sw_idZgl_jrwa.set("GKK.6640")
     g.v_sw_idZgl_nr.set("")
-    g.v_sw_idZgl_rok.set("2020")
+    g.v_sw_idZgl_rok.set("2021")
     g.v_sw_ust5.set(1)
     g.v_sw_ust6.set(1)
     g.v_sw_skala.set("500")
