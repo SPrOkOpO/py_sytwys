@@ -19,6 +19,15 @@ planowane
 changelog
 =========
 
+2020.12.28 v. 2.1.0
+-------------------
+    *   ostateczne wyeliminowanie pól dot. inwentaryzacji z klasy Sytwys
+    *   zmiana sposobu działania funkcji zapisz - przed zapisem pobierane 
+        są dane z kontrolek (dotychczas odbywało się to w sposób pośredni
+        i - jako pisane w pośpiechu i z małym doświadczeniem - niechlujny)
+    *   przekształcenie chBtn "ust 5" w "§ 16 pkt 1"
+    *   działka/działki w tytule
+
 2020.12.28 v. 2.0.10
 -------------------
     *   merge wersja_2 to master (local)

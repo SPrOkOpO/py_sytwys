@@ -69,11 +69,11 @@ class   Sytwys( object):
         self.inw = sytwys_elements.Inwentaryzacja()
         self.inw.set_default()
         # old ver
-        self.sw_inw_obiekt          = ""
-        self.sw_inw_obiektDoUwag    = ""
-        self.sw_inw_nrZal           = ""
-        self.sw_inw_decZnak         = ""
-        self.sw_inw_decData         = ""
+        # self.sw_inw_obiekt          = ""
+        # self.sw_inw_obiektDoUwag    = ""
+        # self.sw_inw_nrZal           = ""
+        # self.sw_inw_decZnak         = ""
+        # self.sw_inw_decData         = ""
 
         # mdcp - new ver
         self.mdcp = sytwys_elements.MDCP()
