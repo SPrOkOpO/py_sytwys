@@ -191,12 +191,20 @@ class SytwysGUIgrid( tk.Frame):
                 lista = lista + " " + teryt
             self.v_sw_obrebListBox.set( lista)
 
-
     def eventHandler_entry_wykonawca(self, event):
+        """
+        >> usun¹æ ten eventHandler - ma dzia³ac odwrotny
+        """
         wykonawca = self.v_sw_wykonawca.get()
         if wykonawca == "kh":
             self.v_sw_typ.set( "mppn")
 
+    def eventHandler_combobox_celpracy(self, event):
+        celpracy = self.v_sw_typ.get()
+        if celpracy in ['inw', 'mdcp']:
+            self.v_sw_wykonawca.set('kp')
+        else:
+            self.v_sw_wykonawca.set('kh')
 
     def createWidgets_frameTL(self):
         #self.rowGr1 = 0
@@ -211,17 +219,20 @@ class SytwysGUIgrid( tk.Frame):
 
         e1  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_numer       , bg="greenyellow")
         e2  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_wykonawca   )
-        e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
+        # zbêdny: e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
 
         # typ
         # ttyp = ( "mdcp", "inw", "podz", "inny") <-- tak by³o przed kG...
-        combobox = ttk.Combobox(
-                                self.frameTL, textvariable=self.v_sw_typ, state="readonly",
+        combobox = ttk.Combobox(self.frameTL, textvariable=self.v_sw_typ, state="readonly",
                                 values=kG_cele_pracy.kG_cele_pracy)
+                                #  postcommand=self.eventHandler_combobox_celpracy)
                                 #, label_text="Typ"
                                 #, labelpos="wn", listbox_width=8, dropdown=0, \
                                 #scrolledlist_items=ttyp)
         # combobox["values"] = ttyp
+        #combobox.bind("<FocusOut>", self.eventHandler_combobox_celpracy)
+        combobox.bind('<<ComboboxSelected>>', self.eventHandler_combobox_celpracy)
+
         e7  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_skala       )
 
         # entry OBRÊB
@@ -234,9 +245,6 @@ class SytwysGUIgrid( tk.Frame):
         # listBox dla obrêbów
         self.listBox_obr = tk.Listbox( self.frameTL, height=4, width=15, listvariable=self.v_sw_obrebListBox)
 
-
-
-
         e4  = tk.Entry( self.frameTL, justify="left",   width=60 , textvariable = self.v_sw_dzialki )
         # e5 = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_typ     )
 
@@ -247,8 +255,6 @@ class SytwysGUIgrid( tk.Frame):
         e6_1    = tk.Entry( self.frameTL, justify="left",   width=15 , textvariable = self.v_sw_idZgl_jrwa  )
         e6_2    = tk.Entry( self.frameTL, justify="left",   width=6 , textvariable  = self.v_sw_idZgl_nr        )
         e6_3    = tk.Entry( self.frameTL, justify="left",   width=6 , textvariable  = self.v_sw_idZgl_rok   )
-
-
 
         e1.grid(            row=self.rowGr1 + 0, column=1, sticky="W")
         e2.grid(            row=self.rowGr1 + 1, column=1, sticky="W")
@@ -570,6 +576,8 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.sw_libre_opis = self.t.nazwaDir_obr + " dz. " + self.sw.sw_dzialka1
         if self.v_sw_typ.get() == "inw":
             self.sw.sw_libre_opis = self.sw.sw_libre_opis + " " + "inw"
+        elif self.v_sw_typ.get() == 'imdcp-ws':
+            self.sw.sw_libre_opis = self.sw.sw_libre_opis + " " + "wykSyn"
 
         # obr_terytFull  = dictObr_nazwaObrWpisana2teryt[    self.v_sw_obreb.get()]
         # self.t.terytFull = obr_terytFull
@@ -582,6 +590,8 @@ class SytwysGUIgrid( tk.Frame):
         tytstr = tytstr + "_" + self.sw.sw_dzialka1
         if self.v_sw_typ.get() == "inw":
             tytstr = tytstr + "_" + "inw"
+        if self.v_sw_typ.get() == 'imdcp-ws':
+            tytstr = tytstr + "_" + "wykSyn"
         self.sw.sw_dir_nazwa = self.GC_DIR_SYTWYS + self.sw.sw_numer_str + "_" + tytstr
         if not os.path.exists(self.sw.sw_plikInfo_fullPath):
             self.sw.sw_plikInfo_fullPath = self.sw.sw_dir_nazwa + "\\sw_" + self.sw.sw_numer_str + "_info.txt"
@@ -1215,7 +1225,6 @@ class SytwysGUIgrid( tk.Frame):
 #
 #        self.tx_sekcje.delete( 1.0, tk.END)
 #        self.tx_sekcje.insert( tk.END, self.sw.sw_sekcje_tytul)
-
 
     def btn_gen_uwagi1(self):
         # utworzenie uwag

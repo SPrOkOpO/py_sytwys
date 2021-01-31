@@ -19,6 +19,16 @@ planowane
 changelog
 =========
 
+2020.12.28 v. 2.1.1
+-------------------
+    *   wdrożenie obsługi zgłoszeń bez mapy (wykaz synchronizacyjny)
+        -   dodano typ imdcp-sw
+        -   katalog sw otrzymuje sufiks "wykSyn"
+    *   zmiana sposobu działania combobox-u typ
+        -   wprowadzono obsługę zdarzenia <<ComboboxSelected>>
+        -   funkcja obsługująca zdarzenie ustala wykonawcę na podstawie typu
+            (poprzednio było odwrotnie, ale był tylko jeden typ prawny)
+
 2020.12.28 v. 2.1.0
 -------------------
     *   ostateczne wyeliminowanie pól dot. inwentaryzacji z klasy Sytwys
