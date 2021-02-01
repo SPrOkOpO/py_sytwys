@@ -19,7 +19,22 @@ planowane
 changelog
 =========
 
-2020.12.28 v. 2.1.1
+2021.02.01 v. 2.1.2
+-------------------
+    *   zdiagnozowanie błędu polegającego na braku aktualizacji plików kG po
+        zmianie danych
+        -   problem występuje na przełomie miesięcy i polega na tym, że:
+            -   struktura sw jest zakładana w styczniu - katalog ma nazwę 
+                1049_kh_2101_...
+            -   jeżeli zmiany wprowadzane są w lutym i uzyta została funkcja
+                inicjuj, to tworzy on zmienną zawierającą nazwę katalogu
+                z aktualnym miesiącem ..._2102_..., co przy próbie zapisu 
+                plików kG powoduje oczywisty błąd No such file or dir
+        >>  należy zmienić program tak, aby rozróżniał sytuację tworzenia
+            nowej roboty od zmian do istniejącej
+    *   Uwaga! Nie dokonano zmian w kodzie.
+
+2020.01.31 v. 2.1.1
 -------------------
     *   wdrożenie obsługi zgłoszeń bez mapy (wykaz synchronizacyjny)
         -   dodano typ imdcp-sw

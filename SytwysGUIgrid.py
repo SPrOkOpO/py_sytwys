@@ -233,7 +233,7 @@ class SytwysGUIgrid( tk.Frame):
         #combobox.bind("<FocusOut>", self.eventHandler_combobox_celpracy)
         combobox.bind('<<ComboboxSelected>>', self.eventHandler_combobox_celpracy)
 
-        e7  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_skala       )
+        e7 = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_skala       )
 
         # entry OBRÊB
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -515,7 +515,7 @@ class SytwysGUIgrid( tk.Frame):
 
             # obrNazwa = self.t.dictObr_teryt2nazwa[ obrTerytFull]
         else:
-            obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[ self.v_sw_obreb.get()]
+            obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[self.v_sw_obreb.get()]
 
         # 1)
         if self.t.setTerytyFrom_obrTerytFull(obrTerytFull) != 0:
