@@ -7,6 +7,7 @@ bieżące
         kodem, wykorzystującym klasę Dzialki
     *   otwieranie z uStn połączone z wczytaniem odpowiedniego pliku
         swInfo
+    *   usunąć błąd opisany w 2.1.2
     
 planowane 
 ---------
