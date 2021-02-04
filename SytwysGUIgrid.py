@@ -847,7 +847,13 @@ class SytwysGUIgrid( tk.Frame):
                 f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
                 f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n\n')
                 # data zakonczenia
-                f.write(spdatetime.date_after(1, 0, 0).isoformat() + '\n')
+                f.write(spdatetime.date_after(1, 0, 0).isoformat() + '\n\n')
+                # fraza do wyboru wyra¿eniem
+                f.write('"idDzialki" IN ( ' + '\n')
+                dzs = list()
+                for dz in self.sw.sw_dzialki_ergo_lst:
+                    dzs.append("'" + dz + "'")
+                f.write(",\n".join(dzs) + "\n)\n")
         except:
             print("ERR b³¹d zapisu pliku kg.txt")
             print(f'B³¹d {sys.exc_info()[0]}')

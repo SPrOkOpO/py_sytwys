@@ -15,9 +15,17 @@ planowane
     *   następnie reorganizacja klasy sytwysGUIgid
     *   dopracowanie funkcji divide_into_rows()
 
-
 changelog
 =========
+
+2021.02.04 v. 2.1.3
+-------------------
+    *   plik kg.txt: dodano frazę do wyboru obiektów (w qgis-ie) wyrażeniem
+         "idDzialki" IN (
+            '240609_2.0005.145/1',
+            '240609_2.0005.145/3',
+            '240609_2.0005.145/4'
+            )
 
 2021.02.01 v. 2.1.2
 -------------------
