@@ -195,11 +195,11 @@ class   Sytwys( object):
     # koniec __init__()
     # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
         
-    def setNazwyPlikow_tytul_uwagi( self):
-        '''
+    def setNazwyPlikow_tytul_uwagi(self):
+        """
         z danej œcie¿ki pliku info tworzy œcie¿ki do plików "tytu³" i "uwagi"
         =====================================================================
-        '''
+        """
         
         ''' 
         czêœæ wywiadowcza:
@@ -250,7 +250,7 @@ class   Sytwys( object):
                 self.sw_numer = int(nr_str)
         self.sw_numer = self.sw_numer + 1
         #deb
-        print( "Numer licznika dla roboty: %d" % (self.sw_numer))
+        print("Numer licznika dla roboty: %d" % (self.sw_numer))
 
 
     def inicjujStrukture( self, asw_dir_nazwa):

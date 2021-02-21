@@ -19,6 +19,14 @@ planowane
 changelog
 =========
 
+2021.02.20 v. 2.1.4
+-------------------
+    <2.1.4 użycie argparse, wdrożenie trybu uruchamiania>
+    *   dodanie obróbki argumentów (z użyciem argparse)
+        -   główny cel, to umożliwienie wczytywania pliku sw_info podczas
+            uruchamiania programu
+        -   dodatkowo umożliwia to wprowadzenie trybów pracy nowa/aktualizacja 
+
 2021.02.04 v. 2.1.3
 -------------------
     *   plik kg.txt: dodano frazę do wyboru obiektów (w qgis-ie) wyrażeniem

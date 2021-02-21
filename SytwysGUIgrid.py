@@ -13,6 +13,7 @@ import datetime
 import os
 import re as re
 from tkinter.constants import ACTIVE
+import pprint
 
 import dictConstants
 import OpracowaniePlanistyczne as oPlan
@@ -24,6 +25,7 @@ import kG_cele_pracy
 import kGeodety
 import spdatetime
 import dzialki
+import spprint
 
 
 class SytwysGUIgrid( tk.Frame):
@@ -865,34 +867,28 @@ class SytwysGUIgrid( tk.Frame):
         # sys.exit()
 
 
-    def wczytaj(self):
+    def wczytaj(self, plik_swinfo_path=''):
         """
-
+        wczytuje dane z pliku swinfo
         """
-
-        # otwarcie pliku sw_*_info.txt
-        # - na razie za pomoc¹ okna dialogowego
-        # >> zrobiæ przekazywanie œcie¿ki pliku do otwarcia jako argumentu
-        #    przekazywanego podczas uruchamiania programu
-        # =========================================================================
-        # global sw_plikInfo_fullPath
-        # self.sw.sw_plikInfo_fullPath = "t:\\sytwys\\826_kp_1904_Biezen_7-24\\sw_826_info.txt"
-        self.sw.sw_plikInfo_fullPath = tk.filedialog.askopenfilename(
-                initialdir=dictConstants.dictConstants["GC_DIR_SYTWYS"],
-                title="Wybierz plik swInfo",
-                filetypes=(("swInfo files", "*.txt"), ("all files", "*.*"))
-                )
+        if plik_swinfo_path:
+            self.sw.sw_plikInfo_fullPath = plik_swinfo_path
+        else:
+            self.sw.sw_plikInfo_fullPath = tk.filedialog.askopenfilename(
+                    initialdir=dictConstants.dictConstants["GC_DIR_SYTWYS"],
+                    title="Wybierz plik swInfo",
+                    filetypes=(("swInfo files", "*.txt"), ("all files", "*.*"))
+                    )
+            if not os.path.exists(self.sw.sw_plikInfo_fullPath):
+                komunikat = "Plik %s nie istnieje" % self.sw.sw_plikInfo_fullPath
+                tk.messagebox.showinfo("Err", komunikat)
+                return -1
         self.sw.setNazwyPlikow_tytul_uwagi()
-        if not os.path.exists(self.sw.sw_plikInfo_fullPath):
-            komunikat = "Plik %s nie istnieje" % self.sw.sw_plikInfo_fullPath
-            tk.messagebox.showinfo("Err", komunikat)
-            return -1
 
         # - odczytanie danych z pliku info
         # - i zapisanie ich s³owniku dicWierszePliku
         # =========================================================================
-        with open( self.sw.sw_plikInfo_fullPath, "r") as f:
-        # with open( plikInfo_826, "r") as f:
+        with open(self.sw.sw_plikInfo_fullPath, "r") as f:
             for wiersz in f:
                 wLen = len( wiersz)
                 # print( "%s" % wiersz[:-1])
@@ -911,8 +907,11 @@ class SytwysGUIgrid( tk.Frame):
 
                 # self.dicWierszePliku.insert( wiersz)
                 # print( "%s" % self.dicWierszePliku)
+
             # deb
-            # print( self.dicWierszePliku)
+            # spprint.print_header('dicWierszePliku')
+            # pprint.pprint(self.dicWierszePliku)
+            # spprint.print_footer('dicWierszePliku')
 
         # aktualizacja zmiennych danymi ze s³ownika dicWierszePliku
         # =========================================================================
@@ -947,10 +946,10 @@ class SytwysGUIgrid( tk.Frame):
             # ?> czy tutaj jest potrzebna aktualizacja obiektu sw.sw_dzialki_obj
             #    NIE, bo tu tylko odczytujemy dane z pliku
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            if key == "[sw_dzialki]"            : self.sw.sw_dzialki = val
+            if key == "[sw_dzialki]"            : self.sw.sw_dzialki        = val
             if key == "[sw_dzialka1]"           : self.sw.sw_dzialka1       = val
 
-            # if key == "[sw_idZgl]"              : self.sw.sw_idZgl          = val
+            # if key == "[sw_idZgl]"              : self.sw.sw_idZgl         = val
             if key == "[sw_idZgl_jrwa]"         : self.sw.sw_idZgl_jrwa     = val
             if key == "[sw_idZgl_nr]"           : self.sw.sw_idZgl_nr       = val
             if key == "[sw_idZgl_rok]"          : self.sw.sw_idZgl_rok      = val
@@ -972,29 +971,29 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[sw_sekcje]"             : self.sw.sw_sekcje         = val
             if key == "[sw_sekcje_tytul]"       : self.sw.sw_sekcje_tytul   = val
 
-            # do zmiany
+            # >> do zmiany
             # print( key[0:7])
-            if key[0:7] == "[godlo_":
-                if key == "[godlo_01]"              : self.sw.sw_godlo_01       = val
-                if key == "[godlo_02]"              : self.sw.sw_godlo_02       = val
-                if key == "[godlo_03]"              : self.sw.sw_godlo_03       = val
-                if key == "[godlo_04]"              : self.sw.sw_godlo_04       = val
-                if key == "[godlo_05]"              : self.sw.sw_godlo_05       = val
-                if key == "[godlo_06]"              : self.sw.sw_godlo_06       = val
-                if key == "[godlo_07]"              : self.sw.sw_godlo_07       = val
-                if key == "[godlo_08]"              : self.sw.sw_godlo_08       = val
-                if key == "[godlo_09]"              : self.sw.sw_godlo_09       = val
-                if key == "[godlo_10]"              : self.sw.sw_godlo_10       = val
-                if key == "[godlo_11]"              : self.sw.sw_godlo_11       = val
-                if key == "[godlo_12]"              : self.sw.sw_godlo_12       = val
-                if key == "[godlo_13]"              : self.sw.sw_godlo_13       = val
-                if key == "[godlo_14]"              : self.sw.sw_godlo_14       = val
-                if key == "[godlo_15]"              : self.sw.sw_godlo_15       = val
-                if key == "[godlo_16]"              : self.sw.sw_godlo_16       = val
-                if key == "[godlo_17]"              : self.sw.sw_godlo_17       = val
-                if key == "[godlo_18]"              : self.sw.sw_godlo_18       = val
-                if key == "[godlo_19]"              : self.sw.sw_godlo_19       = val
-                if key == "[godlo_20]"              : self.sw.sw_godlo_20       = val
+            # if key[0:7] == "[godlo_":
+            #     if key == "[godlo_01]"              : self.sw.sw_godlo_01       = val
+            #     if key == "[godlo_02]"              : self.sw.sw_godlo_02       = val
+            #     if key == "[godlo_03]"              : self.sw.sw_godlo_03       = val
+            #     if key == "[godlo_04]"              : self.sw.sw_godlo_04       = val
+            #     if key == "[godlo_05]"              : self.sw.sw_godlo_05       = val
+            #     if key == "[godlo_06]"              : self.sw.sw_godlo_06       = val
+            #     if key == "[godlo_07]"              : self.sw.sw_godlo_07       = val
+            #     if key == "[godlo_08]"              : self.sw.sw_godlo_08       = val
+            #     if key == "[godlo_09]"              : self.sw.sw_godlo_09       = val
+            #     if key == "[godlo_10]"              : self.sw.sw_godlo_10       = val
+            #     if key == "[godlo_11]"              : self.sw.sw_godlo_11       = val
+            #     if key == "[godlo_12]"              : self.sw.sw_godlo_12       = val
+            #     if key == "[godlo_13]"              : self.sw.sw_godlo_13       = val
+            #     if key == "[godlo_14]"              : self.sw.sw_godlo_14       = val
+            #     if key == "[godlo_15]"              : self.sw.sw_godlo_15       = val
+            #     if key == "[godlo_16]"              : self.sw.sw_godlo_16       = val
+            #     if key == "[godlo_17]"              : self.sw.sw_godlo_17       = val
+            #     if key == "[godlo_18]"              : self.sw.sw_godlo_18       = val
+            #     if key == "[godlo_19]"              : self.sw.sw_godlo_19       = val
+            #     if key == "[godlo_20]"              : self.sw.sw_godlo_20       = val
 
             if key == "[oPlan_fA_01]"           : self.oPlan.funAkt_01      = val
             if key == "[oPlan_fA_02]"           : self.oPlan.funAkt_02      = val
@@ -1012,12 +1011,12 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[oPlan_fA_14]"           : self.oPlan.funAkt_14      = val
             if key == "[oPlan_fA_15]"           : self.oPlan.funAkt_15      = val
 
-            if key == "[sw_mdcp_kp_uwagi1]"     : self.sw.mdcp.kp_uwagi1 = val
-            if key == "[sw_mdcp_kp_uwagi2]"     : self.sw.mdcp.kp_uwagi2 = val
-            if key == "[sw_mdcp_kp_uwagi3]"     : self.sw.mdcp.kp_uwagi3 = val
-            if key == "[sw_mdcp_kp_uwagi4]"     : self.sw.mdcp.kp_uwagi4 = val
-            if key == "[sw_mdcp_kp_uwagi5]"     : self.sw.mdcp.kp_uwagi5 = val
-            if key == "[sw_mdcp_kp_uwagi6]"     : self.sw.mdcp.kp_uwagi6 = val
+            if key == "[sw.mdcp.kp_uwagi1]"     : self.sw.mdcp.kp_uwagi1 = val
+            if key == "[sw.mdcp.kp_uwagi2]"     : self.sw.mdcp.kp_uwagi2 = val
+            if key == "[sw.mdcp.kp_uwagi3]"     : self.sw.mdcp.kp_uwagi3 = val
+            if key == "[sw.mdcp.kp_uwagi4]"     : self.sw.mdcp.kp_uwagi4 = val
+            if key == "[sw.mdcp.kp_uwagi5]"     : self.sw.mdcp.kp_uwagi5 = val
+            if key == "[sw.mdcp.kp_uwagi6]"     : self.sw.mdcp.kp_uwagi6 = val
 
         # aktualizacja zmiennych zwi¹zanych z widgetami
         # =========================================================================
@@ -1062,7 +1061,6 @@ class SytwysGUIgrid( tk.Frame):
         # self.v_sw_typ.set( self.sw_sw_typ)
         # print( self.sw.sw_mdcp_ust5)
         # print( self.sw.sw_mdcp_ust6)
-
 
         # god³a i text sekcje
         # utworzenie listy sekcji i s³ownika sekcji
