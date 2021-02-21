@@ -5,8 +5,6 @@ bieżące
 -------
     *   !!! zweryfikować metodę wczytaj() pod kątem zgodności z nowym
         kodem, wykorzystującym klasę Dzialki
-    *   otwieranie z uStn połączone z wczytaniem odpowiedniego pliku
-        swInfo
     *   usunąć błąd opisany w 2.1.2
     
 planowane 
@@ -25,7 +23,10 @@ changelog
     *   dodanie obróbki argumentów (z użyciem argparse)
         -   główny cel, to umożliwienie wczytywania pliku sw_info podczas
             uruchamiania programu
-        -   dodatkowo umożliwia to wprowadzenie trybów pracy nowa/aktualizacja 
+        -   dodatkowo umożliwia to wprowadzenie trybów pracy nowa/aktualizacja,
+            co wykorzystano do wdrożenia dwu trybów: [nowa, aktualizacja]
+        -   możliwe, że wdrożenie trybów wyeliminowało błąd opisany w uwagach
+            do wersji 2.1.2
 
 2021.02.04 v. 2.1.3
 -------------------
