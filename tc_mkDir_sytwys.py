@@ -89,7 +89,7 @@ def main():
         sw.sw_wykonawca = "kp"
         g.v_sw_numer.set(sw.sw_numer_str)
         g.v_sw_wykonawca.set(sw.sw_wykonawca)
-        g.v_sw_obreb.set("Zagórze")
+        g.v_sw_obreb.set("Nowa Wieœ-Kl")
         g.v_sw_dzialki.set("309, 310 3 , 2000/1, 4, ")
         g.v_sw_typ.set("mdcp")
         # g.v_sw_idZgl.set( "GKK.6640.X.2019")       # <== do likwidacji

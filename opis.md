@@ -17,6 +17,16 @@ planowane
 changelog
 =========
 
+2021.05.16 v. 2.1.5
+-------------------
+    *   w klasie dzialki (spLib\sytwys\dzialki.py) dodano usuwanie z napisu
+        zawierającego listę działek, uciązliwego skrótu `dz.` (i jego 
+        wariantów)
+    *   wprowadzenie jednolitej zasady nazywania obrębów "dublujących się" 
+        w różych j. ew.: do nazwy obrębu dodać suffix `-nazwa_jew[0:2]`
+    *   poprawki w słowniku dictObr_nazwaObrWpisana2teryt wynikające 
+        z wdrożenia powyższej zasady
+
 2021.02.20 v. 2.1.4
 -------------------
     <2.1.4 użycie argparse, wdrożenie trybu uruchamiania>

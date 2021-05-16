@@ -274,10 +274,11 @@ class   Teryt( object):
             "999999_9.9999" :   "koniec wyœcigu"
         }
 
-
-
-
-        # s³ownik do zamiany    nazwy   wpisanej    do  entry-sw_obreb  na  terytFull
+        # s³ownik do zamiany nazwy wpisanej do entry-sw_obreb na terytFull
+        # - zasada dla nazw obrêbów powtarzaj¹cych siê w ró¿nych j. ew.:
+        #   do nazwy dodaæ suffix: myœlnik + dwuliterowy skrót j. ew.
+        #   np. Nowa Wieœ-Kl, D¹browa-Po
+        # ---------------------------------------------------------------------
         self.dictObr_nazwaObrWpisana2teryt = {
          "Brody Malina"                   : "240601_4.0001",
          "BrodyMalina"                    : "240601_4.0001",
@@ -287,6 +288,7 @@ class   Teryt( object):
          "NiwaSkrzeszów"                  : "240601_4.0003",
          "Osoki - Pustkowie"              : "240601_4.0004",
          "Osoki-Pustkowie"                : "240601_4.0004",
+         "Osoki Pustkowie"                : "240601_4.0004",
          "OsokiPustkowie"                 : "240601_4.0004",
          "Przyby³ów"                      : "240601_4.0005",
          "Przybylow"                      : "240601_4.0005",
@@ -306,6 +308,7 @@ class   Teryt( object):
          "Lgota"                          : "240601_5.0007",
          "Libidza"                        : "240601_5.0008",
          "£obodno"                        : "240601_5.0009",
+         "Nowa Wieœ-Kl"                   : "240601_5.0010",
          "Nowa Wieœ K"                    : "240601_5.0010",
          "Nowa Wieœ-K"                    : "240601_5.0010",
          "Nowa WieœK"                     : "240601_5.0010",
@@ -325,7 +328,9 @@ class   Teryt( object):
          "Zaj¹czki II"                    : "240602_5.0007",
 
          "Albertów"                       : "240603_2.0001",
-         "Brzózki"                        : "240603_2.0002",
+         "Brzózki-Li"                     : "240603_2.0002",
+         "Brzózki L"                      : "240603_2.0002",
+         "Brzózki-L"                      : "240603_2.0002",
          "Danków"                         : "240603_2.0003",
          "Grabarze"                       : "240603_2.0004",
          "Julianów"                       : "240603_2.0005",
@@ -340,7 +345,7 @@ class   Teryt( object):
          "Rozalin"                        : "240603_2.0014",
          "Stanis³awów"                    : "240603_2.0015",
          "Szyszków"                       : "240603_2.0016",
-         #"Wapiennik"                      : "240603_2.0017",
+         "Wapiennik-Li"                   : "240603_2.0017",
          "Wapiennik-L"                    : "240603_2.0017",
          "Wapiennik L"                    : "240603_2.0017",
          "Zbrojewsko"                     : "240603_2.0018",
@@ -354,8 +359,7 @@ class   Teryt( object):
          "Mokra"                          : "240604_2.0006",
          "Ostrowy"                        : "240604_2.0007",
          "Suchany"                        : "240604_2.0008",
-         #"Wapiennik"                      : "240604_2.0009",
-         "Wapiennik-M"                    : "240604_2.0009",
+         "Wapiennik-Mi"                   : "240604_2.0009",
          "Wapiennik M"                    : "240604_2.0009",
          "W³adys³awów"                    : "240604_2.0010",
 
@@ -385,17 +389,16 @@ class   Teryt( object):
          "¯erdzina"                       : "240606_2.0014",
 
          "Annolesie"                      : "240607_2.0001",
-         "Brzózki"                        : "240607_2.0002",
-         "D¹browa"                        : "240607_2.0003",
+         "Brzózki-Po"                     : "240607_2.0002",
+         "D¹browa-Po"                     : "240607_2.0003",
          "D¹brówka"                       : "240607_2.0004",
          "Dêbie"                          : "240607_2.0005",
          "Florianów"                      : "240607_2.0006",
          "Kamieñszczyzna"                 : "240607_2.0007",
          "Lelity"                         : "240607_2.0008",
          "Marianów"                       : "240607_2.0009",
-         #"NowaWieœ"                      : "240607_2.0010",
+         "Nowa Wieœ-Po"                   : "240607_2.0010",
          "Nowa Wieœ P"                    : "240607_2.0010",
-         "Nowa Wieœ-P"                    : "240607_2.0010",
          "Nowa WieœP"                     : "240607_2.0010",
          "P³aczki"                        : "240607_2.0011",
          "Popów"                          : "240607_2.0012",
@@ -410,7 +413,7 @@ class   Teryt( object):
          "Bagna"                          : "240608_2.0002",
          "Bór Zajaciñski"                 : "240608_2.0003",
          "Brzeziny"                       : "240608_2.0004",
-         "D¹browa"                        : "240608_2.0005",
+         "D¹browa-Pr"                     : "240608_2.0005",
          "Górki"                          : "240608_2.0006",
          "Kamiñsko"                       : "240608_2.0007",
          "KostrzynaI"                     : "240608_2.0008",
