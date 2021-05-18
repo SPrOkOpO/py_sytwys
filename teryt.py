@@ -258,11 +258,15 @@ class   Teryt( object):
             "240609_2.0024" :   "Wydra",
             "240609_2.0025" :   "Zam³ynie",
 
+            # powiat cz.
             "240401_4.0001" :   "Blachownia",
             "240401_4.0002" :   "B³aszczyki",
             
             "240401_5.0002" :   "Gorzelnia",
-            
+
+            "240412_2.0001" :   "Biskupice",
+            "240412_2.0006" :   "Przymi³owice",
+
             # M. Czêstochowa
             "246401_1"      : "Czêstochowa",
             
@@ -466,8 +470,11 @@ class   Teryt( object):
          "B³aszczyki"                     : "240401_4.0002",
 
          "Gorzelnia"                      : "240401_5.0002",
-         
-         # M. Czêstochowa   
+
+         "Biskupice"                      : "240412_2.0001",
+         "Przymi³owice"                   : "240412_2.0006",
+
+            # M. Czêstochowa
          "Czêstochowa"                    : "246401_1",   
 
 
@@ -630,10 +637,14 @@ class   Teryt( object):
             "240609_2.0024" :   "Wydra",
             "240609_2.0025" :   "Zamlynie",
 
+            # powiat cz.
             "240401_4.0001" :   "Blachownia",
             "240401_4.0002" :   "Blaszczyki",
 
             "240401_5.0002" :   "Gorzelnia",
+
+            "240412_2.0001" :   "Biskupice",
+            "240412_2.0006" :   "Przymilowice",
 
             # M. Czêstochowa
             "246401_1"      :   "CzM",

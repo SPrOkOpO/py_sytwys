@@ -17,6 +17,10 @@ planowane
 changelog
 =========
 
+2021.05.18 v. 2.1.5
+-------------------
+    *   w module teryt dodano dwa obręby z 2404
+
 2021.05.16 v. 2.1.5
 -------------------
     *   w klasie dzialki (spLib\sytwys\dzialki.py) dodano usuwanie z napisu
@@ -65,7 +69,7 @@ changelog
 2020.01.31 v. 2.1.1
 -------------------
     *   wdrożenie obsługi zgłoszeń bez mapy (wykaz synchronizacyjny)
-        -   dodano typ imdcp-sw
+        -   dodano typ imdcp-ws
         -   katalog sw otrzymuje sufiks "wykSyn"
     *   zmiana sposobu działania combobox-u typ
         -   wprowadzono obsługę zdarzenia <<ComboboxSelected>>
