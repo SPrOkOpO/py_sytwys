@@ -17,6 +17,13 @@ planowane
 changelog
 =========
 
+2021.06.25 v. 2.1.7
+-------------------
+    *   w klasie dzialki (spLib\sytwys\dzialki.py) poprawiono usuwania z napisu
+        zawierającego listę działek, zbędnych napisów: dodano  do ich listy `i` 
+        oraz zmieniono kolejność na liście `zbedny_napis_dzialka` tak, aby 
+        dłuższe słowa były na początku
+
 2021.05.18 v. 2.1.5
 -------------------
     *   w module teryt dodano dwa obręby z 2404
