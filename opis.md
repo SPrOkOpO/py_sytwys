@@ -17,6 +17,12 @@ planowane
 changelog
 =========
 
+2021.07.11 v. 2.1.8
+-------------------
+    *   SytwysGUIgrid.py comboBox `Typ` (kG_cele_pracy):
+        -   zmieniono kolejność mdcp i inw (teraz typ inw jest widoczny po 
+            rozwinięciu listy) 
+
 2021.06.25 v. 2.1.7
 -------------------
     *   w klasie dzialki (spLib\sytwys\dzialki.py) poprawiono usuwania z napisu

@@ -26,6 +26,7 @@ import kGeodety
 import spdatetime
 import dzialki
 import spprint
+import spstring
 
 
 class SytwysGUIgrid( tk.Frame):
@@ -155,11 +156,16 @@ class SytwysGUIgrid( tk.Frame):
     def eventHandler_entry_obreb(self, event):
         # wyczyszczenie powi¹zanego ListBoxu
         lista = ""
-        self.v_sw_obrebListBox.set( lista)
+        self.v_sw_obrebListBox.set(lista)
 
+        # pobranie nazwy obrêbu i jej wyczyszczenie
+        # - czyszczenie na razie nie dzia³a dobrze na 100%
         obr = self.v_sw_obreb.get()
+        obr = spstring.clean_string(obr, '\t\n ,;#', ' ')
+        self.v_sw_obreb.set(obr)
+
         # obr = self.e3.get()
-        if len( obr) >= 3:
+        if len(obr) >= 3:
             print("event + tekst %s" % (obr))
             '''
             if obr in self.t.dictObr_nazwaObrWpisana2teryt:
@@ -173,7 +179,7 @@ class SytwysGUIgrid( tk.Frame):
             for k in self.t.dictObr_nazwaObrWpisana2teryt.keys():
                 # print( "k=%s" % ( k))
                 # klucz = "XXX"
-                klucz = k[0:len( obr)]
+                klucz = k[0:len(obr)]
                 if klucz == obr:
                     liczbaKluczy += 1
                     print("klucz %i: %s, teryt: %s" % (liczbaKluczy, obr, self.t.dictObr_nazwaObrWpisana2teryt[k]))
@@ -517,7 +523,12 @@ class SytwysGUIgrid( tk.Frame):
 
             # obrNazwa = self.t.dictObr_teryt2nazwa[ obrTerytFull]
         else:
-            obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[self.v_sw_obreb.get()]
+            # czyszczenie nazwy obr
+            obr = self.v_sw_obreb.get()
+            obr = spstring.clean_string(obr, '\t\n ,;#', ' ')
+            self.v_sw_obreb.set(obr)
+
+            obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[obr]
 
         # 1)
         if self.t.setTerytyFrom_obrTerytFull(obrTerytFull) != 0:
@@ -536,14 +547,14 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.update_dzialki(self.t.terytF_obr, self.t.teryt_jew, self.t.nazwa_obr)
         self.v_sw_dzialki.set(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp)
 
-        self.sw.sw_typ              = self.v_sw_typ.get()
-        self.sw.sw_idZgl            = '.'.join([self.v_sw_idZgl_jrwa.get(), self.v_sw_idZgl_nr.get(), self.v_sw_idZgl_rok.get()])
-        self.sw.sw_skala            = self.v_sw_skala.get()
+        self.sw.sw_typ           = self.v_sw_typ.get()
+        self.sw.sw_idZgl         = '.'.join([self.v_sw_idZgl_jrwa.get(), self.v_sw_idZgl_nr.get(), self.v_sw_idZgl_rok.get()])
+        self.sw.sw_skala         = self.v_sw_skala.get()
         self.sw.mdcp.ust5        = "%s" % self.v_sw_ust5.get()
         self.sw.mdcp.ust6        = "%s" % self.v_sw_ust6.get()
 
-        print ( "self.sw.mdcp.ust5 = " + self.sw.mdcp.ust5)
-        print ( "self.sw.mdcp.ust6 = " + self.sw.mdcp.ust6)
+        print("self.sw.mdcp.ust5 = " + self.sw.mdcp.ust5)
+        print("self.sw.mdcp.ust6 = " + self.sw.mdcp.ust6)
 
         if self.v_sw_typ.get() == "inw":
             # old ver
