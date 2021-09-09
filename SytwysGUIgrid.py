@@ -813,7 +813,7 @@ class SytwysGUIgrid( tk.Frame):
             else:
                 f2.write("Dzia³ki: " + self.sw.sw_dzialki + "\n")
             f2.write("Uk³ad wspó³rzêdnych p³askich prostok¹tnych: PL-2000/18" + "\n")
-            f2.write("Geodezyjny uk³ad wysokoœciowy: PL-KRON86-NH" + "\n")
+            f2.write("Geodezyjny uk³ad wysokoœciowy: PL-EVRF2007-NH" + "\n")
             f2.write(self.sw.sw_sekcje_tytul + "\n")
             f2.write("Skala 1:" + self.sw.sw_skala + "\n")
             f2.write("Id. zg³.: " + self.sw.sw_idZgl + "\n")

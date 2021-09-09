@@ -17,6 +17,11 @@ planowane
 changelog
 =========
 
+2021.09.09 v. 2.1.9
+-------------------
+    *   SytwysGUIgrid.py zapisz_1():
+        -   zmiana układu wysokościowego na PL-EVRF2007-NH (z PL-KRON86-NH) 
+
 2021.07.11 v. 2.1.8
 -------------------
     *   SytwysGUIgrid.py comboBox `Typ` (kG_cele_pracy):
