@@ -17,6 +17,12 @@ planowane
 changelog
 =========
 
+2021.10.08 v. 2.1.10
+--------------------
+    * SytwysGUIgrid.py zapisz_1():
+        - automatyzacja rysowania nagłówka tytułu (MAPA DO ... albo GEODEZYJNA ...)
+          - dodano plik tytNagl.txt
+
 2021.09.09 v. 2.1.9
 -------------------
     *   SytwysGUIgrid.py zapisz_1():

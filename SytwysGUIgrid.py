@@ -799,8 +799,17 @@ class SytwysGUIgrid( tk.Frame):
             f.write( "[sw.mdcp.kp_uwagi6]="     + self.sw.mdcp.kp_uwagi6 + "\n")
 
         # 4)
-        # utworzenie pliku tytul.txt i uwagi.txt
+        # utworzenie pliku tytNagl.txt tytul.txt i uwagi.txt
         self.sw.setNazwyPlikow_tytul_uwagi()
+
+        # tytNagl.txt
+        with open(self.sw.sw_plikTytNagl_fullPath, "w") as f2:
+            if self.sw.sw_typ == 'mdcp':
+                f2.write('MAPA DO CELÓW PROJEKTOWYCH' + "\n")
+            elif self.sw.sw_typ == 'inw':
+                f2.write('GEODEZYJNA DOKUMENTACJA OBIEKTU BUDOWLANEGO' + "\n")
+                f2.write('Inwentaryzacja ' + self.sw.inw.obiekt + '\n')
+
 
         # tytul.txt
         with open(self.sw.sw_plikTytul_fullPath, "w") as f2:

@@ -147,6 +147,7 @@ class   Sytwys( object):
 
         # œcie¿ki
         # sta³e,    ale na razie jako   zwykle pola
+        self.FILE_TYTNAGL  =  "tytNagl.txt"
         self.FILE_TYTUL  =  "tytul.txt"
         self.FILE_UWAGI  =  "uwagi.txt"
         self.FILE_GODLA  =  "godla2swInfo.txt"
@@ -155,6 +156,7 @@ class   Sytwys( object):
 
         self.sw_dir_nazwa           = ""
         self.sw_plikInfo_fullPath   = ""
+        self.sw_plikTytNagl_fullPath  = ""
         self.sw_plikTytul_fullPath  = ""
         self.sw_plikUwagi_fullPath  = ""
         self.sw_plikGodla2swInfo_fullPath  = ""
@@ -197,7 +199,10 @@ class   Sytwys( object):
         
     def setNazwyPlikow_tytul_uwagi(self):
         """
-        z danej œcie¿ki pliku info tworzy œcie¿ki do plików "tytu³" i "uwagi"
+        z danej œcie¿ki pliku info tworzy œcie¿ki do plików
+        - "tytNagl"
+        - "tytu³"
+        - "uwagi"
         =====================================================================
         """
         
@@ -212,9 +217,10 @@ class   Sytwys( object):
         print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
         '''
         p = self.sw_plikInfo_fullPath
-        self.sw_plikTytul_fullPath  = os.path.join( os.path.dirname( p), self.FILE_TYTUL)
-        self.sw_plikUwagi_fullPath  = os.path.join( os.path.dirname( p), self.FILE_UWAGI)
-        self.sw_plikGodla2swInfo_fullPath  = os.path.join( os.path.dirname( p), self.FILE_GODLA)
+        self.sw_plikTytNagl_fullPath = os.path.join(os.path.dirname(p), self.FILE_TYTNAGL)
+        self.sw_plikTytul_fullPath  = os.path.join( os.path.dirname(p), self.FILE_TYTUL)
+        self.sw_plikUwagi_fullPath  = os.path.join( os.path.dirname(p), self.FILE_UWAGI)
+        self.sw_plikGodla2swInfo_fullPath  = os.path.join( os.path.dirname(p), self.FILE_GODLA)
         # w katalogu ...\kG:
         #self.sw_plikDz_ergo_abspath = os.path.join(os.path.dirname(p), self.sw_dictDirs["kG"])
         self.sw_plikDz_ergo_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_DZIALKI_ERGO)
