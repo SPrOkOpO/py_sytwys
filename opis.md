@@ -17,6 +17,11 @@ planowane
 changelog
 =========
 
+2022.01.25 v. 2.1.11
+--------------------
+  * zmiana w instrukcji inicjującej rok polegajaca na z zastąpieniu stałej wartości
+    funkcją zwracajacą aktualny rok: g.v_sw_idZgl_rok.set(get_RRRR())
+
 2021.10.08 v. 2.1.10
 --------------------
     * SytwysGUIgrid.py zapisz_1():
