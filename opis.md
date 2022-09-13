@@ -17,6 +17,14 @@ planowane
 changelog
 =========
 
+2022.09.13 v. 2.1.12
+--------------------
+  * inw: tekst `?-?-?` jako domyślny nr decyzji i jej data
+  * inw: dodanie brakującego nawiasu wokół określenia obiektu budowlanego
+  * gui: w widgetach text zmieniono sposób zawijania tekstu - był domyślny
+         wrap=tk.CHAR, a jest wrap=tk.WORD (usunięto rówocześnie wywołanie funkcji
+         divide_into_rows(self.sw.mdcp.kp_uwagi2, 90) - funkcja jest niedopracowana)
+
 2022.01.25 v. 2.1.11
 --------------------
   * zmiana w instrukcji inicjującej rok polegajaca na z zastąpieniu stałej wartości

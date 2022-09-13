@@ -167,8 +167,8 @@ class Inwentaryzacja():
         self.obiekt = 'budynku mieszkalnego wraz z przyłączami'
         self.obiekt_do_uwag = 'budynku mieszkalnego'
         self.nr_zal = '1'
-        self.dec_znak = 'GPN.6730.140.2020.UC'
-        self.dec_data = '2020'
+        self.dec_znak = '?-?-?'
+        self.dec_data = '?-?-?'
 
     def set_empty(self):
         self.obiekt = ''

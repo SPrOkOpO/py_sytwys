@@ -382,7 +382,8 @@ class SytwysGUIgrid( tk.Frame):
         butUwagi2.grid( row=1, column=2, pady=0, columnspan=1)
         butUwagi3.grid( row=1, column=3, pady=0, columnspan=1)
 
-        self.tx_mdcp_kp_uwagi1      = tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font)
+        self.tx_mdcp_kp_uwagi1 \
+            = tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font, wrap=tk.WORD)
         '''
         lab_tx_mdcp_kp_ust56    = tk.Label( self.frameMR, text="mdcp_kp_ust. 5 i 6:"    , anchor="w", width=20).grid(row=2, sticky="W")
         for etykieta, row, col, status, variable in [ \
@@ -390,20 +391,28 @@ class SytwysGUIgrid( tk.Frame):
             ]:
             tk.Checkbutton( self.frameMR, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
         '''
-        self.tx_mdcp_kp_uwagi2      = tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font)
-        self.tx_mdcp_kp_uwagi3      = tk.Text( self.frameMR, height=3, width=100, tabs=3, font=self.font)
-        self.tx_mdcp_kp_uwagi3.tag_configure('Arial8', font=('Arial', 8))
-        self.tx_mdcp_kp_uwagi3.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
-        self.tx_mdcp_kp_uwagi3.tag_add( 'bold_italics', 1.0, tk.END)
-        self.tx_mdcp_kp_uwagi3.tag_add( 'Arial8', 1.0, tk.END)
+        self.tx_mdcp_kp_uwagi2\
+            = tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+
+        self.tx_mdcp_kp_uwagi3\
+            = tk.Text( self.frameMR, height=3, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+        # self.tx_mdcp_kp_uwagi3.tag_configure('Arial8', font=('Arial', 8))
+        # self.tx_mdcp_kp_uwagi3.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
+        # self.tx_mdcp_kp_uwagi3.tag_add( 'bold_italics', 1.0, tk.END)
+        # self.tx_mdcp_kp_uwagi3.tag_add( 'Arial8', 1.0, tk.END)
         # self.tx_mdcp_kp_uwagi3.tag_configure( 'bold_italics', font= 'Arial, 8, bold, italic')
         # self.tx_mdcp_kp_uwagi3.tag_configure( font='Arial, 8, bold')
 
-        self.tx_mdcp_kp_uwagi4      = tk.Text( self.frameMR, height=8, width=100, tabs=3, font=self.font)
-        self.tx_mdcp_kp_uwagi5      = tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font)
-        self.tx_mdcp_kp_uwagi5.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
-        self.tx_mdcp_kp_uwagi5.tag_add( 'bold_italics', 1.0, tk.END)
-        self.tx_mdcp_kp_uwagi6      = tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font)
+        self.tx_mdcp_kp_uwagi4\
+            = tk.Text( self.frameMR, height=8, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+
+        self.tx_mdcp_kp_uwagi5\
+            = tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+        # self.tx_mdcp_kp_uwagi5.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
+        # self.tx_mdcp_kp_uwagi5.tag_add( 'bold_italics', 1.0, tk.END)
+
+        self.tx_mdcp_kp_uwagi6\
+            = tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font, wrap=tk.WORD)
 
         self.tx_mdcp_kp_uwagi1.grid ( row=2, column=0, sticky="W", columnspan=4)
         self.tx_mdcp_kp_uwagi2.grid ( row=3, column=0, sticky="W", columnspan=4)
@@ -828,7 +837,7 @@ class SytwysGUIgrid( tk.Frame):
             f2.write("Id. zg³.: " + self.sw.sw_idZgl + "\n")
             if self.sw.sw_typ == "inw":
                 f2.write("\n")
-                f2.write(f"Usytuowanie obiektu budowlanego {self.sw.inw.obiekt_do_uwag} zgodne\n")
+                f2.write(f"Usytuowanie obiektu budowlanego ({self.sw.inw.obiekt_do_uwag}) zgodne\n")
                 f2.write(f"z projektem zagospodarowania terenu (za³¹cznik nr {self.sw.inw.nr_zal} do decyzji\n")
                 # na koñcu musi byæ spacja, bo z niewiadomych wzglêdów macro nie tworzy
                 # ostatniego wiersza z ostatnim znakiem (bez spacji nie narysuje siê kropka)
@@ -1264,7 +1273,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.mdcp.kp_uwagi1 += " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
         self.sw.mdcp.kp_uwagi1 += s + "."
 
-        self.sw.mdcp.kp_uwagi1 = self.divide_into_rows(self.sw.mdcp.kp_uwagi1, 90)
+        # self.sw.mdcp.kp_uwagi1 = self.divide_into_rows(self.sw.mdcp.kp_uwagi1, 90)
         # deb
         print(f'{self.sw.mdcp.kp_uwagi1 = }')
 
@@ -1285,7 +1294,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.mdcp.kp_uwagi2 += " w § 16 pkt 1 rozporz¹dzenia Ministra Rozwoju"
         self.sw.mdcp.kp_uwagi2 += " z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429."
 
-        self.sw.mdcp.kp_uwagi2 = self.divide_into_rows(self.sw.mdcp.kp_uwagi2, 90)
+        # self.sw.mdcp.kp_uwagi2 = self.divide_into_rows(self.sw.mdcp.kp_uwagi2, 90)
 
         self.tx_mdcp_kp_uwagi2.delete( 1.0, tk.END)
         self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.mdcp.kp_uwagi2)
@@ -1295,7 +1304,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.mdcp.kp_uwagi3 += ' z tytu³u s³u¿ebnoœci gruntowych (§ 30 ust. 2 pkt 4 rozporz¹dzenia'
         self.sw.mdcp.kp_uwagi3 += ' Ministra Rozwoju z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429).'
 
-        self.sw.mdcp.kp_uwagi3 = self.divide_into_rows(self.sw.mdcp.kp_uwagi3, 90)
+        # self.sw.mdcp.kp_uwagi3 = self.divide_into_rows(self.sw.mdcp.kp_uwagi3, 90)
 
         self.tx_mdcp_kp_uwagi3.delete(1.0, tk.END)
         self.tx_mdcp_kp_uwagi3.insert(tk.END, self.sw.mdcp.kp_uwagi3)
