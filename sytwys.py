@@ -31,15 +31,13 @@ import dzialki
 """
 
 
-
-
-class   Sytwys( object):
+class Sytwys( object):
     '''
     obs³uga roboty  s-w
 
 
     '''
-    def __init__( self):
+    def __init__(self):
 
         # sta³e,    ale na razie jako   zwykle pola
         self.DIR_TABELKI         =  "\\tabelki\\"
@@ -153,6 +151,7 @@ class   Sytwys( object):
         self.FILE_GODLA  =  "godla2swInfo.txt"
         self.FILE_DZIALKI_ERGO = "dz_ergo.txt"
         self.FILE_KG_ERGO = "kg.txt"
+        self.FILE_KG_AHK = "kg.ahk"
 
         self.sw_dir_nazwa           = ""
         self.sw_plikInfo_fullPath   = ""
@@ -398,3 +397,26 @@ class   Sytwys( object):
         for dz in self.sw_dzialki_ergo_lst:
             print(f'(ergo:) {dz = }')
 
+    def set_defaults(self):
+        """
+        nadaje niektórym atrybutom domyœlne wartoœci, w³aœciwe dla nowej robooty
+
+        !!! funkcja w stanie pocz¹tkowym
+        """
+        self.sw_numer_str = str(self.sw_numer)
+        self.sw_wykonawca = "kp"
+        self.sw_obreb = "Nowa Wieœ-Kl"
+        self.sw_obrebDir = ""
+
+        self.sw_dzialki         = "309, 310 3 , 2000/1, 4, "
+        self.sw_dzialki_lst     = list()
+        self.sw_dzialki_ergo_lst = list()
+        self.sw_dzialka1        = ""
+        self.sw_dzialki_obj = dzialki.Dzialki()
+
+        self.sw_typ             = ""
+        self.sw_idZgl           = ""
+        self.sw_idZgl_jrwa      = ""
+        self.sw_idZgl_nr        = ""
+        self.sw_idZgl_rok       = ""
+        self.sw_skala           = ""

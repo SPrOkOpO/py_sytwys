@@ -77,10 +77,10 @@ class StrukturaKatalogow:
             debugowanie
             -   listing całego  katalogu
         '''
-        print( "---[ sw_dictDirs ]------------------------------------------------")
-        for x   in  self.sw_dictDirs:
-            print( x + "=" + self.sw_dictDirs[x])
-        print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+        print("---[ sw_dictDirs ]------------------------------------------------")
+        for x in self.sw_dictDirs:
+            print(x + "=" + self.sw_dictDirs[x])
+        print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
 
     def utworzStrukture(self):
         '''

@@ -27,10 +27,11 @@ import spdatetime
 import dzialki
 import spprint
 import spstring
+import view.AHKgen
 
 
 class SytwysGUIgrid( tk.Frame):
-    def __init__( self, master, sw, teryt):
+    def __init__(self, master, sw, teryt):
         '''
             do konstruktora przekazujê wskaŸniki:
             -   master: do nadrzêdnej ramki, czyli okna aplikacji;
@@ -39,14 +40,21 @@ class SytwysGUIgrid( tk.Frame):
             ¿eby z wnêtrza klasy móc siê odwo³ywac do pól i metod obiektów
             sw i teryt
         '''
-        super( SytwysGUIgrid, self).__init__(master)
+        super(SytwysGUIgrid, self).__init__(master)
         self.grid()
 
         self.master_frame = master
+
+        # obiekty zainicjowane poza niniejsz¹ klas¹
         self.sw = sw
         self.t = teryt
+
+        #
         self.oPlan = oPlan.OpracowaniePlanistyczne()
         self.godlaX = sekcja.ListaSekcji()
+        self.kg = kGeodety.KontoGeodety()
+
+
         self.rowGr1 = 0
         self.rowGr2 = self.rowGr1 + 16
         self.rowGr3 = self.rowGr1 + 9
@@ -125,14 +133,14 @@ class SytwysGUIgrid( tk.Frame):
         self.frameML = tk.Frame( master, bg="khaki")
         self.frameBL = tk.Frame( master, bg="thistle3")
 
-        self.frameTL.grid( row=0, column=0, sticky="W")
-        self.frameML.grid( row=1, column=0, sticky="W")
-        self.frameBL.grid( row=2, column=0, sticky="W")
+        self.frameTL.grid(row=0, column=0, sticky="W")
+        self.frameML.grid(row=1, column=0, sticky="W")
+        self.frameBL.grid(row=2, column=0, sticky="W")
 
         self.frameTR = tk.Frame( master)
         self.frameMR = tk.Frame( master)
-        self.frameTR.grid( row=0, column=5, sticky="NW")
-        self.frameMR.grid( row=1, column=5, sticky="NW")
+        self.frameTR.grid(row=0, column=5, sticky="NW")
+        self.frameMR.grid(row=1, column=5, sticky="NW")
 
 
         '''
@@ -645,8 +653,17 @@ class SytwysGUIgrid( tk.Frame):
 
         self.sw.inicjujStrukture(self.sw.sw_dir_nazwa)   # old
         self.sw.struktura_sw.sw_dir_abspath = self.sw.sw_dir_nazwa
-        self.sw.struktura_sw.inicjujStrukture() # new
+        self.sw.struktura_sw.inicjujStrukture()  # new
         self.sw.struktura_sw.deb_listujStrukture()
+
+        # zaktualizowanie obiektu kg
+        self.kg.update(self.sw.struktura_sw.sw_dictDirs['kG'],  # œcie¿ka katalogu kG
+                       self.sw.sw_typ,
+                       self.sw.sw_dzialki_obj.source_jew_teryt_do_kG,
+                       self.sw.sw_dzialki_obj.source_obr_nazwa,
+                       self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp,
+                       )
+
 
     def btn_rezygnacja(self):
         # print( "Rezygnacja")
@@ -656,6 +673,14 @@ class SytwysGUIgrid( tk.Frame):
     def zapisz(self):
         self.odczytaj_dane_z_gui()
         self.zapisz_1()
+        # dane = {
+        #     'kG_nazwa_obiektu': '',
+        #     'kG_opis_polozenia': '',
+        #     'kG_nr_uprawnien': '',
+        #     'kG_data': '',
+        # }
+        # view.AHKgen.generate_AHK(self.sw.sw_dir_nazwa, dane)
+
 
     def zapisz_1(self):
         """
@@ -865,26 +890,45 @@ class SytwysGUIgrid( tk.Frame):
             print(f'B³¹d {sys.exc_info()[1]}')
 
         # utworzenie pliku do zg³oszenia ergo (kg.txt)
-        # - dodano odstêp miêdzy wierszami - ³atwiej zaznaczaæ mysz¹
+
+        # stara wersja >> do likwidacji
+        # try:
+        #     with open(self.sw.sw_plikDz_kg_abspath, 'w') as f:
+        #         # nazwa obiektu
+        #         f.write(self.sw.sw_typ + ' ')
+        #         f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
+        #         f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
+        #         f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n\n')
+        #         # opis po³o¿enia
+        #         f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
+        #         f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
+        #         f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n\n')
+        #         # data zakonczenia
+        #         f.write(spdatetime.date_after(1, 0, 0).isoformat() + '\n\n')
+        #         # fraza do wyboru wyra¿eniem
+        #         f.write('"idDzialki" IN ( ' + '\n')
+        #         dzs = list()
+        #         for dz in self.sw.sw_dzialki_ergo_lst:
+        #             dzs.append("'" + dz + "'")
+        #         f.write(",\n".join(dzs) + "\n)\n")
+        # except:
+        #     print("ERR b³¹d zapisu pliku kg.txt")
+        #     print(f'B³¹d {sys.exc_info()[0]}')
+        #     print(f'B³¹d {sys.exc_info()[1]}')
+
         try:
-            with open(self.sw.sw_plikDz_kg_abspath, 'w') as f:
-                # nazwa obiektu
-                f.write(self.sw.sw_typ + ' ')
-                f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
-                f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
-                f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n\n')
-                # opis po³o¿enia
-                f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
-                f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
-                f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n\n')
-                # data zakonczenia
-                f.write(spdatetime.date_after(1, 0, 0).isoformat() + '\n\n')
-                # fraza do wyboru wyra¿eniem
-                f.write('"idDzialki" IN ( ' + '\n')
-                dzs = list()
-                for dz in self.sw.sw_dzialki_ergo_lst:
-                    dzs.append("'" + dz + "'")
-                f.write(",\n".join(dzs) + "\n)\n")
+            with open(self.kg.kgtxt_abspath, 'w') as f:
+                s = self.kg.get_kgtxt_content()
+                f.write(s)
+        except:
+            print("ERR b³¹d zapisu pliku kg.txt")
+            print(f'B³¹d {sys.exc_info()[0]}')
+            print(f'B³¹d {sys.exc_info()[1]}')
+
+        try:
+            with open(self.kg.kgahk_abspath, 'w') as f:
+                s = self.kg.get_kgahk_content()
+                f.write(s)
         except:
             print("ERR b³¹d zapisu pliku kg.txt")
             print(f'B³¹d {sys.exc_info()[0]}')

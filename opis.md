@@ -17,6 +17,13 @@ planowane
 changelog
 =========
 
+2022.10.12 v. 2.1.13
+--------------------
+  * kG: implementacja klasy KontoGeodety (częściowa):
+    - generowanie pliku kg.txt
+    - generowanie pliku AutoHotKey, automatyzującego wypełnianie formularza kG
+    - do zrobienia: generowanie pliku dz_ergo.txt
+
 2022.09.13 v. 2.1.12
 --------------------
   * inw: tekst `?-?-?` jako domyślny nr decyzji i jej data

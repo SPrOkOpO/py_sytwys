@@ -71,8 +71,8 @@ def main():
     sw = sytwys.Sytwys()
 
     prompt = "Podaj dane do utworzenia podkatalogu w SW"
-    nrWersji = dictConstants.dictConstants["NR_WERSJI"]
-    title = "SytWys info " + nrWersji
+    nr_wersji = dictConstants.dictConstants["NR_WERSJI"]
+    title = "SytWys info " + nr_wersji
     master = tk.Tk(screenName=prompt)
     master.title(title)
     master.geometry("1500x900+100+50")
