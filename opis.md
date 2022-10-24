@@ -17,6 +17,15 @@ planowane
 changelog
 =========
 
+2022.10.24 v. 2.2.0
+--------------------
+  * modernizacja interfejsu
+    - zmiana układu ramek
+    - dodanie ramki kG (tylko jedno pole - pomoc w debugowaniu)
+  * usunięcie błędu, polegającego na braku uaktualnienia obiektu kg podczas
+    wczytywania danych z pliku info (był to błąd nieszkodliwy, bo w tym trybie
+    pliki kG nie są zapisywane ?> a może powinny być?)
+
 2022.10.12 v. 2.1.13
 --------------------
   * kG: implementacja klasy KontoGeodety (częściowa):

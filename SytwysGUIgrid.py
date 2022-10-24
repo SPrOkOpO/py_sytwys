@@ -4,7 +4,7 @@
 from tkinter import filedialog
 from tkinter import messagebox
 
-import tkinter  as  tk
+import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.font as tkFont
 import sys
@@ -120,27 +120,50 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_ust5_str          = tk.StringVar()
         self.v_sw_ust6_str          = tk.StringVar()
 
+        #
+        # zmienne zwi¹zane z kG
+        self.v_kg_nazwa_obiektu = tk.StringVar()
+
         self.GC_DIR_SYTWYS = "t:\\sytwys\\"
         self.GC_DIR_LICZNIK = "t:\\sytwys\\AAB__licznik\\"
 
         self.dicWierszePliku = {}
 
+        #
+        # nowy uk³ad
+        # L:          R:
+        #   LTop        RTop
+        #   LMiddle     RMiddle
+        #   L_kG
+        # B:
+        #   LBottom     [RBottom]
+        self.frameL = tk.Frame(master)
+        self.frameR = tk.Frame(master)
+        self.frameB = tk.Frame(master)
+        self.frameL.grid(row=0, column=0, padx=10)
+        self.frameR.grid(row=0, column=1, padx=10)
+        self.frameB.grid(row=1, column=0, columnspan=2, padx=10)
+
+
         # 6 ramek
         # LTop      RTop
         # LMiddle   RMiddle
         # LBottom   RBottom
-        self.frameTL = tk.Frame( master, bg="thistle1")
-        self.frameML = tk.Frame( master, bg="khaki")
-        self.frameBL = tk.Frame( master, bg="thistle3")
+        self.frameTL = ttk.LabelFrame(self.frameL, text='Dane roboty')
+        self.frameML = ttk.LabelFrame(self.frameL, text='Dane inicjalizacyjne')
+        self.frameL_kG = ttk.LabelFrame(self.frameL, text='kG')
+        self.frameTL.grid(row=0, column=0, sticky="N", pady=5)
+        self.frameML.grid(row=1, column=0, sticky="N", pady=5)
+        self.frameL_kG.grid(row=2, column=0, sticky="S", pady=5)
 
-        self.frameTL.grid(row=0, column=0, sticky="W")
-        self.frameML.grid(row=1, column=0, sticky="W")
-        self.frameBL.grid(row=2, column=0, sticky="W")
+        self.frameTR = tk.LabelFrame(self.frameR, text='Sekcje')
+        self.frameMR = tk.LabelFrame(self.frameR, text='Uwagi/mdcp')
+        self.frameTR.grid(row=0, column=0, sticky="N", pady=5)
+        self.frameMR.grid(row=1, column=0, sticky="N", pady=5)
 
-        self.frameTR = tk.Frame( master)
-        self.frameMR = tk.Frame( master)
-        self.frameTR.grid(row=0, column=5, sticky="NW")
-        self.frameMR.grid(row=1, column=5, sticky="NW")
+        self.frameBL = tk.Frame(self.frameB, background='gray20')
+        self.frameBL.grid(row=0, column=0, sticky="EW", pady=5)
+
 
 
         '''
@@ -153,9 +176,12 @@ class SytwysGUIgrid( tk.Frame):
 
         self.createWidgets_frameTL()
         self.createWidgets_frameML()
-        self.createWidgets_frameBL()
+        self.createWidgets_frameL_kG()
+
         self.createWidgets_frameTR()
         self.createWidgets_frameMR()
+
+        self.createWidgets_frameBL()
         # self.createWidgets_frameBR()
 
         # self.inicjuj()
@@ -356,54 +382,63 @@ class SytwysGUIgrid( tk.Frame):
         e_sw_libre_opis.grid(   row=self.rowGr2 +  8, column=1, sticky="W", columnspan=4)
         e_sw_dir_nazwa.grid(    row=self.rowGr2 +  9, column=1, sticky="W", columnspan=4)
 
+    def createWidgets_frameL_kG(self):
+        lab_nazwa_obiektu = tk.Label(self.frameL_kG, text="Nazwa obiektu", anchor="w", width=20).grid(column=0,
+                                                                                               row=0)
+
+        # definicje kontrolek entry
+        e_nazwa_obiektu = tk.Entry(self.frameL_kG, justify="left", width=60, textvariable=self.v_kg_nazwa_obiektu,
+                                     bg="chartreuse2")
+        e_nazwa_obiektu.grid(row=0, column=1)
 
     def createWidgets_frameBL( self):
         butNowaRobota  = tk.Button( self.frameBL, text='Nowa robota',  width =15, command=self.nowaRobota)
-        butInicjuj  = tk.Button( self.frameBL, text='Inicjuj',  width =15, command=self.inicjuj)
-        butWczytaj  = tk.Button( self.frameBL, text='Wczytaj swInfo',   width =15, command=self.wczytaj)
-        butOK       = tk.Button( self.frameBL, text='Zapisz swInfo',        width =15, command=self.zapisz)
+        butInicjuj  = tk.Button( self.frameBL, text='Inicjuj',  width=15, command=self.inicjuj)
+        butWczytaj  = tk.Button( self.frameBL, text='Wczytaj swInfo', width =15, command=self.wczytaj)
+        butOK       = tk.Button( self.frameBL, text='Zapisz swInfo', width =15, command=self.zapisz)
         butCancel   = tk.Button( self.frameBL, text='Zakoñcz',  width =15,  command=self.btn_rezygnacja, bg="salmon")
-        butNowaRobota.grid( row=0, column=0, pady=2, columnspan=1)
-        butInicjuj.grid(    row=0, column=1, pady=2, columnspan=1)
-        butOK.grid(         row=1, column=1, pady=3, columnspan=1)
-        butWczytaj.grid(    row=0, column=2, pady=4, columnspan=1)
-        butCancel.grid(     row=1, column=2, pady=4, columnspan=1)
+        butNowaRobota.grid( row=0, column=0, padx=3, pady=3)
+        butInicjuj.grid(    row=0, column=1, padx=3, pady=3)
+        butWczytaj.grid(    row=0, column=2, padx=3, pady=3)
+        butOK.grid(         row=1, column=1, padx=3, pady=3)
+        butCancel.grid(     row=1, column=2, padx=3, pady=3)
 
 
     def createWidgets_frameTR(self):
-        lab_tx_sekcje = tk.Label(   self.frameTR, text="sekcje:"    , anchor="w", width=20).grid(row=0, column=0, sticky="W")
+        # lab_tx_sekcje = tk.Label(   self.frameTR, text="sekcje:"    , anchor="w", width=20).grid(row=0, column=0, sticky="W")
 
-        butSekcje   = tk.Button( self.frameTR, text='Gen sekcje',   width =15,  command=self.btn_gen_sekcje, bg="salmon")
-        butSekcje.grid( row=0, column=1, pady=0, columnspan=1)
+        butSekcje   = tk.Button( self.frameTR, text='Gen sekcje',   width=15,  command=self.btn_gen_sekcje, bg="salmon")
+        butSekcje.grid(row=0, column=0, pady=2, sticky='E', padx=2)
 
-        self.tx_sekcje          = tk.Text( self.frameTR, height=7, width=100, tabs=3, font=self.font)
-        self.tx_sekcje.grid     ( row=1, column=0, sticky="W", columnspan=3)
+        self.tx_sekcje = tk.Text( self.frameTR, height=7, width=115, tabs=3, font=self.font)
+        self.tx_sekcje.grid( row=1, column=0, sticky="EW", padx=2, pady=2)
 
 
     def createWidgets_frameMR(self):
-        lab_tx_mdcp_kp_uwagi    = tk.Label( self.frameMR, text="mdcp_kp_uwagi:" , anchor="w", width=20).grid(row=1, column=0, sticky="W")
+        # lab_tx_mdcp_kp_uwagi    = tk.Label( self.frameMR, text="mdcp_kp_uwagi:" , anchor="w", width=20).grid(row=1, column=0, sticky="W")
 
         butUwagi1   = tk.Button( self.frameMR, text='Gen u1',   width =15,  command=self.btn_gen_uwagi1, bg="salmon")
         butUwagi2   = tk.Button( self.frameMR, text='Gen u2',   width =15,  command=self.btn_gen_uwagi2, bg="salmon")
         butUwagi3   = tk.Button( self.frameMR, text='Gen u3',   width =15,  command=self.btn_gen_uwagi3, bg="salmon")
-        butUwagi1.grid( row=1, column=1, pady=0, columnspan=1)
-        butUwagi2.grid( row=1, column=2, pady=0, columnspan=1)
-        butUwagi3.grid( row=1, column=3, pady=0, columnspan=1)
+        butUwagi1.grid(row=0, column=0, padx=2, pady=2, sticky='E')
+        butUwagi2.grid(row=0, column=1, padx=2, pady=2, sticky='E')
+        butUwagi3.grid(row=0, column=2, padx=2, pady=2, sticky='E')
+        butUwagi3.configure(state='disabled')
 
         self.tx_mdcp_kp_uwagi1 \
-            = tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+            = tk.Text( self.frameMR, height=6, width=115, tabs=3, font=self.font, wrap=tk.WORD)
         '''
-        lab_tx_mdcp_kp_ust56    = tk.Label( self.frameMR, text="mdcp_kp_ust. 5 i 6:"    , anchor="w", width=20).grid(row=2, sticky="W")
+        lab_tx_mdcp_kp_ust56    = tk.Label( self.frameMR, text="mdcp_kp_ust. 5 i 6:"    , anchor="w", width=215.grid(row=2, sticky="W")
         for etykieta, row, col, status, variable in [ \
             ( "5", 3, 0, tk.NORMAL, v_sw_ust5), ( "6", 3, 1, tk.NORMAL, v_sw_ust6) \
             ]:
             tk.Checkbutton( self.frameMR, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
         '''
         self.tx_mdcp_kp_uwagi2\
-            = tk.Text( self.frameMR, height=6, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+            = tk.Text( self.frameMR, height=6, width=115, tabs=3, font=self.font, wrap=tk.WORD)
 
         self.tx_mdcp_kp_uwagi3\
-            = tk.Text( self.frameMR, height=3, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+            = tk.Text( self.frameMR, height=4, width=115, tabs=3, font=self.font, wrap=tk.WORD)
         # self.tx_mdcp_kp_uwagi3.tag_configure('Arial8', font=('Arial', 8))
         # self.tx_mdcp_kp_uwagi3.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
         # self.tx_mdcp_kp_uwagi3.tag_add( 'bold_italics', 1.0, tk.END)
@@ -412,22 +447,22 @@ class SytwysGUIgrid( tk.Frame):
         # self.tx_mdcp_kp_uwagi3.tag_configure( font='Arial, 8, bold')
 
         self.tx_mdcp_kp_uwagi4\
-            = tk.Text( self.frameMR, height=8, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+            = tk.Text( self.frameMR, height=9, width=115, tabs=3, font=self.font, wrap=tk.WORD)
 
         self.tx_mdcp_kp_uwagi5\
-            = tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+            = tk.Text( self.frameMR, height=2, width=115, tabs=3, font=self.font, wrap=tk.WORD)
         # self.tx_mdcp_kp_uwagi5.tag_configure('bold_italics', font=('Arial', 16, 'bold', 'italic'))
         # self.tx_mdcp_kp_uwagi5.tag_add( 'bold_italics', 1.0, tk.END)
 
         self.tx_mdcp_kp_uwagi6\
-            = tk.Text( self.frameMR, height=2, width=100, tabs=3, font=self.font, wrap=tk.WORD)
+            = tk.Text( self.frameMR, height=3, width=115, tabs=3, font=self.font, wrap=tk.WORD)
 
-        self.tx_mdcp_kp_uwagi1.grid ( row=2, column=0, sticky="W", columnspan=4)
-        self.tx_mdcp_kp_uwagi2.grid ( row=3, column=0, sticky="W", columnspan=4)
-        self.tx_mdcp_kp_uwagi3.grid ( row=4, column=0, sticky="W", columnspan=4)
-        self.tx_mdcp_kp_uwagi4.grid ( row=5, column=0, sticky="W", columnspan=4)
-        self.tx_mdcp_kp_uwagi5.grid ( row=6, column=0, sticky="W", columnspan=4)
-        self.tx_mdcp_kp_uwagi6.grid ( row=7, column=0, sticky="W", columnspan=4)
+        self.tx_mdcp_kp_uwagi1.grid ( row=1, column=0, padx=2, pady=2, sticky="EW", columnspan=3)
+        self.tx_mdcp_kp_uwagi2.grid ( row=2, column=0, padx=2, pady=2, sticky="EW", columnspan=3)
+        self.tx_mdcp_kp_uwagi3.grid ( row=3, column=0, padx=2, pady=2, sticky="EW", columnspan=3)
+        self.tx_mdcp_kp_uwagi4.grid ( row=4, column=0, padx=2, pady=2, sticky="EW", columnspan=3)
+        self.tx_mdcp_kp_uwagi5.grid ( row=5, column=0, padx=2, pady=2, sticky="EW", columnspan=3)
+        self.tx_mdcp_kp_uwagi6.grid ( row=6, column=0, padx=2, pady=2, sticky="EW", columnspan=3)
 
     def nowaRobota(self):
         '''
@@ -662,12 +697,13 @@ class SytwysGUIgrid( tk.Frame):
                        self.sw.sw_dzialki_obj.source_jew_teryt_do_kG,
                        self.sw.sw_dzialki_obj.source_obr_nazwa,
                        self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp,
+                       deb=True
                        )
-
+        self.v_kg_nazwa_obiektu.set(self.kg.nazwa_obiektu)
 
     def btn_rezygnacja(self):
         # print( "Rezygnacja")
-        self.master_frame.destroy
+        self.master_frame.destroy()
         sys.exit()
 
     def zapisz(self):
@@ -918,7 +954,7 @@ class SytwysGUIgrid( tk.Frame):
 
         try:
             with open(self.kg.kgtxt_abspath, 'w') as f:
-                s = self.kg.get_kgtxt_content()
+                s = self.kg.generate_content_kgtxt()
                 f.write(s)
         except:
             print("ERR b³¹d zapisu pliku kg.txt")
@@ -927,10 +963,10 @@ class SytwysGUIgrid( tk.Frame):
 
         try:
             with open(self.kg.kgahk_abspath, 'w') as f:
-                s = self.kg.get_kgahk_content()
+                s = self.kg.generate_content_kgahk()
                 f.write(s)
         except:
-            print("ERR b³¹d zapisu pliku kg.txt")
+            print("ERR b³¹d zapisu pliku kg.ahk")
             print(f'B³¹d {sys.exc_info()[0]}')
             print(f'B³¹d {sys.exc_info()[1]}')
 
@@ -1093,32 +1129,32 @@ class SytwysGUIgrid( tk.Frame):
 
         # aktualizacja zmiennych zwi¹zanych z widgetami
         # =========================================================================
-        self.v_sw_numer         .set( self.sw.sw_numer_str          )
-        self.v_sw_wykonawca     .set( self.sw.sw_wykonawca          )
-        self.v_sw_typ           .set( self.sw.sw_typ                )
-        self.v_sw_skala         .set( self.sw.sw_skala              )
-        self.v_sw_obreb         .set( self.t.nazwa_obr              )
+        self.v_sw_numer         .set(self.sw.sw_numer_str          )
+        self.v_sw_wykonawca     .set(self.sw.sw_wykonawca          )
+        self.v_sw_typ           .set(self.sw.sw_typ                )
+        self.v_sw_skala         .set(self.sw.sw_skala              )
+        self.v_sw_obreb         .set(self.t.nazwa_obr              )
         # tu powinien byæ obrêb-teryt
         # self.v_sw_obrebListBox
-        self.v_sw_dzialki       .set( self.sw.sw_dzialki            )
+        self.v_sw_dzialki       .set(self.sw.sw_dzialki            )
         self.v_sw_ust5.set(int(self.sw.mdcp.ust5))
         self.v_sw_ust6.set(int(self.sw.mdcp.ust6))
-        # self.v_sw_idZgl         .set( self.sw.sw_idZgl              )   #<== do likwidacji
-        self.v_sw_idZgl_jrwa    .set( self.sw.sw_idZgl_jrwa         )
-        self.v_sw_idZgl_nr      .set( self.sw.sw_idZgl_nr           )
-        self.v_sw_idZgl_rok     .set( self.sw.sw_idZgl_rok          )
+        # self.v_sw_idZgl         .set(self.sw.sw_idZgl              )   #<== do likwidacji
+        self.v_sw_idZgl_jrwa    .set(self.sw.sw_idZgl_jrwa         )
+        self.v_sw_idZgl_nr      .set(self.sw.sw_idZgl_nr           )
+        self.v_sw_idZgl_rok     .set(self.sw.sw_idZgl_rok          )
 
-        self.v_sw_powiat_teryt  .set( self.t.terytF_pow     )
-        self.v_sw_powiat_nazwa  .set( self.t.nazwa_pow      )
-        self.v_sw_jEw_teryt     .set( self.t.terytF_jew     )
-        self.v_sw_jEw_nazwa     .set( self.t.nazwa_jew      )
-        self.v_sw_obreb_teryt   .set( self.t.teryt_obr      )
-        self.v_sw_obreb_nazwa   .set( self.t.nazwa_obr      )
-        self.v_sw_obreb_dir     .set( self.t.nazwaDir_obr   )
+        self.v_sw_powiat_teryt  .set(self.t.terytF_pow     )
+        self.v_sw_powiat_nazwa  .set(self.t.nazwa_pow      )
+        self.v_sw_jEw_teryt     .set(self.t.terytF_jew     )
+        self.v_sw_jEw_nazwa     .set(self.t.nazwa_jew      )
+        self.v_sw_obreb_teryt   .set(self.t.teryt_obr      )
+        self.v_sw_obreb_nazwa   .set(self.t.nazwa_obr      )
+        self.v_sw_obreb_dir     .set(self.t.nazwaDir_obr   )
 
-        self.v_sw_libre_wykon   .set( self.sw.sw_libre_wykon        )
-        self.v_sw_libre_opis    .set( self.sw.sw_libre_opis         )
-        self.v_sw_dir_nazwa     .set( self.sw.sw_dir_nazwa          )
+        self.v_sw_libre_wykon   .set(self.sw.sw_libre_wykon        )
+        self.v_sw_libre_opis    .set(self.sw.sw_libre_opis         )
+        self.v_sw_dir_nazwa     .set(self.sw.sw_dir_nazwa          )
 
         self.v_sw_inw_obiekt        .set(self.sw.inw.obiekt        )
         self.v_sw_inw_obiektDoUwag  .set(self.sw.inw.obiekt_do_uwag)
@@ -1126,7 +1162,7 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_inw_decZnak       .set(self.sw.inw.dec_znak      )
         self.v_sw_inw_decData       .set(self.sw.inw.dec_data      )
 
-        # self.v_sw_mdcp_kp_uwagi1.set( self.sw.sw_mdcp_kp_uwagi1   )
+        # self.v_sw_mdcp_kp_uwagi1.set(self.sw.sw_mdcp_kp_uwagi1   )
         # self.v_sw_mdcp_kp_uwagi2.set( self.sw.sw_mdcp_kp_uwagi2   )
         # self.v_sw_mdcp_kp_uwagi3.set( self.sw.sw_mdcp_kp_uwagi3   )
         # self.v_sw_mdcp_kp_uwagi4.set( self.sw.sw_mdcp_kp_uwagi4   )
@@ -1182,8 +1218,18 @@ class SytwysGUIgrid( tk.Frame):
         self.tx_mdcp_kp_uwagi5.insert( tk.END, self.sw.mdcp.kp_uwagi5)
         self.tx_mdcp_kp_uwagi6.insert( tk.END, self.sw.mdcp.kp_uwagi6)
 
-        # self.master_frame.destroy
-        # sys.exit()
+        #
+        # >> wczytanie albo inicjacja danych obiektu kg
+        kG_dir, basename = os.path.split(self.sw.sw_plikInfo_fullPath)
+        kG_dir = os.path.join(kG_dir, 'kG')
+        self.kg.update(kG_dir,  #$ self.sw.struktura_sw.sw_dictDirs['kG'],
+                       self.sw.sw_typ,
+                       self.t.teryt_jew,  # self.sw.sw_dzialki_obj.source_jew_teryt_do_kG,
+                       self.t.nazwa_obr,  # self.sw.sw_dzialki_obj.source_obr_nazwa,
+                       self.sw.sw_dzialki,  # self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp,
+                       deb=True
+                       )
+        self.v_kg_nazwa_obiektu.set(self.kg.nazwa_obiektu)
 
     def btn_gen_sekcje( self):
         '''
