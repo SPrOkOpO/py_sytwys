@@ -17,6 +17,10 @@ planowane
 changelog
 =========
 
+2023.06.16 v. 2.2.1
+--------------------
+  * kG - zmiana formuły obliczania: data zakończenia = today + 364 dni 
+
 2022.10.24 v. 2.2.0
 --------------------
   * modernizacja interfejsu
