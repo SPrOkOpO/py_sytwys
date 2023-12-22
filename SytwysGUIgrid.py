@@ -32,14 +32,14 @@ import view.AHKgen
 
 class SytwysGUIgrid( tk.Frame):
     def __init__(self, master, sw, teryt):
-        '''
+        """
             do konstruktora przekazujê wskaŸniki:
             -   master: do nadrzêdnej ramki, czyli okna aplikacji;
             -   sw:     do obiektu klasy Sytwys;
             -   teryt:  do obiektu klasy Teryt;
             ¿eby z wnêtrza klasy móc siê odwo³ywac do pól i metod obiektów
             sw i teryt
-        '''
+        """
         super(SytwysGUIgrid, self).__init__(master)
         self.grid()
 
@@ -75,6 +75,7 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_skala             = tk.StringVar()
         self.v_sw_obreb             = tk.StringVar()
         self.v_sw_obrebListBox      = tk.StringVar()
+        self.v_sw_obreb_kandydaci   = tk.StringVar()
         self.v_sw_dzialki           = tk.StringVar()
         self.v_sw_idZgl_jrwa        = tk.StringVar()
         self.v_sw_idZgl_nr          = tk.StringVar()
@@ -166,13 +167,13 @@ class SytwysGUIgrid( tk.Frame):
 
 
 
-        '''
+        """
         self.tx_mdcp_kp_uwagi1
         self.tx_mdcp_kp_uwagi2
         self.tx_mdcp_kp_uwagi3
         self.tx_mdcp_kp_uwagi4
         self.tx_mdcp_kp_uwagi5
-        '''
+        """
 
         self.createWidgets_frameTL()
         self.createWidgets_frameML()
@@ -188,6 +189,23 @@ class SytwysGUIgrid( tk.Frame):
         # self.wczytaj()
 
     def eventHandler_entry_obreb(self, event):
+        """
+
+        dictObr_nazwaObrWpisana2teryt
+        - s³ownik dekoduj¹cy wpisany tekst na teryt
+        -------------------------------------------
+         "£obodno"                        : "240601_5.0009",
+         "Nowa Wieœ-Kl"                   : "240601_5.0010",
+         "Nowa Wieœ K"                    : "240601_5.0010",
+
+
+
+
+        - wpisanie 4 znaków
+        - 
+
+        
+        """
         # wyczyszczenie powi¹zanego ListBoxu
         lista = ""
         self.v_sw_obrebListBox.set(lista)
@@ -195,32 +213,25 @@ class SytwysGUIgrid( tk.Frame):
         # pobranie nazwy obrêbu i jej wyczyszczenie
         # - czyszczenie na razie nie dzia³a dobrze na 100%
         obr = self.v_sw_obreb.get()
-        obr = spstring.clean_string(obr, '\t\n ,;#', ' ')
+        obr = obr.strip()
+        obr = obr.replace('.', '')
+        obr = obr.replace('obr', '')
+        # obr = spstring.clean_string(obr, '\t\n,;#', ' ')
         self.v_sw_obreb.set(obr)
 
         # obr = self.e3.get()
-        if len(obr) >= 3:
-            print("event + tekst %s" % (obr))
-            '''
-            if obr in self.t.dictObr_nazwaObrWpisana2teryt:
-                print( "Obrêb %s jest w s³owniku" % ( obr))
-            else:
-                print( "Obrêbu %s NIE MA w s³owniku" % ( obr))
-            '''
-            liczbaKluczy = 0
-            lista = ""
-            listaTerytow = []
-            for k in self.t.dictObr_nazwaObrWpisana2teryt.keys():
-                # print( "k=%s" % ( k))
-                # klucz = "XXX"
-                klucz = k[0:len(obr)]
-                if klucz == obr:
-                    liczbaKluczy += 1
-                    print("klucz %i: %s, teryt: %s" % (liczbaKluczy, obr, self.t.dictObr_nazwaObrWpisana2teryt[k]))
-                    listaTerytow.append(self.t.dictObr_nazwaObrWpisana2teryt[k])
-
-            # print( "event + obrCzesc: %s, liczba kluczy: %i" % ( obr, liczbaKluczy))
-
+        if len(obr) >= 1:
+            # deb-
+            # print("event + tekst %s" % (obr))
+            nazwy = [k for k
+                     in self.t.dictObr_nazwaObrWpisana2teryt.keys()
+                     if k[0:len(obr)] == obr
+                     ]
+            liczbaKluczy = len(nazwy)
+            listaTerytow = [v for k, v
+                            in self.t.dictObr_nazwaObrWpisana2teryt.items()
+                            if k in nazwy
+                            ]
 
             listaTerytow.sort()
             listaUnikalnych = []
@@ -228,10 +239,13 @@ class SytwysGUIgrid( tk.Frame):
                 if teryt in listaUnikalnych:
                     pass
                 else:
-                    listaUnikalnych.append( teryt)
+                    listaUnikalnych.append(teryt)
             for teryt in listaUnikalnych:
                 lista = lista + " " + teryt
-            self.v_sw_obrebListBox.set( lista)
+            self.v_sw_obrebListBox.set(lista)
+
+            # self.v_sw_obreb_kandydaci = tk.StringVar(value=nazwy)
+            self.v_sw_obreb_kandydaci.set(nazwy)
 
     def eventHandler_entry_wykonawca(self, event):
         """
@@ -250,14 +264,14 @@ class SytwysGUIgrid( tk.Frame):
 
     def createWidgets_frameTL(self):
         #self.rowGr1 = 0
-        lab_sw_numer            = tk.Label( self.frameTL, text="Nr "            , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 0)
-        lab_sw_wykonawca        = tk.Label( self.frameTL, text="Wykonawca"      , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 1)
-        lab_sw_typ              = tk.Label( self.frameTL, text="Typ"            , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 2)
-        lab_sw_skala            = tk.Label( self.frameTL, text="Skala (mian.)"  , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 3)
-        lab_sw_obreb            = tk.Label( self.frameTL, text="Obreb "         , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 4)
-        lab_sw_obrebLBox        = tk.Label( self.frameTL, text="Obreb - teryty" , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 5)
-        lab_sw_dzialki          = tk.Label( self.frameTL, text="Dzialki "       , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
-        lab_sw_idZgl            = tk.Label( self.frameTL, text="IdZgl "         , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 8)
+        lab_sw_numer     = tk.Label( self.frameTL, text="Nr "            , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 0)
+        lab_sw_wykonawca = tk.Label( self.frameTL, text="Wykonawca"      , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 1)
+        lab_sw_typ       = tk.Label( self.frameTL, text="Typ"            , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 2)
+        lab_sw_skala     = tk.Label( self.frameTL, text="Skala (mian.)"  , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 3)
+        lab_sw_obreb     = tk.Label( self.frameTL, text="Obreb "         , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 4)
+        lab_sw_obrebLBox = tk.Label( self.frameTL, text="Obreb - teryty" , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 5)
+        lab_sw_dzialki   = tk.Label( self.frameTL, text="Dzialki "       , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
+        lab_sw_idZgl     = tk.Label( self.frameTL, text="IdZgl "         , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 8)
 
         e1  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_numer       , bg="greenyellow")
         e2  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_wykonawca   )
@@ -265,8 +279,12 @@ class SytwysGUIgrid( tk.Frame):
 
         # typ
         # ttyp = ( "mdcp", "inw", "podz", "inny") <-- tak by³o przed kG...
-        combobox = ttk.Combobox(self.frameTL, textvariable=self.v_sw_typ, state="readonly",
-                                values=kG_cele_pracy.kG_cele_pracy)
+        combobox = ttk.Combobox(self.frameTL,
+                                textvariable=self.v_sw_typ,
+                                state="readonly",
+                                values=kG_cele_pracy.kG_cele_pracy,
+                                height=len(kG_cele_pracy.kG_cele_pracy),
+                                )
                                 #  postcommand=self.eventHandler_combobox_celpracy)
                                 #, label_text="Typ"
                                 #, labelpos="wn", listbox_width=8, dropdown=0, \
@@ -275,23 +293,30 @@ class SytwysGUIgrid( tk.Frame):
         #combobox.bind("<FocusOut>", self.eventHandler_combobox_celpracy)
         combobox.bind('<<ComboboxSelected>>', self.eventHandler_combobox_celpracy)
 
-        e7 = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_skala       )
+        e7 = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable=self.v_sw_skala)
 
         # entry OBRÊB
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        # -
-        self.e3 = tk.Entry( self.frameTL, justify="left",   width=40    , textvariable  = self.v_sw_obreb       )
+        # ---------------------------------------------------------------------
+        self.e3 = tk.Entry(self.frameTL, justify="left", width=40, textvariable=self.v_sw_obreb)
         # e3.bind('<Button-1>', self.eventHandler_entry_obreb)
         self.e3.bind('<Key>', self.eventHandler_entry_obreb)
 
         # listBox dla obrêbów
-        self.listBox_obr = tk.Listbox( self.frameTL, height=4, width=15, listvariable=self.v_sw_obrebListBox)
+        self.listBox_obr = tk.Listbox(self.frameTL,
+                                      height=4, width=15,
+                                      listvariable=self.v_sw_obrebListBox)
+        self.listBox_obr_kandydaci = tk.Listbox(self.frameTL,
+                                                height=10, width=30,
+                                                listvariable=self.v_sw_obreb_kandydaci)
 
+
+        # dzia³ki
+        # ---------------------------------------------------------------------
         e4  = tk.Entry( self.frameTL, justify="left",   width=60 , textvariable = self.v_sw_dzialki )
         # e5 = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_typ     )
 
         # id Zg³
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        # ---------------------------------------------------------------------
         # do likwidacji:
         # e6 = tk.Entry( self.frameTL, justify="left",   width=40    , textvariable  = self.v_sw_idZgl       )
         e6_1    = tk.Entry( self.frameTL, justify="left",   width=15 , textvariable = self.v_sw_idZgl_jrwa  )
@@ -304,7 +329,8 @@ class SytwysGUIgrid( tk.Frame):
 
         e7.grid(            row=self.rowGr1 + 3, column=1, sticky="W")
         self.e3.grid(       row=self.rowGr1 + 4, column=1, sticky="W")
-        self.listBox_obr.grid(  row=self.rowGr1 + 5, column=1, sticky="W", columnspan=4)
+        self.listBox_obr.grid(row=self.rowGr1 + 5, column=1, sticky="W", columnspan=4)
+        self.listBox_obr_kandydaci.grid(row=self.rowGr1, column=2, sticky="WE", columnspan=2, rowspan=6)
 
         e4.grid(            row=self.rowGr1 + 6, column=1, sticky="W", columnspan=4)
         # e5.grid(   row=rowGr1 + 22, column=1, sticky="W")
@@ -427,13 +453,13 @@ class SytwysGUIgrid( tk.Frame):
 
         self.tx_mdcp_kp_uwagi1 \
             = tk.Text( self.frameMR, height=6, width=115, tabs=3, font=self.font, wrap=tk.WORD)
-        '''
+        """
         lab_tx_mdcp_kp_ust56    = tk.Label( self.frameMR, text="mdcp_kp_ust. 5 i 6:"    , anchor="w", width=215.grid(row=2, sticky="W")
         for etykieta, row, col, status, variable in [ \
             ( "5", 3, 0, tk.NORMAL, v_sw_ust5), ( "6", 3, 1, tk.NORMAL, v_sw_ust6) \
             ]:
             tk.Checkbutton( self.frameMR, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
-        '''
+        """
         self.tx_mdcp_kp_uwagi2\
             = tk.Text( self.frameMR, height=6, width=115, tabs=3, font=self.font, wrap=tk.WORD)
 
@@ -465,11 +491,11 @@ class SytwysGUIgrid( tk.Frame):
         self.tx_mdcp_kp_uwagi6.grid ( row=6, column=0, padx=2, pady=2, sticky="EW", columnspan=3)
 
     def nowaRobota(self):
-        '''
+        """
         skanuje katalog z plikami licznika i ustala numer dla nowej roboty
         -   ma zastosowanie w przypadku rejestracji kilku robót po kolei - nie trzeba uruchamiac
             programu dla kazdej roboty
-        '''
+        """
         self.sw.ustalNrSW(dictConstants.dictConstants["GC_DIR_LICZNIK"])
         self.sw.sw_numer_str = str(self.sw.sw_numer)
         self.v_sw_numer.set(self.sw.sw_numer_str)
@@ -551,7 +577,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.mdcp.kp_uwagi6 = self.tx_mdcp_kp_uwagi6.get( 1.0, tk.END)
 
     def inicjuj(self):
-        '''
+        """
         na  podstawie wprowadzonych danych wype³nia odpowiednie pola
 
         1)  najpierw ustalenie wybranego obrêbu
@@ -565,7 +591,7 @@ class SytwysGUIgrid( tk.Frame):
                     MsgBox z wezwaniem do usera
 
         NIE TWORZY KATALOGU s-w! To robi funkcja zapisz().
-        '''
+        """
 
         # 1a,b)
         if self.listBox_obr.size() > 1:
@@ -1232,12 +1258,12 @@ class SytwysGUIgrid( tk.Frame):
         self.v_kg_nazwa_obiektu.set(self.kg.nazwa_obiektu)
 
     def btn_gen_sekcje( self):
-        '''
+        """
         -   wczytanie gode³ z pliku "godla2swInfo.txt" do obiektu sekcje
         -   utworzenie s³ownika gode³ postaci:
                     [godlo_03]=6.142.28.02.2.2
         -   utworzenie propozycji treœci tekstu sw.sw_sekcje
-        '''
+        """
         # deb
         # self.sw.sw_plikGodla2swInfo_fullPath = "t:\sytwys\883_rg_1909_BorZapilski-kan_inw\godla2swInfo.txt"
         # print( "godla2swInfo.txt= >%s<" % (self.sw.sw_plikGodla2swInfo_fullPath))
@@ -1262,12 +1288,12 @@ class SytwysGUIgrid( tk.Frame):
         # utworzenie tekstu sw_sekcje
         #
         self.sw.sw_sekcje = ""
-        '''
+        """
         -   wiersze numerowane od "0"
         -   i == nr god³a w wierszu
         -   j == nr kolejny god³a
         -   sStart == trzy spacje na pocz. wiersz, poza wierszem 0
-        '''
+        """
         i = 0
         j = 0
         iOstatnia = len( self.godlaX.g_lista)
@@ -1409,10 +1435,10 @@ class SytwysGUIgrid( tk.Frame):
 
 
     def get_RRMM(self):
-        '''
+        """
             funkcja zwraca  string RRMM (1903), potrzebny   do  utworzenia
             sciezki dla katalogu    sw
-        '''
+        """
         x = datetime.datetime.now()
         rrmm = x.strftime("%y%m")
         return rrmm

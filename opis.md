@@ -17,6 +17,17 @@ planowane
 changelog
 =========
 
+2023.12.21 v. 2.3.1
+--------------------
+  * sytwys.py - ustalanie numeru sw_numer z dodatkową kontrolą numerów
+    istniejących katalogów sw
+  * SytwysGUIgrid.py
+    - dodano podgląd obrębów o nazwach pasujących do aktualnie wpisywanego
+      tekstu nazwy obr.
+    - w eventHandler zmieniono sposób czyszczenia wpisywanego tekstu (użyta
+      wcześniej funkcja z spstring nie działała dobrze - problem z niepotrzebnym
+      usuwaniem wszystkich spacji)
+
 2023.06.16 v. 2.2.1
 --------------------
   * kG - zmiana formuły obliczania: data zakończenia = today + 364 dni 

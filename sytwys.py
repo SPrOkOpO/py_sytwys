@@ -5,6 +5,8 @@ import sys
 #import datetime
 import shutil
 
+from tkinter import messagebox
+
 import sytwys_elements
 sys.path.append(r"i:\aPy\LibSP")
 sys.path.append(r"i:\aPy\LibSP\sytwys")
@@ -32,11 +34,11 @@ import dzialki
 
 
 class Sytwys( object):
-    '''
+    """
     obs³uga roboty  s-w
 
 
-    '''
+    """
     def __init__(self):
 
         # sta³e,    ale na razie jako   zwykle pola
@@ -205,7 +207,7 @@ class Sytwys( object):
         =====================================================================
         """
         
-        ''' 
+        """ 
         czêœæ wywiadowcza:
         p = "t:\\sytwys\\826_kp_1904_Biezen_7-24\\sw_826_info.txt"
         print( "---[ path ]--------------------------------------------------------")
@@ -214,7 +216,7 @@ class Sytwys( object):
         print( "%s" % (os.path.dirname( p)))
         print( "join = %s" % ( os.path.join( os.path.dirname( p), os.path.basename( p))))
         print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
-        '''
+        """
         p = self.sw_plikInfo_fullPath
         self.sw_plikTytNagl_fullPath = os.path.join(os.path.dirname(p), self.FILE_TYTNAGL)
         self.sw_plikTytul_fullPath  = os.path.join( os.path.dirname(p), self.FILE_TYTUL)
@@ -230,39 +232,69 @@ class Sytwys( object):
         
         
     
-    def ustalNrSW( self, adir_licznik):
-        '''
+    def ustalNrSW( self, adir_licznik, dir_sytwys):
+        """
          ustalenie  numeru dla nowej roboty s-w
          -  polega na sprawdzeniu, jaki jest ostatni plik
             w katalogu DIR_LICZNIK i odczytanie jego nru
             t:\sytwys\AAB__licznik\909___kp_2001_Bagna_55_inw.nr
+         - dodatkowo sprawdzany jest ostatni katalog sw
+           - ta metoda mo¿e byæ zawodna w sytuacji, kiedy robota o najwy¿szym
+             numerze zosta³a ju¿ zakoñczona i przeniesiona do archiwum
+
 
          adir_licznik :: katalog z plikami licznikowymi
         =====================================================================
-        '''
+        """
         # deb - zawartoœæ katalogu:
         # fileList = [f for f in os.listdir(adir_licznik)]
         # [print(f) for f in fileList]
         # print('----1')
 
         # lista numerów wyekstrachowanych z nazw plików i katalogów
-        num_list = [f.split('_')[0] for f in os.listdir(adir_licznik)]
-        self.sw_numer = -1
-        for nr_str in num_list:
-            # deb
-            # print(f'{nr_str = }')
-            if int(nr_str) > self.sw_numer:
-                self.sw_numer = int(nr_str)
-        self.sw_numer = self.sw_numer + 1
-        #deb
-        print("Numer licznika dla roboty: %d" % (self.sw_numer))
+        # - pliki maj¹ nazwy typu:
+        #   1300___kp_2301_Klobuck_3512.nr
+        #   ostatni numer = 1300
+        num_list = [int(f.split('_')[0]) for f in os.listdir(adir_licznik)]
+        self.sw_numer = max(num_list) + 1
+
+        # numer dekodowany z nazwy katalogu sytwys
+        # 1385_kp_2309_Wilkowiecko_616-2
+        # ?> tutaj jest zastosowany myk, polegaj¹cy na ograniczeniu zawartoœci
+        #    listy do nazw, które maj¹ cztery znaki w czêœci pierwszej przed
+        #    znakiem `_` - tak jest w przypadku nazw katalogów sw
+        num_list = [int(f.split('_')[0]) for f in os.listdir(dir_sytwys) if len(f.split('_')[0]) == 4]
+        sw_numer_alternative = max(num_list) + 1
+
+        # deb
+        print(f'{self.sw_numer=} vs {sw_numer_alternative=}')
+
+        if self.sw_numer != sw_numer_alternative:
+            msg = f'{self.sw_numer=}\n{sw_numer_alternative=}\n'
+            msg += f'Y: zatwierdziæ numer {self.sw_numer=}\n'
+            msg += f'N: zatwierdziæ numer {sw_numer_alternative=}\n'
+            msg += f'C: raise Exception()?'
+            response = messagebox.askquestion(
+                'Problem z numerwem sw',
+                msg, type=messagebox.YESNOCANCEL, )
+            if response == messagebox.YES:
+                # deb
+                print(f"1 Wybrany numer licznika dla roboty: {self.sw_numer}")
+            elif response == messagebox.NO:
+                self.sw_numer = sw_numer_alternative
+                print(f"1 Wybrany numer licznika dla roboty: {self.sw_numer}")
+            else:
+                raise Exception()
+        # deb
+        print(f"2 Numer licznika dla roboty: {self.sw_numer}")
+
 
 
     def inicjujStrukture( self, asw_dir_nazwa):
-        '''
+        """
             dot. struktury katalogów i plików sw
             przypisanie odpowiednich wartoœci do s³ownika katalogów
-        '''
+        """
         self.sw_dictDirs[   "dane_ergo"             ] = asw_dir_nazwa   + "\\dane_ergo\\"
         self.sw_dictDirs[   "dane_wyk"              ] = asw_dir_nazwa   + "\\dane-" + self.sw_wykonawca + "\\"
         self.sw_dictDirs[   "dane_wyk_oryg"         ] = self.sw_dictDirs[ "dane_wyk"] + "_oryg\\"
@@ -290,10 +322,10 @@ class Sytwys( object):
     
     
     def deb_listujStrukture( self):
-        '''
+        """
             debugowanie
             -   listing ca³ego  katalogu
-        '''
+        """
         print( "---[ sw_dictDirs ]------------------------------------------------")
         for x   in  self.sw_dictDirs:
             print( x + "=" + self.sw_dictDirs[x])
@@ -301,12 +333,12 @@ class Sytwys( object):
 
 
     def utworzStrukture(    self):
-        '''
+        """
         >>  trzeba dorobiæ: 
             -   sprawdzenie, czy te katalogi istniej¹
             -   funkcjê, która skasuje b³êdnie za³o¿on¹ strukturê
         
-        '''   
+        """   
         # utworzenie struktury katalogów
         #-------------------------------------------------------
         os.makedirs(self.sw_dictDirs[ "dane_ergo"          ])

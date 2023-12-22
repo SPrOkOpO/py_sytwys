@@ -92,7 +92,9 @@ def main():
     # uruchomienia
     # ---------------------------------------------------------------------
     if args.tryb == 'nowa':
-        sw.ustalNrSW(dictConstants.dictConstants["GC_DIR_LICZNIK"])
+        sw.ustalNrSW(
+            dictConstants.dictConstants["GC_DIR_LICZNIK"],
+            dictConstants.dictConstants["GC_DIR_SYTWYS"])
         # testowe wype³nienie kontrolek entry
         sw.sw_numer_str = str(sw.sw_numer)
         sw.sw_wykonawca = "kp"
