@@ -261,9 +261,14 @@ class Sytwys( object):
         # numer dekodowany z nazwy katalogu sytwys
         # 1385_kp_2309_Wilkowiecko_616-2
         # ?> tutaj jest zastosowany myk, polegaj¹cy na ograniczeniu zawartoœci
-        #    listy do nazw, które maj¹ cztery znaki w czêœci pierwszej przed
-        #    znakiem `_` - tak jest w przypadku nazw katalogów sw
-        num_list = [int(f.split('_')[0]) for f in os.listdir(dir_sytwys) if len(f.split('_')[0]) == 4]
+        #    listy do nazw, które:
+        #    - maj¹ cztery znaki w czêœci pierwszej przed znakiem `_` - tak
+        #      jest w przypadku nazw katalogów sw
+        #    - pierwszy znak czêœci pierwszej, to `1`
+        num_list = [int(f.split('_')[0])
+                    for f
+                    in os.listdir(dir_sytwys)
+                    if len(f.split('_')[0]) == 4 and f.split('_')[0][0] == '1']
         sw_numer_alternative = max(num_list) + 1
 
         # deb

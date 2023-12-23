@@ -17,8 +17,8 @@ planowane
 changelog
 =========
 
-2023.12.21 v. 2.3.1
---------------------
+2023.12.21 v. 2.3.1-3
+---------------------
   * sytwys.py - ustalanie numeru sw_numer z dodatkową kontrolą numerów
     istniejących katalogów sw
   * SytwysGUIgrid.py
