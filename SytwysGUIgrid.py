@@ -197,14 +197,6 @@ class SytwysGUIgrid( tk.Frame):
          "£obodno"                        : "240601_5.0009",
          "Nowa Wieœ-Kl"                   : "240601_5.0010",
          "Nowa Wieœ K"                    : "240601_5.0010",
-
-
-
-
-        - wpisanie 4 znaków
-        - 
-
-        
         """
         # wyczyszczenie powi¹zanego ListBoxu
         lista = ""
@@ -273,7 +265,7 @@ class SytwysGUIgrid( tk.Frame):
         lab_sw_dzialki   = tk.Label( self.frameTL, text="Dzialki "       , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
         lab_sw_idZgl     = tk.Label( self.frameTL, text="IdZgl "         , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 8)
 
-        e1  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_numer       , bg="greenyellow")
+        self.entry_nr_sytwys  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_numer       , bg="greenyellow")
         e2  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_wykonawca   )
         # zbêdny: e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
 
@@ -297,7 +289,10 @@ class SytwysGUIgrid( tk.Frame):
 
         # entry OBRÊB
         # ---------------------------------------------------------------------
-        self.e3 = tk.Entry(self.frameTL, justify="left", width=40, textvariable=self.v_sw_obreb)
+        self.e3 = tk.Entry(self.frameTL,
+                           justify="left",
+                           width=25,
+                           textvariable=self.v_sw_obreb)
         # e3.bind('<Button-1>', self.eventHandler_entry_obreb)
         self.e3.bind('<Key>', self.eventHandler_entry_obreb)
 
@@ -306,7 +301,7 @@ class SytwysGUIgrid( tk.Frame):
                                       height=4, width=15,
                                       listvariable=self.v_sw_obrebListBox)
         self.listBox_obr_kandydaci = tk.Listbox(self.frameTL,
-                                                height=10, width=30,
+                                                height=10, width=25,
                                                 listvariable=self.v_sw_obreb_kandydaci)
 
 
@@ -323,14 +318,14 @@ class SytwysGUIgrid( tk.Frame):
         e6_2    = tk.Entry( self.frameTL, justify="left",   width=6 , textvariable  = self.v_sw_idZgl_nr        )
         e6_3    = tk.Entry( self.frameTL, justify="left",   width=6 , textvariable  = self.v_sw_idZgl_rok   )
 
-        e1.grid(            row=self.rowGr1 + 0, column=1, sticky="W")
+        self.entry_nr_sytwys.grid(            row=self.rowGr1 + 0, column=1, sticky="W")
         e2.grid(            row=self.rowGr1 + 1, column=1, sticky="W")
         combobox.grid(      row=self.rowGr1 + 2, column=1, sticky="W")
 
         e7.grid(            row=self.rowGr1 + 3, column=1, sticky="W")
         self.e3.grid(       row=self.rowGr1 + 4, column=1, sticky="W")
         self.listBox_obr.grid(row=self.rowGr1 + 5, column=1, sticky="W", columnspan=4)
-        self.listBox_obr_kandydaci.grid(row=self.rowGr1, column=2, sticky="WE", columnspan=2, rowspan=6)
+        self.listBox_obr_kandydaci.grid(row=self.rowGr1, column=2, sticky="W", columnspan=2, rowspan=6)
 
         e4.grid(            row=self.rowGr1 + 6, column=1, sticky="W", columnspan=4)
         # e5.grid(   row=rowGr1 + 22, column=1, sticky="W")
@@ -362,10 +357,10 @@ class SytwysGUIgrid( tk.Frame):
         e_sw_inw_decZnak        = tk.Entry( self.frameTL,   justify="left", width=40, textvariable  = self.v_sw_inw_decZnak         , bg="white")
         e_sw_inw_decData        = tk.Entry( self.frameTL,   justify="left", width=40, textvariable  = self.v_sw_inw_decData         , bg="white")
 
-        e_sw_inw_obiekt.grid        ( row=self.rowGr3 + 0, column=1, sticky="W", columnspan=4)
-        e_sw_inw_obiektDoUwag.grid  ( row=self.rowGr3 + 1, column=1, sticky="W", columnspan=4)
-        e_sw_inw_nrZal.grid     ( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=4)
-        e_sw_inw_decZnak.grid   ( row=self.rowGr3 + 3, column=1, sticky="W", columnspan=4)
+        e_sw_inw_obiekt.grid        ( row=self.rowGr3 + 0, column=1, sticky="W", columnspan=3)
+        e_sw_inw_obiektDoUwag.grid  ( row=self.rowGr3 + 1, column=1, sticky="W", columnspan=3)
+        e_sw_inw_nrZal.grid     ( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=3)
+        e_sw_inw_decZnak.grid   ( row=self.rowGr3 + 3, column=1, sticky="W", columnspan=3)
         e_sw_inw_decData.grid   ( row=self.rowGr3 + 4, column=1, sticky="W")
 
     def createWidgets_frameML(self):
@@ -602,8 +597,10 @@ class SytwysGUIgrid( tk.Frame):
             # obrNazwa = self.t.dictObr_teryt2nazwa[ obrTerytFull]
         else:
             # czyszczenie nazwy obr
+            # - raczej nie trzeba czyœciæ
             obr = self.v_sw_obreb.get()
-            obr = spstring.clean_string(obr, '\t\n ,;#', ' ')
+            # ?> funkcja spstring.clean_string() dzia³a Ÿle
+            # obr = spstring.clean_string(obr, '\t\n ,;#', ' ')
             self.v_sw_obreb.set(obr)
 
             obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[obr]
@@ -1197,13 +1194,28 @@ class SytwysGUIgrid( tk.Frame):
         # print( self.sw.sw_mdcp_ust5)
         # print( self.sw.sw_mdcp_ust6)
 
-        # god³a i text sekcje
-        # utworzenie listy sekcji i s³ownika sekcji
+        # god³a i text sekcje, [sw_sekcje_tytul]
+        # -  taki ma byæ format wielowierszowy:
+        #      Sekcje mapy zas. uk³. 2000:
+        #         6.144.29.12.1.3, 6.144.29.12.1.4,
+        #         6.144.29.12.3.1, 6.144.29.12.3.2
         # -------------------------------------------------------------------------
-        # deb - wczytana zmienna
-        print("---[ self.sw.sw_sekcje po wczytaniu ]-----------------------------")
-        print("%s\n" % (self.sw.sw_sekcje))
-        print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+        # deb-
+        # - wczytana zmienna
+        # print("---[ self.sw.sw_sekcje po wczytaniu ]-----------------------------")
+        # print("%s\n" % self.sw.sw_sekcje)
+        # print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+        # print(f"{self.sw.sw_sekcje_tytul}")
+        # print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
+
+        # dodanie do 2. i dalszych linii 3 spacji na poczatku
+        sekcje_lines = self.sw.sw_sekcje_tytul.split('\n')
+        if sekcje_lines[0] == 'Sekcje mapy zas. uk³. 2000:':
+            self.sw.sw_sekcje_tytul = f'{sekcje_lines[0]}\n'
+            for linia in sekcje_lines[1:]:
+                self.sw.sw_sekcje_tytul += f'   {linia}\n'
+
+        # wstawienie treœci dot. sekcji do widgetu edit
         self.tx_sekcje.delete( 1.0, tk.END)
         if len( self.sw.sw_sekcje_tytul) > 0:
             self.tx_sekcje.insert( tk.END, self.sw.sw_sekcje_tytul)

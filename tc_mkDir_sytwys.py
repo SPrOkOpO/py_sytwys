@@ -75,7 +75,7 @@ def main():
     title = "SytWys info " + nr_wersji
     master = tk.Tk(screenName=prompt)
     master.title(title)
-    master.geometry("1400x800+100+50")
+    master.geometry("1500x800+100+50")
     g = SytwysGUIgrid.SytwysGUIgrid(master, sw, t)
 
     # opracowanie argumentow z  linii   poleceñ
