@@ -4,13 +4,13 @@
 # s這wnik sta造ch
 #---------------------------------------------------------------------
 dictConstants = {
-        "NR_WERSJI"             : "2.3.3"
-        ,"GC_DIR_SYTWYS"        : "t:\\sytwys\\"                    
-        ,"GC_DIR_LICZNIK"       : "t:\\sytwys\\AAB__licznik\\"      
+        "NR_WERSJI"            : "2.4.1",
+        "GC_DIR_SYTWYS"        : "t:\\sytwys",
+        "GC_DIR_LICZNIK"       : "t:\\sytwys\\AAB__licznik",
         }
 
 
 def debugList_dictionary():
-    print( "\nS這wnik dictConstants:")
+    print("\nS這wnik dictConstants:")
     for key, val in dictConstants.items():
-        print( "%15s : %s" % (key, val))
+        print("%15s : %s" % (key, val))

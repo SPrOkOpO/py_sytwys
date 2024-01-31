@@ -4,11 +4,10 @@ import shutil
 import dictConstants
 
 class StrukturaKatalogow:
-    #def __init__(self, sw_dir_abspath, sw_wykonawca, sw_numer_str):
+    """
+
+    """
     def __init__(self):
-        # po uruchomieniu programu nie są znane argumenty: sw_dir_abspath,
-        # sw_wykonawca, sw_numer_str, więc zainicjowanie struktury w __init__
-        # nie ma sensu
         self.sw_dir_abspath = ''
         self.sw_wykonawca = ''
         self.sw_numer_str = ''
@@ -42,35 +41,47 @@ class StrukturaKatalogow:
         }
 
 
-    def inicjujStrukture( self):
-        '''
+    def inicjujStrukture(self, sw_dir_abspath, sw_wykonawca, sw_numer_str, sw_obrebDir):
+        """
             dot. struktury katalogów i plików sw
             przypisanie odpowiednich wartości do słownika katalogów
-        '''
-        self.sw_dictDirs["dane_ergo"             ] = self.sw_dir_abspath   + "\\dane_ergo\\"
-        self.sw_dictDirs["dane_wyk"              ] = self.sw_dir_abspath   + "\\dane-" + self.sw_wykonawca + "\\"
-        self.sw_dictDirs["dane_wyk_oryg"         ] = self.sw_dictDirs[ "dane_wyk"] + "_oryg\\"
-        self.sw_dictDirs["mz_nr_v7"              ] = self.sw_dir_abspath   + "\\mz_" + self.sw_numer_str   + "_v7\\"
-        self.sw_dictDirs["mz_nr_v8"              ] = self.sw_dir_abspath   + "\\mz_" + self.sw_numer_str   + "_v8\\"
-        self.sw_dictDirs["mz_nr_v8__v7"          ] = self.sw_dictDirs[ "mz_nr_v8"] + "v7"
-        self.sw_dictDirs["mz_nr_v8__v7_bac"      ] = self.sw_dictDirs[ "mz_nr_v8"] + "v7_bac"
-        self.sw_dictDirs["orient"                ] = self.sw_dir_abspath   + "\\orient\\"
-        self.sw_dictDirs["tabelki"               ] = self.sw_dir_abspath   + "\\tabelki\\"
-        self.sw_dictDirs["tabelki__100_oryg"     ] = self.sw_dir_abspath   + "\\tabelki\\100_oryg\\"
-        self.sw_dictDirs["txt"                   ] = self.sw_dir_abspath   + "\\txt\\"
-        self.sw_dictDirs["wyslane"               ] = self.sw_dir_abspath   + "\\wyslane\\"
-        self.sw_dictDirs["z_dxf"                 ] = self.sw_dir_abspath   + "\\z_dxf\\"
-        self.sw_dictDirs["z_dxf_1"               ] = self.sw_dictDirs[ "z_dxf"] +    "\\1\\"
-        self.sw_dictDirs["z_dxf_2"               ] = self.sw_dictDirs[ "z_dxf"] +    "\\2\\"
-        self.sw_dictDirs["z_dxf_3"               ] = self.sw_dictDirs[ "z_dxf"] +    "\\3\\"
-        self.sw_dictDirs["z_dxf_1__zbedne"       ] = self.sw_dictDirs[ "z_dxf_1"]    + "zbedne\\"
-        self.sw_dictDirs["z_dxf_2__zbedne"       ] = self.sw_dictDirs[ "z_dxf_2"]    + "zbedne\\"
-        self.sw_dictDirs["z_dxf_3__zbedne"       ] = self.sw_dictDirs[ "z_dxf_3"]    + "zbedne\\"
-        self.sw_dictDirs["zz_backup"             ] = self.sw_dir_abspath   + "\\zz_backup\\"
-        self.sw_dictDirs["zz_wersjeNieakt"       ] = self.sw_dir_abspath   + "\\zz_wersjeNieakt\\"
-        self.sw_dictDirs["kG"                    ] = self.sw_dir_abspath   + "\\kG\\"
+        """
+        self.sw_dir_abspath = sw_dir_abspath
+        self.sw_wykonawca = sw_wykonawca
+        self.sw_numer_str = sw_numer_str
+        self.sw_obrebDir = sw_obrebDir
+        # deb
+        print(f'\t{self.sw_dir_abspath=}')
+        print(f'\t{self.sw_wykonawca=}')
+        print(f'\t{self.sw_numer_str=}')
+        print(f'\t{self.sw_obrebDir=}')
 
-        self.sw_dictDirs["rasC_sytwys"           ] = "t:\\&&RasC\\sytwys\\" + self.sw_numer_str + "_" + self.sw_obrebDir
+        self.sw_dictDirs["dane_ergo"        ] = self.sw_dir_abspath   + "\\dane_ergo\\"
+        self.sw_dictDirs["dane_wyk"         ] = self.sw_dir_abspath   + "\\dane-" + self.sw_wykonawca + "\\"
+        self.sw_dictDirs["dane_wyk_oryg"    ] = self.sw_dictDirs[ "dane_wyk"] + "_oryg\\"
+        self.sw_dictDirs["mz_nr_v7"         ] = self.sw_dir_abspath   + "\\mz_" + self.sw_numer_str + "_v7\\"
+        self.sw_dictDirs["mz_nr_v8"         ] = self.sw_dir_abspath   + "\\mz_" + self.sw_numer_str + "_v8\\"
+        self.sw_dictDirs["mz_nr_v8__v7"     ] = self.sw_dictDirs[ "mz_nr_v8"] + "v7"
+        self.sw_dictDirs["mz_nr_v8__v7_bac" ] = self.sw_dictDirs[ "mz_nr_v8"] + "v7_bac"
+        self.sw_dictDirs["orient"           ] = self.sw_dir_abspath   + "\\orient\\"
+        self.sw_dictDirs["tabelki"          ] = self.sw_dir_abspath   + "\\tabelki\\"
+        self.sw_dictDirs["tabelki__100_oryg"] = self.sw_dir_abspath   + "\\tabelki\\100_oryg\\"
+        self.sw_dictDirs["txt"              ] = self.sw_dir_abspath   + "\\txt\\"
+        self.sw_dictDirs["wyslane"          ] = self.sw_dir_abspath   + "\\wyslane\\"
+        self.sw_dictDirs["z_dxf"            ] = self.sw_dir_abspath   + "\\z_dxf\\"
+        self.sw_dictDirs["z_dxf_1"          ] = self.sw_dictDirs[ "z_dxf"] +    "\\1\\"
+        self.sw_dictDirs["z_dxf_2"          ] = self.sw_dictDirs[ "z_dxf"] +    "\\2\\"
+        self.sw_dictDirs["z_dxf_3"          ] = self.sw_dictDirs[ "z_dxf"] +    "\\3\\"
+        self.sw_dictDirs["z_dxf_1__zbedne"  ] = self.sw_dictDirs[ "z_dxf_1"]    + "zbedne\\"
+        self.sw_dictDirs["z_dxf_2__zbedne"  ] = self.sw_dictDirs[ "z_dxf_2"]    + "zbedne\\"
+        self.sw_dictDirs["z_dxf_3__zbedne"  ] = self.sw_dictDirs[ "z_dxf_3"]    + "zbedne\\"
+        self.sw_dictDirs["zz_backup"        ] = self.sw_dir_abspath   + "\\zz_backup\\"
+        self.sw_dictDirs["zz_wersjeNieakt"  ] = self.sw_dir_abspath   + "\\zz_wersjeNieakt\\"
+        self.sw_dictDirs["kG"               ] = self.sw_dir_abspath   + "\\kG\\"
+
+        self.sw_dictDirs["rasC_sytwys"      ] = ("t:\\&&RasC\\sytwys\\"
+                                                 + self.sw_numer_str
+                                                 + "_" + self.sw_obrebDir)
 
     def deb_listujStrukture( self):
         '''
@@ -114,7 +125,7 @@ class StrukturaKatalogow:
         os.makedirs(self.sw_dictDirs["zz_wersjeNieakt"])
         os.makedirs(self.sw_dictDirs["kG"])
 
-        if os.path.exists(self.sw_dictDirs["rasC_sytwys"]) == False:
+        if not os.path.exists(self.sw_dictDirs["rasC_sytwys"]):
             os.makedirs(self.sw_dictDirs["rasC_sytwys"])
 
         # kopiowanie plików do mz...v7
@@ -140,11 +151,12 @@ class StrukturaKatalogow:
         shutil.copy(sourceFile, os.path.join(targetDir, "zDXF_v8_pusty.dgn"))
 
         # utworzenie pliku #_pikiety_XXX.dgn
+        # currently unnecessary
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        sourceFile = "t:\\sytwys_T\\zzz_wzor_mdcp\\mdcp2k\\#_mdcp2k.dgn"
-        targetDir = self.sw_dir_abspath
-        plikPikiety_nazwa = "#_pikiety_" + self.sw_numer_str + ".dgn"
-        shutil.copy(sourceFile, os.path.join(targetDir, plikPikiety_nazwa))
+        # sourceFile = "t:\\sytwys_T\\zzz_wzor_mdcp\\mdcp2k\\#_mdcp2k.dgn"
+        # targetDir = self.sw_dir_abspath
+        # plikPikiety_nazwa = "#_pikiety_" + self.sw_numer_str + ".dgn"
+        # shutil.copy(sourceFile, os.path.join(targetDir, plikPikiety_nazwa))
 
 
 class PlikSWinfo:

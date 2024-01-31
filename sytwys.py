@@ -167,37 +167,7 @@ class Sytwys( object):
         self.sw_plikDz_kg_abspath = ""
 
         self.struktura_sw = sytwys_elements.StrukturaKatalogow()
-        # s³ownik z katalogami s-w
-        self.sw_dictDirs = {
-            "dane_ergo"                     : "",
-            "dane_wyk"                      : "",
-            "dane_wyk_oryg"                 : "",
-            "mz_nr_v7"                      : "",
-            "mz_nr_v8"                      : "",
-            "mz_nr_v8__v7"                  : "",
-            "mz_nr_v8__v7_bac"              : "",
-            "orient"                        : "",
-            "tabelki"                       : "",
-            "tabelki__100_oryg"             : "",
-            "txt"                           : "",
-            "wyslane"                       : "",
-            "z_dxf"                         : "",
-            "z_dxf_1"                       : "",
-            "z_dxf_2"                       : "",
-            "z_dxf_3"                       : "",
-            "z_dxf_1__zbedne"               : "",
-            "z_dxf_2__zbedne"               : "",
-            "z_dxf_3__zbedne"               : "",
-            "zz_backup"                     : "",
-            "zz_wersjeNieakt"               : "",
-            "kG": "",
 
-            "rasC_sytwys"                   : ""
-        }
-    
-    # koniec __init__()
-    # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-        
     def setNazwyPlikow_tytul_uwagi(self):
         """
         z danej œcie¿ki pliku info tworzy œcie¿ki do plików
@@ -209,7 +179,7 @@ class Sytwys( object):
         
         """ 
         czêœæ wywiadowcza:
-        p = "t:\\sytwys\\826_kp_1904_Biezen_7-24\\sw_826_info.txt"
+        p = r't:\sytwys\15_kp_2401_BialaG_21'
         print( "---[ path ]--------------------------------------------------------")
         print( "p = %s" % (p))
         print( "%s" % (os.path.basename( p)))
@@ -224,8 +194,8 @@ class Sytwys( object):
         self.sw_plikGodla2swInfo_fullPath  = os.path.join( os.path.dirname(p), self.FILE_GODLA)
         # w katalogu ...\kG:
         #self.sw_plikDz_ergo_abspath = os.path.join(os.path.dirname(p), self.sw_dictDirs["kG"])
-        self.sw_plikDz_ergo_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_DZIALKI_ERGO)
-        self.sw_plikDz_kg_abspath = os.path.join(self.sw_dictDirs["kG"], self.FILE_KG_ERGO)
+        self.sw_plikDz_ergo_abspath = os.path.join(self.struktura_sw.sw_dictDirs["kG"], self.FILE_DZIALKI_ERGO)
+        self.sw_plikDz_kg_abspath = os.path.join(self.struktura_sw.sw_dictDirs["kG"], self.FILE_KG_ERGO)
         # deb
         #print("def setNazwyPlikow_tytul_uwagi( self):")
         #print( " *1* godla2swInfo.txt= >%s<" % (self.sw.sw_plikGodla2swInfo_fullPath))
@@ -237,7 +207,7 @@ class Sytwys( object):
          ustalenie  numeru dla nowej roboty s-w
          -  polega na sprawdzeniu, jaki jest ostatni plik
             w katalogu DIR_LICZNIK i odczytanie jego nru
-            t:\sytwys\AAB__licznik\909___kp_2001_Bagna_55_inw.nr
+            t:\sytwys\AAB__licznik\9___kp_2024_xxxx_yy_inw.nr
          - dodatkowo sprawdzany jest ostatni katalog sw
            - ta metoda mo¿e byæ zawodna w sytuacji, kiedy robota o najwy¿szym
              numerze zosta³a ju¿ zakoñczona i przeniesiona do archiwum
@@ -292,114 +262,6 @@ class Sytwys( object):
                 raise Exception()
         # deb
         print(f"2 Numer licznika dla roboty: {self.sw_numer}")
-
-
-
-    def inicjujStrukture( self, asw_dir_nazwa):
-        """
-            dot. struktury katalogów i plików sw
-            przypisanie odpowiednich wartoœci do s³ownika katalogów
-        """
-        self.sw_dictDirs[   "dane_ergo"             ] = asw_dir_nazwa   + "\\dane_ergo\\"
-        self.sw_dictDirs[   "dane_wyk"              ] = asw_dir_nazwa   + "\\dane-" + self.sw_wykonawca + "\\"
-        self.sw_dictDirs[   "dane_wyk_oryg"         ] = self.sw_dictDirs[ "dane_wyk"] + "_oryg\\"
-        self.sw_dictDirs[   "mz_nr_v7"              ] = asw_dir_nazwa   + "\\mz_" + self.sw_numer_str   + "_v7\\"
-        self.sw_dictDirs[   "mz_nr_v8"              ] = asw_dir_nazwa   + "\\mz_" + self.sw_numer_str   + "_v8\\"
-        self.sw_dictDirs[   "mz_nr_v8__v7"          ] = self.sw_dictDirs[ "mz_nr_v8"] + "v7"
-        self.sw_dictDirs[   "mz_nr_v8__v7_bac"      ] = self.sw_dictDirs[ "mz_nr_v8"] + "v7_bac"
-        self.sw_dictDirs[   "orient"                ] = asw_dir_nazwa   + "\\orient\\"
-        self.sw_dictDirs[   "tabelki"               ] = asw_dir_nazwa   + self.DIR_TABELKI
-        self.sw_dictDirs[   "tabelki__100_oryg"     ] = asw_dir_nazwa   + self.DIR_TABELKI_100
-        self.sw_dictDirs[   "txt"                   ] = asw_dir_nazwa   + "\\txt\\"
-        self.sw_dictDirs[   "wyslane"               ] = asw_dir_nazwa   + "\\wyslane\\"
-        self.sw_dictDirs[   "z_dxf"                 ] = asw_dir_nazwa   + "\\z_dxf\\"
-        self.sw_dictDirs[   "z_dxf_1"               ] = self.sw_dictDirs[ "z_dxf"] +    "\\1\\"
-        self.sw_dictDirs[   "z_dxf_2"               ] = self.sw_dictDirs[ "z_dxf"] +    "\\2\\"
-        self.sw_dictDirs[   "z_dxf_3"               ] = self.sw_dictDirs[ "z_dxf"] +    "\\3\\"
-        self.sw_dictDirs[   "z_dxf_1__zbedne"       ] = self.sw_dictDirs[ "z_dxf_1"]    + "zbedne\\"
-        self.sw_dictDirs[   "z_dxf_2__zbedne"       ] = self.sw_dictDirs[ "z_dxf_2"]    + "zbedne\\"
-        self.sw_dictDirs[   "z_dxf_3__zbedne"       ] = self.sw_dictDirs[ "z_dxf_3"]    + "zbedne\\"
-        self.sw_dictDirs[   "zz_backup"             ] = asw_dir_nazwa   + "\\zz_backup\\"
-        self.sw_dictDirs[   "zz_wersjeNieakt"       ] = asw_dir_nazwa   + "\\zz_wersjeNieakt\\"
-        self.sw_dictDirs[   "kG"                    ] = asw_dir_nazwa   + "\\kG\\"
-
-        self.sw_dictDirs[   "rasC_sytwys"           ] = "t:\\&&RasC\\sytwys\\" + self.sw_numer_str + "_" + self.sw_obrebDir
-    
-    
-    def deb_listujStrukture( self):
-        """
-            debugowanie
-            -   listing ca³ego  katalogu
-        """
-        print( "---[ sw_dictDirs ]------------------------------------------------")
-        for x   in  self.sw_dictDirs:
-            print( x + "=" + self.sw_dictDirs[x])
-        print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
-
-
-    def utworzStrukture(    self):
-        """
-        >>  trzeba dorobiæ: 
-            -   sprawdzenie, czy te katalogi istniej¹
-            -   funkcjê, która skasuje b³êdnie za³o¿on¹ strukturê
-        
-        """   
-        # utworzenie struktury katalogów
-        #-------------------------------------------------------
-        os.makedirs(self.sw_dictDirs[ "dane_ergo"          ])
-        os.makedirs(self.sw_dictDirs[ "dane_wyk"           ])
-        os.makedirs(self.sw_dictDirs[ "dane_wyk_oryg"      ])
-        os.makedirs(self.sw_dictDirs[ "mz_nr_v7"           ])
-        os.makedirs(self.sw_dictDirs[ "mz_nr_v8"           ])
-        os.makedirs(self.sw_dictDirs[ "mz_nr_v8__v7"       ])
-        os.makedirs(self.sw_dictDirs[ "mz_nr_v8__v7_bac"   ])
-        os.makedirs(self.sw_dictDirs[ "orient"             ])
-        os.makedirs(self.sw_dictDirs[ "tabelki"            ])
-        os.makedirs(self.sw_dictDirs[ "tabelki__100_oryg"  ])
-        os.makedirs(self.sw_dictDirs[ "txt"                ])
-        os.makedirs(self.sw_dictDirs[ "wyslane"            ])
-        os.makedirs(self.sw_dictDirs[ "z_dxf"              ])
-        os.makedirs(self.sw_dictDirs[ "z_dxf_1"            ])
-        os.makedirs(self.sw_dictDirs[ "z_dxf_2"            ])
-        os.makedirs(self.sw_dictDirs[ "z_dxf_3"            ])
-        os.makedirs(self.sw_dictDirs[ "z_dxf_1__zbedne"    ])
-        os.makedirs(self.sw_dictDirs[ "z_dxf_2__zbedne"    ])
-        os.makedirs(self.sw_dictDirs[ "z_dxf_3__zbedne"    ])
-        os.makedirs(self.sw_dictDirs[ "zz_backup"          ])
-        os.makedirs(self.sw_dictDirs[ "zz_wersjeNieakt"    ])
-        os.makedirs(self.sw_dictDirs["kG"])
-
-        if os.path.exists( self.sw_dictDirs[ "rasC_sytwys"]) == False:
-            os.makedirs( self.sw_dictDirs[ "rasC_sytwys"        ])
-
-        # kopiowanie plików do mz...v7
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-        sourceFile = "c:\\USSP\\SEED\\seed_ctBialy_u2k_go50_1cm_mzKlobuck_geoRef.dgn"
-        targetDir = self.sw_dictDirs[ "mz_nr_v7"]
-        shutil.copy( sourceFile, os.path.join( targetDir, "a_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "b_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "s_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "y_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "z_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "#_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "1_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "2_v7.dgn"))
-        shutil.copy( sourceFile, os.path.join( targetDir, "3_v7.dgn"))
-
-        # kopiowanie plików do mz...v8
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-        sourceFile = "c:\\USSP\\SEED\\v8_2004\\zDXF_v8_poziomy-v7.dgn"
-        targetDir = self.sw_dictDirs[ "mz_nr_v8"]
-        shutil.copy( sourceFile, os.path.join( targetDir, "zDXF_v8.dgn"))
-        targetDir = self.sw_dictDirs[ "mz_nr_v8"]
-        shutil.copy( sourceFile, os.path.join( targetDir, "zDXF_v8_pusty.dgn"))
-
-        # utworzenie pliku #_pikiety_XXX.dgn
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-        sourceFile = "t:\\sytwys_T\\zzz_wzor_mdcp\\mdcp2k\\#_mdcp2k.dgn"
-        targetDir = self.sw_dir_nazwa
-        plikPikiety_nazwa = "#_pikiety_" + self.sw_numer_str + ".dgn"
-        shutil.copy( sourceFile, os.path.join( targetDir, plikPikiety_nazwa))
 
     def update_dzialki(self, terytF_obr, teryt_jew, nazwa_obr):
         """

@@ -54,7 +54,6 @@ class SytwysGUIgrid( tk.Frame):
         self.godlaX = sekcja.ListaSekcji()
         self.kg = kGeodety.KontoGeodety()
 
-
         self.rowGr1 = 0
         self.rowGr2 = self.rowGr1 + 16
         self.rowGr3 = self.rowGr1 + 9
@@ -65,7 +64,6 @@ class SytwysGUIgrid( tk.Frame):
 
         # zmienne tekstowe dla kontrolek    entry
         # --------------------------------------------------------------------------
-
 
         # zmienne zwi¹zane z klas¹ Sytwys
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -115,7 +113,6 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_mdcp_kp_uwagi5    = tk.StringVar()
         self.v_sw_mdcp_kp_uwagi6    = tk.StringVar()
 
-        self.v_sw_typ.set("mdcp")
         self.v_sw_ust5              = tk.IntVar()
         self.v_sw_ust6              = tk.IntVar()
         self.v_sw_ust5_str          = tk.StringVar()
@@ -163,18 +160,9 @@ class SytwysGUIgrid( tk.Frame):
         self.frameMR.grid(row=1, column=0, sticky="N", pady=5)
 
         self.frameBL = tk.Frame(self.frameB, background='gray20')
-        self.frameBL.grid(row=0, column=0, sticky="EW", pady=5)
+        self.frameBL.grid(row=0, column=0, sticky="SEW", pady=5)
 
-
-
-        """
-        self.tx_mdcp_kp_uwagi1
-        self.tx_mdcp_kp_uwagi2
-        self.tx_mdcp_kp_uwagi3
-        self.tx_mdcp_kp_uwagi4
-        self.tx_mdcp_kp_uwagi5
-        """
-
+        # create widgets
         self.createWidgets_frameTL()
         self.createWidgets_frameML()
         self.createWidgets_frameL_kG()
@@ -183,10 +171,7 @@ class SytwysGUIgrid( tk.Frame):
         self.createWidgets_frameMR()
 
         self.createWidgets_frameBL()
-        # self.createWidgets_frameBR()
 
-        # self.inicjuj()
-        # self.wczytaj()
 
     def eventHandler_entry_obreb(self, event):
         """
@@ -265,7 +250,9 @@ class SytwysGUIgrid( tk.Frame):
         lab_sw_dzialki   = tk.Label( self.frameTL, text="Dzialki "       , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 6)
         lab_sw_idZgl     = tk.Label( self.frameTL, text="IdZgl "         , anchor="w", width=20).grid(column=0, row=self.rowGr1 + 8)
 
-        self.entry_nr_sytwys  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_numer       , bg="greenyellow")
+        self.entry_nr_sytwys = tk.Entry(self.frameTL,
+                                        justify="left", width=10, bg="greenyellow",
+                                        textvariable=self.v_sw_numer)
         e2  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_wykonawca   )
         # zbêdny: e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
 
@@ -413,11 +400,12 @@ class SytwysGUIgrid( tk.Frame):
         e_nazwa_obiektu.grid(row=0, column=1)
 
     def createWidgets_frameBL( self):
-        butNowaRobota  = tk.Button( self.frameBL, text='Nowa robota',  width =15, command=self.nowaRobota)
-        butInicjuj  = tk.Button( self.frameBL, text='Inicjuj',  width=15, command=self.inicjuj)
-        butWczytaj  = tk.Button( self.frameBL, text='Wczytaj swInfo', width =15, command=self.wczytaj)
-        butOK       = tk.Button( self.frameBL, text='Zapisz swInfo', width =15, command=self.zapisz)
-        butCancel   = tk.Button( self.frameBL, text='Zakoñcz',  width =15,  command=self.btn_rezygnacja, bg="salmon")
+        butNowaRobota  = tk.Button(self.frameBL, text='Nowa robota',  width=15, command=self.nowaRobota)
+        butInicjuj  = tk.Button(self.frameBL, text='Inicjuj',  width=15, command=self.btn_inicjuj)
+        butWczytaj  = tk.Button(self.frameBL, text='Wczytaj swInfo', width=15, command=self.wczytaj)
+        butOK       = tk.Button(self.frameBL, text='Zapisz swInfo', width=15, command=self.btn_zapisz)
+        butCancel   = tk.Button(self.frameBL, text='Zakoñcz',  width=15,  command=self.btn_rezygnacja, bg="salmon")
+
         butNowaRobota.grid( row=0, column=0, padx=3, pady=3)
         butInicjuj.grid(    row=0, column=1, padx=3, pady=3)
         butWczytaj.grid(    row=0, column=2, padx=3, pady=3)
@@ -501,6 +489,7 @@ class SytwysGUIgrid( tk.Frame):
         """
 
         self.sw.sw_numer = self.v_sw_numer.get()
+        self.sw.sw_numer_str = str(self.sw.sw_numer)
         self.sw.sw_wykonawca = self.v_sw_wykonawca.get()
         self.sw.sw_typ = self.v_sw_typ.get()
         self.sw.sw_skala = self.v_sw_skala.get()
@@ -571,7 +560,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.mdcp.kp_uwagi5 = self.tx_mdcp_kp_uwagi5.get( 1.0, tk.END)
         self.sw.mdcp.kp_uwagi6 = self.tx_mdcp_kp_uwagi6.get( 1.0, tk.END)
 
-    def inicjuj(self):
+    def btn_inicjuj(self):
         """
         na  podstawie wprowadzonych danych wype³nia odpowiednie pola
 
@@ -588,6 +577,11 @@ class SytwysGUIgrid( tk.Frame):
         NIE TWORZY KATALOGU s-w! To robi funkcja zapisz().
         """
 
+        # nr
+        self.sw.sw_numer = self.v_sw_numer.get()
+        self.sw.sw_numer_str = str(self.sw.sw_numer)
+
+
         # 1a,b)
         if self.listBox_obr.size() > 1:
             obrTerytFull = self.listBox_obr.get(ACTIVE)
@@ -602,7 +596,6 @@ class SytwysGUIgrid( tk.Frame):
             # ?> funkcja spstring.clean_string() dzia³a Ÿle
             # obr = spstring.clean_string(obr, '\t\n ,;#', ' ')
             self.v_sw_obreb.set(obr)
-
             obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[obr]
 
         # 1)
@@ -709,9 +702,10 @@ class SytwysGUIgrid( tk.Frame):
         # œciezka dir
         self.v_sw_dir_nazwa.set(self.sw.sw_dir_nazwa)
 
-        self.sw.inicjujStrukture(self.sw.sw_dir_nazwa)   # old
-        self.sw.struktura_sw.sw_dir_abspath = self.sw.sw_dir_nazwa
-        self.sw.struktura_sw.inicjujStrukture()  # new
+        self.sw.struktura_sw.inicjujStrukture(self.sw.sw_dir_nazwa,
+                                              self.sw.sw_wykonawca,
+                                              self.sw.sw_numer_str,
+                                              self.sw.sw_obrebDir)
         self.sw.struktura_sw.deb_listujStrukture()
 
         # zaktualizowanie obiektu kg
@@ -729,7 +723,7 @@ class SytwysGUIgrid( tk.Frame):
         self.master_frame.destroy()
         sys.exit()
 
-    def zapisz(self):
+    def btn_zapisz(self):
         self.odczytaj_dane_z_gui()
         self.zapisz_1()
         # dane = {
@@ -765,7 +759,7 @@ class SytwysGUIgrid( tk.Frame):
             print("sw_plikInfo_fullPath=" + self.sw.sw_plikInfo_fullPath)
             # os.mkdir( sw_dir_nazwa, 0777)
             os.makedirs(self.sw.sw_dir_nazwa)
-            self.sw.utworzStrukture()
+            self.sw.struktura_sw.utworzStrukture()
             # os.path.isdir("C:\First\Second\Third")
             f = open(self.sw.sw_plikNr_fullPath,   "w")
             f.write(self.sw.sw_plikNr_nazwa)
