@@ -2,8 +2,7 @@
 
 import os
 import sys
-#import datetime
-import shutil
+import re
 
 from tkinter import messagebox
 
@@ -207,7 +206,7 @@ class Sytwys( object):
          ustalenie  numeru dla nowej roboty s-w
          -  polega na sprawdzeniu, jaki jest ostatni plik
             w katalogu DIR_LICZNIK i odczytanie jego nru
-            t:\sytwys\AAB__licznik\9___kp_2024_xxxx_yy_inw.nr
+            t:\sytwys\AAB__licznik\16___kp_2401_Bagna_55.nr
          - dodatkowo sprawdzany jest ostatni katalog sw
            - ta metoda mo¿e byæ zawodna w sytuacji, kiedy robota o najwy¿szym
              numerze zosta³a ju¿ zakoñczona i przeniesiona do archiwum
@@ -223,22 +222,23 @@ class Sytwys( object):
 
         # lista numerów wyekstrachowanych z nazw plików i katalogów
         # - pliki maj¹ nazwy typu:
-        #   1300___kp_2301_Klobuck_3512.nr
-        #   ostatni numer = 1300
+        #   16___kp_2401_Bagna_55.nr
+        #   ostatni numer = 16
         num_list = [int(f.split('_')[0]) for f in os.listdir(adir_licznik)]
         self.sw_numer = max(num_list) + 1
 
         # numer dekodowany z nazwy katalogu sytwys
-        # 1385_kp_2309_Wilkowiecko_616-2
+        # 15_kp_2401_BialaG_21
         # ?> tutaj jest zastosowany myk, polegaj¹cy na ograniczeniu zawartoœci
         #    listy do nazw, które:
         #    - maj¹ cztery znaki w czêœci pierwszej przed znakiem `_` - tak
         #      jest w przypadku nazw katalogów sw
         #    - pierwszy znak czêœci pierwszej, to `1`
+        file_name_pattern = re.compile(r'\d{1,4}_[a-z]{2}_\d{4}_.+')
         num_list = [int(f.split('_')[0])
                     for f
                     in os.listdir(dir_sytwys)
-                    if len(f.split('_')[0]) == 4 and f.split('_')[0][0] == '1']
+                    if re.fullmatch(file_name_pattern, f)]
         sw_numer_alternative = max(num_list) + 1
 
         # deb
