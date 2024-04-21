@@ -28,6 +28,7 @@ import dzialki
 import spprint
 import spstring
 import view.AHKgen
+import utils
 
 
 class SytwysGUIgrid( tk.Frame):
@@ -190,10 +191,7 @@ class SytwysGUIgrid( tk.Frame):
         # pobranie nazwy obrêbu i jej wyczyszczenie
         # - czyszczenie na razie nie dzia³a dobrze na 100%
         obr = self.v_sw_obreb.get()
-        obr = obr.strip()
-        obr = obr.replace('.', '')
-        obr = obr.replace('obr', '')
-        # obr = spstring.clean_string(obr, '\t\n,;#', ' ')
+        obr = utils.clean_string_obreb(obr)
         self.v_sw_obreb.set(obr)
 
         # obr = self.e3.get()
@@ -234,10 +232,21 @@ class SytwysGUIgrid( tk.Frame):
 
     def eventHandler_combobox_celpracy(self, event):
         celpracy = self.v_sw_typ.get()
+
+        # ustawienie wykonawcy
         if celpracy in ['inw', 'mdcp']:
             self.v_sw_wykonawca.set('kp')
         else:
             self.v_sw_wykonawca.set('kh')
+
+        # wype³nienie domyœlnych treœci dot. inwentaryzacji
+        if celpracy in ['inw']:
+            self.e_sw_inw_obiekt = 'budynku mieszkalnego wraz z przy³¹czami'
+            self.e_sw_inw_obiektDoUwag = 'budynku mieszkalnego'
+            self.e_sw_inw_nrZal = '1'
+            self.e_sw_inw_decZnak = '?'
+            self.e_sw_inw_decData = '?'
+
 
     def createWidgets_frameTL(self):
         #self.rowGr1 = 0
@@ -338,17 +347,17 @@ class SytwysGUIgrid( tk.Frame):
         lab_sw_inw_decZnak      = tk.Label( self.frameTL, text="inw_decZnak"    , anchor="w", width=20).grid(row=self.rowGr3 + 3)
         lab_sw_inw_decData      = tk.Label( self.frameTL, text="inw_decData"    , anchor="w", width=20).grid(row=self.rowGr3 + 4)
 
-        e_sw_inw_obiekt         = tk.Entry( self.frameTL,   justify="left", width=60, textvariable  = self.v_sw_inw_obiekt          , bg="white")
-        e_sw_inw_obiektDoUwag   = tk.Entry( self.frameTL,   justify="left", width=60, textvariable  = self.v_sw_inw_obiektDoUwag    , bg="white")
-        e_sw_inw_nrZal          = tk.Entry( self.frameTL,   justify="left", width=10, textvariable  = self.v_sw_inw_nrZal           , bg="white")
-        e_sw_inw_decZnak        = tk.Entry( self.frameTL,   justify="left", width=40, textvariable  = self.v_sw_inw_decZnak         , bg="white")
-        e_sw_inw_decData        = tk.Entry( self.frameTL,   justify="left", width=40, textvariable  = self.v_sw_inw_decData         , bg="white")
+        self.e_sw_inw_obiekt         = tk.Entry( self.frameTL,   justify="left", width=60, textvariable  = self.v_sw_inw_obiekt          , bg="white")
+        self.e_sw_inw_obiektDoUwag   = tk.Entry( self.frameTL,   justify="left", width=60, textvariable  = self.v_sw_inw_obiektDoUwag    , bg="white")
+        self.e_sw_inw_nrZal          = tk.Entry( self.frameTL,   justify="left", width=10, textvariable  = self.v_sw_inw_nrZal           , bg="white")
+        self.e_sw_inw_decZnak        = tk.Entry( self.frameTL,   justify="left", width=40, textvariable  = self.v_sw_inw_decZnak         , bg="white")
+        self.e_sw_inw_decData        = tk.Entry( self.frameTL,   justify="left", width=40, textvariable  = self.v_sw_inw_decData         , bg="white")
 
-        e_sw_inw_obiekt.grid        ( row=self.rowGr3 + 0, column=1, sticky="W", columnspan=3)
-        e_sw_inw_obiektDoUwag.grid  ( row=self.rowGr3 + 1, column=1, sticky="W", columnspan=3)
-        e_sw_inw_nrZal.grid     ( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=3)
-        e_sw_inw_decZnak.grid   ( row=self.rowGr3 + 3, column=1, sticky="W", columnspan=3)
-        e_sw_inw_decData.grid   ( row=self.rowGr3 + 4, column=1, sticky="W")
+        self.e_sw_inw_obiekt.grid        ( row=self.rowGr3 + 0, column=1, sticky="W", columnspan=3)
+        self.e_sw_inw_obiektDoUwag.grid  ( row=self.rowGr3 + 1, column=1, sticky="W", columnspan=3)
+        self.e_sw_inw_nrZal.grid     ( row=self.rowGr3 + 2, column=1, sticky="W", columnspan=3)
+        self.e_sw_inw_decZnak.grid   ( row=self.rowGr3 + 3, column=1, sticky="W", columnspan=3)
+        self.e_sw_inw_decData.grid   ( row=self.rowGr3 + 4, column=1, sticky="W")
 
     def createWidgets_frameML(self):
         # self.rowGr2 = self.rowGr1 + 9
@@ -591,17 +600,22 @@ class SytwysGUIgrid( tk.Frame):
             # obrNazwa = self.t.dictObr_teryt2nazwa[ obrTerytFull]
         else:
             # czyszczenie nazwy obr
-            # - raczej nie trzeba czyœciæ
             obr = self.v_sw_obreb.get()
-            # ?> funkcja spstring.clean_string() dzia³a Ÿle
-            # obr = spstring.clean_string(obr, '\t\n ,;#', ' ')
+            obr = utils.clean_string_obreb(obr)
             self.v_sw_obreb.set(obr)
-            obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[obr]
+            try:
+                obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[obr]
+                self.e3.config(bg='lawn green')
+            except:
+                print(f'Brak takiego obrêbu: {obr}')
+                self.e3.config(bg='light coral')
+
 
         # 1)
         if self.t.setTerytyFrom_obrTerytFull(obrTerytFull) != 0:
             tk.messagebox.showinfo("Err", "Inicjacja nieudana - b³êdny obrêb")
             return -1
+        self.e3.config(bg='white')
 
         # self.sw.sw_plikInfo_fullPath
         global sw_plikNr_fullPath
