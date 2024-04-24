@@ -28,7 +28,7 @@ import spstring
 
 def clean_string_obreb(s: str):
     """Extract pure obręb string."""
-    garbage = ('obr', 'obr.', 'obręb', 'obreb',)
+    garbage = ('obr.', 'obr', 'obręb', 'obreb',)
     delimiters_to_remove = '\t\n ,.;#'
     for g in garbage:
         s = s.replace(g, '')
