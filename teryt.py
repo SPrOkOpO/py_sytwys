@@ -264,6 +264,8 @@ class   Teryt( object):
             
             "240401_5.0002" :   "Gorzelnia",
 
+            "240411_2.0016":    "Kuünica Lechowa",
+
             "240412_2.0001" :   "Biskupice",
             "240412_2.0006" :   "Przymi≥owice",
 
@@ -470,6 +472,7 @@ class   Teryt( object):
          "B≥aszczyki"                     : "240401_4.0002",
 
          "Gorzelnia"                      : "240401_5.0002",
+         "Kuünica Lechowa": "240411_2.0016",
 
          "Biskupice"                      : "240412_2.0001",
          "Przymi≥owice"                   : "240412_2.0006",
@@ -642,6 +645,8 @@ class   Teryt( object):
             "240401_4.0002" :   "Blaszczyki",
 
             "240401_5.0002" :   "Gorzelnia",
+
+            "240411_2.0016": "Kuünica Lechowa",
 
             "240412_2.0001" :   "Biskupice",
             "240412_2.0006" :   "Przymilowice",
