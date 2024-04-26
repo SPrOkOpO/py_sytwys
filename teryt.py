@@ -652,7 +652,7 @@ class   Teryt( object):
             "240412_2.0006" :   "Przymilowice",
 
             # M. Czêstochowa
-            "246401_1"      :   "CzM",
+            "246401_1":   "CzM",
                     
             "999999_9.9999" :   "koniec wyœcigu"
         }
