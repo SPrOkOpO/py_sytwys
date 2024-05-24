@@ -484,7 +484,8 @@ class   Teryt( object):
          "koniec wyœcigu"                 : "999999_9.9999"
          }
 
-        # s³ownik do zamiany    terytu na nazwê obr.    do  utworzenia katalogu
+        # s³ownik do zamiany    terytu na nazwê obr.    do  utworzenia
+        # katalogu (bez znaków diaktrycznych)
         self.dictObr_teryt2nazwaDir =   {
             "240601_4.0001" :   "BrodyM",
             "240601_4.0002" :   "Klobuck",
@@ -646,7 +647,7 @@ class   Teryt( object):
 
             "240401_5.0002" :   "Gorzelnia",
 
-            "240411_2.0016": "KuŸnica Lechowa",
+            "240411_2.0016": "KuznicaLechowa",
 
             "240412_2.0001" :   "Biskupice",
             "240412_2.0006" :   "Przymilowice",
