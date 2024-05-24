@@ -250,7 +250,7 @@ class Sytwys( object):
             msg += f'N: zatwierdziæ numer {sw_numer_alternative=}\n'
             msg += f'C: raise Exception()?'
             response = messagebox.askquestion(
-                'Problem z numerwem sw',
+                'Problem z numerem sw',
                 msg, type=messagebox.YESNOCANCEL, )
             if response == messagebox.YES:
                 # deb
@@ -313,7 +313,7 @@ class Sytwys( object):
         self.sw_dzialka1        = ""
         self.sw_dzialki_obj = dzialki.Dzialki()
 
-        self.sw_typ             = ""
+        self.sw_typ             = "?"
         self.sw_idZgl           = ""
         self.sw_idZgl_jrwa      = ""
         self.sw_idZgl_nr        = ""

@@ -222,30 +222,30 @@ class SytwysGUIgrid( tk.Frame):
             # self.v_sw_obreb_kandydaci = tk.StringVar(value=nazwy)
             self.v_sw_obreb_kandydaci.set(nazwy)
 
-    def eventHandler_entry_wykonawca(self, event):
-        """
-        >> usun¹æ ten eventHandler - ma dzia³ac odwrotny
-        """
-        wykonawca = self.v_sw_wykonawca.get()
-        if wykonawca == "kh":
-            self.v_sw_typ.set( "mppn")
+    # def eventHandler_entry_wykonawca(self, event):
+    #     """
+    #     >> usun¹æ ten eventHandler - ma dzia³ac odwrotny
+    #     """
+    #     wykonawca = self.v_sw_wykonawca.get()
+    #     if wykonawca == "kh":
+    #         self.v_sw_typ.set( "mppn")
 
     def eventHandler_combobox_celpracy(self, event):
         celpracy = self.v_sw_typ.get()
 
         # ustawienie wykonawcy
-        if celpracy in ['inw', 'mdcp']:
+        if celpracy in ['inw', 'mdcp', 'mdcp+ww']:
             self.v_sw_wykonawca.set('kp')
         else:
             self.v_sw_wykonawca.set('kh')
 
         # wype³nienie domyœlnych treœci dot. inwentaryzacji
         if celpracy in ['inw']:
-            self.e_sw_inw_obiekt = 'budynku mieszkalnego wraz z przy³¹czami'
-            self.e_sw_inw_obiektDoUwag = 'budynku mieszkalnego'
-            self.e_sw_inw_nrZal = '1'
-            self.e_sw_inw_decZnak = '?'
-            self.e_sw_inw_decData = '?'
+            self.v_sw_inw_obiekt.set('budynku mieszkalnego wraz z przy³¹czami')
+            self.v_sw_inw_obiektDoUwag.set('budynku mieszkalnego')
+            self.v_sw_inw_nrZal.set('1')
+            self.v_sw_inw_decZnak.set('?')
+            self.v_sw_inw_decData.set('?')
 
 
     def createWidgets_frameTL(self):
@@ -267,6 +267,8 @@ class SytwysGUIgrid( tk.Frame):
 
         # typ
         # ttyp = ( "mdcp", "inw", "podz", "inny") <-- tak by³o przed kG...
+        # deb-
+        # print(f'deb: {self.v_sw_typ.get()=}')
         combobox = ttk.Combobox(self.frameTL,
                                 textvariable=self.v_sw_typ,
                                 state="readonly",
@@ -277,6 +279,10 @@ class SytwysGUIgrid( tk.Frame):
                                 #, label_text="Typ"
                                 #, labelpos="wn", listbox_width=8, dropdown=0, \
                                 #scrolledlist_items=ttyp)
+        combobox.current(0)
+        # deb-
+        # print(f'deb: {self.v_sw_typ.get()=}')
+
         # combobox["values"] = ttyp
         #combobox.bind("<FocusOut>", self.eventHandler_combobox_celpracy)
         combobox.bind('<<ComboboxSelected>>', self.eventHandler_combobox_celpracy)
@@ -739,7 +745,10 @@ class SytwysGUIgrid( tk.Frame):
 
     def btn_zapisz(self):
         self.odczytaj_dane_z_gui()
-        self.zapisz_1()
+        if self.v_sw_typ.get() == '?':
+            messagebox.showerror('Uwaga', 'Nie wybrano celu pracy.', type=messagebox.OK)
+        else:
+            self.zapisz_1()
         # dane = {
         #     'kG_nazwa_obiektu': '',
         #     'kG_opis_polozenia': '',
