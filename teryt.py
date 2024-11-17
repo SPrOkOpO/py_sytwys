@@ -134,8 +134,8 @@ class   Teryt( object):
             "240602_5.0003" :   "Pod³ê¿e Królewskie",
             "240602_5.0004" :   "Starokrzepice",
             "240602_5.0005" :   "Szarki",
-            "240602_5.0006" :   "Zaj¹czki I",
-            "240602_5.0007" :   "Zaj¹czki II",
+            "240602_5.0006" :   "Zaj¹czki Pierwsze",
+            "240602_5.0007" :   "Zaj¹czki Drugie",
 
             "240603_2.0001" :   "Albertów",
             "240603_2.0002" :   "Brzózki",
@@ -332,6 +332,8 @@ class   Teryt( object):
          "Szarki"                         : "240602_5.0005",
          "Zaj¹czki I"                     : "240602_5.0006",
          "Zaj¹czki II"                    : "240602_5.0007",
+         "Zaj¹czki Pierwsze"              : "240602_5.0006",
+         "Zaj¹czki Drugie"                : "240602_5.0007",
 
          "Albertów"                       : "240603_2.0001",
          "Brzózki-Li"                     : "240603_2.0002",
