@@ -1,8 +1,6 @@
-#-*- coding: windows-1250 -*-
-
 class   Teryt( object):
     '''
-    Obs³uga TERYT
+    ObsÅ‚uga TERYT
 
     konwencje nazewnicze
     --------------------
@@ -15,7 +13,7 @@ class   Teryt( object):
     properties
     ----------
     -   poziom
-        :   okreœla,    czego   dotyczy dana instancja (woj, pow, jew,  obr
+        :   okreÅ›la,    czego   dotyczy dana instancja (woj, pow, jew,  obr
         :   0 - nieokreslone
             1 - woj
             ...
@@ -43,8 +41,8 @@ class   Teryt( object):
         self.teryt_jew  = "99_9"
         self.teryt_obr  = "9999"
 
-        # nazwa bez czlonu okreœlajacego    rodzaj jednostki (poziom)
-        # np.: nazwa_pow = "k³obucki"
+        # nazwa bez czlonu okreÅ›lajacego    rodzaj jednostki (poziom)
+        # np.: nazwa_pow = "kÅ‚obucki"
         self.nazwa_woj  = "wNN"
         self.nazwa_pow  = "pNN"
         self.nazwa_jew  = "jNN"
@@ -59,130 +57,130 @@ class   Teryt( object):
         # nazwa obr do  utworzenia katalogu
         self.nazwaDir_obr   = "NN"
 
-        # s³owniki powiatów
+        # sÅ‚owniki powiatÃ³w
         self.dictPow =  {
-            "2404" :    "czêstochowski",
-            "2406" :    "k³obucki",
+            "2404" :    "czÄ™stochowski",
+            "2406" :    "kÅ‚obucki",
             "2409" :    "myszkowski",
-            "2464" :    "Czêstochowa"
+            "2464" :    "CzÄ™stochowa"
         }
 
-        # s³ownik jEw
+        # sÅ‚ownik jEw
         self.dictJEw =  {
-            # powiat    k³obucki
-            "240601_4" : "K³obuck - miasto",
-            "240601_5" : "K³obuck - obszar wiejski",
+            # powiat    kÅ‚obucki
+            "240601_4" : "KÅ‚obuck - miasto",
+            "240601_5" : "KÅ‚obuck - obszar wiejski",
             "240602_4" : "Krzepice - miasto",
             "240602_5" : "Krzepice - obszar wiejski",
             "240603_2" : "Lipie",
-            "240604_2" : "MiedŸno",
-            "240605_2" : "Opatów",
+            "240604_2" : "MiedÅºno",
+            "240605_2" : "OpatÃ³w",
             "240606_2" : "Panki",
-            "240607_2" : "Popów",
-            "240608_2" : "Przystajñ",
-            "240609_2" : "Wrêczyca Wielka",
+            "240607_2" : "PopÃ³w",
+            "240608_2" : "PrzystajÅ„",
+            "240609_2" : "WrÄ™czyca Wielka",
 
-            # powiat    czêstochowski
+            # powiat    czÄ™stochowski
             "240401_4" : "Blachownia - miasto",
             "240401_5" : "Blachownia - obszar wiejski",
-            "240402_2" : "D¹browa Zielona",
-            "240403_2" : "Janów",
+            "240402_2" : "DÄ…browa Zielona",
+            "240403_2" : "JanÃ³w",
             "240404_2" : "Kamienica Polska",
-            "240405_2" : "K³omnice",
+            "240405_2" : "KÅ‚omnice",
             "240407_2" : "Konopiska",
-            "240411_2" : "Mykanów",
+            "240411_2" : "MykanÃ³w",
             "240412_2" : "Olsztyn",
-            "240415_2" : "Rêdziny",
+            "240415_2" : "RÄ™dziny",
             
-            # M. Czêstochowa
-            "246401_1" : "Czêstochowa",
+            # M. CzÄ™stochowa
+            "246401_1" : "CzÄ™stochowa",
                 
                 
-            "999999_9" : "koniec wyœcigu"
+            "999999_9" : "koniec wyÅ›cigu"
         }
 
 
-        # s³ownik do zamiany    terytu na nazwê obrêbu
+        # sÅ‚ownik do zamiany    terytu na nazwÄ™ obrÄ™bu
         self.dictObr_teryt2nazwa =  {
             "240601_4.0001" :   "Brody Malina",
-            "240601_4.0002" :   "K³obuck",
-            "240601_4.0003" :   "Niwa Skrzeszów",
+            "240601_4.0002" :   "KÅ‚obuck",
+            "240601_4.0003" :   "Niwa SkrzeszÃ³w",
             "240601_4.0004" :   "Osoki - Pustkowie",
-            "240601_4.0005" :   "Przyby³ów",
+            "240601_4.0005" :   "PrzybyÅ‚Ã³w",
             "240601_4.0006" :   "Smugi",
-            "240601_4.0007" :   "Zagórze",
+            "240601_4.0007" :   "ZagÃ³rze",
             "240601_4.0008" :   "Zakrzew",
 
-            "240601_5.0001" :   "Bia³a Dolna",
-            "240601_5.0002" :   "Bia³a Górna",
+            "240601_5.0001" :   "BiaÅ‚a Dolna",
+            "240601_5.0002" :   "BiaÅ‚a GÃ³rna",
             "240601_5.0003" :   "Borowianka",
             "240601_5.0004" :   "Gruszewnia",
             "240601_5.0005" :   "Kamyk",
             "240601_5.0006" :   "Kopiec",
             "240601_5.0007" :   "Lgota",
             "240601_5.0008" :   "Libidza",
-            "240601_5.0009" :   "£obodno",
-            "240601_5.0010" :   "Nowa Wieœ",
+            "240601_5.0009" :   "Åobodno",
+            "240601_5.0010" :   "Nowa WieÅ›",
             "240601_5.0011" :   "Rybno",
 
             "240602_4.0001" :   "Krzepice",
-            "240602_4.0002" :   "Kuków",
-            "240602_4.0003" :   "KuŸniczka",
+            "240602_4.0002" :   "KukÃ³w",
+            "240602_4.0003" :   "KuÅºniczka",
 
             "240602_5.0001" :   "Dankowice",
             "240602_5.0002" :   "Lutrowskie",
-            "240602_5.0003" :   "Pod³ê¿e Królewskie",
+            "240602_5.0003" :   "PodÅ‚Ä™Å¼e KrÃ³lewskie",
             "240602_5.0004" :   "Starokrzepice",
             "240602_5.0005" :   "Szarki",
-            "240602_5.0006" :   "Zaj¹czki Pierwsze",
-            "240602_5.0007" :   "Zaj¹czki Drugie",
+            "240602_5.0006" :   "ZajÄ…czki Pierwsze",
+            "240602_5.0007" :   "ZajÄ…czki Drugie",
 
-            "240603_2.0001" :   "Albertów",
-            "240603_2.0002" :   "Brzózki",
-            "240603_2.0003" :   "Danków",
+            "240603_2.0001" :   "AlbertÃ³w",
+            "240603_2.0002" :   "BrzÃ³zki",
+            "240603_2.0003" :   "DankÃ³w",
             "240603_2.0004" :   "Grabarze",
-            "240603_2.0005" :   "Julianów",
-            "240603_2.0006" :   "Kleœniska",
-            "240603_2.0007" :   "Lindów",
+            "240603_2.0005" :   "JulianÃ³w",
+            "240603_2.0006" :   "KleÅ›niska",
+            "240603_2.0007" :   "LindÃ³w",
             "240603_2.0008" :   "Lipie",
-            "240603_2.0009" :   "£yŸniaki",
+            "240603_2.0009" :   "ÅyÅºniaki",
             "240603_2.0010" :   "Napoleon",
             "240603_2.0011" :   "Natolin",
             "240603_2.0012" :   "Parzymiechy",
-            "240603_2.0013" :   "Rêbielice Szlacheckie",
+            "240603_2.0013" :   "RÄ™bielice Szlacheckie",
             "240603_2.0014" :   "Rozalin",
-            "240603_2.0015" :   "Stanis³awów",
-            "240603_2.0016" :   "Szyszków",
+            "240603_2.0015" :   "StanisÅ‚awÃ³w",
+            "240603_2.0016" :   "SzyszkÃ³w",
             "240603_2.0017" :   "Wapiennik",
             "240603_2.0018" :   "Zbrojewsko",
             "240603_2.0019" :   "Zimnowoda",
 
             "240604_2.0001" :   "Borowa",
             "240604_2.0002" :   "Izbiska",
-            "240604_2.0003" :   "Ko³aczkowice",
-            "240604_2.0004" :   "Mazówki",
-            "240604_2.0005" :   "MiedŸno",
+            "240604_2.0003" :   "KoÅ‚aczkowice",
+            "240604_2.0004" :   "MazÃ³wki",
+            "240604_2.0005" :   "MiedÅºno",
             "240604_2.0006" :   "Mokra",
             "240604_2.0007" :   "Ostrowy",
             "240604_2.0008" :   "Suchany",
             "240604_2.0009" :   "Wapiennik",
-            "240604_2.0010" :   "W³adys³awów",
+            "240604_2.0010" :   "WÅ‚adysÅ‚awÃ³w",
 
-            "240605_2.0001" :   "Iwanowice Du¿e",
-            "240605_2.0002" :   "Iwanowice Ma³e",
-            "240605_2.0003" :   "Naboków",
-            "240605_2.0004" :   "Opatów",
-            "240605_2.0005" :   "Waleñczów",
+            "240605_2.0001" :   "Iwanowice DuÅ¼e",
+            "240605_2.0002" :   "Iwanowice MaÅ‚e",
+            "240605_2.0003" :   "NabokÃ³w",
+            "240605_2.0004" :   "OpatÃ³w",
+            "240605_2.0005" :   "WaleÅ„czÃ³w",
             "240605_2.0006" :   "Wilkowiecko",
-            "240605_2.0007" :   "Z³ochowice",
+            "240605_2.0007" :   "ZÅ‚ochowice",
             "240605_2.0008" :   "Zwierzyniec I",
             "240605_2.0009" :   "Zwierzyniec II",
 
-            "240606_2.0001" :   "Aleksandrów",
+            "240606_2.0001" :   "AleksandrÃ³w",
             "240606_2.0002" :   "Cyganka",
             "240606_2.0003" :   "Jaciska",
             "240606_2.0004" :   "Janiki",
-            "240606_2.0005" :   "Ka³muki",
+            "240606_2.0005" :   "KaÅ‚muki",
             "240606_2.0006" :   "Kawki",
             "240606_2.0007" :   "Konieczki",
             "240606_2.0008" :   "Koski",
@@ -191,53 +189,53 @@ class   Teryt( object):
             "240606_2.0011" :   "Panki",
             "240606_2.0012" :   "Praszczyki",
             "240606_2.0013" :   "Zwierzyniec III",
-            "240606_2.0014" :   "¯erdzina",
+            "240606_2.0014" :   "Å»erdzina",
 
             "240607_2.0001" :   "Annolesie",
-            "240607_2.0002" :   "Brzózki",
-            "240607_2.0003" :   "D¹browa",
-            "240607_2.0004" :   "D¹brówka",
-            "240607_2.0005" :   "Dêbie",
-            "240607_2.0006" :   "Florianów",
-            "240607_2.0007" :   "Kamieñszczyzna",
+            "240607_2.0002" :   "BrzÃ³zki",
+            "240607_2.0003" :   "DÄ…browa",
+            "240607_2.0004" :   "DÄ…brÃ³wka",
+            "240607_2.0005" :   "DÄ™bie",
+            "240607_2.0006" :   "FlorianÃ³w",
+            "240607_2.0007" :   "KamieÅ„szczyzna",
             "240607_2.0008" :   "Lelity",
-            "240607_2.0009" :   "Marianów",
-            "240607_2.0010" :   "Nowa Wieœ",
-            "240607_2.0011" :   "P³aczki",
-            "240607_2.0012" :   "Popów",
-            "240607_2.0013" :   "Rêbielice Królewskie",
-            "240607_2.0014" :   "W¹sosz Dolny",
-            "240607_2.0015" :   "W¹sosz Górny",
-            "240607_2.0016" :   "Wiêcki",
+            "240607_2.0009" :   "MarianÃ³w",
+            "240607_2.0010" :   "Nowa WieÅ›",
+            "240607_2.0011" :   "PÅ‚aczki",
+            "240607_2.0012" :   "PopÃ³w",
+            "240607_2.0013" :   "RÄ™bielice KrÃ³lewskie",
+            "240607_2.0014" :   "WÄ…sosz Dolny",
+            "240607_2.0015" :   "WÄ…sosz GÃ³rny",
+            "240607_2.0016" :   "WiÄ™cki",
             "240607_2.0017" :   "Zawady",
             "240607_2.0018" :   "Zbory",
 
-            "240608_2.0001" :   "Antonów",
+            "240608_2.0001" :   "AntonÃ³w",
             "240608_2.0002" :   "Bagna",
-            "240608_2.0003" :   "Bór Zajaciñski",
+            "240608_2.0003" :   "BÃ³r ZajaciÅ„ski",
             "240608_2.0004" :   "Brzeziny",
-            "240608_2.0005" :   "D¹browa",
-            "240608_2.0006" :   "Górki",
-            "240608_2.0007" :   "Kamiñsko",
+            "240608_2.0005" :   "DÄ…browa",
+            "240608_2.0006" :   "GÃ³rki",
+            "240608_2.0007" :   "KamiÅ„sko",
             "240608_2.0008" :   "Kostrzyna I",
-            "240608_2.0009" :   "KuŸnica Nowa",
-            "240608_2.0010" :   "KuŸnica Stara",
-            "240608_2.0011" :   "£ugi Rad³y",
-            "240608_2.0012" :   "Michalinów",
-            "240608_2.0013" :   "Mrówczak",
-            "240608_2.0014" :   "Pod³ê¿e Szlacheckie",
-            "240608_2.0015" :   "Przystajñ",
+            "240608_2.0009" :   "KuÅºnica Nowa",
+            "240608_2.0010" :   "KuÅºnica Stara",
+            "240608_2.0011" :   "Åugi RadÅ‚y",
+            "240608_2.0012" :   "MichalinÃ³w",
+            "240608_2.0013" :   "MrÃ³wczak",
+            "240608_2.0014" :   "PodÅ‚Ä™Å¼e Szlacheckie",
+            "240608_2.0015" :   "PrzystajÅ„",
             "240608_2.0016" :   "Siekierowizna",
             "240608_2.0017" :   "Stany",
-            "240608_2.0018" :   "Wilcza Góra",
+            "240608_2.0018" :   "Wilcza GÃ³ra",
             "240608_2.0019" :   "Wrzosy",
 
-            "240609_2.0001" :   "Bie¿eñ",
+            "240609_2.0001" :   "BieÅ¼eÅ„",
             "240609_2.0002" :   "Borowe",
-            "240609_2.0003" :   "Bór Zapilski",
+            "240609_2.0003" :   "BÃ³r Zapilski",
             "240609_2.0004" :   "Brzezinki",
-            "240609_2.0005" :   "Czarna Wieœ",
-            "240609_2.0006" :   "D³ugi K¹t",
+            "240609_2.0005" :   "Czarna WieÅ›",
+            "240609_2.0006" :   "DÅ‚ugi KÄ…t",
             "240609_2.0007" :   "Golce",
             "240609_2.0008" :   "Grodzisko",
             "240609_2.0009" :   "Hutka",
@@ -247,112 +245,112 @@ class   Teryt( object):
             "240609_2.0013" :   "Kuleje",
             "240609_2.0014" :   "Nowiny",
             "240609_2.0015" :   "Pierzchno",
-            "240609_2.0016" :   "Pi³a I",
-            "240609_2.0017" :   "Pi³a II",
+            "240609_2.0016" :   "PiÅ‚a I",
+            "240609_2.0017" :   "PiÅ‚a II",
             "240609_2.0018" :   "Puszczew",
             "240609_2.0019" :   "Szarlejka",
             "240609_2.0020" :   "Truskolasy",
-            "240609_2.0021" :   "Wêglowice",
-            "240609_2.0022" :   "Wrêczyca Ma³a",
-            "240609_2.0023" :   "Wrêczyca Wielka",
+            "240609_2.0021" :   "WÄ™glowice",
+            "240609_2.0022" :   "WrÄ™czyca MaÅ‚a",
+            "240609_2.0023" :   "WrÄ™czyca Wielka",
             "240609_2.0024" :   "Wydra",
-            "240609_2.0025" :   "Zam³ynie",
+            "240609_2.0025" :   "ZamÅ‚ynie",
 
             # powiat cz.
             "240401_4.0001" :   "Blachownia",
-            "240401_4.0002" :   "B³aszczyki",
+            "240401_4.0002" :   "BÅ‚aszczyki",
             
             "240401_5.0002" :   "Gorzelnia",
 
-            "240411_2.0016":    "KuŸnica Lechowa",
+            "240411_2.0016":    "KuÅºnica Lechowa",
 
             "240412_2.0001" :   "Biskupice",
-            "240412_2.0006" :   "Przymi³owice",
+            "240412_2.0006" :   "PrzymiÅ‚owice",
 
-            # M. Czêstochowa
-            "246401_1"      : "Czêstochowa",
+            # M. CzÄ™stochowa
+            "246401_1"      : "CzÄ™stochowa",
             
             "246401_1.0395" :   "395",
                 
-            "246401_1.0420" :   "420-Brzeziny Ma³e",
+            "246401_1.0420" :   "420-Brzeziny MaÅ‚e",
                 
             
-            "999999_9.9999" :   "koniec wyœcigu"
+            "999999_9.9999" :   "koniec wyÅ›cigu"
         }
 
-        # s³ownik do zamiany nazwy wpisanej do entry-sw_obreb na terytFull
-        # - zasada dla nazw obrêbów powtarzaj¹cych siê w ró¿nych j. ew.:
-        #   do nazwy dodaæ suffix: myœlnik + dwuliterowy skrót j. ew.
-        #   np. Nowa Wieœ-Kl, D¹browa-Po
+        # sÅ‚ownik do zamiany nazwy wpisanej do entry-sw_obreb na terytFull
+        # - zasada dla nazw obrÄ™bÃ³w powtarzajÄ…cych siÄ™ w rÃ³Å¼nych j. ew.:
+        #   do nazwy dodaÄ‡ suffix: myÅ›lnik + dwuliterowy skrÃ³t j. ew.
+        #   np. Nowa WieÅ›-Kl, DÄ…browa-Po
         # ---------------------------------------------------------------------
         self.dictObr_nazwaObrWpisana2teryt = {
          "Brody Malina"                   : "240601_4.0001",
          "BrodyMalina"                    : "240601_4.0001",
-         "K³obuck"                        : "240601_4.0002",
+         "KÅ‚obuck"                        : "240601_4.0002",
          "Klobuck"                        : "240601_4.0002",
-         "Niwa Skrzeszów"                 : "240601_4.0003",
-         "NiwaSkrzeszów"                  : "240601_4.0003",
+         "Niwa SkrzeszÃ³w"                 : "240601_4.0003",
+         "NiwaSkrzeszÃ³w"                  : "240601_4.0003",
          "Osoki - Pustkowie"              : "240601_4.0004",
          "Osoki-Pustkowie"                : "240601_4.0004",
          "Osoki Pustkowie"                : "240601_4.0004",
          "OsokiPustkowie"                 : "240601_4.0004",
-         "Przyby³ów"                      : "240601_4.0005",
+         "PrzybyÅ‚Ã³w"                      : "240601_4.0005",
          "Przybylow"                      : "240601_4.0005",
          "Smugi"                          : "240601_4.0006",
-         "Zagórze"                        : "240601_4.0007",
+         "ZagÃ³rze"                        : "240601_4.0007",
          "Zagorze"                        : "240601_4.0007",
          "Zakrzew"                        : "240601_4.0008",
 
-         "Bia³a Dolna"                    : "240601_5.0001",
-         "Bia³aD"                         : "240601_5.0001",
-         "Bia³a Górna"                    : "240601_5.0002",
-         "Bia³aG"                         : "240601_5.0002",
+         "BiaÅ‚a Dolna"                    : "240601_5.0001",
+         "BiaÅ‚aD"                         : "240601_5.0001",
+         "BiaÅ‚a GÃ³rna"                    : "240601_5.0002",
+         "BiaÅ‚aG"                         : "240601_5.0002",
          "Borowianka"                     : "240601_5.0003",
          "Gruszewnia"                     : "240601_5.0004",
          "Kamyk"                          : "240601_5.0005",
          "Kopiec"                         : "240601_5.0006",
          "Lgota"                          : "240601_5.0007",
          "Libidza"                        : "240601_5.0008",
-         "£obodno"                        : "240601_5.0009",
-         "Nowa Wieœ-Kl"                   : "240601_5.0010",
-         "Nowa Wieœ K"                    : "240601_5.0010",
-         "Nowa Wieœ-K"                    : "240601_5.0010",
-         "Nowa WieœK"                     : "240601_5.0010",
+         "Åobodno"                        : "240601_5.0009",
+         "Nowa WieÅ›-Kl"                   : "240601_5.0010",
+         "Nowa WieÅ› K"                    : "240601_5.0010",
+         "Nowa WieÅ›-K"                    : "240601_5.0010",
+         "Nowa WieÅ›K"                     : "240601_5.0010",
          "Rybno"                          : "240601_5.0011",
 
          "Krzepice"                       : "240602_4.0001",
-         "Kuków"                          : "240602_4.0002",
-         "KuŸniczka"                      : "240602_4.0003",
+         "KukÃ³w"                          : "240602_4.0002",
+         "KuÅºniczka"                      : "240602_4.0003",
 
          "Dankowice"                      : "240602_5.0001",
          "Lutrowskie"                     : "240602_5.0002",
-         "Pod³ê¿e Królewskie"             : "240602_5.0003",
-         "Pod³ê¿eK"                       : "240602_5.0003",
+         "PodÅ‚Ä™Å¼e KrÃ³lewskie"             : "240602_5.0003",
+         "PodÅ‚Ä™Å¼eK"                       : "240602_5.0003",
          "Starokrzepice"                  : "240602_5.0004",
          "Szarki"                         : "240602_5.0005",
-         "Zaj¹czki I"                     : "240602_5.0006",
-         "Zaj¹czki II"                    : "240602_5.0007",
-         "Zaj¹czki Pierwsze"              : "240602_5.0006",
-         "Zaj¹czki Drugie"                : "240602_5.0007",
+         "ZajÄ…czki I"                     : "240602_5.0006",
+         "ZajÄ…czki II"                    : "240602_5.0007",
+         "ZajÄ…czki Pierwsze"              : "240602_5.0006",
+         "ZajÄ…czki Drugie"                : "240602_5.0007",
 
-         "Albertów"                       : "240603_2.0001",
-         "Brzózki-Li"                     : "240603_2.0002",
-         "Brzózki L"                      : "240603_2.0002",
-         "Brzózki-L"                      : "240603_2.0002",
-         "Danków"                         : "240603_2.0003",
+         "AlbertÃ³w"                       : "240603_2.0001",
+         "BrzÃ³zki-Li"                     : "240603_2.0002",
+         "BrzÃ³zki L"                      : "240603_2.0002",
+         "BrzÃ³zki-L"                      : "240603_2.0002",
+         "DankÃ³w"                         : "240603_2.0003",
          "Grabarze"                       : "240603_2.0004",
-         "Julianów"                       : "240603_2.0005",
-         "Kleœniska"                      : "240603_2.0006",
-         "Lindów"                         : "240603_2.0007",
+         "JulianÃ³w"                       : "240603_2.0005",
+         "KleÅ›niska"                      : "240603_2.0006",
+         "LindÃ³w"                         : "240603_2.0007",
          "Lipie"                          : "240603_2.0008",
-         "£yŸniaki"                       : "240603_2.0009",
+         "ÅyÅºniaki"                       : "240603_2.0009",
          "Napoleon"                       : "240603_2.0010",
          "Natolin"                        : "240603_2.0011",
          "Parzymiechy"                    : "240603_2.0012",
-         "Rêbielice Szlacheckie"          : "240603_2.0013",
+         "RÄ™bielice Szlacheckie"          : "240603_2.0013",
          "Rozalin"                        : "240603_2.0014",
-         "Stanis³awów"                    : "240603_2.0015",
-         "Szyszków"                       : "240603_2.0016",
+         "StanisÅ‚awÃ³w"                    : "240603_2.0015",
+         "SzyszkÃ³w"                       : "240603_2.0016",
          "Wapiennik-Li"                   : "240603_2.0017",
          "Wapiennik-L"                    : "240603_2.0017",
          "Wapiennik L"                    : "240603_2.0017",
@@ -361,31 +359,31 @@ class   Teryt( object):
 
          "Borowa"                         : "240604_2.0001",
          "Izbiska"                        : "240604_2.0002",
-         "Ko³aczkowice"                   : "240604_2.0003",
-         "Mazówki"                        : "240604_2.0004",
-         "MiedŸno"                        : "240604_2.0005",
+         "KoÅ‚aczkowice"                   : "240604_2.0003",
+         "MazÃ³wki"                        : "240604_2.0004",
+         "MiedÅºno"                        : "240604_2.0005",
          "Mokra"                          : "240604_2.0006",
          "Ostrowy"                        : "240604_2.0007",
          "Suchany"                        : "240604_2.0008",
          "Wapiennik-Mi"                   : "240604_2.0009",
          "Wapiennik M"                    : "240604_2.0009",
-         "W³adys³awów"                    : "240604_2.0010",
+         "WÅ‚adysÅ‚awÃ³w"                    : "240604_2.0010",
 
-         "Iwanowice Du¿e"                 : "240605_2.0001",
-         "Iwanowice Ma³e"                 : "240605_2.0002",
-         "Naboków"                        : "240605_2.0003",
-         "Opatów"                         : "240605_2.0004",
-         "Waleñczów"                      : "240605_2.0005",
+         "Iwanowice DuÅ¼e"                 : "240605_2.0001",
+         "Iwanowice MaÅ‚e"                 : "240605_2.0002",
+         "NabokÃ³w"                        : "240605_2.0003",
+         "OpatÃ³w"                         : "240605_2.0004",
+         "WaleÅ„czÃ³w"                      : "240605_2.0005",
          "Wilkowiecko"                    : "240605_2.0006",
-         "Z³ochowice"                     : "240605_2.0007",
+         "ZÅ‚ochowice"                     : "240605_2.0007",
          "Zwierzyniec I"                  : "240605_2.0008",
          "Zwierzyniec II"                 : "240605_2.0009",
 
-         "Aleksandrów"                    : "240606_2.0001",
+         "AleksandrÃ³w"                    : "240606_2.0001",
          "Cyganka"                        : "240606_2.0002",
          "Jaciska"                        : "240606_2.0003",
          "Janiki"                         : "240606_2.0004",
-         "Ka³muki"                        : "240606_2.0005",
+         "KaÅ‚muki"                        : "240606_2.0005",
          "Kawki"                          : "240606_2.0006",
          "Konieczki"                      : "240606_2.0007",
          "Koski"                          : "240606_2.0008",
@@ -394,59 +392,59 @@ class   Teryt( object):
          "Panki"                          : "240606_2.0011",
          "Praszczyki"                     : "240606_2.0012",
          "Zwierzyniec III"                : "240606_2.0013",
-         "¯erdzina"                       : "240606_2.0014",
+         "Å»erdzina"                       : "240606_2.0014",
 
          "Annolesie"                      : "240607_2.0001",
-         "Brzózki-Po"                     : "240607_2.0002",
-         "D¹browa-Po"                     : "240607_2.0003",
-         "D¹brówka"                       : "240607_2.0004",
-         "Dêbie"                          : "240607_2.0005",
-         "Florianów"                      : "240607_2.0006",
-         "Kamieñszczyzna"                 : "240607_2.0007",
+         "BrzÃ³zki-Po"                     : "240607_2.0002",
+         "DÄ…browa-Po"                     : "240607_2.0003",
+         "DÄ…brÃ³wka"                       : "240607_2.0004",
+         "DÄ™bie"                          : "240607_2.0005",
+         "FlorianÃ³w"                      : "240607_2.0006",
+         "KamieÅ„szczyzna"                 : "240607_2.0007",
          "Lelity"                         : "240607_2.0008",
-         "Marianów"                       : "240607_2.0009",
-         "Nowa Wieœ-Po"                   : "240607_2.0010",
-         "Nowa Wieœ P"                    : "240607_2.0010",
-         "Nowa WieœP"                     : "240607_2.0010",
-         "P³aczki"                        : "240607_2.0011",
-         "Popów"                          : "240607_2.0012",
-         "Rêbielice Królewskie"           : "240607_2.0013",
-         "W¹sosz Dolny"                   : "240607_2.0014",
-         "W¹sosz Górny"                   : "240607_2.0015",
-         "Wiêcki"                         : "240607_2.0016",
+         "MarianÃ³w"                       : "240607_2.0009",
+         "Nowa WieÅ›-Po"                   : "240607_2.0010",
+         "Nowa WieÅ› P"                    : "240607_2.0010",
+         "Nowa WieÅ›P"                     : "240607_2.0010",
+         "PÅ‚aczki"                        : "240607_2.0011",
+         "PopÃ³w"                          : "240607_2.0012",
+         "RÄ™bielice KrÃ³lewskie"           : "240607_2.0013",
+         "WÄ…sosz Dolny"                   : "240607_2.0014",
+         "WÄ…sosz GÃ³rny"                   : "240607_2.0015",
+         "WiÄ™cki"                         : "240607_2.0016",
          "Zawady"                         : "240607_2.0017",
          "Zbory"                          : "240607_2.0018",
 
-         "Antonów"                        : "240608_2.0001",
+         "AntonÃ³w"                        : "240608_2.0001",
          "Bagna"                          : "240608_2.0002",
-         "Bór Zajaciñski"                 : "240608_2.0003",
+         "BÃ³r ZajaciÅ„ski"                 : "240608_2.0003",
          "Brzeziny"                       : "240608_2.0004",
-         "D¹browa-Pr"                     : "240608_2.0005",
-         "Górki"                          : "240608_2.0006",
-         "Kamiñsko"                       : "240608_2.0007",
+         "DÄ…browa-Pr"                     : "240608_2.0005",
+         "GÃ³rki"                          : "240608_2.0006",
+         "KamiÅ„sko"                       : "240608_2.0007",
          "KostrzynaI"                     : "240608_2.0008",
          "Kostrzyna I"                    : "240608_2.0008",
-         "KuŸnica Nowa"                   : "240608_2.0009",
-         "KuŸnica Stara"                  : "240608_2.0010",
-         "£ugi Rad³y"                     : "240608_2.0011",
-         "Michalinów"                     : "240608_2.0012",
-         "Mrówczak"                       : "240608_2.0013",
-         "Pod³ê¿e Szlacheckie"            : "240608_2.0014",
-         "Przystajñ"                      : "240608_2.0015",
+         "KuÅºnica Nowa"                   : "240608_2.0009",
+         "KuÅºnica Stara"                  : "240608_2.0010",
+         "Åugi RadÅ‚y"                     : "240608_2.0011",
+         "MichalinÃ³w"                     : "240608_2.0012",
+         "MrÃ³wczak"                       : "240608_2.0013",
+         "PodÅ‚Ä™Å¼e Szlacheckie"            : "240608_2.0014",
+         "PrzystajÅ„"                      : "240608_2.0015",
          "Siekierowizna"                  : "240608_2.0016",
          "Stany"                          : "240608_2.0017",
-         "Wilcza Góra"                    : "240608_2.0018",
+         "Wilcza GÃ³ra"                    : "240608_2.0018",
          "Wrzosy"                         : "240608_2.0019",
 
-         "Bie¿eñ"                         : "240609_2.0001",
+         "BieÅ¼eÅ„"                         : "240609_2.0001",
          "Borowe"                         : "240609_2.0002",
-         "Bór Zapilski"                   : "240609_2.0003",
+         "BÃ³r Zapilski"                   : "240609_2.0003",
          "Brzezinki"                      : "240609_2.0004",
-         "Czarna Wieœ"                    : "240609_2.0005",
+         "Czarna WieÅ›"                    : "240609_2.0005",
          "CzarnaW"                        : "240609_2.0005",
-         "D³ugi K¹t"                      : "240609_2.0006",
-         "D³ugiK¹t"                       : "240609_2.0006",
-         "D³ugiK"                         : "240609_2.0006",
+         "DÅ‚ugi KÄ…t"                      : "240609_2.0006",
+         "DÅ‚ugiKÄ…t"                       : "240609_2.0006",
+         "DÅ‚ugiK"                         : "240609_2.0006",
          "Golce"                          : "240609_2.0007",
          "Grodzisko"                      : "240609_2.0008",
          "Hutka"                          : "240609_2.0009",
@@ -456,38 +454,38 @@ class   Teryt( object):
          "Kuleje"                         : "240609_2.0013",
          "Nowiny"                         : "240609_2.0014",
          "Pierzchno"                      : "240609_2.0015",
-         "Pi³a I"                         : "240609_2.0016",
-         "Pi³a II"                        : "240609_2.0017",
+         "PiÅ‚a I"                         : "240609_2.0016",
+         "PiÅ‚a II"                        : "240609_2.0017",
          "Puszczew"                       : "240609_2.0018",
          "Szarlejka"                      : "240609_2.0019",
          "Truskolasy"                     : "240609_2.0020",
-         "Wêglowice"                      : "240609_2.0021",
-         "Wrêczyca Ma³a"                  : "240609_2.0022",
-         "WrêczycaM"                      : "240609_2.0022",
-         "Wrêczyca Wielka"                : "240609_2.0023",
-         "WrêczycaW"                      : "240609_2.0023",
+         "WÄ™glowice"                      : "240609_2.0021",
+         "WrÄ™czyca MaÅ‚a"                  : "240609_2.0022",
+         "WrÄ™czycaM"                      : "240609_2.0022",
+         "WrÄ™czyca Wielka"                : "240609_2.0023",
+         "WrÄ™czycaW"                      : "240609_2.0023",
          "Wydra"                          : "240609_2.0024",
-         "Zam³ynie"                       : "240609_2.0025",
+         "ZamÅ‚ynie"                       : "240609_2.0025",
 
          # inne powiaty
          "Blachownia"                     : "240401_4.0001",
-         "B³aszczyki"                     : "240401_4.0002",
+         "BÅ‚aszczyki"                     : "240401_4.0002",
 
          "Gorzelnia"                      : "240401_5.0002",
-         "KuŸnica Lechowa": "240411_2.0016",
+         "KuÅºnica Lechowa": "240411_2.0016",
 
          "Biskupice"                      : "240412_2.0001",
-         "Przymi³owice"                   : "240412_2.0006",
+         "PrzymiÅ‚owice"                   : "240412_2.0006",
 
-            # M. Czêstochowa
-         "Czêstochowa"                    : "246401_1",   
+            # M. CzÄ™stochowa
+         "CzÄ™stochowa"                    : "246401_1",   
 
 
-         "koniec wyœcigu"                 : "999999_9.9999"
+         "koniec wyÅ›cigu"                 : "999999_9.9999"
          }
 
-        # s³ownik do zamiany    terytu na nazwê obr.    do  utworzenia
-        # katalogu (bez znaków diaktrycznych)
+        # sÅ‚ownik do zamiany    terytu na nazwÄ™ obr.    do  utworzenia
+        # katalogu (bez znakÃ³w diaktrycznych)
         self.dictObr_teryt2nazwaDir =   {
             "240601_4.0001" :   "BrodyM",
             "240601_4.0002" :   "Klobuck",
@@ -654,97 +652,97 @@ class   Teryt( object):
             "240412_2.0001" :   "Biskupice",
             "240412_2.0006" :   "Przymilowice",
 
-            # M. Czêstochowa
+            # M. CzÄ™stochowa
             "246401_1":   "CzM",
                     
-            "999999_9.9999" :   "koniec wyœcigu"
+            "999999_9.9999" :   "koniec wyÅ›cigu"
         }
 
 
-        # s³ownik do zamiany    nazwy   obrêbu na teryt
+        # sÅ‚ownik do zamiany    nazwy   obrÄ™bu na teryt
         # UWAGA!!!
-        # Ten s³ownik jest nieprzydatny, bo powtarzaj¹ sie w nim klucze
+        # Ten sÅ‚ownik jest nieprzydatny, bo powtarzajÄ… sie w nim klucze
         '''
         self.dictObr_nazwa2teryt =  {
             "Brody Malina"                      : "240601_4.0001",
-            "K³obuck"                           : "240601_4.0002",
-            "Niwa Skrzeszów"                    : "240601_4.0003",
+            "KÅ‚obuck"                           : "240601_4.0002",
+            "Niwa SkrzeszÃ³w"                    : "240601_4.0003",
             "Osoki - Pustkowie"                 : "240601_4.0004",
-            "Przyby³ów"                         : "240601_4.0005",
+            "PrzybyÅ‚Ã³w"                         : "240601_4.0005",
             "Smugi"                             : "240601_4.0006",
-            "Zagórze"                           : "240601_4.0007",
+            "ZagÃ³rze"                           : "240601_4.0007",
             "Zakrzew"                           : "240601_4.0008",
                                                     
-            "Bia³a Dolna"                       : "240601_5.0001",
-            "Bia³a Górna"                       : "240601_5.0002",
+            "BiaÅ‚a Dolna"                       : "240601_5.0001",
+            "BiaÅ‚a GÃ³rna"                       : "240601_5.0002",
             "Borowianka"                        : "240601_5.0003",
             "Gruszewnia"                        : "240601_5.0004",
             "Kamyk"                             : "240601_5.0005",
             "Kopiec"                            : "240601_5.0006",
             "Lgota"                             : "240601_5.0007",
             "Libidza"                           : "240601_5.0008",
-            "£obodno"                           : "240601_5.0009",
-            "Nowa Wieœ"                         : "240601_5.0010",
+            "Åobodno"                           : "240601_5.0009",
+            "Nowa WieÅ›"                         : "240601_5.0010",
             "Rybno"                             : "240601_5.0011",
                                                     
             "Krzepice"                          : "240602_4.0001",
-            "Kuków"                             : "240602_4.0002",
-            "KuŸniczka"                         : "240602_4.0003",
+            "KukÃ³w"                             : "240602_4.0002",
+            "KuÅºniczka"                         : "240602_4.0003",
                                                     
             "Dankowice"                         : "240602_5.0001",
             "Lutrowskie"                        : "240602_5.0002",
-            "Pod³ê¿e Królewskie"                : "240602_5.0003",
+            "PodÅ‚Ä™Å¼e KrÃ³lewskie"                : "240602_5.0003",
             "Starokrzepice"                     : "240602_5.0004",
             "Szarki"                            : "240602_5.0005",
-            "Zaj¹czki I"                        : "240602_5.0006",
-            "Zaj¹czki II"                       : "240602_5.0007",
+            "ZajÄ…czki I"                        : "240602_5.0006",
+            "ZajÄ…czki II"                       : "240602_5.0007",
                                                     
-            "Albertów"                          : "240603_2.0001",
-            "Brzózki"                           : "240603_2.0002",
-            "Danków"                            : "240603_2.0003",
+            "AlbertÃ³w"                          : "240603_2.0001",
+            "BrzÃ³zki"                           : "240603_2.0002",
+            "DankÃ³w"                            : "240603_2.0003",
             "Grabarze"                          : "240603_2.0004",
-            "Julianów"                          : "240603_2.0005",
-            "Kleœniska"                         : "240603_2.0006",
-            "Lindów"                            : "240603_2.0007",
+            "JulianÃ³w"                          : "240603_2.0005",
+            "KleÅ›niska"                         : "240603_2.0006",
+            "LindÃ³w"                            : "240603_2.0007",
             "Lipie"                             : "240603_2.0008",
-            "£yŸniaki"                          : "240603_2.0009",
+            "ÅyÅºniaki"                          : "240603_2.0009",
             "Napoleon"                          : "240603_2.0010",
             "Natolin"                           : "240603_2.0011",
             "Parzymiechy"                       : "240603_2.0012",
-            "Rêbielice Szlacheckie"             : "240603_2.0013",
+            "RÄ™bielice Szlacheckie"             : "240603_2.0013",
             "Rozalin"                           : "240603_2.0014",
-            "Stanis³awów"                       : "240603_2.0015",
-            "Szyszków"                          : "240603_2.0016",
+            "StanisÅ‚awÃ³w"                       : "240603_2.0015",
+            "SzyszkÃ³w"                          : "240603_2.0016",
             "Wapiennik"                         : "240603_2.0017",
             "Zbrojewsko"                        : "240603_2.0018",
             "Zimnowoda"                         : "240603_2.0019",
                                                     
             "Borowa"                            : "240604_2.0001",
             "Izbiska"                           : "240604_2.0002",
-            "Ko³aczkowice"                      : "240604_2.0003",
-            "Mazówki"                           : "240604_2.0004",
-            "MiedŸno"                           : "240604_2.0005",
+            "KoÅ‚aczkowice"                      : "240604_2.0003",
+            "MazÃ³wki"                           : "240604_2.0004",
+            "MiedÅºno"                           : "240604_2.0005",
             "Mokra"                             : "240604_2.0006",
             "Ostrowy"                           : "240604_2.0007",
             "Suchany"                           : "240604_2.0008",
             "Wapiennik"                         : "240604_2.0009",
-            "W³adys³awów"                       : "240604_2.0010",
+            "WÅ‚adysÅ‚awÃ³w"                       : "240604_2.0010",
                                                     
-            "Iwanowice Du¿e"                    : "240605_2.0001",
-            "Iwanowice Ma³e"                    : "240605_2.0002",
-            "Naboków"                           : "240605_2.0003",
-            "Opatów"                            : "240605_2.0004",
-            "Waleñczów"                         : "240605_2.0005",
+            "Iwanowice DuÅ¼e"                    : "240605_2.0001",
+            "Iwanowice MaÅ‚e"                    : "240605_2.0002",
+            "NabokÃ³w"                           : "240605_2.0003",
+            "OpatÃ³w"                            : "240605_2.0004",
+            "WaleÅ„czÃ³w"                         : "240605_2.0005",
             "Wilkowiecko"                       : "240605_2.0006",
-            "Z³ochowice"                        : "240605_2.0007",
+            "ZÅ‚ochowice"                        : "240605_2.0007",
             "Zwierzyniec I"                     : "240605_2.0008",
             "Zwierzyniec II"                    : "240605_2.0009",
                                                     
-            "Aleksandrów"                       : "240606_2.0001",
+            "AleksandrÃ³w"                       : "240606_2.0001",
             "Cyganka"                           : "240606_2.0002",
             "Jaciska"                           : "240606_2.0003",
             "Janiki"                            : "240606_2.0004",
-            "Ka³muki"                           : "240606_2.0005",
+            "KaÅ‚muki"                           : "240606_2.0005",
             "Kawki"                             : "240606_2.0006",
             "Konieczki"                         : "240606_2.0007",
             "Koski"                             : "240606_2.0008",
@@ -753,53 +751,53 @@ class   Teryt( object):
             "Panki"                             : "240606_2.0011",
             "Praszczyki"                        : "240606_2.0012",
             "Zwierzyniec III"                   : "240606_2.0013",
-            "¯erdzina"                          : "240606_2.0014",
+            "Å»erdzina"                          : "240606_2.0014",
                                                     
             "Annolesie"                         : "240607_2.0001",
-            "Brzózki"                           : "240607_2.0002",
-            "D¹browa"                           : "240607_2.0003",
-            "D¹brówka"                          : "240607_2.0004",
-            "Dêbie"                             : "240607_2.0005",
-            "Florianów"                         : "240607_2.0006",
-            "Kamieñszczyzna"                    : "240607_2.0007",
+            "BrzÃ³zki"                           : "240607_2.0002",
+            "DÄ…browa"                           : "240607_2.0003",
+            "DÄ…brÃ³wka"                          : "240607_2.0004",
+            "DÄ™bie"                             : "240607_2.0005",
+            "FlorianÃ³w"                         : "240607_2.0006",
+            "KamieÅ„szczyzna"                    : "240607_2.0007",
             "Lelity"                            : "240607_2.0008",
-            "Marianów"                          : "240607_2.0009",
-            "Nowa Wieœ"                         : "240607_2.0010",
-            "P³aczki"                           : "240607_2.0011",
-            "Popów"                             : "240607_2.0012",
-            "Rêbielice Królewskie"              : "240607_2.0013",
-            "W¹sosz Dolny"                      : "240607_2.0014",
-            "W¹sosz Górny"                      : "240607_2.0015",
-            "Wiêcki"                            : "240607_2.0016",
+            "MarianÃ³w"                          : "240607_2.0009",
+            "Nowa WieÅ›"                         : "240607_2.0010",
+            "PÅ‚aczki"                           : "240607_2.0011",
+            "PopÃ³w"                             : "240607_2.0012",
+            "RÄ™bielice KrÃ³lewskie"              : "240607_2.0013",
+            "WÄ…sosz Dolny"                      : "240607_2.0014",
+            "WÄ…sosz GÃ³rny"                      : "240607_2.0015",
+            "WiÄ™cki"                            : "240607_2.0016",
             "Zawady"                            : "240607_2.0017",
             "Zbory"                             : "240607_2.0018",
                                                     
-            "Antonów"                           : "240608_2.0001",
+            "AntonÃ³w"                           : "240608_2.0001",
             "Bagna"                             : "240608_2.0002",
-            "Bór Zajaciñski"                    : "240608_2.0003",
+            "BÃ³r ZajaciÅ„ski"                    : "240608_2.0003",
             "Brzeziny"                          : "240608_2.0004",
-            "D¹browa"                           : "240608_2.0005",
-            "Górki"                             : "240608_2.0006",
-            "Kamiñsko"                          : "240608_2.0007",
+            "DÄ…browa"                           : "240608_2.0005",
+            "GÃ³rki"                             : "240608_2.0006",
+            "KamiÅ„sko"                          : "240608_2.0007",
             "Kostrzyna I"                       : "240608_2.0008",
-            "KuŸnica Nowa"                      : "240608_2.0009",
-            "KuŸnica Stara"                     : "240608_2.0010",
-            "£ugi Rad³y"                        : "240608_2.0011",
-            "Michalinów"                        : "240608_2.0012",
-            "Mrówczak"                          : "240608_2.0013",
-            "Pod³ê¿e Szlacheckie"               : "240608_2.0014",
-            "Przystajñ"                         : "240608_2.0015",
+            "KuÅºnica Nowa"                      : "240608_2.0009",
+            "KuÅºnica Stara"                     : "240608_2.0010",
+            "Åugi RadÅ‚y"                        : "240608_2.0011",
+            "MichalinÃ³w"                        : "240608_2.0012",
+            "MrÃ³wczak"                          : "240608_2.0013",
+            "PodÅ‚Ä™Å¼e Szlacheckie"               : "240608_2.0014",
+            "PrzystajÅ„"                         : "240608_2.0015",
             "Siekierowizna"                     : "240608_2.0016",
             "Stany"                             : "240608_2.0017",
-            "Wilcza Góra"                       : "240608_2.0018",
+            "Wilcza GÃ³ra"                       : "240608_2.0018",
             "Wrzosy"                            : "240608_2.0019",
                                                     
-            "Bie¿eñ"                            : "240609_2.0001",
+            "BieÅ¼eÅ„"                            : "240609_2.0001",
             "Borowe"                            : "240609_2.0002",
-            "Bór Zapilski"                      : "240609_2.0003",
+            "BÃ³r Zapilski"                      : "240609_2.0003",
             "Brzezinki"                         : "240609_2.0004",
-            "Czarna Wieœ"                       : "240609_2.0005",
-            "D³ugi K¹t"                         : "240609_2.0006",
+            "Czarna WieÅ›"                       : "240609_2.0005",
+            "DÅ‚ugi KÄ…t"                         : "240609_2.0006",
             "Golce"                             : "240609_2.0007",
             "Grodzisko"                         : "240609_2.0008",
             "Hutka"                             : "240609_2.0009",
@@ -809,22 +807,22 @@ class   Teryt( object):
             "Kuleje"                            : "240609_2.0013",
             "Nowiny"                            : "240609_2.0014",
             "Pierzchno"                         : "240609_2.0015",
-            "Pi³a I"                            : "240609_2.0016",
-            "Pi³a II"                           : "240609_2.0017",
+            "PiÅ‚a I"                            : "240609_2.0016",
+            "PiÅ‚a II"                           : "240609_2.0017",
             "Puszczew"                          : "240609_2.0018",
             "Szarlejka"                         : "240609_2.0019",
             "Truskolasy"                        : "240609_2.0020",
-            "Wêglowice"                         : "240609_2.0021",
-            "Wrêczyca Ma³a"                     : "240609_2.0022",
-            "Wrêczyca Wielka"                   : "240609_2.0023",
+            "WÄ™glowice"                         : "240609_2.0021",
+            "WrÄ™czyca MaÅ‚a"                     : "240609_2.0022",
+            "WrÄ™czyca Wielka"                   : "240609_2.0023",
             "Wydra"                             : "240609_2.0024",
-            "Zam³ynie"                          : "240609_2.0025",
+            "ZamÅ‚ynie"                          : "240609_2.0025",
                                                     
             "Blachownia"                        : "240401_4.0001",
-            "B³aszczyki"                        : "240401_4.0002",
+            "BÅ‚aszczyki"                        : "240401_4.0002",
                                                     
                                                     
-            "koniec wyœcigu"                    : "999999_9.9999"
+            "koniec wyÅ›cigu"                    : "999999_9.9999"
         }
         '''
         
@@ -838,7 +836,7 @@ class   Teryt( object):
     '''
 
     def setTerytyFrom_obrTerytFull( self, aobrTerytFull):
-        # sprawdzenie, czy aobrTerytFull jest w s³owniku terytów
+        # sprawdzenie, czy aobrTerytFull jest w sÅ‚owniku terytÃ³w
         if aobrTerytFull in self.dictObr_teryt2nazwa.keys():
             self.terytFull = aobrTerytFull 
             print( "aobrTerytFull=" +   aobrTerytFull)
@@ -853,29 +851,29 @@ class   Teryt( object):
             self.teryt_jew   =  self.terytFull[4:8]
             self.teryt_obr   =  self.terytFull[9:15]
 
-            self.nazwa_woj  = "œl¹skie"
+            self.nazwa_woj  = "Å›lÄ…skie"
             self.nazwa_pow  = self.dictPow[ self.terytF_pow]
             self.nazwa_jew  = self.dictJEw[ self.terytF_jew]
             self.nazwa_obr  = self.dictObr_teryt2nazwa[ self.terytFull]
 
-            self.nazwa_uStn_woj = "Województwo: " + self.nazwa_woj
+            self.nazwa_uStn_woj = "WojewÃ³dztwo: " + self.nazwa_woj
             self.nazwa_uStn_pow = "Powiat: " + self.nazwa_pow
             self.nazwa_uStn_jew = "Jednostka ewidencyjna: "  + self.terytF_jew[0:6] + "__" + self.terytF_jew[7:9] + ", "   + self.nazwa_jew
-            self.nazwa_uStn_obr = "Obrêb: " + self.teryt_obr + " " + self.nazwa_obr
+            self.nazwa_uStn_obr = "ObrÄ™b: " + self.teryt_obr + " " + self.nazwa_obr
 
             # nazwa obr. do nazwy katalogu
             self.nazwaDir_obr   = self.dictObr_teryt2nazwaDir[ self.terytFull]
 
             return 0
         else:
-            print( "aobrTerytFull >%s< nie zosta³ odnaleziony w s³owniku" % ( aobrTerytFull))
+            print( "aobrTerytFull >%s< nie zostaÅ‚ odnaleziony w sÅ‚owniku" % ( aobrTerytFull))
             return -1
     
     
-    # chyba - w tej postaci - zbêdna funkcja
+    # chyba - w tej postaci - zbÄ™dna funkcja
     def setTerytFrom_obrNazwa(self, astr):
         '''
-            podajemy    nazwê   obrêbu, a funkcja   na  tej podstawie ustawia
+            podajemy    nazwÄ™   obrÄ™bu, a funkcja   na  tej podstawie ustawia
             wszystkie pola  instancji klasy
         '''
         if  len( astr) > 2:
@@ -892,22 +890,22 @@ class   Teryt( object):
             self.teryt_jew   =  self.terytFull[4:8]
             self.teryt_obr   =  self.terytFull[9:15]
 
-            self.nazwa_woj  = "œl¹skie"
+            self.nazwa_woj  = "Å›lÄ…skie"
             self.nazwa_pow  = self.dictPow[ self.terytF_pow]
             self.nazwa_jew  = self.dictJEw[ self.terytF_jew]
             self.nazwa_obr  = self.dictObr_teryt2nazwa[ self.terytFull]
 
-            self.nazwa_uStn_woj = "Województwo: " + self.nazwa_woj
+            self.nazwa_uStn_woj = "WojewÃ³dztwo: " + self.nazwa_woj
             self.nazwa_uStn_pow = "Powiat: "    + self.nazwa_pow
             self.nazwa_uStn_jew = "Jednostka ewidencyjna: "  + self.terytF_jew[0:6] + "__"   + self.terytF_jew[7:9] + ", "   + self.nazwa_jew
-            self.nazwa_uStn_obr = "obrêb:   " + self.teryt_obr +    " " +   self.nazwa_obr
+            self.nazwa_uStn_obr = "obrÄ™b:   " + self.teryt_obr +    " " +   self.nazwa_obr
 
             # nazwa obr. do nazwy katalogu
             self.nazwaDir_obr   = self.dictObr_teryt2nazwaDir[ self.terytFull]
 
             return 0
         else:
-            print( "Zbyt krótka nazwa obrêbu!")
+            print( "Zbyt krÃ³tka nazwa obrÄ™bu!")
             return -1
 
     

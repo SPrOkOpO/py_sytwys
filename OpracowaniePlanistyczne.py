@@ -1,16 +1,14 @@
-#-*- coding: windows-1250 -*-
-
 
 class FunkcjePlanu():
     """
     funkcje planu i ich opisy
 
-    -   w fazie projektowej nie jestem zdecydowany na typ atrybutów;
-        byæ mo¿e oba typy bêd¹ przydatne
+    -   w fazie projektowej nie jestem zdecydowany na typ atrybutÃ³w;
+        byÄ‡ moÅ¼e oba typy bÄ™dÄ… przydatne
     """
     def __init__(self):
-        # Ÿród³owe dane z ustn - funkcje (mog¹ byæ zdublowane)
-        # - pobrane z dgna za pomoc¹ makra fun>inf (sw_funkcja2plikInf.bas)
+        # ÅºrÃ³dÅ‚owe dane z ustn - funkcje (mogÄ… byÄ‡ zdublowane)
+        # - pobrane z dgna za pomocÄ… makra fun>inf (sw_funkcja2plikInf.bas)
         # - to makro dopisuje do pliku sw_XXX_info.txt wiersze postaci:
         #   [oPlan_fA_01]=MN,RM,DG
         self.funkcje_z_uStn = list()
@@ -21,7 +19,7 @@ class FunkcjePlanu():
 
     def import_ustn_data(self):
         """
-        dane z ustn porz¹dkuje i wype³nia nimi atrybuty dot. funkcji
+        dane z ustn porzÄ…dkuje i wypeÅ‚nia nimi atrybuty dot. funkcji
         """
         pass
 
@@ -30,7 +28,7 @@ class FunkcjePlanu():
 
 class OpracowaniePlanistyczne(object):
     '''
-    klasa do obs³ugi opracowania planistycznego
+    klasa do obsÅ‚ugi opracowania planistycznego
     -   planu zagospodarowania
     -   decyzji o warunkach zabudowy
     
@@ -38,12 +36,12 @@ class OpracowaniePlanistyczne(object):
     na razie tylko dostarcza zmiennych do odczytu i zapisu symboli funkcji 
     terenu w pliku sw_XXX_info.txt
     
-    >>  na obecnym etapie da siê latwo zrobiæ makro do pod³¹czenia pod polecenie
+    >>  na obecnym etapie da siÄ™ latwo zrobiÄ‡ makro do podÅ‚Ä…czenia pod polecenie
         inf>fun w p500A.sbm
-    >>  mozna te¿ dorobiæ podobn¹ obs³ugê opisów, w tym celu trzeba:
-        -   zrobiæ pole tekstowe do edycji tych opisów
-        -   dodaæ obs³ugê zapisu i odczytu do/z pliku sw_info    
-    ?>  zastanowiæ siê nad opisami, które nie mieszcz¹ siê w jedne linii
+    >>  mozna teÅ¼ dorobiÄ‡ podobnÄ… obsÅ‚ugÄ™ opisÃ³w, w tym celu trzeba:
+        -   zrobiÄ‡ pole tekstowe do edycji tych opisÃ³w
+        -   dodaÄ‡ obsÅ‚ugÄ™ zapisu i odczytu do/z pliku sw_info    
+    ?>  zastanowiÄ‡ siÄ™ nad opisami, ktÃ³re nie mieszczÄ… siÄ™ w jedne linii
     
         
     '''

@@ -1,4 +1,3 @@
-#-*- coding: windows-1250 -*-
 
 
 from tkinter import filedialog
@@ -34,11 +33,11 @@ import utils
 class SytwysGUIgrid( tk.Frame):
     def __init__(self, master, sw, teryt):
         """
-            do konstruktora przekazujê wskaŸniki:
-            -   master: do nadrzêdnej ramki, czyli okna aplikacji;
+            do konstruktora przekazujÄ™ wskaÅºniki:
+            -   master: do nadrzÄ™dnej ramki, czyli okna aplikacji;
             -   sw:     do obiektu klasy Sytwys;
             -   teryt:  do obiektu klasy Teryt;
-            ¿eby z wnêtrza klasy móc siê odwo³ywac do pól i metod obiektów
+            Å¼eby z wnÄ™trza klasy mÃ³c siÄ™ odwoÅ‚ywac do pÃ³l i metod obiektÃ³w
             sw i teryt
         """
         super(SytwysGUIgrid, self).__init__(master)
@@ -46,7 +45,7 @@ class SytwysGUIgrid( tk.Frame):
 
         self.master_frame = master
 
-        # obiekty zainicjowane poza niniejsz¹ klas¹
+        # obiekty zainicjowane poza niniejszÄ… klasÄ…
         self.sw = sw
         self.t = teryt
 
@@ -59,14 +58,14 @@ class SytwysGUIgrid( tk.Frame):
         self.rowGr2 = self.rowGr1 + 16
         self.rowGr3 = self.rowGr1 + 9
 
-        # font dla widgetów tekst
+        # font dla widgetÃ³w tekst
         # --------------------------------------------------------------------------
         self.font = tkFont.Font(family="Courier New", size=8)
 
         # zmienne tekstowe dla kontrolek    entry
         # --------------------------------------------------------------------------
 
-        # zmienne zwi¹zane z klas¹ Sytwys
+        # zmienne zwiÄ…zane z klasÄ… Sytwys
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         self.v_sw_numer             = tk.StringVar()
         self.v_sw_wykonawca         = tk.StringVar()
@@ -94,7 +93,7 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_inw_decZnak.set(self.sw.inw.dec_znak)
         self.v_sw_inw_decData.set(self.sw.inw.dec_data)
 
-        # zmienne zwi¹zane z klas¹ Teryt
+        # zmienne zwiÄ…zane z klasÄ… Teryt
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         self.v_sw_powiat_teryt      = tk.StringVar()
         self.v_sw_powiat_nazwa      = tk.StringVar()
@@ -120,7 +119,7 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_ust6_str          = tk.StringVar()
 
         #
-        # zmienne zwi¹zane z kG
+        # zmienne zwiÄ…zane z kG
         self.v_kg_nazwa_obiektu = tk.StringVar()
 
         self.GC_DIR_SYTWYS = "t:\\sytwys\\"
@@ -129,7 +128,7 @@ class SytwysGUIgrid( tk.Frame):
         self.dicWierszePliku = {}
 
         #
-        # nowy uk³ad
+        # nowy ukÅ‚ad
         # L:          R:
         #   LTop        RTop
         #   LMiddle     RMiddle
@@ -178,18 +177,18 @@ class SytwysGUIgrid( tk.Frame):
         """
 
         dictObr_nazwaObrWpisana2teryt
-        - s³ownik dekoduj¹cy wpisany tekst na teryt
+        - sÅ‚ownik dekodujÄ…cy wpisany tekst na teryt
         -------------------------------------------
-         "£obodno"                        : "240601_5.0009",
-         "Nowa Wieœ-Kl"                   : "240601_5.0010",
-         "Nowa Wieœ K"                    : "240601_5.0010",
+         "Åobodno"                        : "240601_5.0009",
+         "Nowa WieÅ›-Kl"                   : "240601_5.0010",
+         "Nowa WieÅ› K"                    : "240601_5.0010",
         """
-        # wyczyszczenie powi¹zanego ListBoxu
+        # wyczyszczenie powiÄ…zanego ListBoxu
         lista = ""
         self.v_sw_obrebListBox.set(lista)
 
-        # pobranie nazwy obrêbu i jej wyczyszczenie
-        # - czyszczenie na razie nie dzia³a dobrze na 100%
+        # pobranie nazwy obrÄ™bu i jej wyczyszczenie
+        # - czyszczenie na razie nie dziaÅ‚a dobrze na 100%
         obr = self.v_sw_obreb.get()
         obr = utils.clean_string_obreb(obr)
         self.v_sw_obreb.set(obr)
@@ -224,7 +223,7 @@ class SytwysGUIgrid( tk.Frame):
 
     # def eventHandler_entry_wykonawca(self, event):
     #     """
-    #     >> usun¹æ ten eventHandler - ma dzia³ac odwrotny
+    #     >> usunÄ…Ä‡ ten eventHandler - ma dziaÅ‚ac odwrotny
     #     """
     #     wykonawca = self.v_sw_wykonawca.get()
     #     if wykonawca == "kh":
@@ -239,9 +238,9 @@ class SytwysGUIgrid( tk.Frame):
         else:
             self.v_sw_wykonawca.set('kh')
 
-        # wype³nienie domyœlnych treœci dot. inwentaryzacji
+        # wypeÅ‚nienie domyÅ›lnych treÅ›ci dot. inwentaryzacji
         if celpracy in ['inw']:
-            self.v_sw_inw_obiekt.set('budynku mieszkalnego wraz z przy³¹czami')
+            self.v_sw_inw_obiekt.set('budynku mieszkalnego wraz z przyÅ‚Ä…czami')
             self.v_sw_inw_obiektDoUwag.set('budynku mieszkalnego')
             self.v_sw_inw_nrZal.set('1')
             self.v_sw_inw_decZnak.set('?')
@@ -263,10 +262,10 @@ class SytwysGUIgrid( tk.Frame):
                                         justify="left", width=10, bg="greenyellow",
                                         textvariable=self.v_sw_numer)
         e2  = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_wykonawca   )
-        # zbêdny: e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
+        # zbÄ™dny: e2.bind( "<FocusOut>", self.eventHandler_entry_wykonawca)
 
         # typ
-        # ttyp = ( "mdcp", "inw", "podz", "inny") <-- tak by³o przed kG...
+        # ttyp = ( "mdcp", "inw", "podz", "inny") <-- tak byÅ‚o przed kG...
         # deb-
         # print(f'deb: {self.v_sw_typ.get()=}')
         combobox = ttk.Combobox(self.frameTL,
@@ -289,7 +288,7 @@ class SytwysGUIgrid( tk.Frame):
 
         e7 = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable=self.v_sw_skala)
 
-        # entry OBRÊB
+        # entry OBRÄ˜B
         # ---------------------------------------------------------------------
         self.e3 = tk.Entry(self.frameTL,
                            justify="left",
@@ -298,7 +297,7 @@ class SytwysGUIgrid( tk.Frame):
         # e3.bind('<Button-1>', self.eventHandler_entry_obreb)
         self.e3.bind('<Key>', self.eventHandler_entry_obreb)
 
-        # listBox dla obrêbów
+        # listBox dla obrÄ™bÃ³w
         self.listBox_obr = tk.Listbox(self.frameTL,
                                       height=4, width=15,
                                       listvariable=self.v_sw_obrebListBox)
@@ -307,12 +306,12 @@ class SytwysGUIgrid( tk.Frame):
                                                 listvariable=self.v_sw_obreb_kandydaci)
 
 
-        # dzia³ki
+        # dziaÅ‚ki
         # ---------------------------------------------------------------------
         e4  = tk.Entry( self.frameTL, justify="left",   width=60 , textvariable = self.v_sw_dzialki )
         # e5 = tk.Entry( self.frameTL, justify="left",   width=10    , textvariable  = self.v_sw_typ     )
 
-        # id Zg³
+        # id ZgÅ‚
         # ---------------------------------------------------------------------
         # do likwidacji:
         # e6 = tk.Entry( self.frameTL, justify="left",   width=40    , textvariable  = self.v_sw_idZgl       )
@@ -338,14 +337,14 @@ class SytwysGUIgrid( tk.Frame):
 
 
         # self.v_sw_ust6.set = 1
-        lab_tx_mdcp_kp_ust56    = tk.Label( self.frameTL, text="§ 16 pkt 1"    , anchor="w", width=20).grid(row=self.rowGr1 + 7, sticky="W")
+        lab_tx_mdcp_kp_ust56    = tk.Label( self.frameTL, text="Â§ 16 pkt 1"    , anchor="w", width=20).grid(row=self.rowGr1 + 7, sticky="W")
         for etykieta, row, col, status, variable in [
-                ("dane spe³niaj¹ wymogi", 7, 1, tk.NORMAL, self.v_sw_ust5),
+                ("dane speÅ‚niajÄ… wymogi", 7, 1, tk.NORMAL, self.v_sw_ust5),
                 ("ust. 6", 7, 2, tk.DISABLED, self.v_sw_ust6)
                 ]:
             tk.Checkbutton( self.frameTL, text=etykieta, variable=variable, state=status).grid( row=row, column=col, sticky="W")
 
-        # kontrolki zwi¹zane z inwentaryzacj¹
+        # kontrolki zwiÄ…zane z inwentaryzacjÄ…
         # self.rowGr3 = self.rowGr1 + 8
         lab_sw_inw_obiekt       = tk.Label( self.frameTL, text="inw_obiekt "    , anchor="w", width=20).grid(row=self.rowGr3 + 0)
         lab_sw_inw_obiektDoUwag = tk.Label( self.frameTL, text="inw_obiekt do uwag "    , anchor="w", width=20).grid(row=self.rowGr3 + 1)
@@ -419,7 +418,7 @@ class SytwysGUIgrid( tk.Frame):
         butInicjuj  = tk.Button(self.frameBL, text='Inicjuj',  width=15, command=self.btn_inicjuj)
         butWczytaj  = tk.Button(self.frameBL, text='Wczytaj swInfo', width=15, command=self.wczytaj)
         butOK       = tk.Button(self.frameBL, text='Zapisz swInfo', width=15, command=self.btn_zapisz)
-        butCancel   = tk.Button(self.frameBL, text='Zakoñcz',  width=15,  command=self.btn_rezygnacja, bg="salmon")
+        butCancel   = tk.Button(self.frameBL, text='ZakoÅ„cz',  width=15,  command=self.btn_rezygnacja, bg="salmon")
 
         butNowaRobota.grid( row=0, column=0, padx=3, pady=3)
         butInicjuj.grid(    row=0, column=1, padx=3, pady=3)
@@ -491,7 +490,7 @@ class SytwysGUIgrid( tk.Frame):
     def nowaRobota(self):
         """
         skanuje katalog z plikami licznika i ustala numer dla nowej roboty
-        -   ma zastosowanie w przypadku rejestracji kilku robót po kolei - nie trzeba uruchamiac
+        -   ma zastosowanie w przypadku rejestracji kilku robÃ³t po kolei - nie trzeba uruchamiac
             programu dla kazdej roboty
         """
         self.sw.ustalNrSW(dictConstants.dictConstants["GC_DIR_LICZNIK"])
@@ -509,20 +508,20 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.sw_typ = self.v_sw_typ.get()
         self.sw.sw_skala = self.v_sw_skala.get()
 
-        # tu ma byæ obrêb
-        # choæ na razie nie ma, a chyba dzia³a dobrze
+        # tu ma byÄ‡ obrÄ™b
+        # choÄ‡ na razie nie ma, a chyba dziaÅ‚a dobrze
 
-        # oczyszczenie i posortowanie dzia³ek i wype³nienie pól dot. dzia³ek
+        # oczyszczenie i posortowanie dziaÅ‚ek i wypeÅ‚nienie pÃ³l dot. dziaÅ‚ek
         self.sw.sw_dzialki_obj.source_string_nr = self.v_sw_dzialki.get()
         self.sw.sw_dzialki_obj.init_instance()
         self.sw.update_dzialki(self.t.terytF_obr, self.t.teryt_jew, self.t.nazwa_obr)
         self.v_sw_dzialki.set(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp)
 
-        # zast¹piæ jednym ChBoxem "spe³niaj¹"
+        # zastÄ…piÄ‡ jednym ChBoxem "speÅ‚niajÄ…"
         self.sw.mdcp.ust5 = "%s" % self.v_sw_ust5.get()
         self.sw.mdcp.ust6 = "%s" % self.v_sw_ust6.get()
 
-        # id zg³.
+        # id zgÅ‚.
         self.sw.sw_idZgl_jrwa = self.v_sw_idZgl_jrwa.get()
         self.sw.sw_idZgl_nr = self.v_sw_idZgl_nr.get()
         self.sw.sw_idZgl_rok = self.v_sw_idZgl_rok.get()
@@ -551,7 +550,7 @@ class SytwysGUIgrid( tk.Frame):
             self.v_sw_inw_decZnak.set       (self.sw.inw.dec_znak      )
             self.v_sw_inw_decData.set       (self.sw.inw.dec_data      )
 
-        # dane do excela - czêœæ teryt
+        # dane do excela - czÄ™Å›Ä‡ teryt
         self.t.terytF_pow = self.v_sw_powiat_teryt.get()
         self.t.nazwa_pow = self.v_sw_powiat_nazwa.get()
         self.t.terytF_jew = self.v_sw_jEw_teryt.get()
@@ -560,7 +559,7 @@ class SytwysGUIgrid( tk.Frame):
         self.t.nazwa_obr = self.v_sw_obreb_nazwa.get()
 
         self.v_sw_obreb_dir.set( self.t.nazwaDir_obr)
-        # dane do excela - czêœæ libre
+        # dane do excela - czÄ™Å›Ä‡ libre
         self.sw.sw_obrebDir = self.v_sw_obreb_dir.get()
         self.sw.sw_libre_wykon = self.v_sw_libre_wykon.get()
         self.sw.sw_libre_opis = self.v_sw_libre_opis.get()
@@ -577,16 +576,16 @@ class SytwysGUIgrid( tk.Frame):
 
     def btn_inicjuj(self):
         """
-        na  podstawie wprowadzonych danych wype³nia odpowiednie pola
+        na  podstawie wprowadzonych danych wypeÅ‚nia odpowiednie pola
 
-        1)  najpierw ustalenie wybranego obrêbu
-            (jest to jednoczeœnie inicjalizacja pól terytu i nazw p/g/o)
-            -   sprawdzenie, czy obrêb jest wpisany jednoznacznie
-                a)  to sprawdzenie odbywa siê poprzez ustalenie liczby terytów
-                    w ListBoxie obrêbu
-                -   je¿eli jest jeden teryt, to nie trzeba nic robiæ
-                b)  je¿eli jest wiêcej ni¿ jeden teryt, to trzeba pobraæ teryt
-                    wybrany w ListBoxie, a je¿eli ¿aden nie jest wybrany, to wyœwietliæ
+        1)  najpierw ustalenie wybranego obrÄ™bu
+            (jest to jednoczeÅ›nie inicjalizacja pÃ³l terytu i nazw p/g/o)
+            -   sprawdzenie, czy obrÄ™b jest wpisany jednoznacznie
+                a)  to sprawdzenie odbywa siÄ™ poprzez ustalenie liczby terytÃ³w
+                    w ListBoxie obrÄ™bu
+                -   jeÅ¼eli jest jeden teryt, to nie trzeba nic robiÄ‡
+                b)  jeÅ¼eli jest wiÄ™cej niÅ¼ jeden teryt, to trzeba pobraÄ‡ teryt
+                    wybrany w ListBoxie, a jeÅ¼eli Å¼aden nie jest wybrany, to wyÅ›wietliÄ‡
                     MsgBox z wezwaniem do usera
 
         NIE TWORZY KATALOGU s-w! To robi funkcja zapisz().
@@ -601,7 +600,7 @@ class SytwysGUIgrid( tk.Frame):
         if self.listBox_obr.size() > 1:
             obrTerytFull = self.listBox_obr.get(ACTIVE)
             if len( obrTerytFull) < 3:
-                tk.messagebox.showinfo("Err", "Wska¿ teryt obrêbu w ListBoxie!")
+                tk.messagebox.showinfo("Err", "WskaÅ¼ teryt obrÄ™bu w ListBoxie!")
 
             # obrNazwa = self.t.dictObr_teryt2nazwa[ obrTerytFull]
         else:
@@ -613,13 +612,13 @@ class SytwysGUIgrid( tk.Frame):
                 obrTerytFull = self.t.dictObr_nazwaObrWpisana2teryt[obr]
                 self.e3.config(bg='lawn green')
             except:
-                print(f'Brak takiego obrêbu: {obr}')
+                print(f'Brak takiego obrÄ™bu: {obr}')
                 self.e3.config(bg='light coral')
 
 
         # 1)
         if self.t.setTerytyFrom_obrTerytFull(obrTerytFull) != 0:
-            tk.messagebox.showinfo("Err", "Inicjacja nieudana - b³êdny obrêb")
+            tk.messagebox.showinfo("Err", "Inicjacja nieudana - bÅ‚Ä™dny obrÄ™b")
             return -1
         self.e3.config(bg='white')
 
@@ -629,7 +628,7 @@ class SytwysGUIgrid( tk.Frame):
 
         self.sw.sw_wykonawca = self.v_sw_wykonawca.get()
 
-        # oczyszczenie i posortowanie dzia³ek i wype³nienie pól dot. dzia³ek
+        # oczyszczenie i posortowanie dziaÅ‚ek i wypeÅ‚nienie pÃ³l dot. dziaÅ‚ek
         self.sw.sw_dzialki_obj.source_string_nr = self.v_sw_dzialki.get()
         self.sw.sw_dzialki_obj.init_instance()
         self.sw.update_dzialki(self.t.terytF_obr, self.t.teryt_jew, self.t.nazwa_obr)
@@ -702,7 +701,7 @@ class SytwysGUIgrid( tk.Frame):
         print("1 sw_plikInfo_fullPath=" + self.sw.sw_plikInfo_fullPath)
         print("1 sw_plikNr_fullPath=" + self.sw.sw_plikNr_fullPath)
 
-        # wype³nienie kontrolek entry   aktualnymi danymi
+        # wypeÅ‚nienie kontrolek entry   aktualnymi danymi
         # - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   - - -   -
         # teryty    i nazwy
         self.v_sw_powiat_teryt.set( self.t.terytF_pow)
@@ -719,17 +718,17 @@ class SytwysGUIgrid( tk.Frame):
         self.v_sw_libre_wykon.set(self.sw.sw_libre_wykon)
         self.v_sw_libre_opis.set(self.sw.sw_libre_opis)
 
-        # œciezka dir
+        # Å›ciezka dir
         self.v_sw_dir_nazwa.set(self.sw.sw_dir_nazwa)
 
         self.sw.struktura_sw.inicjujStrukture(self.sw.sw_dir_nazwa,
                                               self.sw.sw_wykonawca,
                                               self.sw.sw_numer_str,
-                                              self.sw.sw_obrebDir)
+                                              self.sw.sw_obrebDir,)
         self.sw.struktura_sw.deb_listujStrukture()
 
         # zaktualizowanie obiektu kg
-        self.kg.update(self.sw.struktura_sw.sw_dictDirs['kG'],  # œcie¿ka katalogu kG
+        self.kg.update(self.sw.struktura_sw.sw_dictDirs['kG'],  # Å›cieÅ¼ka katalogu kG
                        self.sw.sw_typ,
                        self.sw.sw_dzialki_obj.source_jew_teryt_do_kG,
                        self.sw.sw_dzialki_obj.source_obr_nazwa,
@@ -761,22 +760,22 @@ class SytwysGUIgrid( tk.Frame):
     def zapisz_1(self):
         """
         -   tworzy katalog s-w
-        -   wype³nia go struktur¹ s-w
+        -   wypeÅ‚nia go strukturÄ… s-w
         -   tworzy i otwiera plik sw_NNN_info.txt
         -   zapisuje do niego:
-            -   dane teryt - wszystkie pola klasy (oprócz s³owników oczywiœcie)
+            -   dane teryt - wszystkie pola klasy (oprÃ³cz sÅ‚ownikÃ³w oczywiÅ›cie)
             -   dane sw
 
         """
 
-        # aktualizacja list dzia³ek
+        # aktualizacja list dziaÅ‚ek
         self.sw.update_dzialki(self.t.terytF_obr, self.t.teryt_jew, self.t.nazwa_obr)
 
         # global sw_plikInfo_fullPath
         global sw_plikNr_fullPath
         global sw_plikNr_nazwa
 
-        # utworzenie katalogu w GC_DIR_SYTWYS - je¿eli nie istnieje
+        # utworzenie katalogu w GC_DIR_SYTWYS - jeÅ¼eli nie istnieje
         if not os.path.exists(self.sw.sw_plikInfo_fullPath):
             print("sw_dir_nazwa=" + self.sw.sw_dir_nazwa)
             print("sw_plikInfo_fullPath=" + self.sw.sw_plikInfo_fullPath)
@@ -875,9 +874,9 @@ class SytwysGUIgrid( tk.Frame):
 
             # zapisanie danych wieloliniowych
             # 1) pobranie z textu
-            # 2) obciêcie
+            # 2) obciÄ™cie
             # 3) zapisanie do pliku info
-            # 4) zapisanie do pliku tytu³
+            # 4) zapisanie do pliku tytuÅ‚
             # 5) zapisanie do pliku uwagi
             # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             # 1)
@@ -915,7 +914,7 @@ class SytwysGUIgrid( tk.Frame):
         # tytNagl.txt
         with open(self.sw.sw_plikTytNagl_fullPath, "w") as f2:
             if self.sw.sw_typ == 'mdcp':
-                f2.write('MAPA DO CELÓW PROJEKTOWYCH' + "\n")
+                f2.write('MAPA DO CELÃ“W PROJEKTOWYCH' + "\n")
             elif self.sw.sw_typ == 'inw':
                 f2.write('GEODEZYJNA DOKUMENTACJA OBIEKTU BUDOWLANEGO' + "\n")
                 f2.write('Inwentaryzacja ' + self.sw.inw.obiekt + '\n')
@@ -928,20 +927,20 @@ class SytwysGUIgrid( tk.Frame):
             f2.write(self.t.nazwa_uStn_jew + "\n")
             f2.write(self.t.nazwa_uStn_obr + "\n")
             if len(self.sw.sw_dzialki_ergo_lst) < 2:
-                f2.write("Dzia³ka: " + self.sw.sw_dzialki + "\n")
+                f2.write("DziaÅ‚ka: " + self.sw.sw_dzialki + "\n")
             else:
-                f2.write("Dzia³ki: " + self.sw.sw_dzialki + "\n")
-            f2.write("Uk³ad wspó³rzêdnych p³askich prostok¹tnych: PL-2000/18" + "\n")
-            f2.write("Geodezyjny uk³ad wysokoœciowy: PL-EVRF2007-NH" + "\n")
+                f2.write("DziaÅ‚ki: " + self.sw.sw_dzialki + "\n")
+            f2.write("UkÅ‚ad wspÃ³Å‚rzÄ™dnych pÅ‚askich prostokÄ…tnych: PL-2000/18" + "\n")
+            f2.write("Geodezyjny ukÅ‚ad wysokoÅ›ciowy: PL-EVRF2007-NH" + "\n")
             f2.write(self.sw.sw_sekcje_tytul + "\n")
             f2.write("Skala 1:" + self.sw.sw_skala + "\n")
-            f2.write("Id. zg³.: " + self.sw.sw_idZgl + "\n")
+            f2.write("Id. zgÅ‚.: " + self.sw.sw_idZgl + "\n")
             if self.sw.sw_typ == "inw":
                 f2.write("\n")
                 f2.write(f"Usytuowanie obiektu budowlanego ({self.sw.inw.obiekt_do_uwag}) zgodne\n")
-                f2.write(f"z projektem zagospodarowania terenu (za³¹cznik nr {self.sw.inw.nr_zal} do decyzji\n")
-                # na koñcu musi byæ spacja, bo z niewiadomych wzglêdów macro nie tworzy
-                # ostatniego wiersza z ostatnim znakiem (bez spacji nie narysuje siê kropka)
+                f2.write(f"z projektem zagospodarowania terenu (zaÅ‚Ä…cznik nr {self.sw.inw.nr_zal} do decyzji\n")
+                # na koÅ„cu musi byÄ‡ spacja, bo z niewiadomych wzglÄ™dÃ³w macro nie tworzy
+                # ostatniego wiersza z ostatnim znakiem (bez spacji nie narysuje siÄ™ kropka)
                 f2.write("o znaku %s z dnia %s r.). " % (self.sw.inw.dec_znak, self.sw.inw.dec_data))
             else:
                 print(f'deb: {self.sw.sw_typ=}')
@@ -955,17 +954,17 @@ class SytwysGUIgrid( tk.Frame):
             f2.write(self.sw.mdcp.kp_uwagi5 + "\n\n")
             f2.write(self.sw.mdcp.kp_uwagi6 + "\n\n")
 
-        # utworzenie pliku dz.txt z dzia³kami do zakresu ergo
+        # utworzenie pliku dz.txt z dziaÅ‚kami do zakresu ergo
         try:
             with open(self.sw.sw_plikDz_ergo_abspath, 'w') as f:
                 for dz in self.sw.sw_dzialki_ergo_lst:
                     f.write(dz + '\n')
         except:
-            print("ERR b³¹d zapisu listy dzia³ek do ergo do pliku")
-            print(f'B³¹d {sys.exc_info()[0]}')
-            print(f'B³¹d {sys.exc_info()[1]}')
+            print("ERR bÅ‚Ä…d zapisu listy dziaÅ‚ek do ergo do pliku")
+            print(f'BÅ‚Ä…d {sys.exc_info()[0]}')
+            print(f'BÅ‚Ä…d {sys.exc_info()[1]}')
 
-        # utworzenie pliku do zg³oszenia ergo (kg.txt)
+        # utworzenie pliku do zgÅ‚oszenia ergo (kg.txt)
 
         # stara wersja >> do likwidacji
         # try:
@@ -975,43 +974,43 @@ class SytwysGUIgrid( tk.Frame):
         #         f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
         #         f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
         #         f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n\n')
-        #         # opis po³o¿enia
+        #         # opis poÅ‚oÅ¼enia
         #         f.write(self.sw.sw_dzialki_obj.source_jew_teryt_do_kG + ' ')
         #         f.write(self.sw.sw_dzialki_obj.source_obr_nazwa + ' ')
         #         f.write(self.sw.sw_dzialki_obj.sorted_string_nr_prz_sp + '\n\n')
         #         # data zakonczenia
         #         f.write(spdatetime.date_after(1, 0, 0).isoformat() + '\n\n')
-        #         # fraza do wyboru wyra¿eniem
+        #         # fraza do wyboru wyraÅ¼eniem
         #         f.write('"idDzialki" IN ( ' + '\n')
         #         dzs = list()
         #         for dz in self.sw.sw_dzialki_ergo_lst:
         #             dzs.append("'" + dz + "'")
         #         f.write(",\n".join(dzs) + "\n)\n")
         # except:
-        #     print("ERR b³¹d zapisu pliku kg.txt")
-        #     print(f'B³¹d {sys.exc_info()[0]}')
-        #     print(f'B³¹d {sys.exc_info()[1]}')
+        #     print("ERR bÅ‚Ä…d zapisu pliku kg.txt")
+        #     print(f'BÅ‚Ä…d {sys.exc_info()[0]}')
+        #     print(f'BÅ‚Ä…d {sys.exc_info()[1]}')
 
         try:
             with open(self.kg.kgtxt_abspath, 'w') as f:
                 s = self.kg.generate_content_kgtxt()
                 f.write(s)
         except:
-            print("ERR b³¹d zapisu pliku kg.txt")
-            print(f'B³¹d {sys.exc_info()[0]}')
-            print(f'B³¹d {sys.exc_info()[1]}')
+            print("ERR bÅ‚Ä…d zapisu pliku kg.txt")
+            print(f'BÅ‚Ä…d {sys.exc_info()[0]}')
+            print(f'BÅ‚Ä…d {sys.exc_info()[1]}')
 
         try:
             with open(self.kg.kgahk_abspath, 'w') as f:
                 s = self.kg.generate_content_kgahk()
                 f.write(s)
         except:
-            print("ERR b³¹d zapisu pliku kg.ahk")
-            print(f'B³¹d {sys.exc_info()[0]}')
-            print(f'B³¹d {sys.exc_info()[1]}')
+            print("ERR bÅ‚Ä…d zapisu pliku kg.ahk")
+            print(f'BÅ‚Ä…d {sys.exc_info()[0]}')
+            print(f'BÅ‚Ä…d {sys.exc_info()[1]}')
 
         print("zapisano")
-        # na razie trzeba zamkn¹æ, ¿eby program nie g³upia³
+        # na razie trzeba zamknÄ…Ä‡, Å¼eby program nie gÅ‚upiaÅ‚
         # self.master_frame.destroy
         # sys.exit()
 
@@ -1035,7 +1034,7 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.setNazwyPlikow_tytul_uwagi()
 
         # - odczytanie danych z pliku info
-        # - i zapisanie ich s³owniku dicWierszePliku
+        # - i zapisanie ich sÅ‚owniku dicWierszePliku
         # =========================================================================
         with open(self.sw.sw_plikInfo_fullPath, "r") as f:
             for wiersz in f:
@@ -1062,7 +1061,7 @@ class SytwysGUIgrid( tk.Frame):
             # pprint.pprint(self.dicWierszePliku)
             # spprint.print_footer('dicWierszePliku')
 
-        # aktualizacja zmiennych danymi ze s³ownika dicWierszePliku
+        # aktualizacja zmiennych danymi ze sÅ‚ownika dicWierszePliku
         # =========================================================================
         for key, val in self.dicWierszePliku.items():
             if key == "[t_terytFull]"           : self.t.terytFull          = val
@@ -1090,7 +1089,7 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[sw_typ]"                : self.sw.sw_typ            = val
             if key == "[sw_skala]"              : self.sw.sw_skala          = val
 
-            # aktualizacja dzia³ek
+            # aktualizacja dziaÅ‚ek
             # - string z numerami odczytany z pliku
             # ?> czy tutaj jest potrzebna aktualizacja obiektu sw.sw_dzialki_obj
             #    NIE, bo tu tylko odczytujemy dane z pliku
@@ -1167,14 +1166,14 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[sw.mdcp.kp_uwagi5]"     : self.sw.mdcp.kp_uwagi5 = val
             if key == "[sw.mdcp.kp_uwagi6]"     : self.sw.mdcp.kp_uwagi6 = val
 
-        # aktualizacja zmiennych zwi¹zanych z widgetami
+        # aktualizacja zmiennych zwiÄ…zanych z widgetami
         # =========================================================================
         self.v_sw_numer         .set(self.sw.sw_numer_str          )
         self.v_sw_wykonawca     .set(self.sw.sw_wykonawca          )
         self.v_sw_typ           .set(self.sw.sw_typ                )
         self.v_sw_skala         .set(self.sw.sw_skala              )
         self.v_sw_obreb         .set(self.t.nazwa_obr              )
-        # tu powinien byæ obrêb-teryt
+        # tu powinien byÄ‡ obrÄ™b-teryt
         # self.v_sw_obrebListBox
         self.v_sw_dzialki       .set(self.sw.sw_dzialki            )
         self.v_sw_ust5.set(int(self.sw.mdcp.ust5))
@@ -1211,9 +1210,9 @@ class SytwysGUIgrid( tk.Frame):
         # print( self.sw.sw_mdcp_ust5)
         # print( self.sw.sw_mdcp_ust6)
 
-        # god³a i text sekcje, [sw_sekcje_tytul]
-        # -  taki ma byæ format wielowierszowy:
-        #      Sekcje mapy zas. uk³. 2000:
+        # godÅ‚a i text sekcje, [sw_sekcje_tytul]
+        # -  taki ma byÄ‡ format wielowierszowy:
+        #      Sekcje mapy zas. ukÅ‚. 2000:
         #         6.144.29.12.1.3, 6.144.29.12.1.4,
         #         6.144.29.12.3.1, 6.144.29.12.3.2
         # -------------------------------------------------------------------------
@@ -1227,19 +1226,19 @@ class SytwysGUIgrid( tk.Frame):
 
         # dodanie do 2. i dalszych linii 3 spacji na poczatku
         sekcje_lines = self.sw.sw_sekcje_tytul.split('\n')
-        if sekcje_lines[0] == 'Sekcje mapy zas. uk³. 2000:':
+        if sekcje_lines[0] == 'Sekcje mapy zas. ukÅ‚. 2000:':
             self.sw.sw_sekcje_tytul = f'{sekcje_lines[0]}\n'
             for linia in sekcje_lines[1:]:
                 self.sw.sw_sekcje_tytul += f'   {linia}\n'
 
-        # wstawienie treœci dot. sekcji do widgetu edit
+        # wstawienie treÅ›ci dot. sekcji do widgetu edit
         self.tx_sekcje.delete( 1.0, tk.END)
         if len( self.sw.sw_sekcje_tytul) > 0:
             self.tx_sekcje.insert( tk.END, self.sw.sw_sekcje_tytul)
 
-        # utworzenie listy i s³ownika sekcji
+        # utworzenie listy i sÅ‚ownika sekcji
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        print("---[ utworzenie listy i s³ownika sekcji ]------------------------")
+        print("---[ utworzenie listy i sÅ‚ownika sekcji ]------------------------")
         self.sw.sw_dicSekcje.clear()
         del self.sw.sw_lstSekcje[0:]
         for key, val in self.dicWierszePliku.items():
@@ -1288,10 +1287,10 @@ class SytwysGUIgrid( tk.Frame):
 
     def btn_gen_sekcje( self):
         """
-        -   wczytanie gode³ z pliku "godla2swInfo.txt" do obiektu sekcje
-        -   utworzenie s³ownika gode³ postaci:
+        -   wczytanie godeÅ‚ z pliku "godla2swInfo.txt" do obiektu sekcje
+        -   utworzenie sÅ‚ownika godeÅ‚ postaci:
                     [godlo_03]=6.142.28.02.2.2
-        -   utworzenie propozycji treœci tekstu sw.sw_sekcje
+        -   utworzenie propozycji treÅ›ci tekstu sw.sw_sekcje
         """
         # deb
         # self.sw.sw_plikGodla2swInfo_fullPath = "t:\sytwys\883_rg_1909_BorZapilski-kan_inw\godla2swInfo.txt"
@@ -1312,15 +1311,15 @@ class SytwysGUIgrid( tk.Frame):
         # for wiersz
         # print( self.godlaX.g_lista)
         self.godlaX.drukujListe("---[ godla po wczytaniu ]-------")
-        self.godlaX.drukujSlownik("---[ slownik gode³ po wczytaniu ]-------")
+        self.godlaX.drukujSlownik("---[ slownik godeÅ‚ po wczytaniu ]-------")
 
         # utworzenie tekstu sw_sekcje
         #
         self.sw.sw_sekcje = ""
         """
         -   wiersze numerowane od "0"
-        -   i == nr god³a w wierszu
-        -   j == nr kolejny god³a
+        -   i == nr godÅ‚a w wierszu
+        -   j == nr kolejny godÅ‚a
         -   sStart == trzy spacje na pocz. wiersz, poza wierszem 0
         """
         i = 0
@@ -1351,23 +1350,23 @@ class SytwysGUIgrid( tk.Frame):
             # print( "i=%d, iOstatnia=%d >%s<>%s<\n" % ( i, iOstatnia, sPrzecinek, sEnd))
             wierszSekcji = wierszSekcji + s + sPrzecinek + sEnd
             self.sw.sw_sekcje = self.sw.sw_sekcje + sStart + s + sPrzecinek + sEnd
-            # zapisanie wiersza w s³owniku sekcji
+            # zapisanie wiersza w sÅ‚owniku sekcji
             # self.sw.sw_dicSekcje[]
 
         if iOstatnia < (liczbaSekcjiWWierszu - 1):
-            self.sw.sw_sekcje_tytul = "Sekcje mapy zas. uk³. 2000: " + self.sw.sw_sekcje
+            self.sw.sw_sekcje_tytul = "Sekcje mapy zas. ukÅ‚. 2000: " + self.sw.sw_sekcje
         else:
-            self.sw.sw_sekcje_tytul = "Sekcje mapy zas. uk³. 2000:\n" + self.sw.sw_sekcje
-        # print( "self.sw.sw_lstSekcje po utworzeniu z gode³:\n")
+            self.sw.sw_sekcje_tytul = "Sekcje mapy zas. ukÅ‚. 2000:\n" + self.sw.sw_sekcje
+        # print( "self.sw.sw_lstSekcje po utworzeniu z godeÅ‚:\n")
         # print( "%s\n" % (self.sw.sw_lstSekcje))
-        print("self.sw.sw_sekcje po utworzeniu z gode³:\n")
+        print("self.sw.sw_sekcje po utworzeniu z godeÅ‚:\n")
         print("%s\n" % (self.sw.sw_sekcje))
 
         self.tx_sekcje.delete(1.0, tk.END)
         self.tx_sekcje.insert(tk.END, self.sw.sw_sekcje_tytul)
 
 
-#        # WERSJA WCZEŒNIEJSZA
+#        # WERSJA WCZEÅšNIEJSZA
 #        # utworzenie tekstu sw_sekcje
 #        i = 0
 #        j = 0
@@ -1391,13 +1390,13 @@ class SytwysGUIgrid( tk.Frame):
 #            #print( "i=%d, iOstatnia=%d >%s<>%s<\n" % ( i, iOstatnia, sPrzecinek, sEnd))
 #            wierszSekcji = wierszSekcji + s + sPrzecinek + sEnd
 #            self.sw.sw_sekcje = self.sw.sw_sekcje + s + sPrzecinek + sEnd
-#            # zapisanie wiersza w s³owniku sekcji
+#            # zapisanie wiersza w sÅ‚owniku sekcji
 #            #self.sw.sw_dicSekcje[]
 #
-#        self.sw.sw_sekcje_tytul = "Sekcje mapy zas. uk³. 2000: " + self.sw.sw_sekcje
-#        print( "self.sw.sw_lstSekcje po utworzeniu z gode³:\n")
+#        self.sw.sw_sekcje_tytul = "Sekcje mapy zas. ukÅ‚. 2000: " + self.sw.sw_sekcje
+#        print( "self.sw.sw_lstSekcje po utworzeniu z godeÅ‚:\n")
 #        print( "%s\n" % (self.sw.sw_lstSekcje))
-#        print( "self.sw.sw_sekcje po utworzeniu z gode³:\n")
+#        print( "self.sw.sw_sekcje po utworzeniu z godeÅ‚:\n")
 #        print( "%s\n" % (self.sw.sw_sekcje))
 #
 #
@@ -1415,7 +1414,7 @@ class SytwysGUIgrid( tk.Frame):
 
         self.sw.mdcp.kp_uwagi1 = "Mapa utworzona na podstawie arkusza "
         self.sw.mdcp.kp_uwagi1 += self.sw.sw_sekcje
-        self.sw.mdcp.kp_uwagi1 += " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg³. "
+        self.sw.mdcp.kp_uwagi1 += " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zgÅ‚. "
         self.sw.mdcp.kp_uwagi1 += s + "."
 
         # self.sw.mdcp.kp_uwagi1 = self.divide_into_rows(self.sw.mdcp.kp_uwagi1, 90)
@@ -1430,13 +1429,13 @@ class SytwysGUIgrid( tk.Frame):
         self.sw.sw_dzialki = self.v_sw_dzialki.get()
         self.sw.mdcp.ust5 = "%s" % self.v_sw_ust5.get()
         self.sw.mdcp.ust6 = "%s" % self.v_sw_ust6.get()
-        self.sw.mdcp.kp_uwagi2 = "Dane dotycz¹ce granic dzia³ki "
+        self.sw.mdcp.kp_uwagi2 = "Dane dotyczÄ…ce granic dziaÅ‚ki "
         self.sw.mdcp.kp_uwagi2 += self.sw.sw_dzialki + ", ujawnione w PZGiK,"
         if self.sw.mdcp.ust5 == "1":
-            self.sw.mdcp.kp_uwagi2 += " spe³niaj¹ wymogi dok³adnoœciowe dla znaków i punktów granicznych, okreœlone"
+            self.sw.mdcp.kp_uwagi2 += " speÅ‚niajÄ… wymogi dokÅ‚adnoÅ›ciowe dla znakÃ³w i punktÃ³w granicznych, okreÅ›lone"
         else:
-            self.sw.mdcp.kp_uwagi2 += " nie spe³niaj¹ wymogów dok³adnoœciowych dla znaków i punktów granicznych, okreœlonych"
-        self.sw.mdcp.kp_uwagi2 += " w § 16 pkt 1 rozporz¹dzenia Ministra Rozwoju"
+            self.sw.mdcp.kp_uwagi2 += " nie speÅ‚niajÄ… wymogÃ³w dokÅ‚adnoÅ›ciowych dla znakÃ³w i punktÃ³w granicznych, okreÅ›lonych"
+        self.sw.mdcp.kp_uwagi2 += " w Â§ 16 pkt 1 rozporzÄ…dzenia Ministra Rozwoju"
         self.sw.mdcp.kp_uwagi2 += " z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429."
 
         # self.sw.mdcp.kp_uwagi2 = self.divide_into_rows(self.sw.mdcp.kp_uwagi2, 90)
@@ -1445,8 +1444,8 @@ class SytwysGUIgrid( tk.Frame):
         self.tx_mdcp_kp_uwagi2.insert( tk.END, self.sw.mdcp.kp_uwagi2)
 
     def btn_gen_uwagi3(self):
-        self.sw.mdcp.kp_uwagi3 = 'Dla obszaru w granicach projektowanej inwestycji budowlanej brak obci¹¿eñ'
-        self.sw.mdcp.kp_uwagi3 += ' z tytu³u s³u¿ebnoœci gruntowych (§ 30 ust. 2 pkt 4 rozporz¹dzenia'
+        self.sw.mdcp.kp_uwagi3 = 'Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciÄ…Å¼eÅ„'
+        self.sw.mdcp.kp_uwagi3 += ' z tytuÅ‚u sÅ‚uÅ¼ebnoÅ›ci gruntowych (Â§ 30 ust. 2 pkt 4 rozporzÄ…dzenia'
         self.sw.mdcp.kp_uwagi3 += ' Ministra Rozwoju z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429).'
 
         # self.sw.mdcp.kp_uwagi3 = self.divide_into_rows(self.sw.mdcp.kp_uwagi3, 90)
@@ -1459,7 +1458,7 @@ class SytwysGUIgrid( tk.Frame):
         # pass
 
     #
-    #     self.sw.mdcp.kp_uwagi4 += 'Dla terenu objêtego pomiarem brak opracowañ planistycznych (§ 30 ust. 2 pkt 3 rozporz¹dzenia'
+    #     self.sw.mdcp.kp_uwagi4 += 'Dla terenu objÄ™tego pomiarem brak opracowaÅ„ planistycznych (Â§ 30 ust. 2 pkt 3 rozporzÄ…dzenia'
     #     self.sw.mdcp.kp_uwagi4 += 'Ministra Rozwoju z dnia 18 sierpnia 2020 r., DzU 2020 poz. 1429).'
 
 
@@ -1474,12 +1473,12 @@ class SytwysGUIgrid( tk.Frame):
 
     def divide_into_rows(self, text, max_length):
         """
-        podzia³ na linie po ok. 90 znaków
-        podzia³ polega na wstawieniu znaków \n
+        podziaÅ‚ na linie po ok. 90 znakÃ³w
+        podziaÅ‚ polega na wstawieniu znakÃ³w \n
         - wymaga dopracowania
-        - dzieli na chama w pó³ s³owa, je¿eli tak wypadnie
+        - dzieli na chama w pÃ³Å‚ sÅ‚owa, jeÅ¼eli tak wypadnie
 
-            text        :: tekst do podzia³u
+            text        :: tekst do podziaÅ‚u
             max_length  ::
         """
         i = 0

@@ -1,4 +1,3 @@
-#-*- coding: windows-1250 -*-
 
 
 class Sekcja( object):
@@ -20,11 +19,11 @@ class Sekcja( object):
 class ListaSekcji( object):
     '''
     lista:
-    -   zawiera posortowanπ liste gode≥
+    -   zawiera posortowanƒÖ liste gode≈Ç
     
-    s≥ownik:
-    -   u≥atwia wydruk
-    -   ma postaÊ:
+    s≈Çownik:
+    -   u≈Çatwia wydruk
+    -   ma postaƒá:
             [godlo_01]=6.142.28.02.2.1
             [godlo_02]=6.142.28.02.2.3
             [godlo_03]=6.142.28.02.2.2
@@ -38,8 +37,8 @@ class ListaSekcji( object):
         
     def dodajSekcje( self, agodlo):
         '''
-        -   sprawdzenie, czy sekcja jest juø na liúcie
-        -   jeøeli nie, to dodanie sekcji
+        -   sprawdzenie, czy sekcja jest ju≈º na li≈õcie
+        -   je≈ºeli nie, to dodanie sekcji
         -   posortowanie listy
         
         '''
@@ -51,7 +50,7 @@ class ListaSekcji( object):
 
     def oproznijListe( self):
         '''
-        -   usuniÍcie wszystkich elementÛw z listy
+        -   usuniƒôcie wszystkich element√≥w z listy
         
         '''
         del self.g_lista[0:]

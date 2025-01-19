@@ -1,64 +1,72 @@
+import sys
 import os
 import shutil
+import configparser
 
-import dictConstants
+lib_abspaths = [r'i:\aPy\LibSP',
+                ]
+for path in lib_abspaths:
+    if path not in sys.path:
+        sys.path.append(path)
+import spos
+
 
 class StrukturaKatalogow:
     """
 
     """
-    def __init__(self):
+    def __init__(self, dictConstants):
+        # kopia słownika stałych globalnych, z którego potrzebne są
+        # - "GC_DIR_SYTWYS"         : "t:\\sytwys",
+        # - 'GC_EMPTY_STRATEG_DATABASE_DIR': r't:\STRATEG\BAZA_pusta',
+        self.dictConstants = dictConstants
+        self.empty_strateg_database = self.dictConstants['GC_EMPTY_STRATEG_DATABASE_DIR']
+        self.ewmapa_baza_ini = self.dictConstants['GC_EWMAPA_BAZA_INIFILE']
+
         self.sw_dir_abspath = ''
         self.sw_wykonawca = ''
         self.sw_numer_str = ''
         self.sw_obrebDir = ''
         # słownik z katalogami s-w
-        self.sw_dictDirs = {
-            "dane_ergo": "",
-            "dane_wyk": "",
-            "dane_wyk_oryg": "",
-            "mz_nr_v7": "",
-            "mz_nr_v8": "",
-            "mz_nr_v8__v7": "",
-            "mz_nr_v8__v7_bac": "",
-            "orient": "",
-            "tabelki": "",
-            "tabelki__100_oryg": "",
-            "txt": "",
-            "wyslane": "",
-            "z_dxf": "",
-            "z_dxf_1": "",
-            "z_dxf_2": "",
-            "z_dxf_3": "",
-            "z_dxf_1__zbedne": "",
-            "z_dxf_2__zbedne": "",
-            "z_dxf_3__zbedne": "",
-            "zz_backup": "",
-            "zz_wersjeNieakt": "",
-            "kG": "",
-
-            "rasC_sytwys": ""
-        }
+        self.sw_dictDirs = dict()
 
 
-    def inicjujStrukture(self, sw_dir_abspath, sw_wykonawca, sw_numer_str, sw_obrebDir):
+    def inicjujStrukture(self,
+                         sw_dir_abspath,
+                         sw_wykonawca,
+                         sw_numer_str,
+                         sw_obrebDir,
+                         ):
         """
             dot. struktury katalogów i plików sw
             przypisanie odpowiednich wartości do słownika katalogów
         """
+        # atrybuty potrzebne do tworzenia ścieżek i wpisów do baza.ini
+        # ---------------------------------------------------------------------
         self.sw_dir_abspath = sw_dir_abspath
         self.sw_wykonawca = sw_wykonawca
         self.sw_numer_str = sw_numer_str
         self.sw_obrebDir = sw_obrebDir
+        self.ewmapa_baza_id_str = f'Baza_{self.sw_numer_str}{self.sw_wykonawca}'
         # deb
         print(f'\t{self.sw_dir_abspath=}')
         print(f'\t{self.sw_wykonawca=}')
         print(f'\t{self.sw_numer_str=}')
         print(f'\t{self.sw_obrebDir=}')
 
+
+        # słownik ścieżek
+        # ---------------------------------------------------------------------
+        self.sw_dictDirs["baza"] = self.sw_dir_abspath + "\\BAZA_" + self.sw_numer_str + self.sw_wykonawca
         self.sw_dictDirs["dane_ergo"        ] = self.sw_dir_abspath   + "\\dane_ergo\\"
+
         self.sw_dictDirs["dane_wyk"         ] = self.sw_dir_abspath   + "\\dane-" + self.sw_wykonawca + "\\"
         self.sw_dictDirs["dane_wyk_oryg"    ] = self.sw_dictDirs[ "dane_wyk"] + "_oryg\\"
+
+        self.sw_dictDirs["dxf"] = self.sw_dir_abspath + "\\dxf\\"
+        self.sw_dictDirs["gml_1_do_modyf"] = self.sw_dir_abspath + "\\gml_1_do_modyf\\"
+        self.sw_dictDirs["gml_2_eksport"] = self.sw_dir_abspath + "\\gml_2_eksport\\"
+
         self.sw_dictDirs["mz_nr_v7"         ] = self.sw_dir_abspath   + "\\mz_" + self.sw_numer_str + "_v7\\"
         self.sw_dictDirs["mz_nr_v8"         ] = self.sw_dir_abspath   + "\\mz_" + self.sw_numer_str + "_v8\\"
         self.sw_dictDirs["mz_nr_v8__v7"     ] = self.sw_dictDirs[ "mz_nr_v8"] + "v7"
@@ -94,36 +102,18 @@ class StrukturaKatalogow:
         print("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
 
     def utworzStrukture(self):
-        '''
+        """
         >>  trzeba dorobić:
             -   sprawdzenie, czy te katalogi istnieją
             -   funkcję, która skasuje błędnie założoną strukturę
 
-        '''
+        """
         # utworzenie struktury katalogów
+        # - w kat. sw
+        # - w &rasC (dla zakresu)
         # -------------------------------------------------------
-        os.makedirs(self.sw_dictDirs["dane_ergo"])
-        os.makedirs(self.sw_dictDirs["dane_wyk"])
-        os.makedirs(self.sw_dictDirs["dane_wyk_oryg"])
-        os.makedirs(self.sw_dictDirs["mz_nr_v7"])
-        os.makedirs(self.sw_dictDirs["mz_nr_v8"])
-        os.makedirs(self.sw_dictDirs["mz_nr_v8__v7"])
-        os.makedirs(self.sw_dictDirs["mz_nr_v8__v7_bac"])
-        os.makedirs(self.sw_dictDirs["orient"])
-        os.makedirs(self.sw_dictDirs["tabelki"])
-        os.makedirs(self.sw_dictDirs["tabelki__100_oryg"])
-        os.makedirs(self.sw_dictDirs["txt"])
-        os.makedirs(self.sw_dictDirs["wyslane"])
-        os.makedirs(self.sw_dictDirs["z_dxf"])
-        os.makedirs(self.sw_dictDirs["z_dxf_1"])
-        os.makedirs(self.sw_dictDirs["z_dxf_2"])
-        os.makedirs(self.sw_dictDirs["z_dxf_3"])
-        os.makedirs(self.sw_dictDirs["z_dxf_1__zbedne"])
-        os.makedirs(self.sw_dictDirs["z_dxf_2__zbedne"])
-        os.makedirs(self.sw_dictDirs["z_dxf_3__zbedne"])
-        os.makedirs(self.sw_dictDirs["zz_backup"])
-        os.makedirs(self.sw_dictDirs["zz_wersjeNieakt"])
-        os.makedirs(self.sw_dictDirs["kG"])
+        for k,v in self.sw_dictDirs.items():
+            os.makedirs(v)
 
         if not os.path.exists(self.sw_dictDirs["rasC_sytwys"]):
             os.makedirs(self.sw_dictDirs["rasC_sytwys"])
@@ -149,6 +139,86 @@ class StrukturaKatalogow:
         shutil.copy(sourceFile, os.path.join(targetDir, "zDXF_v8.dgn"))
         targetDir = self.sw_dictDirs["mz_nr_v8"]
         shutil.copy(sourceFile, os.path.join(targetDir, "zDXF_v8_pusty.dgn"))
+
+        # przygotowanie pustej bazy danych
+        # - kopiowanie plików
+        # - dodanie bazy do pliku konfiguracyjnego ewmapy
+        #   [baza]
+        #   Baza_152kp=Baza_152kp
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        spos.copy_directory_tree(self.empty_strateg_database, self.sw_dictDirs["baza"])
+
+        # Create a ConfigParser object
+        config = configparser.ConfigParser()
+        config.optionxform = str  # Preserve case sensitivity for keys
+
+        # Read the existing INI file
+        config.read(self.ewmapa_baza_ini, encoding="cp1250")
+
+        # Ensure the `[baza]` section exists, and add the line
+        if "baza" not in config:
+            config["baza"] = {}
+        config["baza"][self.ewmapa_baza_id_str] = self.ewmapa_baza_id_str
+
+        # Add the `[BAZA_152kp]` section
+        config[self.ewmapa_baza_id_str] = {
+            'Dzialki': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\egib.fdb,,,,0,',
+            'Kontury klasyfikacyjne1': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\egib.fdb,,{self.ewmapa_baza_id_str} - kontury,,,,',
+            'Uzytki gruntowe1': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\egib.fdb,,{self.ewmapa_baza_id_str} - użytki,,,,',
+            'Kat1': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\gesut.fdb:GESUT',
+            'Kat1Nazwa': 'GESUT',
+            'Kat2': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\bdot500.fdb:BDOT500',
+            'Kat2Nazwa': 'BDOT500',
+
+            'Kat3': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\egib.fdb:BUDYNKI',
+            'Kat3Nazwa': f'Budynki',
+            'Kat4': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\egib.fdb:ADRESY',
+            'Kat4Nazwa': f'Adresy',
+            'Kat5': f'{self.sw_dictDirs["baza"]}\\sp_warstwy\\',
+            'Kat5Nazwa': f'sp_warstwy',
+            'Kat6': f'{self.sw_dictDirs["baza"]}\\sp_dxf\\',
+            'Kat6Nazwa': f'sp_dxf',
+            'Menu aktywności1': f'GESUT,I:\\STRATEG\\PROGRAMY\\EWMAPA\\Gesut_2021\\gesut_2021.mnu',
+            'Menu aktywności2': f'GESUT - projektowane,I:\\STRATEG\\PROGRAMY\\EWMAPA\\Gesut_2021\\gesut2021_proj.mnu',
+            'Menu aktywności3': f'BDOT500,I:\\STRATEG\\PROGRAMY\\EWMAPA\\Bdot500_2021\\bdot500_2021.mnu',
+            'Menu aktywności4': f'EGIB,I:\\STRATEG\\PROGRAMY\\EWMAPA\\Egib\\egib.mnu',
+            'Szrafury1': f'{self.sw_dictDirs["baza"]}\\Szrafury,{self.ewmapa_baza_id_str}',
+            'Operaty': f'{self.sw_dictDirs["baza"]}\\Operaty',
+            'Kartoteka z danymi dla interfejsow': f'{self.sw_dictDirs["baza"]}\\',
+            'Identyfikator bazy dla interfejsow': f'{self.ewmapa_baza_id_str}',
+            'Rastry': f'{self.sw_dictDirs["baza"]}\\Rastry',
+            'Sterowanie': f'{self.ewmapa_baza_id_str}',
+            'Parametry przecięcia baz': f'',
+            'Baza budynków': f'',
+            'Kod budynków': f'',
+            'Kat7': f'{self.sw_dictDirs["baza"]}\\sp_wydruk\\',
+            'Kat7Nazwa': f'sp_wydruk',
+            'Kat9': f'{self.sw_dictDirs["baza"]}\\sp_wydruk_dxf',
+            'Kat9Nazwa': f'sp_wydruk_dxf',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+        # Write the updated configuration back to the file
+        with open(self.ewmapa_baza_ini, "w", encoding="cp1250") as configfile:
+            config.write(configfile)
+            print(f"Updated INI file saved at: {self.empty_strateg_database}")
+
 
         # utworzenie pliku #_pikiety_XXX.dgn
         # currently unnecessary

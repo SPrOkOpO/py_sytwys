@@ -1,4 +1,3 @@
-#-*- coding: windows-1250 -*-
 #
 #   Utworzenie w katalogu syswys podkatalogu dla    nowej   roboty
 #
@@ -14,7 +13,7 @@ import tkinter.ttk as ttk
 import argparse
 import pprint
 
-# import zasobów w³asnych programu
+# import zasobÃ³w wÅ‚asnych programu
 #---------------------------------------------------------------------
 import teryt
 #teryt.__doc__
@@ -22,7 +21,7 @@ str( teryt)
 import sytwys
 import SytwysGUIgrid
 
-import dictConstants
+from dictConstants import dictConstants
 #import dictErrors
 sys.path.append(r"i:\aPy\LibSP")
 import spprint
@@ -54,7 +53,7 @@ def main():
                     choices=['nowa', 'aktualizacja'],
                     help='tryb pracy [nowa, aktualizacja]')
     ap.add_argument('-d', '--swbasedir', help='katalog sw')
-    ap.add_argument('-i', '--swinfo', help='œcie¿ka do pliku sw_info_....txt')
+    ap.add_argument('-i', '--swinfo', help='Å›cieÅ¼ka do pliku sw_info_....txt')
     ap.add_argument('-n', '--nrsw', help='numer sw')
     args = ap.parse_args()
     spprint.print_header('Argumenty')
@@ -68,20 +67,20 @@ def main():
     # utworzenie instancji klasy Teryt i Sytwys
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     t = teryt.Teryt()
-    sw = sytwys.Sytwys()
+    sw = sytwys.Sytwys(dictConstants)
 
     prompt = "Podaj dane do utworzenia podkatalogu w SW"
-    nr_wersji = dictConstants.dictConstants["NR_WERSJI"]
+    nr_wersji = dictConstants["NR_WERSJI"]
     title = "SytWys info " + nr_wersji
     master = tk.Tk(screenName=prompt)
     master.title(title)
     master.geometry("1500x800+100+50")
     g = SytwysGUIgrid.SytwysGUIgrid(master, sw, t)
 
-    # opracowanie argumentow z  linii   poleceñ
+    # opracowanie argumentow z  linii   poleceÅ„
     # - potrzebne,  zeby uzyskac info   o parametrach uruchomienia, np.:
-    # - argument 1: katalog bie¿¹cy
-    # ?> TO JEST PRAWDOPODOBNIE ZBÊDNE
+    # - argument 1: katalog bieÅ¼Ä…cy
+    # ?> TO JEST PRAWDOPODOBNIE ZBÄ˜DNE
     # -------------------------------------------------------
     # listaArg = sys.argv[0].split('" "')
     # dirBiezacy_fullPath = listaArg[0]
@@ -93,14 +92,14 @@ def main():
     # ---------------------------------------------------------------------
     if args.tryb == 'nowa':
         sw.ustalNrSW(
-            dictConstants.dictConstants["GC_DIR_LICZNIK"],
-            dictConstants.dictConstants["GC_DIR_SYTWYS"])
-        # testowe wype³nienie kontrolek entry
+            dictConstants["GC_DIR_LICZNIK"],
+            dictConstants["GC_DIR_SYTWYS"])
+        # testowe wypeÅ‚nienie kontrolek entry
         sw.sw_numer_str = str(sw.sw_numer)
         sw.sw_wykonawca = "kp"
         g.v_sw_numer.set(sw.sw_numer_str)
         g.v_sw_wykonawca.set(sw.sw_wykonawca)
-        g.v_sw_obreb.set("Nowa Wieœ-Kl")
+        g.v_sw_obreb.set("Nowa WieÅ›-Kl")
         g.v_sw_dzialki.set("309, 310 3 , 2000/1, 4, ")
         g.v_sw_typ.set("?")
         # g.v_sw_idZgl.set( "GKK.6640.X.2019")       # <== do likwidacji

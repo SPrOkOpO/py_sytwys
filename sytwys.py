@@ -1,4 +1,3 @@
-#-*- coding: windows-1250 -*-
 
 import os
 import sys
@@ -13,7 +12,7 @@ import dzialki
 
 """
 #-####################################################################
-    grupuje dane zwiπzane z robotπ sw
+    grupuje dane zwiƒÖzane z robotƒÖ sw
     klasa jest obecnie zbyt rozbudowana i wymaga przeprogramowania
     
     plan zmian
@@ -25,31 +24,35 @@ import dzialki
     ToDO - must have:
     >>  
 
-    ToDO - w razie nudÛw:
+    ToDO - w razie nud√≥w:
     >>  
 
 ######################################################################
 """
 
 
-class Sytwys( object):
+class Sytwys:
     """
-    obs≥uga roboty  s-w
+    obs≈Çuga roboty  s-w
 
 
     """
-    def __init__(self):
+    def __init__(self, dictConstants:dict):
+        # kopia s≈Çownika sta≈Çych globalnych, z kt√≥rego potrzebne sƒÖ
+        # - "GC_DIR_SYTWYS"         : "t:\\sytwys",
+        # - 'EMPTY_STRATEG_DATABASE': r't:\STRATEG\BAZA_pusta',
+        self.dictConstants = dictConstants
 
-        # sta≥e,    ale na razie jako   zwykle pola
+        # sta≈Çe,    ale na razie jako   zwykle pola
         self.DIR_TABELKI         =  "\\tabelki\\"
         self.DIR_TABELKI_100     =  "\\tabelki\\100_oryg\\"
 
         # zmienne dot.  roboty
-        self.sw_numer           = -1
-        self.sw_numer_str       = ""
-        self.sw_wykonawca       = ""
-        self.sw_obreb           = ""
-        self.sw_obrebDir        = ""
+        self.sw_numer           = -1  # 152
+        self.sw_numer_str       = ""  # '152'
+        self.sw_wykonawca       = ""  # kp
+        self.sw_obreb           = ""  # Panki
+        self.sw_obrebDir        = ""  #
 
         self.sw_dzialki         = ""
         self.sw_dzialki_lst     = list()
@@ -86,19 +89,19 @@ class Sytwys( object):
         # self.sw_mdcp_ust5_str = "1"
         # self.sw_mdcp_ust6_str = "1"
         # self.sw_mdcp_kp_uwagi1 = "Mapa utworzona na podstawie arkusza ..."
-        # self.sw_mdcp_kp_uwagi2 = "Dane dotyczπce granic dzia≥ki ..., ujawn..."
-        # self.sw_mdcp_kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciπøeÒ z tytu≥u s≥uøebnoúci \ngruntowych (ß80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
-        # self.sw_mdcp_kp_uwagi4 = "Dla terenu objÍtego opracowaniem brak opracowaÒ planistycznych."
-        # self.sw_mdcp_kp_uwagi5 = "Granice nieruchomoúci oznaczono kolorem zielonym."
-        # self.sw_mdcp_kp_uwagi6  = "Nie wyklucza siÍ istnienia w terenie innych, niewykazanych na niniejszej mapie, urzπdzeÒ \npodziemnych."
-        # self.sw_mdcp_kp_uwagi6 = "Nie wyklucza siÍ istnienia w terenie innych, niewykazanych na niniejszej mapie, urzπdzeÒ \npodziemnych, ktÛre nie by≥y zg≥oszone do inwentaryzacji lub o ktÛrych brak jest informacji\nw instytucjach branøowych."
+        # self.sw_mdcp_kp_uwagi2 = "Dane dotyczƒÖce granic dzia≈Çki ..., ujawn..."
+        # self.sw_mdcp_kp_uwagi3 = "Dla obszaru w granicach projektowanej inwestycji budowlanej brak obciƒÖ≈ºe≈Ñ z tytu≈Çu s≈Çu≈ºebno≈õci \ngruntowych (¬ß80 ust. 4. rozp. MSWiA z dnia 9 listopada 2011 r.)."
+        # self.sw_mdcp_kp_uwagi4 = "Dla terenu objƒôtego opracowaniem brak opracowa≈Ñ planistycznych."
+        # self.sw_mdcp_kp_uwagi5 = "Granice nieruchomo≈õci oznaczono kolorem zielonym."
+        # self.sw_mdcp_kp_uwagi6  = "Nie wyklucza siƒô istnienia w terenie innych, niewykazanych na niniejszej mapie, urzƒÖdze≈Ñ \npodziemnych."
+        # self.sw_mdcp_kp_uwagi6 = "Nie wyklucza siƒô istnienia w terenie innych, niewykazanych na niniejszej mapie, urzƒÖdze≈Ñ \npodziemnych, kt√≥re nie by≈Çy zg≈Çoszone do inwentaryzacji lub o kt√≥rych brak jest informacji\nw instytucjach bran≈ºowych."
         #
         # self.sw_mdcp_kp_uwagi1_fraza1 = "Mapa utworzona na podstawie arkusza "
-        # self.sw_mdcp_kp_uwagi1_fraza2 = " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg≥. "
+        # self.sw_mdcp_kp_uwagi1_fraza2 = " mapy zasadniczej oraz pomiaru aktualizacyjnego id. zg≈Ç. "
         #
-        # self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotyczπce granic dzia≥ki "
+        # self.sw_mdcp_kp_uwagi2_fraza1 = "Dane dotyczƒÖce granic dzia≈Çki "
         # self.sw_mdcp_kp_uwagi2_fraza2 = ", ujawnione w PZGiK, "
-        # self.sw_mdcp_kp_uwagi2_fraza3 = "przepisÛw ß79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
+        # self.sw_mdcp_kp_uwagi2_fraza3 = "przepis√≥w ¬ß79, ust. 5 i 6 rozp. MSWiA z dnia 9 listopada 2011 r."
 
 
         # dane do libre
@@ -106,9 +109,9 @@ class Sytwys( object):
         self.sw_libre_opis  = ""
 
         # sekcje
-        # s≥ownik sekcji
+        # s≈Çownik sekcji
         # - zawiera dwa (na razie) rodzaje kluczy
-        #       -   na pojedyncze god≥a
+        #       -   na pojedyncze god≈Ça
         #               key: [sw_godlo_01]
         #               val: 6.143.45.22.2
         #       -   na wiersze z tekstem do wstawienia do opisu
@@ -138,14 +141,14 @@ class Sytwys( object):
         self.sw_godlo_20        = ""
                 
         self.sw_sekcje          = ""
-        self.sw_sekcje_tytul    = "Sekcje mapy zas. uk≥. 2000: "
+        self.sw_sekcje_tytul    = "Sekcje mapy zas. uk≈Ç. 2000: "
         self.sw_lstSekcje       = []
         
 
         self.plik_sw_info = sytwys_elements.PlikSWinfo()
 
-        # úcieøki
-        # sta≥e,    ale na razie jako   zwykle pola
+        # ≈õcie≈ºki
+        # sta≈Çe,    ale na razie jako   zwykle pola
         self.FILE_TYTNAGL  =  "tytNagl.txt"
         self.FILE_TYTUL  =  "tytul.txt"
         self.FILE_UWAGI  =  "uwagi.txt"
@@ -165,19 +168,19 @@ class Sytwys( object):
         self.sw_plikDz_ergo_abspath = ""
         self.sw_plikDz_kg_abspath = ""
 
-        self.struktura_sw = sytwys_elements.StrukturaKatalogow()
+        self.struktura_sw = sytwys_elements.StrukturaKatalogow(self.dictConstants)
 
     def setNazwyPlikow_tytul_uwagi(self):
         """
-        z danej úcieøki pliku info tworzy úcieøki do plikÛw
+        z danej ≈õcie≈ºki pliku info tworzy ≈õcie≈ºki do plik√≥w
         - "tytNagl"
-        - "tytu≥"
+        - "tytu≈Ç"
         - "uwagi"
         =====================================================================
         """
         
         """ 
-        czÍúÊ wywiadowcza:
+        czƒô≈õƒá wywiadowcza:
         p = r't:\sytwys\15_kp_2401_BialaG_21'
         print( "---[ path ]--------------------------------------------------------")
         print( "p = %s" % (p))
@@ -208,32 +211,40 @@ class Sytwys( object):
             w katalogu DIR_LICZNIK i odczytanie jego nru
             t:\sytwys\AAB__licznik\16___kp_2401_Bagna_55.nr
          - dodatkowo sprawdzany jest ostatni katalog sw
-           - ta metoda moøe byÊ zawodna w sytuacji, kiedy robota o najwyøszym
-             numerze zosta≥a juø zakoÒczona i przeniesiona do archiwum
+           - ta metoda mo≈ºe byƒá zawodna w sytuacji, kiedy robota o najwy≈ºszym
+             numerze zosta≈Ça ju≈º zako≈Ñczona i przeniesiona do archiwum
 
 
          adir_licznik :: katalog z plikami licznikowymi
         =====================================================================
         """
-        # deb - zawartoúÊ katalogu:
-        # fileList = [f for f in os.listdir(adir_licznik)]
-        # [print(f) for f in fileList]
-        # print('----1')
+        # # deb-
+        # print('\n- zawarto≈õƒá katalogu licznik:')
+        # files = [f for f in os.listdir(adir_licznik)]
+        # [print(f) for f in files]
+        # print('----1a')
+        # files = [f for f in os.listdir(adir_licznik)]
+        # for f in files:
+        #     print(f'{f=} {os.path.isfile(os.path.join(adir_licznik, f))=} {os.path.isdir(f)=}')
+        # [print(f) for f in files]
+        # print('----1b')
 
-        # lista numerÛw wyekstrachowanych z nazw plikÛw i katalogÛw
-        # - pliki majπ nazwy typu:
+        # lista numer√≥w wyekstrachowanych z nazw plik√≥w i katalog√≥w
+        # - pliki majƒÖ nazwy typu:
         #   16___kp_2401_Bagna_55.nr
         #   ostatni numer = 16
-        num_list = [int(f.split('_')[0]) for f in os.listdir(adir_licznik)]
+        num_list = [int(f.split('_')[0])
+                    for f in os.listdir(adir_licznik)
+                    if os.path.isfile(os.path.join(adir_licznik, f))]
         self.sw_numer = max(num_list) + 1
 
         # numer dekodowany z nazwy katalogu sytwys
         # 15_kp_2401_BialaG_21
-        # ?> tutaj jest zastosowany myk, polegajπcy na ograniczeniu zawartoúci
-        #    listy do nazw, ktÛre:
-        #    - majπ cztery znaki w czÍúci pierwszej przed znakiem `_` - tak
-        #      jest w przypadku nazw katalogÛw sw
-        #    - pierwszy znak czÍúci pierwszej, to `1`
+        # ?> tutaj jest zastosowany myk, polegajƒÖcy na ograniczeniu zawarto≈õci
+        #    listy do nazw, kt√≥re:
+        #    - majƒÖ cztery znaki w czƒô≈õci pierwszej przed znakiem `_` - tak
+        #      jest w przypadku nazw katalog√≥w sw
+        #    - pierwszy znak czƒô≈õci pierwszej, to `1`
         file_name_pattern = re.compile(r'\d{1,4}_[a-z]{2}_\d{4}_.+')
         num_list = [int(f.split('_')[0])
                     for f
@@ -246,8 +257,8 @@ class Sytwys( object):
 
         if self.sw_numer != sw_numer_alternative:
             msg = f'{self.sw_numer=}\n{sw_numer_alternative=}\n'
-            msg += f'Y: zatwierdziÊ numer {self.sw_numer=}\n'
-            msg += f'N: zatwierdziÊ numer {sw_numer_alternative=}\n'
+            msg += f'Y: zatwierdziƒá numer {self.sw_numer=}\n'
+            msg += f'N: zatwierdziƒá numer {sw_numer_alternative=}\n'
             msg += f'C: raise Exception()?'
             response = messagebox.askquestion(
                 'Problem z numerem sw',
@@ -265,13 +276,13 @@ class Sytwys( object):
 
     def update_dzialki(self, terytF_obr, teryt_jew, nazwa_obr):
         """
-        aktualizuje listy numerÛw dzia≥ek
-        - funkcja uøyta w metodzie zapisz()
-        - jako ürÛd≥a danych o dzia≥kach uøywa obiektu sw.dzialki_obj
+        aktualizuje listy numer√≥w dzia≈Çek
+        - funkcja u≈ºyta w metodzie zapisz()
+        - jako ≈∫r√≥d≈Ça danych o dzia≈Çkach u≈ºywa obiektu sw.dzialki_obj
           - jest on aktualizowany w metodzie inicjuj()
-          - zak≥adamy, øe w momencie wywo≥ania matody zapisz() dzia≥ki
-            wyúwietlone w swoim polu i przechowywane w obiekcie dzialki_obj
-            sπ aktualne
+          - zak≈Çadamy, ≈ºe w momencie wywo≈Çania matody zapisz() dzia≈Çki
+            wy≈õwietlone w swoim polu i przechowywane w obiekcie dzialki_obj
+            sƒÖ aktualne
         """
         self.sw_dzialki = self.sw_dzialki_obj.sorted_string_nr_prz_sp
         self.sw_dzialki_lst = self.sw_dzialki_obj.lista_nr_sorted
@@ -280,8 +291,8 @@ class Sytwys( object):
         self.sw_dzialka1 = self.sw_dzialki_obj.dzialka1
 
         """
-        tworzy listÍ dzia≥ek w formacie wymaganym przez Ergo podczas
-        tworzenia zakresu zamÛwienia/zg≥oszenia z pliku
+        tworzy listƒô dzia≈Çek w formacie wymaganym przez Ergo podczas
+        tworzenia zakresu zam√≥wienia/zg≈Çoszenia z pliku
         -   format:
             999999_9.9999.dz1
 
@@ -298,13 +309,13 @@ class Sytwys( object):
 
     def set_defaults(self):
         """
-        nadaje niektÛrym atrybutom domyúlne wartoúci, w≥aúciwe dla nowej robooty
+        nadaje niekt√≥rym atrybutom domy≈õlne warto≈õci, w≈Ça≈õciwe dla nowej robooty
 
-        !!! funkcja w stanie poczπtkowym
+        !!! funkcja w stanie poczƒÖtkowym
         """
         self.sw_numer_str = str(self.sw_numer)
         self.sw_wykonawca = "kp"
-        self.sw_obreb = "Nowa Wieú-Kl"
+        self.sw_obreb = "Nowa Wie≈õ-Kl"
         self.sw_obrebDir = ""
 
         self.sw_dzialki         = "309, 310 3 , 2000/1, 4, "
