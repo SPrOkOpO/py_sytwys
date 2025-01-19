@@ -4,7 +4,7 @@
 # słownik stałych
 #---------------------------------------------------------------------
 dictConstants = {
-    "NR_WERSJI" : "2.5.0",
+    "NR_WERSJI" : "2.5.1",
     "GC_DIR_SYTWYS" : "t:\\sytwys",
     "GC_DIR_LICZNIK" : "t:\\sytwys\\AAB__licznik",
     'GC_EMPTY_STRATEG_DATABASE_DIR': r't:\STRATEG\BAZA_pusta',

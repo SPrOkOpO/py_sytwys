@@ -113,10 +113,12 @@ class StrukturaKatalogow:
         # - w &rasC (dla zakresu)
         # -------------------------------------------------------
         for k,v in self.sw_dictDirs.items():
-            os.makedirs(v)
+            if v == self.sw_dictDirs["rasC_sytwys"]:
+                if not os.path.exists(v):
+                    os.makedirs(v)
+            else:
+                os.makedirs(v)
 
-        if not os.path.exists(self.sw_dictDirs["rasC_sytwys"]):
-            os.makedirs(self.sw_dictDirs["rasC_sytwys"])
 
         # kopiowanie plików do mz...v7
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -195,22 +197,6 @@ class StrukturaKatalogow:
             'Kat7Nazwa': f'sp_wydruk',
             'Kat9': f'{self.sw_dictDirs["baza"]}\\sp_wydruk_dxf',
             'Kat9Nazwa': f'sp_wydruk_dxf',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         }
 
