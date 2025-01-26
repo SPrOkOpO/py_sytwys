@@ -9,6 +9,7 @@ for path in lib_abspaths:
     if path not in sys.path:
         sys.path.append(path)
 import spos
+import spprint
 
 
 class StrukturaKatalogow:
@@ -64,6 +65,7 @@ class StrukturaKatalogow:
         self.sw_dictDirs["dane_wyk_oryg"    ] = self.sw_dictDirs[ "dane_wyk"] + "_oryg\\"
 
         self.sw_dictDirs["dxf"] = self.sw_dir_abspath + "\\dxf\\"
+        self.sw_dictDirs["qgis"] = self.sw_dir_abspath + "\\qgis\\"
         self.sw_dictDirs["gml_1_do_modyf"] = self.sw_dir_abspath + "\\gml_1_do_modyf\\"
         self.sw_dictDirs["gml_2_eksport"] = self.sw_dir_abspath + "\\gml_2_eksport\\"
 
@@ -176,10 +178,6 @@ class StrukturaKatalogow:
             'Kat3Nazwa': f'Budynki',
             'Kat4': f'fb:127.0.0.1:{self.sw_dictDirs["baza"]}\\egib.fdb:ADRESY',
             'Kat4Nazwa': f'Adresy',
-            'Kat5': f'{self.sw_dictDirs["baza"]}\\sp_warstwy\\',
-            'Kat5Nazwa': f'sp_warstwy',
-            'Kat6': f'{self.sw_dictDirs["baza"]}\\sp_dxf\\',
-            'Kat6Nazwa': f'sp_dxf',
             'Menu aktywności1': f'GESUT,I:\\STRATEG\\PROGRAMY\\EWMAPA\\Gesut_2021\\gesut_2021.mnu',
             'Menu aktywności2': f'GESUT - projektowane,I:\\STRATEG\\PROGRAMY\\EWMAPA\\Gesut_2021\\gesut2021_proj.mnu',
             'Menu aktywności3': f'BDOT500,I:\\STRATEG\\PROGRAMY\\EWMAPA\\Bdot500_2021\\bdot500_2021.mnu',
@@ -193,6 +191,10 @@ class StrukturaKatalogow:
             'Parametry przecięcia baz': f'',
             'Baza budynków': f'',
             'Kod budynków': f'',
+            'Kat5': f'{self.sw_dictDirs["baza"]}\\sp_warstwy\\',
+            'Kat5Nazwa': f'sp_warstwy',
+            'Kat6': f'{self.sw_dictDirs["baza"]}\\sp_dxf\\',
+            'Kat6Nazwa': f'sp_dxf',
             'Kat7': f'{self.sw_dictDirs["baza"]}\\sp_wydruk\\',
             'Kat7Nazwa': f'sp_wydruk',
             'Kat9': f'{self.sw_dictDirs["baza"]}\\sp_wydruk_dxf',
@@ -214,6 +216,8 @@ class StrukturaKatalogow:
         # plikPikiety_nazwa = "#_pikiety_" + self.sw_numer_str + ".dgn"
         # shutil.copy(sourceFile, os.path.join(targetDir, plikPikiety_nazwa))
 
+    def deb_print_struktura_sw(self):
+        spprint.deb_dict(self.sw_dictDirs, header='Struktura katalogów')
 
 class PlikSWinfo:
     """

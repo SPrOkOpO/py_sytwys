@@ -179,7 +179,7 @@ class Sytwys:
         =====================================================================
         """
         
-        """ 
+        r""" 
         część wywiadowcza:
         p = r't:\sytwys\15_kp_2401_BialaG_21'
         print( "---[ path ]--------------------------------------------------------")
@@ -189,6 +189,16 @@ class Sytwys:
         print( "join = %s" % ( os.path.join( os.path.dirname( p), os.path.basename( p))))
         print( "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -")
         """
+        # # deb-  struktura_sw
+        # print('=== struktura ===')
+        # if len(self.struktura_sw.sw_dictDirs):
+        #     for k,v in self.struktura_sw.sw_dictDirs.items():
+        #         print(f'{k}: {v}')
+        #     self.struktura_sw.deb_print_struktura_sw()
+        # else:
+        #     print('brak struktury sw')
+        #     raise Exception('Zakończenie awaryjne')
+
         p = self.sw_plikInfo_fullPath
         self.sw_plikTytNagl_fullPath = os.path.join(os.path.dirname(p), self.FILE_TYTNAGL)
         self.sw_plikTytul_fullPath  = os.path.join( os.path.dirname(p), self.FILE_TYTUL)
@@ -205,7 +215,7 @@ class Sytwys:
         
     
     def ustalNrSW( self, adir_licznik, dir_sytwys):
-        """
+        r"""
          ustalenie  numeru dla nowej roboty s-w
          -  polega na sprawdzeniu, jaki jest ostatni plik
             w katalogu DIR_LICZNIK i odczytanie jego nru

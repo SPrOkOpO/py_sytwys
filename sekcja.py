@@ -31,22 +31,21 @@ class ListaSekcji( object):
     # godla2swInfo.txt            
     '''
     def __init__(self):        
+        self.g_wiersze = []
         self.g_lista = []
         self.g_liczbaSekcjiNaLiscie = 0
         self.g_slownik = {}
         
-    def dodajSekcje( self, agodlo):
+    def dodajSekcje( self, agodlo:str):
         '''
         -   sprawdzenie, czy sekcja jest już na liście
         -   jeżeli nie, to dodanie sekcji
         -   posortowanie listy
         
         '''
-        if self.g_lista.count( agodlo) == 0:
-            self.g_lista.append( agodlo)
-            self.g_lista.sort()
-            self.generujSlownik()
-            
+        g = agodlo.strip()
+        if self.g_lista.count(g) == 0:
+            self.g_lista.append(g)
 
     def oproznijListe( self):
         '''
@@ -62,10 +61,11 @@ class ListaSekcji( object):
             print( "%s" % (s))
                      
     def generujSlownik( self):
+        self.g_lista.sort()
         self.g_slownik.clear()
         i = 0
         for godlo in self.g_lista:
-            key = "[godlo_%02d]" % ( i)
+            key = f"[godlo_{i:02d}]"
             self.g_slownik[key] = godlo
             i += 1
 

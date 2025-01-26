@@ -67,6 +67,7 @@ def main():
     # utworzenie instancji klasy Teryt i Sytwys
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     t = teryt.Teryt()
+
     sw = sytwys.Sytwys(dictConstants)
 
     prompt = "Podaj dane do utworzenia podkatalogu w SW"
@@ -127,7 +128,7 @@ def main():
     else:
         sw.sw_numer = args.nrsw
         if not os.path.exists(args.swinfo):
-            raise Exception
+            raise Exception(f'Plik {args.swinfo} not exists.')
         g.wczytaj(plik_swinfo_path=args.swinfo)
 
     master.mainloop()

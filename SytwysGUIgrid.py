@@ -1031,7 +1031,6 @@ class SytwysGUIgrid( tk.Frame):
                 komunikat = "Plik %s nie istnieje" % self.sw.sw_plikInfo_fullPath
                 tk.messagebox.showinfo("Err", komunikat)
                 return -1
-        self.sw.setNazwyPlikow_tytul_uwagi()
 
         # - odczytanie danych z pliku info
         # - i zapisanie ich słowniku dicWierszePliku
@@ -1056,7 +1055,7 @@ class SytwysGUIgrid( tk.Frame):
                 # self.dicWierszePliku.insert( wiersz)
                 # print( "%s" % self.dicWierszePliku)
 
-            # deb
+            # # deb-
             # spprint.print_header('dicWierszePliku')
             # pprint.pprint(self.dicWierszePliku)
             # spprint.print_footer('dicWierszePliku')
@@ -1165,6 +1164,15 @@ class SytwysGUIgrid( tk.Frame):
             if key == "[sw.mdcp.kp_uwagi4]"     : self.sw.mdcp.kp_uwagi4 = val
             if key == "[sw.mdcp.kp_uwagi5]"     : self.sw.mdcp.kp_uwagi5 = val
             if key == "[sw.mdcp.kp_uwagi6]"     : self.sw.mdcp.kp_uwagi6 = val
+
+
+        self.sw.struktura_sw.inicjujStrukture(
+            self.sw.sw_dir_nazwa,
+            self.sw.sw_wykonawca,
+            self.sw.sw_numer_str,
+            self.sw.sw_obrebDir,
+        )
+        self.sw.setNazwyPlikow_tytul_uwagi()
 
         # aktualizacja zmiennych związanych z widgetami
         # =========================================================================
@@ -1306,10 +1314,11 @@ class SytwysGUIgrid( tk.Frame):
             self.godlaX.oproznijListe()
             self.godlaX.drukujListe("---[ godla przed wczytaniem z pliku ]-------")
             for wiersz in f:
-                self.godlaX.dodajSekcje( wiersz[:-1])
+                self.godlaX.dodajSekcje(wiersz)
 
         # for wiersz
         # print( self.godlaX.g_lista)
+        self.godlaX.generujSlownik()
         self.godlaX.drukujListe("---[ godla po wczytaniu ]-------")
         self.godlaX.drukujSlownik("---[ slownik godeł po wczytaniu ]-------")
 
